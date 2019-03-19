@@ -72,9 +72,19 @@
   <ItemGroup>
     <Content Include="code\document_example\说明.txt" />
     <Content Include="gd3d\tsconfig.json" />
+    <Content Include="lib\cannon.js" />
+    <Content Include="lib\cannon.min.js" />
+    <Content Include="lib\eruda.min.js" />
     <Content Include="lib\gd3d_jsloader.js" />
     <Content Include="lib\htmlui.js" />
+    <Content Include="lib\matter.min.js" />
+    <Content Include="lib\oimo.js" />
+    <Content Include="lib\oimo.min.js" />
     <Content Include="lib\Reflect.js.map" />
+    <Content Include="lib\stats.js" />
+    <Content Include="lib\th.js" />
+    <Content Include="lib\webgl-texture-util.js" />
+    <Content Include="lib\webgl-util.js" />
     <Content Include="res\comp\comp.atlas.json" />
     <Content Include="res\effectShow\billboard\particle_billboard\particle_billboard.assetbundle.json" />
     <Content Include="res\effectShow\billboard\particle_billboard\particle_billboard.effect.json" />
@@ -1393,9 +1403,6 @@
     <Content Include="res\shader\resources\advanced\pbr.fs.glsl" />
     <Content Include="res\shader\resources\advanced\pbr.shader.json" />
     <Content Include="res\shader\resources\advanced\pbr.vs.glsl" />
-    <Content Include="res\shader\resources\advanced\pbrMR.fs.glsl" />
-    <Content Include="res\shader\resources\advanced\pbrMR.shader.json" />
-    <Content Include="res\shader\resources\advanced\pbrMR.vs.glsl" />
     <Content Include="res\shader\resources\advanced\pbr_sss.fs.glsl" />
     <Content Include="res\shader\resources\advanced\pbr_sss.shader.json" />
     <Content Include="res\shader\resources\advanced\pbr_sss.vs.glsl" />
@@ -1921,6 +1928,7 @@
     <Content Include="code\build.cmd" />
     <Content Include="code\tsconfig.json" />
     <Content Include="lib\htmlui.js.map" />
+    <Content Include="lib\th.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
