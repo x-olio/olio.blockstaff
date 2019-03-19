@@ -1,0 +1,16 @@
+{
+    "files": [
+        {
+            "name": "resources/GJ.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/gj.mesh.bin",
+            "length": 41722
+        },
+        {
+            "name": "fx_ss_female@attack_01.effect.json",
+            "length": 41722
+        }
+    ]
+}

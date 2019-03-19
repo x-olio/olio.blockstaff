@@ -1,0 +1,19 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		"_NormalTex('NormalTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "cw",
+                "vs": "light3",
+                "fs": "light3"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

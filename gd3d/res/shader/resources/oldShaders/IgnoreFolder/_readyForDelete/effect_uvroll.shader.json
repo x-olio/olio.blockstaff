@@ -1,0 +1,21 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		"_MainColor('MainColor',color)=(1,1,1,1)"
+    ],
+    "properties": {},
+    "passes": {
+        "base": [
+            {
+                "blendmode": "add",
+                "showface": "all",
+                "vs": "effect_uvroll",
+                "fs": "effect_uvroll"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

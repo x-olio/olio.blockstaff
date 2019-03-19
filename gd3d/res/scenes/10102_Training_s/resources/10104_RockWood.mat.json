@@ -1,0 +1,22 @@
+{
+    "shader":"diffuse.shader.json",
+    "mapUniform":{
+        "_MainColor":{
+            "type":2,
+            "value":{
+                "x":1,
+                "y":1,
+                "z":1,
+                "w":1
+                }
+            },
+        "_MainTex":{
+            "type":0,
+            "value":"10204.imgdesc.json"
+            },
+        "_AlphaCut":{
+            "type":1,
+            "value":0.5
+            }
+        }
+    }

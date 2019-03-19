@@ -1,0 +1,15 @@
+
+        setNodeType(canvasrender: any, camera: any,node:SceneTreeNode)
+        {
+            if (canvasrender != null && camera != null)
+            {
+                node.nodeType = NodeTypeEnum.TransformCanvasRender | NodeTypeEnum.TransformCamera;
+            } else if (canvasrender != null && camera == null)
+            {
+                node.nodeType = NodeTypeEnum.TransformCanvasRender;
+            } else if (camera != null && canvasrender != null)
+            {
+                node.nodeType = NodeTypeEnum.TransformCamera;
+            } else
+                node.nodeType = NodeTypeEnum.TransformNormal;
+        }

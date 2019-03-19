@@ -1,0 +1,24 @@
+{
+    "layer": "geometry",
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "skybox",
+                "fs": "skybox"
+            }
+        ],
+        "base_fog": [
+
+        ],
+        "skin": [
+
+        ],
+        "skin_fog": [
+
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

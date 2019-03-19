@@ -1,0 +1,19 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.1"
+    ],
+    "passes": {
+        "base": [
+            {
+                "blendmode":"blend",
+                "showface": "all",
+                "vs": "test_trail",
+                "fs": "test_trail",
+                "zwrite":"on",
+                "ztest":"lequal"
+            }
+        ]
+    }
+}

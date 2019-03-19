@@ -1,0 +1,30 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "light1",
+                "fs": "light1"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "ccw",
+                "vs": "diffuse",
+                "fs": "diffuse"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ],
+        "shadowuse": []
+    }
+}

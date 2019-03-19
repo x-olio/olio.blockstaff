@@ -1,0 +1,39 @@
+{
+    "layer": "geometry",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "asi",
+                "fs": "asi"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_asi",
+                "fs": "fog_asi"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "ccw",
+                "vs": "asibone_eff",
+                "fs": "asi"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_asibone_eff",
+                "fs": "fog_asi"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

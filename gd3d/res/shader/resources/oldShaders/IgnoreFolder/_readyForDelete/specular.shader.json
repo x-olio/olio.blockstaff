@@ -1,0 +1,15 @@
+{
+    "layer": "geometry",
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "specular",
+                "fs": "specular"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

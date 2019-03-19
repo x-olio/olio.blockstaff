@@ -1,0 +1,57 @@
+{
+    "life": 5,
+    "elements": [
+      {
+        "name": "glow",
+        "type": "singlemesh",
+        "timeline": [
+          {
+            "frame": -1,
+            "attrs": {
+              "pos": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+              },
+              "euler": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "scale": {
+                "x": 10,
+                "y": 10,
+                "z": 10
+              },
+              "alpha": 0.5,
+              "uv": {
+                "u": 1,
+                "v": 1
+              },
+              "color": {
+                "x": 1,
+                "y": 0.294,
+                "z": 0.2941
+              },
+              "colorRate": 3,
+              "mesh": "quad",
+              "mat": {
+                "shader": "particles_additive.shader.json",
+                "diffuseTexture": "E_glow001.png"
+              },
+              "billboard": "billboard"
+            }
+          },
+          {
+            "frame": 61,
+            "actions": [
+              {
+                "action": "destroy",
+                "param": {}
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

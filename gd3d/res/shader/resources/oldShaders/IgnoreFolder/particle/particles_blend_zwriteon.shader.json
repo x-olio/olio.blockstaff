@@ -1,0 +1,31 @@
+{
+  "layer": "transparent",
+  "queue": 0,
+  "properties": [
+    "_MainTex('MainTex',Texture)='white'{}",
+    "_TintColor ('Tint Color', Color) = (0.5,0.5,0.5,0.5)"
+  ],
+  "passes": {
+    "base": [
+      {
+        "blendmode": "blend",
+        "showface": "all",
+        "zwrite": "on",
+        "vs": "particles_transparent",
+        "fs": "particles_transparent"
+      }
+    ],
+    "base_fog": [
+      {
+        "blendmode": "blend",
+        "showface": "all",
+        "zwrite": "on",
+        "vs": "fog_particles_transparent",
+        "fs": "fog_particles_transparent"
+      }
+    ],
+    "shadowgen": [],
+    "bone": [],
+    "shadowuse": []
+  }
+}

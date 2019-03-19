@@ -1,0 +1,1 @@
+{"shader":"diffuse.shader.json","srcshader":"Gd3d/Diffuse","mapUniform":{"_MainColor":{"type":3,"value":"(0.4632353,1,0.9777891,1)"},"_MainTex_ST":{"type":3,"value":"(15,2,0,0)"},"_MainTex":{"type":0,"value":"Water_01.imgdesc.json"},"_AlphaCut":{"type":1,"value":0.5}}}

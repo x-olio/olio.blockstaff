@@ -1,0 +1,97 @@
+{
+    "life": 150,
+    "elements": [
+        {
+            "name": "kuosan0",
+            "type": "emission",
+            "timeline": {
+                "attrs": {
+                    "emissionType": "continue",
+                    "maxcount": 100,
+                    "emissioncount": 20,
+                    "time": 5,
+                    "mesh": "quad",
+                    "mat": {
+                        "shader": "particles_blend.shader.json",
+                        "diffuseTexture": "f_fire035a_5x2.png",
+                        "alphaCut": 0.5
+                    },
+                    "pos": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "shape": "box",
+                    "moveSpeed": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "gravity": 9.8,
+                    "euler": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "eulerSpeed": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "scale": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "scaleNodes": [
+                        {
+                            "x": 0.5,
+                            "y": 1,
+                            "z": 1,
+                            "key": 0.5
+                        },
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1,
+                            "key": 1
+                        }
+                    ],
+                    "alpha": 0.5,
+                    "alphaNodes": [
+                        {
+                            "alpha": 0.5,
+                            "key": 0.5
+                        }
+                    ],
+                    "color": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "colorSpeed": {
+                        "x": 0.5,
+                        "y": 1,
+                        "z": 1
+                    },
+                    "uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "uvtype": "uvsprite",
+                    "uvroll": {
+                        "u": 1.2,
+                        "v": 2.0
+                    },
+                    "uvsprite": {
+                        "row": 2,
+                        "colum": 5,
+                        "count": 30
+                    },
+                    "billboard": "billboard",
+                    "life": 50
+                }
+            }
+        }
+    ]
+}

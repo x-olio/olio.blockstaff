@@ -1,0 +1,15 @@
+{
+    "layer": "common",
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "line",
+                "fs": "line"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

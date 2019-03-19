@@ -1,0 +1,19 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "blendmode": "blend",
+                "showface": "ccw",
+                "vs": "unlit_transparent",
+                "fs": "unlit_transparent"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

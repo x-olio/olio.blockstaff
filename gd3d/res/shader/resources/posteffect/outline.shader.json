@@ -1,0 +1,23 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_DepthTex('DepthTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "outline"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "outline"
+            }
+        ]
+    }
+}

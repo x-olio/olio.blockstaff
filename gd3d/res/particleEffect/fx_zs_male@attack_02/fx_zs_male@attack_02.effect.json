@@ -1,0 +1,430 @@
+{
+    "life": 510,
+    "elements": [
+        {
+            "name": "huo",
+            "type": "emission",
+            "beloop": false,
+            "timeline": [
+                {
+                    "attrs": {
+                        "emissionType": "burst",
+                        "maxcount": 100,
+                        "emissioncount": 20,
+                        "time": 0,
+                        "mesh": "quad_particle",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "kaihuo_0000_0000_0000.png"
+                        },
+                        "billboard": "stretched",
+                        "startpos": {
+                            "type": "cone",
+                            "radius": 0,
+                            "angle": 50,
+                            "height": 4
+                        },
+                        "scale": {
+                            "x": 4,
+                            "y": 2,
+                            "z": 0
+                        },
+                        "simulationSpeed": 0,
+                        "moveSpeed": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "uv": {
+                            "x": 1,
+                            "y": 1
+                        },
+                        "uvtype": "uvsprite",
+                        "uvsprite": {
+                            "row": 4,
+                            "colum": 2,
+                            "count": 8
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 0.61,
+                            "z": 0.47
+                        },
+                        "life": [
+                            0.2,
+                            0.4
+                        ],
+                        "alpha": 0.7
+                    }
+                }
+            ]
+        },
+        {
+            "name": "shandian1",
+            "type": "emission",
+            "beloop": false,
+            "timeline": [
+                {
+                    "attrs": {
+                        "emissionType": "burst",
+                        "maxcount": 100,
+                        "emissioncount": 20,
+                        "rootpos": {
+                            "x": 0,
+                            "y": 0.2,
+                            "z": 0
+                        },
+                        "time": 0,
+                        "mesh": "quad_particle",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "ShockWave_A.png"
+                        },
+                        "billboard": "billboard",
+                        "startpos": {
+                            "type": "cone",
+                            "radius": 1,
+                            "angle": 90,
+                            "height": 4
+                        },
+                        "scale": {
+                            "x": 2,
+                            "y": 2,
+                            "z": 0
+                        },
+                        "moveSpeed": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "uv": {
+                            "x": 1,
+                            "y": 1
+                        },
+                        "uvtype": "uvsprite",
+                        "uvsprite": {
+                            "row": 4,
+                            "colum": 4,
+                            "count": 16
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 0.61,
+                            "z": 0.47
+                        },
+                        "life": [
+                            0.2,
+                            0.4
+                        ],
+                        "alpha": 0.7
+                    }
+                }
+            ]
+        },
+        {
+            "name": "kuosan",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": [
+                                0,
+                                0.5
+                            ],
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 90,
+                            "y": 0,
+                            "z": [
+                                0,
+                                360
+                            ]
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 0.6,
+                            "z": 0.1
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive_zwriteon.shader.json",
+                            "diffuseTexture": "FallingStar02_line.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "scale": {
+                            "x": 4.5,
+                            "y": 4.5,
+                            "z": 4.5
+                        },
+                        "alpha": 0.5
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 4,
+                            "attribute": {
+                                "alpha": 0.5,
+                                "scale": {
+                                    "x": 7,
+                                    "y": 7,
+                                    "z": 7
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 4,
+                    "attrs": {
+                        "alpha": 0.5
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 10,
+                            "attribute": {
+                                "alpha": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 10,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "dimian",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": [
+                                0,
+                                0.5
+                            ],
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "scale": {
+                            "x": 4,
+                            "y": 4,
+                            "z": 4
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_blend_zwriteon.shader.json",
+                            "diffuseTexture": "Ground_Crack_10.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "alpha": 1
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 20,
+                            "attribute": {
+                                "alpha": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "dimian1",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": [
+                                0,
+                                0.5
+                            ],
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 0.72,
+                            "z": 0.5
+                        },
+                        "scale": {
+                            "x": 3,
+                            "y": 3,
+                            "z": 4
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_blend_zwriteon.shader.json",
+                            "diffuseTexture": "g_fissure051a.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "alpha": 1
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 20,
+                            "attribute": {
+                                "alpha": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "quan",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -90
+                        },
+                        "uv": {
+                            "x": 1,
+                            "y": 1
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "colorRate": 3,
+                        "color": {
+                            "x": 1,
+                            "y": 0.75,
+                            "z": 0.2
+                        },
+                        "mesh": "g1j.mesh.bin",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "light00101.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "scale": {
+                            "x": 3,
+                            "y": 3,
+                            "z": 3
+                        }
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 3,
+                            "attribute": {
+                                "scale": {
+                                    "x": 15,
+                                    "y": 6,
+                                    "z": 6
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 10,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "layer": "geometry",
+    "properties": [
+	"_MainTex('MainTex',Texture)='white'{}"
+	],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "uvroll",
+                "fs": "uvroll"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_uvroll",
+                "fs": "fog_uvroll"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

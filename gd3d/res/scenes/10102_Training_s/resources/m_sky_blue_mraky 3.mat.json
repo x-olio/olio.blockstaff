@@ -1,0 +1,26 @@
+{
+    "shader":"uvroll.shader.json",
+    "srcshader":"Gd3d/UVRoll",
+    "mapUniform":{
+        "_MainColor":{
+            "type":3,
+            "value":"(1,1,1,1)"
+            },
+        "_MainTex":{
+            "type":0,
+            "value":"m_sky_blue_mraky.imgdesc.json"
+            },
+        "_AlphaCut":{
+            "type":1,
+            "value":0.5
+            },
+        "_SpeedU":{
+            "type":1,
+            "value":0.02
+            },
+        "_SpeedV":{
+            "type":1,
+            "value":0.0
+            }
+        }
+    }

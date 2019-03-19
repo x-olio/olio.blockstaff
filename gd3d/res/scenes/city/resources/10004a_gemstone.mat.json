@@ -1,0 +1,9 @@
+{
+    "shader":"diffuse.shader.json",
+    "mapUniform":{
+        "_MainTex":{
+            "type":0,
+            "value":"10004a_gemstone.imgdesc.json"
+            }
+        }
+    }

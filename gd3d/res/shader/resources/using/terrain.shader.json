@@ -1,0 +1,40 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_Splat0('Layer 1',Texture) = 'white'{}",
+        "_Splat1('layer 2',Texture) = 'white'{}",
+        "_Splat2('layer 3',Texture) = 'white'{}",
+        "_Splat3('layer 4',Texture) = 'white'{}",
+        "_Control('Control (RGBA)',Texture) = 'white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "terrain",
+                "fs": "terrain"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "ccw",
+                "vs": "terrain",
+                "fs": "terrain"
+            }
+        ],
+		"lightmap": [
+            {
+                "showface": "ccw",
+                "vs": "terrain",
+                "fs": "terrain"
+            }
+        ],
+        "lightmap_fog": [
+            {
+                "showface": "ccw",
+                "vs": "terrain",
+                "fs": "terrain"
+            }
+        ]
+    }
+}

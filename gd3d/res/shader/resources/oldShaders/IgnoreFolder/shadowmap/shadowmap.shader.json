@@ -1,0 +1,25 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_MainTex_ST('MainTex_ST',Vector) = (1,1,1,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "shadowmap",
+                "fs": "shadowmap",
+                "zwrite": "on",
+                "ztest": "lequal"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "all",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

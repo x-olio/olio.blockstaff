@@ -1,0 +1,25 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_BlurGap('_BlurGap',float)=1.0",
+        "_BlurSigma('BlurSigma',float)=2.0",
+        "_BlurLayer('BlurLayer',float)=3.0"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "GaussianBlur",
+                "fs": "GaussianBlur"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "GaussianBlur_quad",
+                "fs": "GaussianBlur"
+            }
+        ]
+    }
+}

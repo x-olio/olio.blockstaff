@@ -1,0 +1,20 @@
+{
+  "layer": "transparent",
+  "properties": [
+    "_MainTex('MainTex',Texture)='white'{}",
+	"_MainTex_ST('MainTex_ST',Vector) = (1,1,1,1)"
+  ],
+  "passes": {
+    "base": [
+      {
+        "blendmode":  "blend",
+        "showface": "ccw",
+        "vs": "transparent-diffuse",
+        "fs": "transparent-diffuse"
+      }
+    ],
+    "shadowgen": [],
+    "bone": [],
+    "shadowuse": []
+  }
+}

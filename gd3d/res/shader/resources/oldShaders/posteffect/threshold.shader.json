@@ -1,0 +1,30 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "threshold('threshold',Vector) = (0.5,0.5,0.5,1.0)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "threshold"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "threshold"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

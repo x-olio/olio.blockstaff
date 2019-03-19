@@ -1,0 +1,1 @@
+{"shader":"diffuse_bothside.shader.json","srcshader":"Gd3d/Diffuse_BothSide","mapUniform":{"_MainTex":{"type":0,"value":"FS_hand_002_diff.imgdesc.json"},"_AlphaCut":{"type":1,"value":0.5},"_MainColor":{"type":3,"value":"(1,1,1,1)"}}}

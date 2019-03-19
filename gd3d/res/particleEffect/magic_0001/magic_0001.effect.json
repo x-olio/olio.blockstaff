@@ -1,0 +1,163 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "glow",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 10,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 0.57,
+                            "y": 0,
+                            "z": 1
+                        },
+                        "mesh": "7FE68455E071C2828972666FA4C9447646A8DAD8.mesh.bin",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "E_glow001.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": 
+                    {
+                        "alpha": 1
+                    },
+                    "lerp": {
+                        "type": "linear",
+                        "to": 90,
+                        "attribute": 
+                        {
+                            "alpha": 0.2
+                        }
+                    }
+                },                {
+                    "frame": 90,
+                    "attrs": 
+                    {
+                        "alpha": 0.2
+                    },
+                    "lerp": {
+                        "type": "linear",
+                        "to": 180,
+                        "attribute": 
+                        {
+                            "alpha":1
+                        }
+                    }
+                },
+                {
+                    "frame": 180,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "line",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0.55,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 5,
+                            "y": 5,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 0.55,
+                            "y": 0.1,
+                            "z": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "LF01_14.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": 
+                    {
+                        "alpha": 1
+                    },
+                    "lerp": {
+                        "type": "linear",
+                        "to": 90,
+                        "attribute": 
+                        {
+                            "alpha": 0.2
+                        }
+                    }
+                },                {
+                    "frame": 90,
+                    "attrs": 
+                    {
+                        "alpha": 0.2
+                    },
+                    "lerp": {
+                        "type": "linear",
+                        "to": 180,
+                        "attribute": 
+                        {
+                            "alpha":1
+                        }
+                    }
+                },
+                {
+                    "frame": 180,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

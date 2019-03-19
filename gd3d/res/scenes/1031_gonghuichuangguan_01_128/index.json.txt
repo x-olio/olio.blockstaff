@@ -1,0 +1,1 @@
+{"1031_gonghuichuangguan_01_1024.assetbundle.json":8982176,"1031_gonghuichuangguan_01_128.assetbundle.json":4418069,"1031_gonghuichuangguan_01_256.assetbundle.json":5197247,"1031_gonghuichuangguan_01_512.assetbundle.json":7856953}

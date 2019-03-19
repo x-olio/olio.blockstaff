@@ -1,0 +1,23 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_Power('Power',Float)=0.5"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "barrel_blur"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "barrel_blur"
+            }
+        ]
+    }
+}

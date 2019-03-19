@@ -1,0 +1,26 @@
+{
+	"layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		"_NormalTex('NormalTex',Texture)='white'{}"
+    ],
+	"passes": {
+		"base": [
+			{
+				"showface": "all",
+				"vs": "normalmap",
+				"fs": "normalmap"
+			}
+		],
+		"base_fog": [
+			{
+				"showface": "all",
+				"vs": "fog_normalmap",
+				"fs": "fog_normalmap"
+			}
+		],
+		"shadowgen": [],
+		"bone": [],
+		"shadowuse": []
+	}
+}

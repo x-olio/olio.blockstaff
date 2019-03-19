@@ -1,0 +1,70 @@
+{
+    "layer": "transparent",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.5",
+        "_TintColor ('Tint Color', Color) = (0.5,0.5,0.5,0.5)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "blendmode": "add",
+                "showface": "ccw",
+                "vs": "transparent",
+                "fs": "transparent_add"
+            }
+        ],
+        "base_fog": [
+            {
+                "blendmode": "add",
+                "showface": "ccw",
+                "vs": "fog_transparent",
+                "fs": "fog_transparent_add"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "ccw",
+                "blendmode": "add",
+                "vs": "bone_eff",
+                "fs": "transparent_add"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "ccw",
+                "blendmode": "add",
+                "vs": "fog_bone_eff",
+                "fs": "fog_transparent_add"
+            }
+        ],
+        "lightmap": [
+            {
+                "showface": "ccw",
+                "vs": "diffuselightmap",
+                "fs": "diffuselightmap"
+            }
+        ],
+        "lightmap_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_diffuselightmap",
+                "fs": "fog_diffuselightmap"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "post_quad_depth"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

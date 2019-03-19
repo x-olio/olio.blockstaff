@@ -1,0 +1,1 @@
+{"shader":"mask_add_tint.shader.json","srcshader":"Gd3d/mask_add_tint","queue":0,"mapUniform":{"_MainTex":{"type":0,"value":"GS_wing_012_diff.imgdesc.json"},"_Main_Color":{"type":3,"value":"(0.02649221,0.02997941,0.5147059,0.466)"},"_Mask":{},"_mixColorRate":{"type":1,"value":1.5},"_mixAlphaRate":{"type":1,"value":1.5}}}

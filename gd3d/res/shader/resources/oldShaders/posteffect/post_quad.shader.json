@@ -1,0 +1,29 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "diffuse",
+                "fs": "diffuse"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "post_quad"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

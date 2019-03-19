@@ -1,0 +1,31 @@
+{
+  "layer": "transparent",
+  "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		    "_MainColor('MainColor',color)=(1,1,1,1)"
+    ],
+  "queue": 0,
+  "passes": {
+    "base": [
+      {
+        "blendmode": "blend",
+        "showface": "ccw",
+        "zwrite": "off",
+        "vs": "flowwater_new",
+        "fs": "flowwater_new"
+      }
+    ],
+    "base_fog": [
+      {
+        "blendmode": "blend",
+        "showface": "ccw",
+        "zwrite": "off",
+        "vs": "fog_flowwater_new",
+        "fs": "fog_flowwater_new"
+      }
+    ],
+    "shadowgen": [],
+    "bone": [],
+    "shadowuse": []
+  }
+}

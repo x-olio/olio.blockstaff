@@ -1,0 +1,217 @@
+{
+    "files": [
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_xin_Model_87_river_002.FBX_87_river_002.mesh.bin",
+            "length": 7400
+        },
+        {
+            "name": "resources/water2.imgdesc.json",
+            "length": 115
+        },
+        {
+            "name": "resources/CJ_he_10.mat.json",
+            "length": 293
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_Effect_Mesh_pubu_01.FBX_Plane02.mesh.bin",
+            "length": 2991
+        },
+        {
+            "name": "resources/CJ_he_03.mat.json",
+            "length": 278
+        },
+        {
+            "name": "resources/CJ_he_02.mat.json",
+            "length": 292
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_xin_Model_87_river_001.FBX_87_river_001.mesh.bin",
+            "length": 17145
+        },
+        {
+            "name": "resources/CJ_he_04.mat.json",
+            "length": 307
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_terrain_87_terrain_01.FBX_87_terrain_01.mesh.bin",
+            "length": 7520
+        },
+        {
+            "name": "resources/87_terrain_020_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_terrain_012_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_terrain_007_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_terrain_011_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_terrain_01.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/87_terrain_01.mat.json",
+            "length": 597
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_terrain_87_terrain_03.FBX_87_binghouqu_01.mesh.bin",
+            "length": 28930
+        },
+        {
+            "name": "resources/87_dimian_mudi_04_diff.imgdesc.json",
+            "length": 131
+        },
+        {
+            "name": "resources/87_dimian_mudi_02_diff.imgdesc.json",
+            "length": 131
+        },
+        {
+            "name": "resources/87_terrain_025_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_terrain_01_yz.imgdesc.json",
+            "length": 126
+        },
+        {
+            "name": "resources/87_binghouqu_01.mat.json",
+            "length": 609
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_terrain_87_terrain_03.FBX_87_longdanqu_01.mesh.bin",
+            "length": 16990
+        },
+        {
+            "name": "resources/87_dimian_mudi_03_diff.imgdesc.json",
+            "length": 131
+        },
+        {
+            "name": "resources/87_terrain_018_diff.imgdesc.json",
+            "length": 128
+        },
+        {
+            "name": "resources/87_longdan_01.mat.json",
+            "length": 606
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_terrain_87_terrain_03.FBX_87_mudi_01.mesh.bin",
+            "length": 14513
+        },
+        {
+            "name": "resources/87_dimian_mudi_01_diff.imgdesc.json",
+            "length": 131
+        },
+        {
+            "name": "resources/87_mudi_01.mat.json",
+            "length": 609
+        },
+        {
+            "name": "resources/MU_2.0_Artist_ChangJing_2.0_map_87_yongzhedalu_terrain_87_terrain_03.FBX_87_zhizhuqu_01.mesh.bin",
+            "length": 9897
+        },
+        {
+            "name": "resources/87_zhizhuqu_001_diff.imgdesc.json",
+            "length": 129
+        },
+        {
+            "name": "resources/87_zhizhu_01.mat.json",
+            "length": 607
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_01.mesh.bin",
+            "length": 1805778
+        },
+        {
+            "name": "resources/yongzhedalu_01.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_01.mat.json",
+            "length": 146
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_02.mesh.bin",
+            "length": 716494
+        },
+        {
+            "name": "resources/yongzhedalu_02.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_02.mat.json",
+            "length": 146
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_03.mesh.bin",
+            "length": 3283990
+        },
+        {
+            "name": "resources/yongzhedalu_03.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_03.mat.json",
+            "length": 146
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_04.mesh.bin",
+            "length": 72722
+        },
+        {
+            "name": "resources/yongzhedalu_04.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_04.mat.json",
+            "length": 146
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_05.mesh.bin",
+            "length": 17810
+        },
+        {
+            "name": "resources/yongzhedalu_05.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_05.mat.json",
+            "length": 146
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_06.mesh.bin",
+            "length": 591310
+        },
+        {
+            "name": "resources/yongzhedalu_06.imgdesc.json",
+            "length": 123
+        },
+        {
+            "name": "resources/yongzhedalu_06.mat.json",
+            "length": 246
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_yc_01.mesh.bin",
+            "length": 15365
+        },
+        {
+            "name": "resources/Model_yongzhedalu_all_02.FBX_yongzhedalu_yc_02.mesh.bin",
+            "length": 108901
+        },
+        {
+            "name": "resources/Lightmap-0_comp_light.imgdesc.json",
+            "length": 130
+        },
+        {
+            "name": "resources/yongzhedalu_02_1024.scene.json",
+            "length": 79473
+        }
+    ],
+    "totalLength": 8100243
+}

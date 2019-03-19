@@ -1,0 +1,24 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_FilterType('FilterType',Float)=0",
+        "_Step('Step',Float)=1"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "filter_quad",
+                "fs": "filter_quad"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "filter_quad",
+                "fs": "filter_quad"
+            }
+        ]
+    }
+}

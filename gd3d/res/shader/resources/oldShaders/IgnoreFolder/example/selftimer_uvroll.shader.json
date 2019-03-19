@@ -1,0 +1,19 @@
+{
+    "layer": "geometry",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+    "properties": [],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "selftimer_uvroll",
+                "fs": "selftimer_uvroll"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

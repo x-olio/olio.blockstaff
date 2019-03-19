@@ -1,0 +1,21 @@
+{
+    "layer": "geometry",
+    "properties": [
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "sssss"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "sssss"
+            }
+        ]
+    }
+}

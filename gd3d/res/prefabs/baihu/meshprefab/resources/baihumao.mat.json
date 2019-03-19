@@ -1,0 +1,1 @@
+{"shader":"diffuse.shader.json","srcshader":"Transparent/Diffuse","mapUniform":{"_Color":{"type":3,"value":"(0.588,0.588,0.588,1)"},"_MainTex":{}}}

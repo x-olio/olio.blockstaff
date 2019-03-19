@@ -1,0 +1,43 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.5",
+        "_LightTex('Light',Texture) = 'black' {}",
+        "_LightColor('LightColor',Color) = (1,1,1,1)",
+        "_LightRate('LightRate',Range(0.0,1.0)) = 1.0",
+		"_SpeedU('SpeedU',float) = 0.5",
+		"_SpeedV('SpeedV',float) = 0.5",
+		"_MaskTex('Mask',Texture) = 'white' {}"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "streamlight",
+                "fs": "streamlight"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_streamlight",
+                "fs": "fog_streamlight"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "ccw",
+                "vs": "streamlightbone_eff",
+                "fs": "streamlight"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "ccw",
+                "vs": "fog_streamlightbone_eff",
+                "fs": "fog_streamlight"
+            }
+        ]
+    }
+}

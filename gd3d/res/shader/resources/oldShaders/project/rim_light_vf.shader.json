@@ -1,0 +1,36 @@
+{
+    "layer": "overlay",
+    "properties": [
+        "_RimIntensity('RimIntensity',Range(0.0,2.0)) = 0.1",
+        "_RimColor ('RimColor', Color) = (0.0,0.33,0.42,1.0)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "blendmode": "add",
+                "vs": "rim_light_vf",
+                "fs": "rim_light_vf",
+                "zwrite": "off"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "ccw",
+                "blendmode": "add",
+                "vs": "bone_eff_rimlight",
+                "fs": "rim_light_vf",
+                "zwrite": "off"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "ccw",
+                "blendmode": "add",
+                "vs": "bone_eff_rimlight",
+                "fs": "rim_light_vf",
+                "zwrite": "off"
+            }
+        ]
+    }
+}

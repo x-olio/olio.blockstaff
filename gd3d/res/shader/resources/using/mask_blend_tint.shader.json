@@ -1,0 +1,55 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_Mask('Mask',Texture)='white'{}",
+        "_MainTex_ST('MainTex_ST',Vector)=(1,1,0,0)",
+        "_Mask_ST('Mask_ST',Vector)=(1,1,0,0)",
+        "_Main_Color('Main_Color', Color) = (1,1,0,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "blendmode": "blend",
+                "zwrite": "off",
+                "ztest":"on",
+                "vs": "mask_trans_tint",
+                "fs": "mask_trans_tint"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "all",
+                "blendmode": "blend",
+                "zwrite": "off",
+                "ztest":"on",
+                "vs": "mask_trans_tint",
+                "fs": "mask_trans_tint"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "all",
+                "blendmode": "blend",
+                "zwrite": "off",
+                "ztest":"on",
+                "vs": "mask_trans_tint",
+                "fs": "mask_trans_tint"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "all",
+                "blendmode": "blend",
+                "zwrite": "off",
+                "ztest":"on",
+                "vs": "mask_trans_tint",
+                "fs": "mask_trans_tint"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

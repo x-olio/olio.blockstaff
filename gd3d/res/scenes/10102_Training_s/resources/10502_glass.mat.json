@@ -1,0 +1,9 @@
+{
+    "shader":"transparent.shader.json",
+    "mapUniform":{
+        "_MainTex":{
+            "type":0,
+            "value":"10502_glass.imgdesc.json"
+            }
+        }
+    }

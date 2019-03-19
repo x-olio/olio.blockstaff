@@ -1,0 +1,20 @@
+{
+    "files": [
+        {
+            "name": "resources/daoguang_01.imgdesc.json",
+            "length": 49589
+        },
+        {
+            "name": "resources/daoguangmoxing.mesh.bin",
+            "length": 49589
+        },
+        {
+            "name": "resources/tra1il_t.png",
+            "length": 49589
+        },
+        {
+            "name": "fx_zs_male@attack_01.effect.json",
+            "length": 41722
+        }
+    ]
+}

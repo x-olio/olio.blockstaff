@@ -1,0 +1,70 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "daoguang",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 3,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 0,
+                            "v": 0
+                        },
+                        "color": {
+                            "x": 0,
+                            "y": 1,
+                            "z": 0
+                        },
+                        "mesh": "daoguangmoxing.mesh.bin",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "daoguang_01.imgdesc.json"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "uvroll",
+			    "end": 15,
+                            "param": {
+				"speedu": 0,
+				"speedv": 0.13333,
+				"startu": 0,
+				"startv": -1
+			    }
+                        }
+                    ]
+                },
+                {
+                    "frame": 16,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

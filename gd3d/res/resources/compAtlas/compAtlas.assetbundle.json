@@ -1,0 +1,12 @@
+{
+  "files":[
+      {
+          "name":"resources/comp.json.png",
+          "length":0
+          },
+		{
+          "name":"resources/comp.atlas.json",
+          "length":0
+          }
+      ]
+  }

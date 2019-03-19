@@ -1,0 +1,130 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "rotation1",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 1,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 87.35994,
+                            "y": 96.09596,
+                            "z": 87.35996
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "Art_Effects_Skill_Effects_magian_hei_long_bo_FBX_dragon.FBX_long_tou_1.mesh.bin",
+                        "mat": {
+                            "shader": "diffuse_bothside.shader.json",
+                            "diffuseTexture": "dragon.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "rosepath",
+                            "param": {
+                                "radius": 5,
+                                "level": 1,
+                                "speed": 0.02,
+                                "polar": {
+                                    "x": 180,
+                                    "y": 1,
+                                    "z": 180
+                                }
+                            }
+                        },
+                        {
+                            "action": "trail",
+                            "param": {
+                                "pos": {
+                                    "x": 0,
+                                    "y": 0,
+                                    "z": 0
+                                }, 
+                                "eular": {
+                                    "x": 0,
+                                    "y": 0,
+                                    "z": 90
+                                },
+                                "speed": 2,
+                                "width": 1,
+                                "alpha": 1,
+                                "color": {
+                                    "x": 1,
+                                    "y": 1,
+                                    "z": 1
+                                },
+                                "shader": "particles_blend.shader.json",
+                                "diffuseTexture": "sd_hlb_1.png"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+          {
+            "name": "kuosan0",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 2,
+                            "v": 3
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "sd_hlb_1.png"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "uv_Basecolor('albedo',Texture)='white'{}",
+        "uv_MetallicRoughness('MetallicRoughness',Texture)='white'{}",
+        "uv_AO('AO',Texture)='white'{}",
+        "uv_Normal('Normal',Texture)='normal'{}",
+        "CustomBasecolor ('Color', Color) = (1,1,1,1)",
+        "CustomMetallic('Metallic',Range(0.0,1.0)) = 1.0",
+        "CustomRoughness('Roughness',Range(0.0,1.0)) = 1.0"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "pbr",
+                "fs": "pbr"
+            }
+        ],
+        "base_fog": [
+
+        ],
+        "skin": [
+
+        ],
+        "skin_fog": [
+
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

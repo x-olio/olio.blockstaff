@@ -1,0 +1,1 @@
+{"shader":"diffuse_bothside.shader.json","srcshader":"Gd3d/Diffuse_BothSide","queue":0,"mapUniform":{"_MainTex":{"type":0,"value":"sf_rgb_overlap.imgdesc.json"},"_AlphaCut":{"type":1,"value":0},"_MainColor":{"type":3,"value":"(1,1,1,1)"}}}

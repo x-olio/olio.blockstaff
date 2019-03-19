@@ -1,0 +1,32 @@
+{
+    "files": [
+        {
+            "name": "resources/rock256.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/f_fire035a_5x2.png",
+            "length": 10000
+        },
+        {
+            "name": "resources/fs_1.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/E_huo01.png",
+            "length": 10000
+        },
+        {
+            "name": "resources/117e875620d52496fb971dbf6724624d.png",
+            "length": 111111
+        },
+        {
+            "name": "resources/7FE68455E071C2828972666FA4C9447646A8DAD8.mesh.bin",
+            "length": 41722
+        },
+        {
+            "name": "vertexcolorlerp.effect.json",
+            "length": 41722
+        }
+    ]
+}

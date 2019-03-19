@@ -1,0 +1,23 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_MosaicSize('MosaicSize',float)=5"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "mosaic"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "mosaic"
+            }
+        ]
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "layer": "common",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_asm('asm',Texture)='white'{}",
+        "_streamLight('streamLight',Texture)='black'{}",
+        "_MainTex_ST('MainTex_ST',Vector)=(1,1,0,0)",
+        "_asm_ST('asm_ST',Vector)=(1,1,0,0)",
+        "_streamLight_ST('streamLight_ST',Vector)=(1,1,0,0)",
+        "_diffuseRate('diffuseRate',Range(0.0, 3)) = 1.0",
+        "_speculerRate('speculerRate',Range(0.0, 10)) = 0",
+        "_LightRate('LightRate',Range(0, 3)) = 0",
+        "_alphaRate('alphaRate',Range(0, 3)) = 1.0",
+        "_speedu('speedu',Float) = 0",
+        "_speedv('speedv',Float) = 0",
+        "_LightColor('LightColor', Color) = (1,1,0,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "asi_new",
+                "fs": "asi_new"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "all",
+                "vs": "asi_new_bone_eff",
+                "fs": "asi_new"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

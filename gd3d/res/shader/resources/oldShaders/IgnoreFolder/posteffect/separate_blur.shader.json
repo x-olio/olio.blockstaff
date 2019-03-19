@@ -1,0 +1,31 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "sample_offsets('sample_offsets',Vector) = (0,1.0,0,-1.0)",
+        "_MainTex_TexelSize('MainTex_TexelSize',Vector) = (0.009765,0.009765,1024,1024)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "diffuse",
+                "fs": "diffuse"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "separate_blur",
+                "fs": "separate_blur"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

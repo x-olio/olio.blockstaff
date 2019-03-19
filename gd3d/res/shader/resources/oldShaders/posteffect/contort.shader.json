@@ -1,0 +1,24 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_UD('UD',float)=90",
+        "_UR('UR',float)=0.2"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "contort",
+                "fs": "contort"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "contort_quad",
+                "fs": "contort"
+            }
+        ]
+    }
+}

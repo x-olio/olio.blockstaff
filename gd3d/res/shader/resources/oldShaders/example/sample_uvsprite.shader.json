@@ -1,0 +1,19 @@
+{
+  "layer": "transparent",
+  "properties": [
+    "_MainTex('MainTex',Texture)='white'{}",
+    "_MainTex_ST('MainTex_ST',Vector) = (1,1,1,1)"
+  ],
+  "passes": {
+    "base": [
+      {
+        "showface": "ccw",
+        "vs": "sample_uvsprite",
+        "fs": "sample_uvsprite"
+      }
+    ],
+    "shadowgen": [],
+    "bone": [],
+    "shadowuse": []
+  }
+}

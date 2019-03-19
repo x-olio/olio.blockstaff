@@ -1,0 +1,23 @@
+{"t":"comp.json.png",
+ "w":256,
+ "h":256,
+ "s":[
+["bg",138,1,100,79],
+["blank",240,1,10,10],
+["ui_boundary_close",65,214,25,25],
+["ui_boundary_close_in",67,170,25,25],
+["ui_lianji_0",179,82,32,42],
+["ui_lianji_1",35,214,28,41],
+["ui_lianji_2",1,214,32,41],
+["ui_lianji_3",1,170,31,42],
+["ui_lianji_4",138,112,32,42],
+["ui_lianji_5",213,82,32,42],
+["ui_lianji_6",172,126,32,42],
+["ui_lianji_7",1,113,30,42],
+["ui_lianji_8",206,126,32,42],
+["ui_lianji_9",34,170,31,42],
+["ui_public_button_1",1,1,135,54],
+["ui_public_button_hits",1,57,135,54],
+["ui_public_input",138,82,39,28]
+ ]
+}

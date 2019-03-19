@@ -1,0 +1,26 @@
+{
+    "shader":"asi.shader.json",
+    "srcshader":"Gd3d/Asi",
+    "mapUniform":{
+        "_base":{
+            "type":0,
+            "value":"0122_huanghunshibing_d.imgdesc.json"
+            },
+        "_asi":{
+            "type":0,
+            "value":"0122_huanghunshibing_asi.imgdesc.json"
+            },
+        "_emitPow":{
+            "type":1,
+            "value":1.02999997138977
+            },
+        "_diffuse":{
+            "type":1,
+            "value":4.03999996185303
+            },
+        "_Cutoff":{
+            "type":1,
+            "value":0.5
+            }
+        }
+    }

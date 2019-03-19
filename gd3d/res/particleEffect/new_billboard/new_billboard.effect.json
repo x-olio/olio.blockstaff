@@ -1,0 +1,189 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "kuosan0",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        },
+                        "billboard": "horizontal"
+                    }
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "loop",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "kuosan1",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 1,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -90
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        },
+                        "billboard": "stretched"
+                    }
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "loop",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "kuosan2",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        },
+                        "billboard": "billboard"
+                    }
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "loop",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "kuosan2",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": -1,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        },
+                        "billboard": "vertical"
+                    }
+                },
+                {
+                    "frame": 30,
+                    "actions": [
+                        {
+                            "action": "loop",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

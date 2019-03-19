@@ -1,0 +1,15 @@
+{
+    "layer": "overlay",
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "color_solid",
+                "fs": "color_solid"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

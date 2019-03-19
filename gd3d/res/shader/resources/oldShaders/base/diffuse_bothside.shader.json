@@ -1,0 +1,70 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.5",
+        "_MainColor ('MainColor', Color) = (1,1,1,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "diffuse",
+                "fs": "diffuse",
+                "zwrite":"on",
+                "ztest":"lequal"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_diffuse",
+                "fs": "fog_diffuse",
+                "zwrite":"on",
+                "ztest":"lequal"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "all",
+                "vs": "bone_eff",
+                "fs": "diffuse"
+            }
+        ],
+         "skin_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_bone_eff",
+                "fs": "fog_diffuse"
+            }
+        ],
+        "lightmap": [
+            {
+                "showface": "all",
+                "vs": "diffuselightmap",
+                "fs": "diffuselightmap"
+            }
+        ],
+        "lightmap_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_diffuselightmap",
+                "fs": "fog_diffuselightmap"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "all",
+                "vs": "post_quad",
+                "fs": "post_quad_depth"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "all",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

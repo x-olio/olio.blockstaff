@@ -1,0 +1,1 @@
+{"shader":"diffuse.shader.json","srcshader":"Gd3d/Diffuse","mapUniform":{"_MainColor":{"type":3,"value":"(0.9558824,0.7189476,0.295199,1)"},"_MainTex":{"type":0,"value":"skybox02.imgdesc.json"},"_AlphaCut":{"type":1,"value":0.5}}}

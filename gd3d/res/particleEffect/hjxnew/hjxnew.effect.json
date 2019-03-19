@@ -1,0 +1,220 @@
+{
+    "life": 15,
+    "elements": [
+        {
+            "name": "kuosan0",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 0.57,
+                            "y": 0,
+                            "z": 1
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "rock256.png"
+                        },
+                        "billboard": "horizontalbillboard"
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 120,
+                            "attribute": {
+                                "scale": {
+                                    "x": 3,
+                                    "y": 3,
+                                    "z": 3
+                                },
+                                "alpha": 0.2
+                            }
+                        },
+                        {
+                            "type": "xxxxx",
+                            "to": 50,
+                            "attribute": {
+                                "aaa": {
+                                    "x": 3,
+                                    "y": 3,
+                                    "z": 3
+                                },
+                                "bbb": 0.2
+                            }
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "action": "linear",
+                            "end": 120,
+                            "param": {
+                                "name": "uv",
+                                "value": {
+                                    "u": 0.01,
+                                    "v": 0.01
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 130,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "kuosan1",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "fs_1.png"
+                        },
+                        "billboard": "horizontalbillboard"
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    },
+                    "actions": [
+                        {
+                            "action": "linear",
+                            "end": 30,
+                            "param": {
+                                "name": "scale",
+                                "value": {
+                                    "y": 0.1
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 130,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "kuosan3",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0.5,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "117e875620d52496fb971dbf6724624d.png"
+                        },
+                        "billboard": "horizontalbillboard"
+                    }
+                },
+                {
+                    "frame": 130,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

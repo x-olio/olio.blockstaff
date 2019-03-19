@@ -1,0 +1,37 @@
+{
+    "files": [
+         
+        {
+            "name": "resources/g_fissure051a.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/Ground_Crack_10.png",
+            "length": 49589
+        },
+          {
+            "name": "resources/FallingStar02_line.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/kaihuo_0000_0000_0000.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/light00101.png",
+            "length": 49589
+        },
+         {
+            "name": "resources/ShockWave_A.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/g1j.mesh.bin",
+            "length": 49589
+        },
+        {
+            "name": "fx_zs_male@attack_02.effect.json",
+            "length": 41722
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "layer": "geometry",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		"_LightColor('LightColor',color)=(1,1,1,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "asi",
+                "fs": "asi"
+            }
+        ],
+         "base_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_asi",
+                "fs": "fog_asi"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "all",
+                "vs": "asibone_eff",
+                "fs": "asi"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_asibone_eff",
+                "fs": "fog_asi"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

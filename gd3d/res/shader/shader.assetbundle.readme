@@ -1,0 +1,40 @@
+{
+    //"packs": ["shaderpack.bin","shaderpack.json"],
+    ///如果有启用打包功能，则packfile用 0 1 2 标记
+    "files": [
+        {
+            "name": "shader/color.vs.glsl",
+            "length": 0
+            //"hash":"sha1" 可选，hash 值，可以用来验证文件正确性
+            //"inpack":0 可选，有这行，则该文件在一个包里，0号包是"shaderpack.bin"
+            //不在包里的文件则从相对路径读取
+        },
+        {
+            "name": "shader/color.fs.glsl",
+            "length": 0
+        },
+        {
+            "name": "shader/color.shader.json",
+            "length": 0
+        },
+        {
+            "name": "shader/colorwithborder.mat.json",
+            "length": 0
+        },
+        {
+            "name": "shader/white.glsl",
+            "length": 0
+        }
+    ]
+}
+
+打包工具  ShaderPackTool.exe 
+说明： 直接运行 会将resources 目录中所有子目录的shader文件打包成 shader.assetbundle.json
+
+配置文件：shaderPack.config  （必须放置于 resources 目录下）
+1.忽略选项<IgnorePathList>
+可添加相对resources 路径下的目录路径 ，被记录的路径在打包时将不被包含
+2.子shader包选项<SubPackage name="xxx">
+name 设置 包名
+逐行添加shader名（不含后缀） ，被列入的shader才会被包裹
+可依次添加多个子包

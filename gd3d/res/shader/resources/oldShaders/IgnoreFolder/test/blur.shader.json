@@ -1,0 +1,23 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_BlurGap('_BlurGap',float)=1.0"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "blur",
+                "fs": "blur"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "blur_quad",
+                "fs": "blur"
+            }
+        ]
+    }
+}

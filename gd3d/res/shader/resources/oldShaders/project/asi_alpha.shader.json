@@ -1,0 +1,36 @@
+{
+    "layer": "geometry",
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "asi",
+                "fs": "asi_alpha"
+            }
+        ],
+        "base_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_asi",
+                "fs": "fog_asi_alpha"
+            }
+        ],
+        "skin": [
+            {
+                "showface": "all",
+                "vs": "asibone_eff",
+                "fs": "asi_alpha"
+            }
+        ],
+        "skin_fog": [
+            {
+                "showface": "all",
+                "vs": "fog_asibone_eff",
+                "fs": "fog_asi_alpha"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

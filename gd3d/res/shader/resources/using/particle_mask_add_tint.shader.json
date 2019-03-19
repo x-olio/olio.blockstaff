@@ -1,0 +1,27 @@
+{
+    "layer": "transparent",
+	"properties": [
+        "_Main_Tex('MainTex',Texture)='white'{}",
+        "_Mask('Mask',Texture)='white'{}",
+        "_Main_Tex_ST('MainTex_ST',Vector)=(1,1,0,0)",
+        "_Mask_ST('Mask_ST',Vector)=(1,1,0,0)",
+        "_Main_Color('Main_Color', Color) = (1,1,1,1)",
+        "_mixAlphaRate('mixAlphaRate',Float) = 1",
+        "_mixColorRate('mixColorRate',Float) = 1"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "blendmode": "add",
+                "zwrite": "off",
+                "ztest":"on",
+                "vs": "par_mask_tint",
+                "fs": "par_mask_tint"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

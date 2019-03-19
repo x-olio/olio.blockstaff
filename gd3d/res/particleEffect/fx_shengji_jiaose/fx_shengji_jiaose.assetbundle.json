@@ -1,0 +1,32 @@
+{
+    "files": [
+        {
+            "name": "resources/Effects_Textures_232-1.png",
+            "length": 49567
+        },
+        {
+            "name": "resources/light0029.png",
+            "length": 49553
+        },
+        {
+            "name": "resources/p_halo024a.png",
+            "length": 49231
+        },
+        {
+            "name": "resources/E_glow001.png",
+            "length": 49345
+        },
+      {
+            "name": "resources/len_01.png",
+            "length": 49345
+        },
+        {
+            "name": "resources/ui_3043-120.png",
+            "length": 49523
+        },
+        {
+            "name": "fx_shengji_jiaose.effect.json",
+            "length": 41722
+        }
+    ]
+}

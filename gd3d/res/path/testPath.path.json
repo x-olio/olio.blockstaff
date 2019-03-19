@@ -1,0 +1,27 @@
+{
+    "pathName":"testPath.path.json",
+    "type":"Once",
+    "insertPointcount":8,
+    "path":[
+        {
+            "type":"VertexPoint",
+            "point":"-0.01,0,0.07"
+            },
+        {
+            "type":"VertexPoint",
+            "point":"1.9,0,4.85"
+            },
+        {
+            "type":"ControlPoint",
+            "point":"3.9,0,0.07"
+            },
+        {
+            "type":"VertexPoint",
+            "point":"6.72,-0.87,3.83"
+            },
+        {
+            "type":"VertexPoint",
+            "point":"8.349999,0,0.07"
+            }
+        ]
+    }

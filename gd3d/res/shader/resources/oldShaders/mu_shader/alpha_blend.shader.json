@@ -1,0 +1,23 @@
+{
+    "layer":"transparent",
+    "properties":[
+        "_MainTex('MainTex', Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.5",
+		"_MainColor ('MainColor', Color) = (1,1,1,1)"
+    ],
+    "queue":0,
+    "passes":{
+        "base":[
+		{
+			"showface": "ccw",
+                "vs": "diffuse",
+                "fs": "diffuse",
+                "zwrite": "on",
+                "ztest": "lequal"
+		
+		}
+           
+        ]
+
+    }
+}

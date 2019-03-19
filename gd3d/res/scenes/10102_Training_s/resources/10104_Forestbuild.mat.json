@@ -1,0 +1,9 @@
+{
+    "shader":"diffuse.shader.json",
+    "mapUniform":{
+        "_MainTex":{
+            "type":0,
+            "value":"forestbuild33.imgdesc.json"
+            }
+        }
+    }

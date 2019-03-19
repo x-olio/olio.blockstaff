@@ -1,0 +1,10 @@
+{
+    "shader":"diffuse.shader.json",
+    "srcshader":"Mobile/Diffuse",
+    "mapUniform":{
+        "_MainTex":{
+            "type":0,
+            "value":"dieren_01.imgdesc.json"
+            }
+        }
+    }

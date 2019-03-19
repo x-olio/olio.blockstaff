@@ -1,0 +1,30 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_bloomFactor('bloomFactor',Range(0.0,1.0)) = 2.0"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "bloom"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "post_quad",
+                "fs": "custom_bloom"
+            }
+        ],
+        "base_depth": [
+            {
+                "showface": "ccw",
+                "vs": "post_depth",
+                "fs": "post_depth"
+            }
+        ]
+    }
+}

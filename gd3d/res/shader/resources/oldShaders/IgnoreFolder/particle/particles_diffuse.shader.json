@@ -1,0 +1,28 @@
+{
+  "layer": "common",
+  "properties": [
+        "_MainTex('MainTex',Texture)='white'{}"
+    ],
+  "queue":  0,
+    "passes": {
+        "base": [
+          {
+            "blendmode":"close",
+            "showface": "all",
+            "vs": "particles_diffuse",
+            "fs": "particles_diffuse"
+          }
+        ],
+        "base_fog": [
+          {
+            "blendmode":"close",
+            "showface": "all",
+            "vs": "fog_particles_diffuse",
+            "fs": "fog_particles_diffuse"
+          }
+        ],
+        "shadowgen": [],  
+        "bone": [],
+        "shadowuse": []
+    }
+}

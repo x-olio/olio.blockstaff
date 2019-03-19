@@ -1,0 +1,79 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "quan",
+            "type": "singlemesh",
+            "timeline": [
+              {
+                "frame": -1,
+                "attrs": {
+                  "pos": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  },
+                  "euler": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  },
+                  "scale": {
+                    "x": 2,
+                    "y": 2,
+                    "z": 2
+                  },
+                  "alpha": 1,
+                  "uv": {
+                    "u": 1,
+                    "v": 1
+                  },
+                  "color": {
+                    "x": 1,
+                    "y": 1,
+                    "z": 1
+                  },
+                  "mesh": "cube",
+                  "mat": {
+                    "shader": "particles_additive.shader.json",
+                    "diffuseTexture": "shandian_00094.png"
+                  },
+                  "billboard": "billboard"
+                }
+              },
+               {
+                    "frame": 0,
+                    "attrs": {
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 30,
+                            "attribute": {
+                                "euler": {
+                                    "x": 0,
+                                    "y": 0,
+                                    "z": 360
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 1000,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

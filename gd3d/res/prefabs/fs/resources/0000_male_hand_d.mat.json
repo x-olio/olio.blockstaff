@@ -1,0 +1,10 @@
+{
+    "shader":"diffuse.shader.json",
+    "srcshader":"Mobile/Diffuse",
+    "mapUniform":{
+        "_MainTex":{
+            "type":0,
+            "value":"0000_male_hand_d.imgdesc.json"
+            }
+        }
+    }

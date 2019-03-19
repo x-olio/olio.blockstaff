@@ -1,0 +1,96 @@
+{
+    "life": 15,
+    "elements": [
+        {
+            "name": "kuosan0",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 0.57,
+                            "y": 0,
+                            "z": 1
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "fs_1.png"
+
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "color": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "alpha": 0.5
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 60,
+                            "attribute": {
+                                "color": {
+                                    "x": 1,
+                                    "y": 0,
+                                    "z": 0
+                                },
+                                  "alpha": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 60,
+                    "attrs": {
+                        "alpha": 1
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 120,
+                            "attribute": {
+                                "alpha": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 130,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

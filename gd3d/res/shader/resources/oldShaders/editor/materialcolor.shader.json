@@ -1,0 +1,19 @@
+{
+    "layer": "overlay",
+	"properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+		"_Color('Color',color)=(1,1,1,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "all",
+                "vs": "materialcolor",
+                "fs": "materialcolor"
+            }
+        ],
+        "shadowgen": [],
+        "bone": [],
+        "shadowuse": []
+    }
+}

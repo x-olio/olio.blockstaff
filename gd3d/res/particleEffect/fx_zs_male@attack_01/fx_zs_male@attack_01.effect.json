@@ -1,0 +1,94 @@
+{
+    "life": 1,
+    "elements": [
+        {
+            "name": "daogaung",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 90,
+                            "y": 180,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x": 1,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "daoguang_01.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "euler": {
+                            "x": 90,
+                            "y": 180,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    },
+                    "lerp": [
+                        {
+                            "type": "linear",
+                            "to": 3,
+                            "attribute": {
+                                "scale": {
+                                    "x": 5,
+                                    "y": 5,
+                                    "z": 5
+                                }
+                            }
+                        },
+                        {
+                            "type": "linear",
+                            "to": 5,
+                            "attribute": {
+                                "euler": {
+                                    "x": 90,
+                                    "y": 300,
+                                    "z": 0
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "frame": 6,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

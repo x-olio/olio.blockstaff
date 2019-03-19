@@ -1,0 +1,233 @@
+{
+    "life": 1000,
+    "elements": [
+        {
+            "name": "rotation1",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": -0.5,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x":1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "rotation",
+                            "param": {
+                                "velocity":
+                                {
+                                    "x":0,
+                                    "y":100,
+                                    "z":0
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "rotation2",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x":-1.5,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x":1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "rotation",
+                            "param": {
+                                "velocity":
+                                {
+                                    "x":100,
+                                    "y":0,
+                                    "z":0
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+               {
+            "name": "rotation3",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x":1.5,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x":1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "rotation",
+                            "param": {
+                                "velocity":
+                                {
+                                    "x":0,
+                                    "y":0,
+                                    "z":100
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+                       {
+            "name": "rotation4",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x":0.5,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 1,
+                        "uv": {
+                            "u": 1,
+                            "v": 1
+                        },
+                        "color": {
+                            "x":1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "mesh": "quad",
+                        "mat": {
+                            "shader": "particles_additive.shader.json",
+                            "diffuseTexture": "onepiece.png"
+                        }
+                    }
+                },
+                {
+                    "frame": 0,
+                    "actions": [
+                        {
+                            "action": "rotation",
+                            "param": {
+                                "velocity":
+                                {
+                                    "x":0,
+                                    "y":0,
+                                    "z":100
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

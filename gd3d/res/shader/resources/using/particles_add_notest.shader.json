@@ -1,0 +1,23 @@
+{
+  "layer": "transparent",
+  "queue":  0,
+  "properties": [
+		"_Main_Tex('MainTex',Texture)='white'{}",
+        "_Main_Color ('Tint Color', Color) = (1.0,1.0,1.0,1.0)"
+    ],
+    "passes": {
+        "base": [
+          {
+            "blendmode": "add",
+            "showface": "all",
+            "zwrite": "off",
+            "ztest":"off",
+            "vs": "f14trans",
+            "fs": "f14trans"
+          }
+        ],
+        "shadowgen": [],  
+        "bone": [],
+        "shadowuse": []
+    }
+}

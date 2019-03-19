@@ -1,0 +1,61 @@
+{
+    "life": 15,
+    "elements": [
+        {
+            "name": "kuosan0",
+            "type": "singlemesh",
+            "timeline": [
+                {
+                    "frame": -1,
+                    "attrs": {
+                        "pos": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "euler": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        },
+                        "alpha": 0.5,
+                        "uv": {
+                            "u": 2,
+                            "v": 2
+                        },
+                        "mesh": "plane",
+                        "mat": {
+                            "shader": "particles_blend.shader.json",
+                            "diffuseTexture": "fs_1.png"
+                        },
+                        "billboard": "horizontalbillboard"
+                    }
+                },
+                {
+                    "frame": 0,
+                    "attrs": {
+                        "scale": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                },
+                {
+                    "frame": 130,
+                    "actions": [
+                        {
+                            "action": "destroy",
+                            "param": {}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_K('K',Range(0.5,2.0))=1.5",
+        "_MainTex_ST('MainTex_ST',Vector)=(1,1,1,1)"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "hdr_quad_0"
+            },
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "hdr_quad_1"
+            }
+        ],
+        "quad": [
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "hdr_quad_0"
+            },
+            {
+                "showface": "ccw",
+                "vs": "quad",
+                "fs": "hdr_quad_1"
+            }
+        ]
+    }
+}

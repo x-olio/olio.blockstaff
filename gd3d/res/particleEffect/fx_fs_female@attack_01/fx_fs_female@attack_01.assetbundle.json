@@ -1,0 +1,32 @@
+{
+    "files": [
+        {
+            "name": "resources/GF_2500.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/shandian_00094.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/lightning01.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/lightning001.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/lightning2x4_blue.png",
+            "length": 49589
+        },
+        {
+            "name": "resources/LD.png",
+            "length": 49589
+        },
+        {
+            "name": "fx_fs_female@attack_01.effect.json",
+            "length": 41722
+        }
+    ]
+}
