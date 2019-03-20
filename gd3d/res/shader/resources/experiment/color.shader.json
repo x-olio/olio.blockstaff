@@ -6,6 +6,7 @@
     "passes": {
         "base": [
             {
+                "blendmode": "blend",
                 "showface": "all",
                 "vs": "color",
                 "fs": "color"

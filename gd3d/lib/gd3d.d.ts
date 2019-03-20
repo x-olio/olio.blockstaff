@@ -193,13 +193,6 @@ declare namespace Stats {
         private end;
     }
 }
-declare namespace gd3d.io {
-    function xhrLoad(url: string, fun: (ContentData: any, _err: Error, isloadFail?: boolean) => void, onprocess: (curLength: number, totalLength: number) => void, responseType: XMLHttpRequestResponseType, loadedFun: (req: XMLHttpRequest) => void): void;
-    function loadText(url: string, fun: (_txt: string, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
-    function loadArrayBuffer(url: string, fun: (_bin: ArrayBuffer, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
-    function loadBlob(url: string, fun: (_blob: Blob, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
-    function loadImg(url: string, fun: (_tex: HTMLImageElement, _err: Error, loadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
-}
 declare namespace gd3d {
     var gd3d_reflect_root: {};
     namespace reflect {
@@ -353,126 +346,6 @@ declare namespace gd3d.math {
     function vec3FormJson(json: string, vec3: vector3): void;
     function vec2FormJson(json: string, vec2: vector2): void;
     function colorFormJson(json: string, _color: color): void;
-}
-declare namespace gd3d.math {
-    class pool {
-        static collect_all(): void;
-        private static _vector4_one;
-        static readonly vector4_one: vector4;
-        private static unused_vector4;
-        static new_vector4(x?: number, y?: number, z?: number, w?: number): vector4;
-        static clone_vector4(src: vector4): vector4;
-        static delete_vector4(v: vector4): void;
-        static collect_vector4(): void;
-        private static _color_one;
-        static readonly color_one: color;
-        private static unused_color;
-        static new_color(r?: number, g?: number, b?: number, a?: number): color;
-        static delete_color(v: color): void;
-        static collect_color(): void;
-        private static _vector3_up;
-        static readonly vector3_up: vector3;
-        private static _vector3_right;
-        static readonly vector3_right: vector3;
-        private static _vector3_forward;
-        static readonly vector3_forward: vector3;
-        private static _vector3_zero;
-        static readonly vector3_zero: vector3;
-        private static _vector3_one;
-        static readonly vector3_one: vector3;
-        private static unused_vector3;
-        static new_vector3(x?: number, y?: number, z?: number): vector3;
-        static clone_vector3(src: vector3): vector3;
-        static delete_vector3(v: vector3): void;
-        static delete_vector3Array(vs: vector3[]): void;
-        static collect_vector3(): void;
-        private static _vector2_zero;
-        static readonly vector2_zero: vector2;
-        private static _vector2_up;
-        static readonly vector2_up: vector2;
-        private static _vector2_right;
-        static readonly vector2_right: vector2;
-        private static unused_vector2;
-        static new_vector2(x?: number, y?: number): vector2;
-        static clone_vector2(src: vector2): vector2;
-        static delete_vector2(v: vector2): void;
-        static delete_vector2Array(vs: vector2[]): void;
-        static collect_vector2(): void;
-        private static unused_matrix3x2;
-        static new_matrix3x2(): matrix3x2;
-        static clone_matrix3x2(src: matrix3x2): matrix3x2;
-        static delete_matrix3x2(v: matrix3x2): void;
-        static collect_matrix3x2(): void;
-        private static unused_matrix;
-        static new_matrix(): matrix;
-        static clone_matrix(src: matrix): matrix;
-        static readonly identityMat: matrix;
-        static delete_matrix(v: matrix): void;
-        static collect_matrix(): void;
-        private static unused_quaternion;
-        static new_quaternion(x?: number, y?: number, z?: number, w?: number): quaternion;
-        static clone_quaternion(src: quaternion): quaternion;
-        static delete_quaternion(v: quaternion): void;
-        static collect_quaternion(): void;
-        private static unused_pickInfo;
-        static new_pickInfo(bu?: number, bv?: number, distance?: number): framework.pickinfo;
-        static delete_pickInfo(v: framework.pickinfo): void;
-        static collect_pickInfo(): void;
-        private static unused_rect;
-        static new_rect(x?: number, y?: number, w?: number, h?: number): rect;
-        static clone_rect(src: rect): rect;
-        static delete_rect(v: rect): void;
-        static collect_rect(): void;
-    }
-}
-declare namespace gd3d.render {
-    class caps {
-        maxTexturesImageUnits: number;
-        maxTextureSize: number;
-        maxCubemapTextureSize: number;
-        maxRenderTextureSize: number;
-        standardDerivatives: boolean;
-        s3tc: WEBGL_compressed_texture_s3tc;
-        textureFloat: boolean;
-        textureAnisotropicFilterExtension: EXT_texture_filter_anisotropic;
-        maxAnisotropy: number;
-        instancedArrays: ANGLE_instanced_arrays;
-        uintIndices: boolean;
-        highPrecisionShaderSupported: boolean;
-        fragmentDepthSupported: boolean;
-        textureFloatLinearFiltering: boolean;
-        textureLOD: boolean;
-        drawBuffersExtension: any;
-        pvrtcExtension: any;
-        atcExtension: any;
-    }
-    class webglkit {
-        private static _maxVertexAttribArray;
-        static SetMaxVertexAttribArray(webgl: WebGLRenderingContext, count: number): void;
-        private static _texNumber;
-        static GetTextureNumber(webgl: WebGLRenderingContext, index: number): number;
-        static FUNC_ADD: number;
-        static FUNC_SUBTRACT: number;
-        static FUNC_REVERSE_SUBTRACT: number;
-        static ONE: number;
-        static ZERO: number;
-        static SRC_ALPHA: number;
-        static SRC_COLOR: number;
-        static ONE_MINUS_SRC_ALPHA: number;
-        static ONE_MINUS_SRC_COLOR: number;
-        static ONE_MINUS_DST_ALPHA: number;
-        static ONE_MINUS_DST_COLOR: number;
-        static LEQUAL: number;
-        static EQUAL: number;
-        static GEQUAL: number;
-        static NOTEQUAL: number;
-        static LESS: number;
-        static GREATER: number;
-        static ALWAYS: number;
-        static NEVER: number;
-        static caps: caps;
-        static initConst(webgl: WebGLRenderingContext): void;
-    }
 }
 declare namespace gd3d.framework {
     class batcher2D {
@@ -762,6 +635,482 @@ declare namespace gd3d.framework {
     }
 }
 declare namespace gd3d.framework {
+    class behaviour2d implements I2DComponent {
+        transform: transform2D;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        remove(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class boxcollider2d implements I2DComponent, ICollider2d {
+        static readonly ClassName: string;
+        transform: transform2D;
+        private _obb;
+        getBound(): obb2d;
+        intersectsTransform(tran: transform2D): boolean;
+        private build;
+        refreshTofullOver(): void;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        remove(): void;
+    }
+}
+declare namespace gd3d.framework {
+    enum TransitionType {
+        None = 0,
+        ColorTint = 1,
+        SpriteSwap = 2
+    }
+    class button implements I2DComponent, event.IUIEventer {
+        static readonly ClassName: string;
+        private _transition;
+        transition: TransitionType;
+        private _originalColor;
+        private _originalSprite;
+        private _origianlSpriteName;
+        private _pressedSpriteName;
+        private _targetImage;
+        targetImage: image2D;
+        private _pressedSprite;
+        pressedGraphic: sprite;
+        private _normalColor;
+        normalColor: math.color;
+        private _pressedColor;
+        pressedColor: math.color;
+        private _fadeDuration;
+        fadeDuration: number;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        transform: transform2D;
+        remove(): void;
+        private downPointV2;
+        private isMovedLimit;
+        private readonly movedLimit;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        private UIEventer;
+        addListener(eventEnum: event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
+        removeListener(eventEnum: event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
+        private _downInThis;
+        private _dragOut;
+        private showNormal;
+        private showPress;
+        private tryGetSprite;
+        private changeColor;
+        private changeSprite;
+    }
+}
+declare namespace gd3d.framework {
+    class image2D implements IRectRenderer {
+        static readonly ClassName: string;
+        constructor();
+        private _unitLen;
+        private datar;
+        private _sprite;
+        private needRefreshImg;
+        color: math.color;
+        private static readonly defUIShader;
+        private static readonly defMaskUIShader;
+        private _CustomShaderName;
+        setShaderByName(shaderName: string): void;
+        getMaterial(): material;
+        private _darwRect;
+        getDrawBounds(): math.rect;
+        private _uimat;
+        private readonly uimat;
+        private _imageType;
+        imageType: ImageType;
+        private _fillMethod;
+        fillMethod: FillMethod;
+        private _fillAmmount;
+        fillAmmount: number;
+        transform: transform2D;
+        sprite: sprite;
+        private _spriteName;
+        private _imageBorder;
+        readonly imageBorder: math.border;
+        render(canvas: canvas): void;
+        private searchTexture;
+        private _cacheMaskV4;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        remove(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        private prepareData;
+        updateTran(): void;
+        private min_x;
+        private max_x;
+        private min_y;
+        private max_y;
+        private calcDrawRect;
+        private updateQuadData;
+        private updateSimpleData;
+        private updateSlicedData;
+        private updateFilledData;
+        private updateTiledData;
+    }
+    enum ImageType {
+        Simple = 0,
+        Sliced = 1,
+        Tiled = 2,
+        Filled = 3
+    }
+    enum FillMethod {
+        Horizontal = 0,
+        Vertical = 1,
+        Radial_90 = 2,
+        Radial_180 = 3,
+        Radial_360 = 4
+    }
+}
+declare namespace gd3d.framework {
+    class inputField implements I2DComponent {
+        static readonly ClassName: string;
+        transform: transform2D;
+        private _frameImage;
+        frameImage: image2D;
+        private customRegexStr;
+        private beFocus;
+        private inputElement;
+        private _text;
+        readonly text: string;
+        private _charlimit;
+        characterLimit: number;
+        private _lineType;
+        LineType: lineType;
+        private _contentType;
+        ContentType: number;
+        private _textLable;
+        TextLabel: label;
+        private _placeholderLabel;
+        PlaceholderLabel: label;
+        private layoutRefresh;
+        start(): void;
+        onPlay(): void;
+        private inputElmLayout;
+        private textRefresh;
+        private filterContentText;
+        update(delta: number): void;
+        remove(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+    enum lineType {
+        SingleLine = 0,
+        MultiLine = 1
+    }
+    enum contentType {
+        None = 0,
+        Number = 1,
+        Word = 2,
+        Underline = 4,
+        ChineseCharacter = 8,
+        NoneChineseCharacter = 16,
+        Email = 32,
+        PassWord = 64,
+        Custom = 128
+    }
+}
+declare namespace gd3d.framework {
+    class label implements IRectRenderer {
+        static readonly ClassName: string;
+        private _text;
+        text: string;
+        private initdater;
+        private _font;
+        font: font;
+        private needRefreshFont;
+        private _fontName;
+        private _fontsize;
+        fontsize: number;
+        linespace: number;
+        horizontalType: HorizontalType;
+        verticalType: VerticalType;
+        horizontalOverflow: boolean;
+        verticalOverflow: boolean;
+        private indexarr;
+        private remainarrx;
+        updateData(_font: gd3d.framework.font): void;
+        private data_begin;
+        private datar;
+        color: math.color;
+        color2: math.color;
+        private static readonly defUIShader;
+        private static readonly defMaskUIShader;
+        private _CustomShaderName;
+        setShaderByName(shaderName: string): void;
+        getMaterial(): material;
+        private _darwRect;
+        getDrawBounds(): math.rect;
+        private _uimat;
+        private readonly uimat;
+        private dirtyData;
+        render(canvas: canvas): void;
+        private searchTexture;
+        private _cacheMaskV4;
+        updateTran(): void;
+        private min_x;
+        private max_x;
+        private min_y;
+        private max_y;
+        private calcDrawRect;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        transform: transform2D;
+        remove(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+    enum HorizontalType {
+        Center = 0,
+        Left = 1,
+        Right = 2
+    }
+    enum VerticalType {
+        Center = 0,
+        Top = 1,
+        Boom = 2
+    }
+}
+declare namespace gd3d.framework {
+    class progressbar implements I2DComponent {
+        static readonly ClassName: string;
+        private _cutPanel;
+        cutPanel: transform2D;
+        private _barBg;
+        barBg: image2D;
+        private _barOverImg;
+        barOverImg: image2D;
+        private _value;
+        value: number;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        private refreshBar;
+        private adjustOverImg;
+        transform: transform2D;
+        remove(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+}
+declare namespace gd3d.framework {
+    class rawImage2D implements IRectRenderer {
+        static readonly ClassName: string;
+        private datar;
+        private _image;
+        private needRefreshImg;
+        image: texture;
+        color: math.color;
+        private static readonly defUIShader;
+        private static readonly defMaskUIShader;
+        private _CustomShaderName;
+        setShaderByName(shaderName: string): void;
+        getMaterial(): material;
+        private _darwRect;
+        getDrawBounds(): math.rect;
+        private _uimat;
+        private readonly uimat;
+        render(canvas: canvas): void;
+        private _cacheMaskV4;
+        updateTran(): void;
+        private min_x;
+        private max_x;
+        private min_y;
+        private max_y;
+        private calcDrawRect;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        transform: transform2D;
+        remove(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+}
+declare namespace gd3d.framework {
+    class scrollRect implements I2DComponent {
+        static readonly ClassName: string;
+        private _content;
+        content: transform2D;
+        horizontal: boolean;
+        vertical: boolean;
+        inertia: boolean;
+        decelerationRate: number;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        transform: transform2D;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        private isPointDown;
+        private lastPoint;
+        private strPoint;
+        private strPos;
+        private SlideTo;
+        private readonly collectNum;
+        private points;
+        private collectPointing;
+        private flyVelocity;
+        private onInertiaSliderUp;
+        private canfly;
+        private readonly threshold;
+        private readonly cgTime;
+        private cgCount;
+        private lastfv;
+        private flyingSlidr;
+        remove(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class uirect implements I2DComponent {
+        static readonly ClassName: string;
+        canbeClick: boolean;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        transform: transform2D;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+        remove(): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface I2DBody {
+        initData: IBodyData;
+        transform: transform2D;
+        body: Ibody;
+        addForce(Force: gd3d.math.vector2): any;
+        setVelocity(velocity: math.vector2): any;
+        setDesity(Desity: number): any;
+        setFrictionAir(frictionAir: number): any;
+        setFriction(friction: number): any;
+        setFrictionStatic(frictionStatic: number): any;
+        setRestitution(restitution: number): any;
+        setMass(mass: number): any;
+    }
+    interface IBodyData {
+        mass?: number;
+        density?: number;
+        inertia?: number;
+        restitution?: number;
+        frictionStatic?: number;
+        frictionAir?: number;
+        friction?: number;
+        collisionFilter?: collisionFilter;
+        slop?: number;
+        isStatic?: boolean;
+        type?: string;
+        tag?: string;
+        name?: string;
+    }
+    class bassBody implements I2DBody {
+        transform: transform2D;
+        body: Ibody;
+        m_velocity: math.vector2;
+        addForce(Force: math.vector2): void;
+        setVelocity(velocity: math.vector2): void;
+        setAngularVelocity(velocity: number): void;
+        readonly angularVelocity: number;
+        readonly speed: number;
+        readonly velocity: math.vector2;
+        type: string;
+        readonly collisionFilter: collisionFilter;
+        tag: string;
+        name: string;
+        setDesity(Desity: number): void;
+        setFrictionAir(frictionAir: number): void;
+        setFriction(friction: number): void;
+        setFrictionStatic(frictionStatic: number): void;
+        setRestitution(restitution: number): void;
+        setMass(mass: number): void;
+        initData: IBodyData;
+        setInitData(att: IBodyData): void;
+        setPosition(pos: math.vector2): void;
+        update(delta: number): void;
+        remove(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class circleBody extends bassBody implements I2DComponent, I2DBody {
+        static readonly ClassName: string;
+        transform: transform2D;
+        radius: number;
+        start(): void;
+        onPlay(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface Itiming {
+        timeScale?: number;
+        timestamp?: number;
+    }
+    interface IEngine2DOP {
+        constraintIterations?: number;
+        timing?: Itiming;
+        velocityIterations?: number;
+    }
+    class physicEngine2D {
+        matterEngine: any;
+        private engineWorld;
+        private matterVector;
+        constructor(op?: IEngine2DOP);
+        update(delta: number): void;
+        creatRectBodyByInitData(posx: number, posy: number, width: number, height: number, initData: IBodyData): any;
+        creatCircleBodyByInitData(posx: number, posy: number, radius: number, initData: IBodyData): any;
+        addBody(body: Ibody): void;
+        applyForce(body: Ibody, positon: math.vector2, force: math.vector2): void;
+        applyForceAtCenter(body: Ibody, force: math.vector2): void;
+        setGravity(x: number, y: number): void;
+        setVelocity(body: Ibody, velocity: math.vector2): void;
+        setPosition(body: Ibody, pos: math.vector2): void;
+        setMass(body: Ibody, mass: number): void;
+        setDesity(body: Ibody, Desity: number): void;
+        setFrictionAir(body: Ibody, frictionAir: number): void;
+        setFriction(body: Ibody, friction: number): void;
+        setFrictionStatic(body: Ibody, frictionStatic: number): void;
+        setRestitution(body: Ibody, restitution: number): void;
+        setAngularVelocity(body: Ibody, angularVelocity: number): void;
+        private set;
+        addEvent(eventname: string, callback: Function): void;
+        removeEvent(eventname: string, callback: Function): void;
+        removeBody(body: Ibody): void;
+    }
+    interface Ibody {
+        angle: number;
+        position: matterVector;
+        speed: number;
+        type: string;
+        tag: string;
+        name: string;
+        angularVelocity: number;
+        velocity: matterVector;
+        collisionFilter: collisionFilter;
+        applyForce(body: Ibody, positon: matterVector, force: matterVector): void;
+    }
+    interface matterVector {
+        x: number;
+        y: number;
+        create(x: number, y: number): matterVector;
+    }
+    interface collisionFilter {
+        group?: number;
+        category?: number;
+        mask?: number;
+    }
+}
+declare namespace gd3d.framework {
+    class rectBody extends bassBody implements I2DComponent, I2DBody {
+        static readonly ClassName: string;
+        transform: transform2D;
+        start(): void;
+        onPlay(): void;
+        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
+    }
+}
+declare namespace gd3d.framework {
     class resID {
         constructor();
         private static idAll;
@@ -1022,6 +1371,871 @@ declare enum ChannelTypes {
     UnsignedFloat = 13
 }
 declare namespace gd3d.framework {
+    class defmaterial {
+        static initDefaultMaterial(assetmgr: assetMgr): void;
+    }
+}
+declare namespace gd3d.framework {
+    class defMesh {
+        static initDefaultMesh(assetmgr: assetMgr): void;
+        private static createDefaultMesh;
+    }
+}
+declare namespace gd3d.framework {
+    class defShader {
+        static shader0: string;
+        static vscode: string;
+        static fscode: string;
+        static fscode2: string;
+        static uishader: string;
+        static fscodeUI: string;
+        static vscodeUI: string;
+        static vscodeMaskUI: string;
+        static fscodeMaskUI: string;
+        static shaderuifront: string;
+        static vscodefontUI: string;
+        static fscodefontUI: string;
+        static vscodeuifontmask: string;
+        static fscodeuifontmask: string;
+        static diffuseShader: string;
+        static vsdiffuse: string;
+        static fsdiffuse: string;
+        static vsline: string;
+        static fsline: string;
+        static materialShader: string;
+        static vsmaterialcolor: string;
+        static initDefaultShader(assetmgr: assetMgr): void;
+    }
+}
+declare namespace gd3d.framework {
+    class defsprite {
+        static initDefaultSprite(assetmgr: assetMgr): void;
+    }
+}
+declare namespace gd3d.framework {
+    class defTexture {
+        static initDefaultTexture(assetmgr: assetMgr): void;
+        private static initDefaultCubeTexture;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Aniclip implements IAssetFactory {
+        newAsset(): animationClip;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: animationClip, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: animationClip, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Atlas implements IAssetFactory {
+        newAsset(): atlas;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: atlas, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: atlas, call: (handle: () => void) => void): void;
+    }
+}
+declare var WebGLTextureUtil: any;
+declare namespace gd3d.framework {
+    class AssetFactory_DDS implements IAssetFactory {
+        newAsset(): texture;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_f14eff implements IAssetFactory {
+        newAsset(): f14eff;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: f14eff, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: f14eff, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Font implements IAssetFactory {
+        newAsset(filename?: string): font;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: font, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: font, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_GLFragmentShader implements IAssetFactory {
+        newAsset(): IAsset;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_GLVertexShader implements IAssetFactory {
+        newAsset(): IAsset;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface IAssetFactory {
+        newAsset(assetName?: string): IAsset;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
+    }
+    class AssetFactoryTools {
+        static catchError(err: Error, onstate: (state: stateLoad) => void, state: stateLoad): boolean;
+        static useAsset(assetMgr: assetMgr, onstate: (state: stateLoad) => void, state: stateLoad, asset: IAsset, url: string): void;
+        static onProgress(loadedLength: number, totalLength: number, onstate: (state: stateLoad) => void, state: stateLoad, filename: string): void;
+        static onRefProgress(loadedLength: number, totalLength: number, onstate: (state: stateLoad) => void, state: stateLoad, filename: string): void;
+    }
+    function getFileName(url: string): string;
+}
+declare namespace gd3d.framework {
+    class assetfactory_keyFrameAniClip implements IAssetFactory {
+        newAsset(): keyFrameAniClip;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: keyFrameAniClip, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: keyFrameAniClip, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Material implements IAssetFactory {
+        newAsset(filename?: string): material;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: material, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: material, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Mesh implements IAssetFactory {
+        newAsset(): mesh;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: mesh, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: mesh, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_PathAsset implements IAssetFactory {
+        newAsset(): pathasset;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: pathasset, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: pathasset, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Prefab implements IAssetFactory {
+        newAsset(): prefab;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: prefab, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: prefab, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_PVR implements IAssetFactory {
+        newAsset(): texture;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Scene implements IAssetFactory {
+        newAsset(): rawscene;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: rawscene, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: rawscene, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Shader implements IAssetFactory {
+        newAsset(): shader;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: shader, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: shader, call: (handle: () => void) => void): void;
+        private TryParseMap;
+        private parseShader;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_TextAsset implements IAssetFactory {
+        newAsset(): textasset;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: textasset, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: textasset, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_Texture implements IAssetFactory {
+        newAsset(): texture;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class AssetFactory_TextureDesc implements IAssetFactory {
+        newAsset(): texture;
+        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
+    }
+}
+declare namespace gd3d.framework {
+    class animationClip implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        Parse(buf: ArrayBuffer): threading.gdPromise<any>;
+        fps: number;
+        loop: boolean;
+        readonly time: number;
+        boneCount: number;
+        bones: string[];
+        indexDic: {
+            [boneName: string]: number;
+        };
+        frameCount: number;
+        frames: {
+            [fid: string]: Float32Array;
+        };
+        subclipCount: number;
+        subclips: subClip[];
+    }
+    class PoseBoneMatrix {
+        static readonly ClassName: string;
+        t: math.vector3;
+        r: math.quaternion;
+        static caclByteLength(): number;
+        Clone(): PoseBoneMatrix;
+        load(read: io.binReader): void;
+        static createDefault(): PoseBoneMatrix;
+        copyFrom(src: PoseBoneMatrix): void;
+        copyFromData(src: Float32Array, seek: number): void;
+        invert(): void;
+        lerpInWorld(_tpose: PoseBoneMatrix, from: PoseBoneMatrix, to: PoseBoneMatrix, v: number): void;
+        lerpInWorldWithData(_tpose: PoseBoneMatrix, from: PoseBoneMatrix, todata: Float32Array, toseek: number, v: number): void;
+        static sMultiply(left: PoseBoneMatrix, right: PoseBoneMatrix, target?: PoseBoneMatrix): PoseBoneMatrix;
+        static sMultiplytpose(left: PoseBoneMatrix, right: tPoseInfo, target?: PoseBoneMatrix): PoseBoneMatrix;
+        static sMultiplyDataAndMatrix(leftdata: Float32Array, leftseek: number, right: PoseBoneMatrix, target?: PoseBoneMatrix): PoseBoneMatrix;
+        static sLerp(left: PoseBoneMatrix, right: PoseBoneMatrix, v: number, target?: PoseBoneMatrix): PoseBoneMatrix;
+        private static poolmats;
+        static recycle(mat: PoseBoneMatrix): void;
+        static create(): PoseBoneMatrix;
+    }
+    class subClip {
+        name: string;
+        loop: boolean;
+        startframe: number;
+        endframe: number;
+        static caclByteLength(): number;
+    }
+}
+declare namespace gd3d.framework {
+    class atlas implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        texturewidth: number;
+        textureheight: number;
+        private _texture;
+        texture: texture;
+        sprites: {
+            [id: string]: sprite;
+        };
+        Parse(jsonStr: string, assetmgr: assetMgr): void;
+    }
+}
+declare namespace gd3d.framework {
+    class f14node {
+        trans: transform;
+        f14Effect: f14EffectSystem;
+    }
+    class f14eff implements IAsset {
+        static readonly ClassName: string;
+        defaultAsset: boolean;
+        private name;
+        private id;
+        constructor(assetName?: string);
+        assetbundle: string;
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        data: F14EffectData;
+        delayTime: number;
+        Parse(jsonStr: string, assetmgr: assetMgr): void;
+        getDependents(): IAsset[];
+        private doSearch;
+    }
+}
+declare namespace gd3d.framework {
+    class font implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        private _texture;
+        texture: texture;
+        cmap: {
+            [id: string]: charinfo;
+        };
+        fontname: string;
+        pointSize: number;
+        padding: number;
+        lineHeight: number;
+        baseline: number;
+        atlasWidth: number;
+        atlasHeight: number;
+        Parse(jsonStr: string, assetmgr: assetMgr): void;
+    }
+    class charinfo {
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+        xSize: number;
+        ySize: number;
+        xOffset: number;
+        yOffset: number;
+        xAddvance: number;
+        static caclByteLength(): number;
+    }
+}
+declare namespace gd3d.framework {
+    class transform {
+        static readonly ClassName: string;
+        private helpLRotate;
+        private helpLPos;
+        private helpLScale;
+        private checkLRTSChange;
+        private fastEqual;
+        private _scene;
+        scene: scene;
+        name: string;
+        insId: insID;
+        prefab: string;
+        updateWorldTran(): void;
+        updateTran(bool: boolean): void;
+        private _dirtyAABB;
+        private _aabb;
+        readonly aabb: aabb;
+        private _buildAABB;
+        private _children;
+        children: transform[];
+        private _physicsImpostor;
+        physicsImpostor: PhysicsImpostor;
+        private _parent;
+        readonly parent: transform;
+        addChild(node: transform): void;
+        addChildAt(node: transform, index: number): void;
+        removeAllChild(): void;
+        removeChild(node: transform): void;
+        find(name: string): transform;
+        checkImpactTran(tran: transform): boolean;
+        checkImpact(): Array<transform>;
+        private doImpact;
+        private dirtyLocal;
+        private dirtyWorld;
+        private dirtify;
+        private sync;
+        markDirty(): void;
+        markHaveComponent(): void;
+        markHaveRendererComp(): void;
+        hasComponent: boolean;
+        hasComponentChild: boolean;
+        hasRendererComp: boolean;
+        hasRendererCompChild: boolean;
+        private _localRotate;
+        localRotate: math.quaternion;
+        private _localTranslate;
+        localTranslate: math.vector3;
+        localPosition: math.vector3;
+        private _localScale;
+        localScale: math.vector3;
+        private localMatrix;
+        private _localEulerAngles;
+        localEulerAngles: math.vector3;
+        private worldMatrix;
+        private worldRotate;
+        private worldTranslate;
+        private worldScale;
+        getWorldRotate(): math.quaternion;
+        setWorldRotate(rotate: math.quaternion): void;
+        getWorldTranslate(): math.vector3;
+        getWorldPosition(): math.vector3;
+        setWorldPosition(pos: math.vector3): void;
+        getWorldScale(): math.vector3;
+        setWorldScale(scale: math.vector3): void;
+        getLocalMatrix(): math.matrix;
+        getWorldMatrix(): math.matrix;
+        private checkToTop;
+        getForwardInWorld(out: math.vector3): void;
+        getRightInWorld(out: math.vector3): void;
+        getUpInWorld(out: math.vector3): void;
+        setWorldMatrix(mat: math.matrix): void;
+        lookat(trans: transform): void;
+        lookatPoint(point: math.vector3): void;
+        private calcLookAt;
+        private _gameObject;
+        readonly gameObject: gameObject;
+        clone(): transform;
+        readonly beDispose: boolean;
+        private _beDispose;
+        onDispose: () => void;
+        dispose(): void;
+    }
+    class insID {
+        constructor();
+        private static idAll;
+        private static next;
+        private id;
+        getInsID(): number;
+    }
+}
+declare namespace gd3d.framework {
+    interface ICollider {
+        gameObject: gameObject;
+        subTran: transform;
+        getBound(): any;
+        intersectsTransform(tran: transform): boolean;
+    }
+    class boxcollider implements INodeComponent, ICollider {
+        static readonly ClassName: string;
+        gameObject: gameObject;
+        subTran: transform;
+        filter: meshFilter;
+        obb: obb;
+        center: math.vector3;
+        size: math.vector3;
+        getBound(): obb;
+        private static _tempMatrix;
+        readonly matrix: gd3d.math.matrix;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        _colliderVisible: boolean;
+        colliderVisible: boolean;
+        intersectsTransform(tran: transform): boolean;
+        private build;
+        private buildMesh;
+        private getColliderMesh;
+        remove(): void;
+        clone(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class meshcollider implements INodeComponent, ICollider {
+        static readonly ClassName: string;
+        gameObject: gameObject;
+        subTran: transform;
+        mesh: mesh;
+        getBound(): mesh;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        _colliderVisible: boolean;
+        colliderVisible: boolean;
+        intersectsTransform(tran: transform): boolean;
+        private buildMesh;
+        private getColliderMesh;
+        remove(): void;
+        clone(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class meshFilter implements INodeComponent {
+        static readonly ClassName: string;
+        gameObject: gameObject;
+        start(): void;
+        onPlay(): void;
+        update(delta: number): void;
+        private _mesh;
+        mesh: mesh;
+        getMeshOutput(): mesh;
+        remove(): void;
+        clone(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class meshRenderer implements IRenderer {
+        static readonly ClassName: string;
+        constructor();
+        gameObject: gameObject;
+        materials: material[];
+        useGlobalLightMap: boolean;
+        lightmapIndex: number;
+        lightmapScaleOffset: math.vector4;
+        layer: RenderLayerEnum;
+        renderLayer: number;
+        private issetq;
+        _queue: number;
+        queue: number;
+        filter: meshFilter;
+        start(): void;
+        onPlay(): void;
+        private refreshLayerAndQue;
+        update(delta: number): void;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        remove(): void;
+        clone(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class skinnedMeshRenderer implements IRenderer {
+        static readonly ClassName: string;
+        constructor();
+        gameObject: gameObject;
+        layer: RenderLayerEnum;
+        renderLayer: number;
+        private issetq;
+        _queue: number;
+        queue: number;
+        materials: material[];
+        _player: aniplayer;
+        readonly player: aniplayer;
+        private _mesh;
+        mesh: mesh;
+        bones: transform[];
+        rootBone: transform;
+        center: math.vector3;
+        size: math.vector3;
+        maxBoneCount: number;
+        private _efficient;
+        private _skeletonMatrixData;
+        start(): void;
+        onPlay(): void;
+        getMatByIndex(index: number): math.matrix;
+        intersects(ray: ray, outInfo: pickinfo): boolean;
+        update(delta: number): void;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        remove(): void;
+        clone(): void;
+    }
+}
+declare namespace gd3d.framework {
+    enum WrapMode {
+        Default = 0,
+        Once = 1,
+        Clamp = 1,
+        Loop = 2,
+        PingPong = 4,
+        ClampForever = 8
+    }
+    class keyFrameAniClip implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        Parse(jsonStr: string): void;
+        private length;
+        readonly wrapMode: WrapMode;
+        _wrapMode: WrapMode;
+        readonly fps: number;
+        private frameRate;
+        readonly time: number;
+        readonly frameCount: number;
+        curves: AnimationCurve[];
+    }
+    class AnimationCurve {
+        path: string;
+        type: string;
+        propertyName: string;
+        keyFrames: keyFrame[];
+    }
+    class keyFrame {
+        inTangent: number;
+        outTangent: number;
+        tangentMode: number;
+        time: number;
+        value: number;
+    }
+}
+declare namespace gd3d.framework {
+    class UniformData {
+        type: render.UniformTypeEnum;
+        value: any;
+        defaultValue: any;
+        resname: string;
+        constructor(type: render.UniformTypeEnum, value: any, defaultValue?: any);
+    }
+    class material implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        dispose(): void;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        caclByteLength(): number;
+        uploadUnifoms(pass: render.glDrawPass, context: renderContext): void;
+        setShader(shader: shader): void;
+        getLayer(): RenderLayerEnum;
+        private queue;
+        getQueue(): number;
+        setQueue(queue: number): void;
+        getShader(): shader;
+        private shader;
+        defaultMapUniform: {
+            [key: string]: {
+                type: render.UniformTypeEnum;
+                value?: any;
+                becolor?: boolean;
+                min?: number;
+                max?: number;
+            };
+        };
+        statedMapUniforms: {
+            [id: string]: any;
+        };
+        setFloat(_id: string, _number: number): void;
+        setFloatv(_id: string, _numbers: Float32Array): void;
+        setVector4(_id: string, _vector4: math.vector4): void;
+        setVector4v(_id: string, _vector4v: Float32Array): void;
+        setMatrix(_id: string, _matrix: math.matrix): void;
+        setMatrixv(_id: string, _matrixv: Float32Array): void;
+        setTexture(_id: string, _texture: gd3d.framework.texture, resname?: string): void;
+        setCubeTexture(_id: string, _texture: gd3d.framework.texture): void;
+        draw(context: renderContext, mesh: mesh, sm: subMeshInfo, basetype?: string, useGLobalLightMap?: boolean): void;
+        Parse(assetmgr: assetMgr, json: any, bundleName?: string): void;
+        clone(): material;
+        save(): string;
+    }
+}
+declare namespace gd3d.framework {
+    class mesh implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        glMesh: gd3d.render.glMesh;
+        updateByEffect: boolean;
+        data: gd3d.render.meshData;
+        submesh: subMeshInfo[];
+        onReadFinish: () => void;
+        private reading;
+        private readProcess;
+        private readFinish;
+        Parse(buf: ArrayBuffer, webgl: WebGLRenderingContext): threading.gdPromise<{}>;
+        intersects(ray: ray, matrix: gd3d.math.matrix, outInfo: pickinfo): boolean;
+        clone(): mesh;
+        private _cacheMinP;
+        private _cacheMaxP;
+        calcVectexMinMax(outMin: math.vector3, outMax: math.vector3): void;
+    }
+    class subMeshInfo {
+        matIndex: number;
+        useVertexIndex: number;
+        line: boolean;
+        start: number;
+        size: number;
+    }
+}
+declare namespace gd3d.framework {
+    class pathasset implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(): void;
+        dispose(): void;
+        caclByteLength(): number;
+        paths: gd3d.math.vector3[];
+        private type;
+        private instertPointcount;
+        private items;
+        Parse(json: JSON): void;
+        private lines;
+        private getpaths;
+        private getBeisaierPointAlongCurve;
+        private vec3Lerp;
+    }
+    enum pathtype {
+        once = 0,
+        loop = 1,
+        pingpong = 2
+    }
+    enum epointtype {
+        VertexPoint = 0,
+        ControlPoint = 1
+    }
+    class pointitem {
+        point: gd3d.math.vector3;
+        type: epointtype;
+    }
+}
+declare namespace gd3d.framework {
+    class prefab implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        assetbundle: string;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        private trans;
+        getCloneTrans(): transform;
+        getCloneTrans2D(): transform2D;
+        apply(trans: transform): void;
+        jsonstr: string;
+        Parse(jsonStr: string, assetmgr: assetMgr): void;
+    }
+}
+declare namespace gd3d.framework {
+    class rawscene implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        fog: Fog;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        assetbundle: string;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        caclByteLength(): number;
+        resetLightMap(assetmgr: assetMgr): void;
+        private lightmapData;
+        Parse(txt: string, assetmgr: assetMgr): void;
+        getSceneRoot(): transform;
+        useLightMap(scene: scene): void;
+        useFog(scene: scene): void;
+        useNavMesh(scene: scene): boolean;
+        dispose(): void;
+        private navMeshJson;
+        private rootNode;
+        private lightmaps;
+    }
+    class Fog {
+        _Start: number;
+        _End: number;
+        _Color: gd3d.math.vector4;
+        _Density: number;
+    }
+}
+declare namespace gd3d.framework {
+    class shader implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        passes: {
+            [id: string]: gd3d.render.glDrawPass[];
+        };
+        defaultMapUniform: {
+            [key: string]: {
+                type: render.UniformTypeEnum;
+                value?: any;
+                becolor?: boolean;
+                min?: number;
+                max?: number;
+            };
+        };
+        layer: RenderLayerEnum;
+        parse(assetmgr: assetMgr, json: any): void;
+        _parseProperties(assetmgr: assetMgr, properties: any): void;
+        private _parsePass;
+        fillUnDefUniform(pass: render.glDrawPass): void;
+    }
+}
+declare namespace gd3d.framework {
+    class sprite implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        caclByteLength(): number;
+        private _texture;
+        texture: texture;
+        atlas: string;
+        rect: math.rect;
+        border: math.border;
+        private _urange;
+        private _vrange;
+        readonly urange: math.vector2;
+        readonly vrange: math.vector2;
+    }
+}
+declare namespace gd3d.framework {
+    class textasset implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(): void;
+        dispose(): void;
+        content: string;
+        caclByteLength(): number;
+    }
+}
+declare namespace gd3d.framework {
+    class texture implements IAsset {
+        static readonly ClassName: string;
+        private name;
+        private id;
+        defaultAsset: boolean;
+        constructor(assetName?: string);
+        getName(): string;
+        getGUID(): number;
+        use(): void;
+        unuse(disposeNow?: boolean): void;
+        dispose(): void;
+        glTexture: gd3d.render.ITexture;
+        caclByteLength(): number;
+        private _realName;
+        realName: string;
+    }
+}
+declare namespace gd3d.framework {
     class AudioEx {
         private static g_this;
         static instance(): AudioEx;
@@ -1215,37 +2429,6 @@ declare namespace gd3d.framework {
         start(): void;
         onPlay(): void;
         update(delta: number): void;
-        remove(): void;
-        clone(): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface ICollider {
-        gameObject: gameObject;
-        subTran: transform;
-        getBound(): any;
-        intersectsTransform(tran: transform): boolean;
-    }
-    class boxcollider implements INodeComponent, ICollider {
-        static readonly ClassName: string;
-        gameObject: gameObject;
-        subTran: transform;
-        filter: meshFilter;
-        obb: obb;
-        center: math.vector3;
-        size: math.vector3;
-        getBound(): obb;
-        private static _tempMatrix;
-        readonly matrix: gd3d.math.matrix;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        _colliderVisible: boolean;
-        colliderVisible: boolean;
-        intersectsTransform(tran: transform): boolean;
-        private build;
-        private buildMesh;
-        private getColliderMesh;
         remove(): void;
         clone(): void;
     }
@@ -1583,95 +2766,6 @@ declare namespace gd3d.framework {
         clone(): void;
     }
 }
-declare namespace gd3d.framework {
-    class meshcollider implements INodeComponent, ICollider {
-        static readonly ClassName: string;
-        gameObject: gameObject;
-        subTran: transform;
-        mesh: mesh;
-        getBound(): mesh;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        _colliderVisible: boolean;
-        colliderVisible: boolean;
-        intersectsTransform(tran: transform): boolean;
-        private buildMesh;
-        private getColliderMesh;
-        remove(): void;
-        clone(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class meshFilter implements INodeComponent {
-        static readonly ClassName: string;
-        gameObject: gameObject;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        private _mesh;
-        mesh: mesh;
-        getMeshOutput(): mesh;
-        remove(): void;
-        clone(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class meshRenderer implements IRenderer {
-        static readonly ClassName: string;
-        constructor();
-        gameObject: gameObject;
-        materials: material[];
-        useGlobalLightMap: boolean;
-        lightmapIndex: number;
-        lightmapScaleOffset: math.vector4;
-        layer: RenderLayerEnum;
-        renderLayer: number;
-        private issetq;
-        _queue: number;
-        queue: number;
-        filter: meshFilter;
-        start(): void;
-        onPlay(): void;
-        private refreshLayerAndQue;
-        update(delta: number): void;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        remove(): void;
-        clone(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class skinnedMeshRenderer implements IRenderer {
-        static readonly ClassName: string;
-        constructor();
-        gameObject: gameObject;
-        layer: RenderLayerEnum;
-        renderLayer: number;
-        private issetq;
-        _queue: number;
-        queue: number;
-        materials: material[];
-        _player: aniplayer;
-        readonly player: aniplayer;
-        private _mesh;
-        mesh: mesh;
-        bones: transform[];
-        rootBone: transform;
-        center: math.vector3;
-        size: math.vector3;
-        maxBoneCount: number;
-        private _efficient;
-        private _skeletonMatrixData;
-        start(): void;
-        onPlay(): void;
-        getMatByIndex(index: number): math.matrix;
-        intersects(ray: ray, outInfo: pickinfo): boolean;
-        update(delta: number): void;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        remove(): void;
-        clone(): void;
-    }
-}
 declare let helpMat: gd3d.framework.material;
 declare namespace gd3d.framework {
     class spherestruct {
@@ -1832,6 +2926,599 @@ declare namespace gd3d.framework {
         clone(): void;
     }
 }
+declare namespace gd3d.framework {
+    class f14EffectSystem implements IRenderer {
+        static readonly ClassName: string;
+        layer: RenderLayerEnum;
+        renderLayer: number;
+        queue: number;
+        start(): void;
+        onPlay(): void;
+        gameObject: gameObject;
+        private fps;
+        data: F14EffectData;
+        layers: F14Layer[];
+        VF: number;
+        webgl: WebGLRenderingContext;
+        private _f14eff;
+        f14eff: f14eff;
+        private _delayTime;
+        delay: number;
+        setData(data: F14EffectData): void;
+        readonly root: transform;
+        _root: transform;
+        private elements;
+        renderBatch: F14Basebatch[];
+        private loopCount;
+        private allTime;
+        private renderActive;
+        beref: boolean;
+        update(deltaTime: number): void;
+        private OnEndOnceLoop;
+        private _renderCamera;
+        readonly renderCamera: camera;
+        mvpMat: math.matrix;
+        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue?: number): void;
+        private totalTime;
+        restartFrame: number;
+        totalFrame: number;
+        private addF14layer;
+        getElementCount(): number;
+        private playRate;
+        enabletimeFlow: boolean;
+        enableDraw: boolean;
+        private onFinish;
+        play(onFinish?: () => void, PlayRate?: number): void;
+        stop(): void;
+        pause(): void;
+        changeColor(newcolor: math.color): void;
+        changeAlpha(newAlpha: number): void;
+        reset(): void;
+        clone(): void;
+        remove(): void;
+    }
+    enum PlayStateEnum {
+        play = 0,
+        beReady = 1,
+        pause = 2
+    }
+}
+declare namespace gd3d.framework {
+    enum F14TypeEnum {
+        SingleMeshType = 0,
+        particlesType = 1,
+        RefType = 2
+    }
+    interface F14Element {
+        type: F14TypeEnum;
+        update(deltaTime: number, frame: number, fps: number): any;
+        dispose(): any;
+        reset(): any;
+        OnEndOnceLoop(): any;
+        changeColor(value: math.color): any;
+        changeAlpha(value: number): any;
+        layer: F14Layer;
+        drawActive: boolean;
+    }
+}
+declare namespace gd3d.framework {
+    class F14Layer {
+        active: boolean;
+        effect: f14EffectSystem;
+        data: F14LayerData;
+        type: F14TypeEnum;
+        frameList: number[];
+        frames: {
+            [index: number]: F14Frame;
+        };
+        Attlines: {
+            [name: string]: F14AttTimeLine;
+        };
+        element: F14Element;
+        batch: F14Basebatch;
+        constructor(effect: f14EffectSystem, data: F14LayerData);
+        addFrame(index: number, framedata: F14FrameData): F14Frame;
+        removeFrame(frame: number): void;
+        dispose(): void;
+    }
+    class F14Frame {
+        layer: F14Layer;
+        data: F14FrameData;
+        attDic: {
+            [name: string]: any;
+        };
+        constructor(layer: F14Layer, data: F14FrameData);
+        setdata(name: string, obj: any): void;
+        removedata(name: string): void;
+        getdata(name: string): any;
+    }
+    class F14AttTimeLine {
+        name: string;
+        lerpFunc: (from: any, to: any, lerp: any, out: any) => void;
+        cloneFunc: (from: any, to: any) => void;
+        constructor(name: string, lerpfunc: (from: any, to: any, lerp: any, out: any) => void, clonefunc: (from: any, to: any) => void);
+        frameList: number[];
+        line: {
+            [index: number]: any;
+        };
+        addNode(frame: number, value: any): void;
+        remove(frame: number): void;
+        getValue(frame: number, basedate: F14SingleMeshBaseData, out: any): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14EffectData {
+        beloop: boolean;
+        lifeTime: number;
+        layers: F14LayerData[];
+        parsejson(json: any, assetmgr: assetMgr, assetbundle: string): void;
+    }
+    class F14LayerData {
+        Name: string;
+        type: F14TypeEnum;
+        elementdata: F14ElementData;
+        frames: {
+            [frame: number]: F14FrameData;
+        };
+        constructor();
+        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
+    }
+    class F14FrameData {
+        frameindex: number;
+        singlemeshAttDic: {
+            [name: string]: any;
+        };
+        EmissionData: F14EmissionBaseData;
+        constructor(index: number, type: F14TypeEnum);
+    }
+}
+declare namespace gd3d.framework {
+    interface F14ElementData {
+        parse(json: any, assetmgr: assetMgr, assetbundle: string): any;
+    }
+}
+declare namespace gd3d.framework {
+    class NumberData {
+        isRandom: boolean;
+        _value: number;
+        _valueLimitMin: number;
+        _valueLimitMax: number;
+        beInited: boolean;
+        key: number;
+        setValue(value: number): void;
+        setRandomValue(max: number, min: number): void;
+        getValue(reRandom?: boolean): number;
+        constructor(value?: number);
+        static copyto(from: NumberData, to: NumberData): void;
+        static FormJson(json: string, data: NumberData): void;
+    }
+    class Vector3Data {
+        x: NumberData;
+        y: NumberData;
+        z: NumberData;
+        constructor(x?: number, y?: number, z?: number);
+        getValue(reRandom?: boolean): math.vector3;
+        static copyto(from: Vector3Data, to: Vector3Data): void;
+        static FormJson(json: string, data: Vector3Data): void;
+    }
+    class NumberKey {
+        key: number;
+        value: number;
+        constructor(_key: number, _value: number);
+    }
+    class Vector3Key {
+        key: number;
+        value: math.vector3;
+        constructor(_key: number, _value: math.vector3);
+    }
+    class Vector2Key {
+        key: number;
+        value: math.vector2;
+        constructor(_key: number, _value: math.vector2);
+    }
+}
+declare namespace gd3d.framework {
+    class F14Emission implements F14Element {
+        type: F14TypeEnum;
+        layer: F14Layer;
+        drawActive: boolean;
+        effect: f14EffectSystem;
+        baseddata: F14EmissionBaseData;
+        currentData: F14EmissionBaseData;
+        particlelist: F14Particle[];
+        deadParticles: F14Particle[];
+        private frameLife;
+        private TotalTime;
+        private newStartDataTime;
+        curTime: number;
+        private beover;
+        private numcount;
+        localMatrix: math.matrix;
+        private _worldMatrix;
+        private localrot;
+        private worldRot;
+        vertexCount: number;
+        vertexLength: number;
+        dataforvboLen: number;
+        dataforebo: Uint16Array;
+        posArr: math.vector3[];
+        colorArr: math.color[];
+        uvArr: math.vector2[];
+        constructor(effect: f14EffectSystem, layer: F14Layer);
+        private lastFrame;
+        update(deltaTime: number, frame: number, fps: number): void;
+        private refreshByFrameData;
+        changeCurrentBaseData(data: F14EmissionBaseData): void;
+        private initBycurrentdata;
+        getWorldMatrix(): math.matrix;
+        getWorldRotation(): math.quaternion;
+        private updateLife;
+        private reInit;
+        private bursts;
+        private updateEmission;
+        private addParticle;
+        reset(): void;
+        changeColor(value: math.color): void;
+        private settedAlpha;
+        changeAlpha(value: number): void;
+        OnEndOnceLoop(): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    enum RenderModelEnum {
+        None = 0,
+        BillBoard = 1,
+        StretchedBillBoard = 2,
+        HorizontalBillBoard = 3,
+        VerticalBillBoard = 4,
+        Mesh = 5
+    }
+    class F14EmissionBaseData implements F14ElementData {
+        loopenum: LoopEnum;
+        mesh: mesh;
+        material: material;
+        rotPosition: math.vector3;
+        rotScale: math.vector3;
+        rotEuler: math.vector3;
+        rendermodel: RenderModelEnum;
+        beloop: boolean;
+        lifeTime: NumberData;
+        simulateInLocalSpace: boolean;
+        startScaleRate: NumberData;
+        startScale: Vector3Data;
+        startEuler: Vector3Data;
+        startColor: Vector3Data;
+        startAlpha: NumberData;
+        colorRate: number;
+        simulationSpeed: NumberData;
+        start_tex_st: math.vector4;
+        delayTime: number;
+        duration: number;
+        rateOverTime: NumberData;
+        bursts: busrtInfo[];
+        shapeType: ParticleSystemShape;
+        width: number;
+        height: number;
+        depth: number;
+        radius: number;
+        angle: number;
+        emitFrom: emitfromenum;
+        enableVelocityOverLifetime: boolean;
+        moveSpeed: Vector3Data;
+        enableSizeOverLifetime: boolean;
+        sizeNodes: NumberKey[];
+        enableRotOverLifeTime: boolean;
+        angleSpeed: NumberData;
+        enableColorOverLifetime: boolean;
+        colorNodes: Vector3Key[];
+        alphaNodes: NumberKey[];
+        enableTexAnimation: boolean;
+        uvType: UVTypeEnum;
+        uSpeed: number;
+        vSpeed: number;
+        row: number;
+        column: number;
+        count: number;
+        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
+        static getRandomDirAndPosByZEmission(emission: F14EmissionBaseData, outDir: gd3d.math.vector3, outPos: gd3d.math.vector3): void;
+    }
+    class busrtInfo {
+        time: number;
+        count: NumberData;
+        private _beburst;
+        beburst(): boolean;
+        burst(bebusrt?: boolean): void;
+        static CreatformJson(json: any): busrtInfo;
+    }
+}
+declare namespace gd3d.framework {
+    class F14EmissionBatch implements F14Basebatch {
+        type: F14TypeEnum;
+        effect: f14EffectSystem;
+        emission: F14Emission;
+        private mesh;
+        private mat;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        curRealVboCount: number;
+        curVertexcount: number;
+        curIndexCount: number;
+        vertexLength: number;
+        constructor(effect: f14EffectSystem, element: F14Emission);
+        private getMaxParticleCount;
+        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
+        unRender(): void;
+        getElementCount(): number;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14Particle {
+        private data;
+        private element;
+        private totalLife;
+        private startScaleRate;
+        private startScale;
+        Starteuler: math.vector3;
+        StartPos: math.vector3;
+        startColor: math.vector3;
+        startAlpha: number;
+        colorRate: number;
+        private simulationSpeed;
+        private simulateInLocalSpace;
+        private starTex_ST;
+        private speedDir;
+        enableVelocityOverLifetime: boolean;
+        private movespeed;
+        enableSizeOverLifetime: boolean;
+        private sizeNodes;
+        enableRotOverLifeTime: boolean;
+        eulerSpeed: number;
+        enableColorOverLifetime: boolean;
+        private colorNodes;
+        private alphaNodes;
+        enableTexAnimation: boolean;
+        uvType: UVTypeEnum;
+        tex_ST: math.vector4;
+        rotationByEuler: math.quaternion;
+        rotationByShape: math.quaternion;
+        startRotation: math.quaternion;
+        rotAngle: number;
+        localMatrix: math.matrix;
+        localTranslate: math.vector3;
+        localRotation: math.quaternion;
+        localScale: math.vector3;
+        color: math.vector3;
+        alpha: number;
+        private Color;
+        private curLife;
+        private life01;
+        actived: boolean;
+        private emissionMatToWorld;
+        private emissionWorldRotation;
+        private getEmissionMatToWorld;
+        private getemissionWorldRotation;
+        constructor(element: F14Emission, data: F14EmissionBaseData);
+        initByEmissionData(data: F14EmissionBaseData): void;
+        update(deltaTime: number): void;
+        private tempos;
+        private temcolor;
+        private temUv;
+        uploadMeshdata(): void;
+        private transformVertex;
+        private updateLocalMatrix;
+        private updatePos;
+        private updateSize;
+        private updateEuler;
+        private angleRot;
+        private worldpos;
+        private tarWorldpos;
+        private worldspeeddir;
+        private lookDir;
+        private temptx;
+        private worldRotation;
+        private invParWorldRot;
+        private worldStartPos;
+        private updateRot;
+        private updateColor;
+        private updateUV;
+        getCurTex_ST(data: F14EmissionBaseData): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14RefElementBatch implements F14Basebatch {
+        type: F14TypeEnum;
+        effect: f14EffectSystem;
+        private element;
+        constructor(effect: f14EffectSystem, element: F14RefElement);
+        unRender(): void;
+        getElementCount(): number;
+        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14RefBaseData implements F14ElementData {
+        beLoop: boolean;
+        refdataName: string;
+        refData: F14EffectData;
+        localPos: math.vector3;
+        localEuler: math.vector3;
+        localScale: math.vector3;
+        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14RefElement implements F14Element {
+        type: F14TypeEnum;
+        layer: F14Layer;
+        drawActive: boolean;
+        baseddata: F14RefBaseData;
+        startFrame: number;
+        endFrame: number;
+        effect: f14EffectSystem;
+        constructor(effect: f14EffectSystem, layer: F14Layer);
+        RefEffect: f14EffectSystem;
+        reset(): void;
+        private refreshStartEndFrame;
+        update(deltaTime: number, frame: number, fps: number): void;
+        OnEndOnceLoop(): void;
+        changeColor(value: math.color): void;
+        changeAlpha(value: number): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class F14SingleMesh implements F14Element {
+        drawActive: boolean;
+        type: F14TypeEnum;
+        layer: F14Layer;
+        private effect;
+        RenderBatch: F14SingleMeshBath;
+        position: math.vector3;
+        scale: math.vector3;
+        euler: math.vector3;
+        color: math.color;
+        tex_ST: math.vector4;
+        baseddata: F14SingleMeshBaseData;
+        private localRotate;
+        startFrame: number;
+        endFrame: number;
+        private vertexCount;
+        private posArr;
+        private colorArr;
+        private uvArr;
+        dataforvbo: Float32Array;
+        dataforebo: Uint16Array;
+        constructor(effect: f14EffectSystem, layer: F14Layer);
+        refreshStartEndFrame(): void;
+        update(deltaTime: number, frame: number, fps: number): void;
+        OnEndOnceLoop(): void;
+        targetMat: math.matrix;
+        refreshTargetMatrix(): void;
+        private tempos;
+        private temColor;
+        private temUv;
+        uploadMeshdata(): void;
+        refreshCurTex_ST(curframe: number, detalTime: number, fps: number): void;
+        private eulerRot;
+        private worldpos;
+        private worldRot;
+        private inverseRot;
+        private lookDir;
+        private worldDirx;
+        private worldDiry;
+        updateRotByBillboard(): void;
+        reset(): void;
+        changeColor(value: math.color): void;
+        settedAlpha: number;
+        changeAlpha(value: number): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface F14Basebatch {
+        type: F14TypeEnum;
+        effect: f14EffectSystem;
+        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): any;
+        unRender(): any;
+        dispose(): any;
+        getElementCount(): number;
+    }
+    class F14SingleMeshBath implements F14Basebatch {
+        type: F14TypeEnum;
+        effect: f14EffectSystem;
+        ElementMat: gd3d.framework.material;
+        meshlist: F14SingleMesh[];
+        private activemeshlist;
+        private mesh;
+        indices: number[];
+        vertices: math.vector3[];
+        colors: math.color[];
+        uv: math.vector2[];
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        curRealVboCount: number;
+        curVertexcount: number;
+        curIndexCount: number;
+        vertexLength: number;
+        constructor(mat: material, effect: f14EffectSystem);
+        private noBatch;
+        OnEndCollectElement(): void;
+        reInit(mat: material, effect: f14EffectSystem): void;
+        addElement(mesh: F14SingleMesh, insert?: boolean): void;
+        canBatch(mesh: F14SingleMesh): boolean;
+        getElementCount(): number;
+        private mat;
+        private defST;
+        private temptColorv4;
+        private uploadData;
+        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
+        unRender(): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    enum LoopEnum {
+        Restart = 0,
+        TimeContinue = 1
+    }
+    enum BindAxis {
+        X = 0,
+        Y = 1,
+        NONE = 2
+    }
+    class F14SingleMeshBaseData implements F14ElementData {
+        loopenum: LoopEnum;
+        mesh: mesh;
+        material: material;
+        position: gd3d.math.vector3;
+        scale: gd3d.math.vector3;
+        euler: gd3d.math.vector3;
+        color: gd3d.math.color;
+        tex_ST: gd3d.math.vector4;
+        enableTexAnimation: boolean;
+        uvType: UVTypeEnum;
+        uSpeed: number;
+        vSpeed: number;
+        row: number;
+        column: number;
+        count: number;
+        beBillboard: boolean;
+        bindAxis: BindAxis;
+        firtstFrame: number;
+        constructor(firstFrame: number);
+        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
+    }
+}
+declare namespace gd3d.framework {
+    class starCamCtr implements INodeComponent {
+        static readonly ClassName: string;
+        moveDuration: number;
+        minSpeed: number;
+        relativelocation: math.vector3;
+        relativeEuler: math.vector3;
+        private relativeRot;
+        private starteCamRot;
+        private targetCamPos;
+        private targetCamRot;
+        private distance;
+        private movedir;
+        private moveSpeed;
+        private eulerSpeed;
+        private active;
+        start(): void;
+        onPlay(): void;
+        private moveDis;
+        update(delta: number): void;
+        gameObject: gameObject;
+        remove(): void;
+        clone(): void;
+        moveTo(to: transform): void;
+    }
+}
 declare namespace gd3d {
     abstract class AEvent {
         private events;
@@ -1840,17 +3527,6 @@ declare namespace gd3d {
         RemoveListener(event: string, func: Function, thisArg: any): void;
         RemoveListenerAll(): void;
         listenerCount(event: string): number;
-    }
-}
-declare namespace gd3d.framework {
-    class PointEvent {
-        type: event.PointEventEnum;
-        x: number;
-        y: number;
-        eated: boolean;
-        selected: transform2D;
-        c_x: number;
-        c_y: number;
     }
 }
 declare namespace gd3d.event {
@@ -1980,6 +3656,17 @@ declare namespace gd3d.event {
     class UIEvent extends AEvent {
         OnEnum(event: UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
         EmitEnum(event: UIEventEnum, ...args: Array<any>): void;
+    }
+}
+declare namespace gd3d.framework {
+    class PointEvent {
+        type: event.PointEventEnum;
+        x: number;
+        y: number;
+        eated: boolean;
+        selected: transform2D;
+        c_x: number;
+        c_y: number;
     }
 }
 declare namespace gd3d.framework {
@@ -2514,17 +4201,6 @@ declare namespace gd3d.framework {
     }
 }
 declare namespace gd3d.framework {
-    class Navigate {
-        navindexmap: {
-            [id: number]: number;
-        };
-        navinfo: navMeshInfo;
-        constructor(navinfo: gd3d.framework.navMeshInfo, navindexmap: any);
-        pathPoints(start: gd3d.math.vector3, end: gd3d.math.vector3, startIndex: number, endIndex: number): Array<gd3d.math.vector3>;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
     class NavMeshLoadManager {
         private static _instance;
         private navMeshVertexOffset;
@@ -2543,6 +4219,17 @@ declare namespace gd3d.framework {
         static readonly Instance: NavMeshLoadManager;
         moveToPoints(startPos: gd3d.math.vector3, endPos: gd3d.math.vector3): Array<gd3d.math.vector3>;
         static findtriIndex(point: gd3d.math.vector3, trans: gd3d.framework.transform): number;
+    }
+}
+declare namespace gd3d.framework {
+    class Navigate {
+        navindexmap: {
+            [id: number]: number;
+        };
+        navinfo: navMeshInfo;
+        constructor(navinfo: gd3d.framework.navMeshInfo, navindexmap: any);
+        pathPoints(start: gd3d.math.vector3, end: gd3d.math.vector3, startIndex: number, endIndex: number): Array<gd3d.math.vector3>;
+        dispose(): void;
     }
 }
 declare namespace gd3d.framework {
@@ -2585,6 +4272,988 @@ declare namespace gd3d.framework {
         private updateTransform;
         private RVO_check;
         private cal2dDir;
+    }
+}
+declare namespace gd3d.framework {
+    class EffectSystemData {
+        life: number;
+        beLoop: boolean;
+        elementDic: {
+            [name: string]: EffectElementData;
+        };
+        clone(): EffectSystemData;
+        dispose(): void;
+    }
+    class EffectElement {
+        transform: transform;
+        data: EffectElementData;
+        name: string;
+        timelineFrame: {
+            [frameIndex: number]: EffectFrameData;
+        };
+        ref: string;
+        actions: IEffectAction[];
+        curAttrData: EffectAttrsData;
+        effectBatcher: EffectBatcher;
+        startVboIndex: number;
+        startEboIndex: number;
+        endEboIndex: number;
+        delayTime: number;
+        actionActive: boolean;
+        loopFrame: number;
+        active: boolean;
+        constructor(_data: EffectElementData);
+        private recordElementLerpAttributes;
+        private recordLerpValues;
+        private recordLerp;
+        initActions(): void;
+        update(): void;
+        private updateElementRotation;
+        isCurFrameNeedRefresh(frameIndex: number): boolean;
+        setActive(_active: boolean): void;
+        dispose(): void;
+    }
+    class EffectElementData {
+        name: string;
+        type: EffectElementTypeEnum;
+        timelineFrame: {
+            [frameIndex: number]: EffectFrameData;
+        };
+        refFrom: string;
+        beloop: boolean;
+        delayTime: number;
+        actionData: EffectActionData[];
+        emissionData: Emission;
+        initFrameData: EffectFrameData;
+        clone(): EffectElementData;
+        dispose(): void;
+    }
+    class EffectAttrsData {
+        pos: math.vector3;
+        euler: math.vector3;
+        color: math.vector3;
+        colorRate: number;
+        scale: math.vector3;
+        uv: math.vector2;
+        alpha: number;
+        mat: EffectMatData;
+        renderModel: RenderModel;
+        matrix: math.matrix;
+        tilling: math.vector2;
+        rotationByEuler: math.quaternion;
+        localRotation: math.quaternion;
+        mesh: mesh;
+        meshdataVbo: Float32Array;
+        setLerpAttribute(attribute: string, val: any): void;
+        getAttribute(attribute: string): any;
+        initAttribute(attribute: string): void;
+        resetMatrix(): void;
+        copyandinit(): EffectAttrsData;
+        clone(): EffectAttrsData;
+    }
+    class EffectFrameData {
+        frameIndex: number;
+        attrsData: EffectAttrsData;
+        lerpDatas: EffectLerpData[];
+        delayTime: number;
+        clone(): EffectFrameData;
+        dispose(): void;
+    }
+    class EffectLerpData {
+        type: EffectLerpTypeEnum;
+        fromFrame: number;
+        toFrame: ValueData;
+        attrsData: EffectAttrsData;
+        attrsList: any[];
+        clone(): EffectLerpData;
+    }
+    class EffectActionData {
+        actionType: string;
+        startFrame: number;
+        endFrame: number;
+        params: any;
+        clone(): EffectActionData;
+    }
+    class EffectMatData {
+        shader: shader;
+        diffuseTexture: texture;
+        alphaTexture: texture;
+        alphaCut: number;
+        static beEqual(data0: EffectMatData, data1: EffectMatData): boolean;
+        clone(): EffectMatData;
+    }
+    enum EffectBatcherState {
+        NotInitedStateType = 0,
+        InitedStateType = 1,
+        ResizeCapacityStateType = 2
+    }
+    class EffectBatcher {
+        mesh: mesh;
+        mat: material;
+        state: EffectBatcherState;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        effectElements: EffectElement[];
+        private _totalVertexCount;
+        curTotalVertexCount: number;
+        private _indexStartIndex;
+        indexStartIndex: number;
+        private _vbosize;
+        resizeVboSize(value: number): void;
+        dispose(): void;
+        vertexSize: number;
+        constructor(formate: number);
+    }
+    enum EffectPlayStateEnum {
+        None = 0,
+        BeReady = 1,
+        Play = 2,
+        Pause = 3,
+        Stop = 4,
+        Dispose = 5
+    }
+    enum EffectElementTypeEnum {
+        SingleMeshType = 0,
+        EmissionType = 1,
+        MultiMeshType = 2
+    }
+    enum EffectLerpTypeEnum {
+        Linear = 0
+    }
+    enum RenderModel {
+        None = 0,
+        BillBoard = 1,
+        StretchedBillBoard = 2,
+        HorizontalBillBoard = 3,
+        VerticalBillBoard = 4,
+        Mesh = 5
+    }
+}
+declare namespace gd3d.framework {
+    enum ParticleEmissionType {
+        burst = 0,
+        continue = 1
+    }
+    class EmissionData {
+        type: ParticleEmissionType;
+        emissionName: string;
+        time: number;
+        count: number;
+        constructor();
+    }
+}
+declare namespace gd3d.framework {
+    class Emission {
+        emissionType: ParticleEmissionType;
+        simulateInLocalSpace: boolean;
+        rootpos: gd3d.math.vector3;
+        rootRotAngle: gd3d.math.vector3;
+        rootScale: gd3d.math.vector3;
+        maxEmissionCount: number;
+        emissionCount: number;
+        time: number;
+        moveSpeed: ParticleNode;
+        gravity: number;
+        euler: ParticleNode;
+        eulerNodes: Array<ParticleNode>;
+        eulerSpeed: ParticleNode;
+        scale: ParticleNode;
+        scaleNodes: Array<ParticleNodeNumber>;
+        scaleSpeed: ParticleNode;
+        color: ParticleNode;
+        colorRate: number;
+        colorNodes: Array<ParticleNode>;
+        colorSpeed: ParticleNode;
+        simulationSpeed: ParticleNodeNumber;
+        alpha: ParticleNodeNumber;
+        alphaNodes: Array<ParticleNodeNumber>;
+        alphaSpeed: ParticleNodeNumber;
+        uv: ParticleNodeVec2;
+        uvType: UVTypeEnum;
+        uvRoll: UVRoll;
+        uvSprite: UVSprite;
+        tilling: math.vector2;
+        mat: EffectMatData;
+        life: ValueData;
+        renderModel: RenderModel;
+        mesh: mesh;
+        particleStartData: gd3d.framework.ParticleStartData;
+        private dataForVbo;
+        getVboData(vf: number): Float32Array;
+        clone(): Emission;
+        getworldRotation(): void;
+        cloneParticleNodeArray(_array: Array<ParticleNode>): ParticleNode[];
+        cloneParticleNodeNumberArray(_array: Array<ParticleNodeNumber>): ParticleNodeNumber[];
+    }
+    class UVSprite {
+        row: number;
+        column: number;
+        totalCount: number;
+        clone(): UVSprite;
+    }
+    class UVRoll {
+        uvSpeed: UVSpeedNode;
+        uvSpeedNodes: Array<UVSpeedNode>;
+        clone(): UVRoll;
+    }
+    enum UVTypeEnum {
+        NONE = 0,
+        UVRoll = 1,
+        UVSprite = 2
+    }
+}
+declare namespace gd3d.framework {
+    class ParticleNode {
+        x: ValueData;
+        y: ValueData;
+        z: ValueData;
+        key: number;
+        constructor();
+        getValue(): gd3d.math.vector3;
+        getValueRandom(): gd3d.math.vector3;
+        clone(): ParticleNode;
+    }
+    class AlphaNode {
+        alpha: ValueData;
+        key: number;
+        getValue(): number;
+    }
+    class UVSpeedNode {
+        u: ValueData;
+        v: ValueData;
+        key: number;
+        getValue(): gd3d.math.vector2;
+        getValueRandom(): gd3d.math.vector2;
+        clone(): UVSpeedNode;
+    }
+    class ParticleNodeVec2 {
+        x: ValueData;
+        y: ValueData;
+        key: number;
+        getValue(): gd3d.math.vector2;
+        getValueRandom(): gd3d.math.vector2;
+        clone(): ParticleNodeVec2;
+    }
+    class ParticleNodeNumber {
+        num: ValueData;
+        key: number;
+        getValue(): number;
+        getValueRandom(): number;
+        clone(): ParticleNodeNumber;
+    }
+}
+declare namespace gd3d.framework {
+    enum ParticleSystemShape {
+        NORMAL = 0,
+        BOX = 1,
+        SPHERE = 2,
+        HEMISPHERE = 3,
+        CONE = 4,
+        EDGE = 5,
+        CIRCLE = 6
+    }
+    class ParticleStartData {
+        shapeType: ParticleSystemShape;
+        private _position;
+        position: gd3d.math.vector3;
+        private _direction;
+        direction: gd3d.math.vector3;
+        private _width;
+        width: number;
+        private _height;
+        height: number;
+        depth: number;
+        private _radius;
+        radius: number;
+        private _angle;
+        angle: number;
+        readonly randomDirection: gd3d.math.vector3;
+        readonly boxDirection: gd3d.math.vector3;
+        readonly sphereDirection: gd3d.math.vector3;
+        readonly hemisphereDirection: gd3d.math.vector3;
+        emitFrom: emitfromenum;
+        readonly coneDirection: gd3d.math.vector3;
+        readonly circleDirection: gd3d.math.vector3;
+        readonly edgeDirection: math.vector3;
+        private getposition;
+        clone(): ParticleStartData;
+    }
+    enum emitfromenum {
+        base = 0,
+        volume = 1
+    }
+}
+declare namespace gd3d.framework {
+    class ValueData {
+        isRandom: boolean;
+        private _value;
+        private _valueLimitMin;
+        private _valueLimitMax;
+        private beInited;
+        value: number;
+        valueLimitMin: number;
+        valueLimitMax: number;
+        clone(): ValueData;
+        getValue(): number;
+        getValueRandom(): number;
+        constructor();
+        static RandomRange(min: number, max: number, isInteger?: boolean): number;
+    }
+}
+declare namespace gd3d.framework {
+    class Particle_new {
+        gameObject: gameObject;
+        private emisson;
+        private batcher;
+        private startScale;
+        startRotation: gd3d.math.quaternion;
+        rotationByShape: math.quaternion;
+        Starteuler: math.vector3;
+        rotAngle: number;
+        eulerSpeed: number;
+        rotationByEuler: math.quaternion;
+        localMatrix: math.matrix;
+        localTranslate: math.vector3;
+        localRotation: math.quaternion;
+        localScale: math.vector3;
+        startColor: math.color;
+        color: math.vector3;
+        alpha: number;
+        tex_ST: math.vector4;
+        private totalLife;
+        private curLife;
+        private life;
+        private speedDir;
+        private movespeed;
+        private simulationSpeed;
+        sourceVbo: Float32Array;
+        vertexStartIndex: number;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        private emissionMatToWorld;
+        private emissionWorldRotation;
+        private sizeNodes;
+        private colorNodes;
+        private alphaNodes;
+        constructor(batcher: EmissionBatcher_new);
+        uploadData(array: Float32Array): void;
+        initByData(): void;
+        actived: boolean;
+        update(delta: number): void;
+        private transformVertex;
+        private _updateLocalMatrix;
+        private matToworld;
+        private refreshEmissionData;
+        private _updateRotation;
+        private _updatePos;
+        private _updateEuler;
+        private _updateScale;
+        private _updateColor;
+        private spriteIndex;
+        private _updateUV;
+        private _updateVBO;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface IAttributeData {
+        uiState: AttributeUIState;
+        data: {
+            [frameIndex: number]: FrameKeyPointData;
+        };
+        frameIndexs: number[];
+        attributeValType: AttributeValType;
+        attributeType: AttributeType;
+        actions: {
+            [frameIndex: number]: IEffectAction[];
+        };
+        init(): any;
+    }
+    class Vector3AttributeData implements IAttributeData, ILerpAttributeInterface {
+        uiState: AttributeUIState;
+        attributeValType: AttributeValType;
+        attributeType: AttributeType;
+        data: {
+            [frameIndex: number]: FrameKeyPointData;
+        };
+        frameIndexs: number[];
+        actions: {
+            [frameIndex: number]: IEffectAction[];
+        };
+        constructor();
+        init(): void;
+        addFramePoint(data: FrameKeyPointData, func?: Function): void;
+        removeFramePoint(frameId: number, data: any, func?: Function): void;
+        updateFramePoint(data: any, func?: Function): void;
+    }
+    class Vector2AttributeData implements IAttributeData, ILerpAttributeInterface {
+        uiState: AttributeUIState;
+        attributeValType: AttributeValType;
+        attributeType: AttributeType;
+        frameIndexs: number[];
+        data: {
+            [frameIndex: number]: FrameKeyPointData;
+        };
+        actions: {
+            [frameIndex: number]: IEffectAction[];
+        };
+        constructor();
+        init(): void;
+        addFramePoint(data: FrameKeyPointData, func?: Function): void;
+        removeFramePoint(frameId: number, data: gd3d.math.vector2, func?: Function): void;
+        updateFramePoint(data: any, func?: Function): void;
+    }
+    class NumberAttributeData implements IAttributeData, ILerpAttributeInterface {
+        uiState: AttributeUIState;
+        attributeValType: AttributeValType;
+        attributeType: AttributeType;
+        data: {
+            [frameIndex: number]: FrameKeyPointData;
+        };
+        frameIndexs: number[];
+        timeLine: {
+            [frameIndex: number]: number;
+        };
+        actions: {
+            [frameIndex: number]: IEffectAction[];
+        };
+        constructor();
+        init(): void;
+        addFramePoint(data: any, func?: Function): void;
+        removeFramePoint(frameId: number, data: number, func?: Function): void;
+        updateFramePoint(data: any, func?: Function): void;
+    }
+    interface ILerpAttributeInterface {
+        addFramePoint(data: any, func?: Function): any;
+        removeFramePoint(frameId: number, data: any, func?: Function): any;
+        updateFramePoint(data: any, func?: Function): any;
+    }
+    enum AttributeUIState {
+        None = 0,
+        Show = 1,
+        Hide = 2
+    }
+    enum AttributeUIType {
+        Number = 0,
+        Vector2 = 1,
+        Vector3 = 2,
+        Vector4 = 3
+    }
+    enum AttributeValType {
+        FixedValType = 0,
+        LerpType = 1
+    }
+    class FrameKeyPointData {
+        frameIndex: number;
+        val: any;
+        actions: IEffectAction[];
+        constructor(frameIndex: number, val: any);
+    }
+    class AttributeUtil {
+        static addFrameIndex(datas: number[], index: number): void;
+    }
+}
+declare namespace gd3d.framework {
+    interface IEffectElement {
+        name: string;
+        elementType: EffectElementTypeEnum;
+        beloop: boolean;
+        delayTime: number;
+        mat: material;
+        mesh: mesh;
+        writeToJson(obj: any): any;
+        dispose(): any;
+    }
+    enum AttributeType {
+        PositionType = 1,
+        EulerType = 2,
+        ScaleType = 3,
+        ColorType = 4,
+        ColorRateType = 5,
+        AlphaType = 6,
+        TillingType = 7
+    }
+    class EffectElementSingleMesh implements IEffectElement {
+        name: string;
+        elementType: gd3d.framework.EffectElementTypeEnum;
+        beloop: boolean;
+        delayTime: number;
+        life: number;
+        mat: gd3d.framework.material;
+        mesh: gd3d.framework.mesh;
+        colorRate: number;
+        renderModel: gd3d.framework.RenderModel;
+        tex_ST: math.vector4;
+        position: Vector3Key[];
+        euler: Vector3Key[];
+        scale: Vector3Key[];
+        color: Vector3Key[];
+        alpha: NumberKey[];
+        actions: IEffectAction[];
+        curAttrData: EffectAttrsData;
+        loopFrame: number;
+        active: boolean;
+        transform: transform;
+        private mgr;
+        private effectSys;
+        rotationByEuler: math.quaternion;
+        localRotation: math.quaternion;
+        constructor(sys: TestEffectSystem, data?: EffectElementData);
+        private initByElementdata;
+        private initByDefData;
+        writeToJson(obj: any): any;
+        update(): void;
+        private updateElementRotation;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class EffectElementEmission implements IEffectElement {
+        webgl: WebGLRenderingContext;
+        gameObject: gameObject;
+        effectSys: TestEffectSystem;
+        active: boolean;
+        vf: number;
+        private maxVertexCount;
+        rotTranslate: gd3d.math.vector3;
+        rotScale: gd3d.math.vector3;
+        rotRotation: gd3d.math.vector3;
+        private rotQuta;
+        name: string;
+        elementType: EffectElementTypeEnum;
+        delayTime: number;
+        beloop: boolean;
+        lifeTime: NumberData;
+        simulateInLocalSpace: boolean;
+        startScale: Vector3Data;
+        startEuler: Vector3Data;
+        startColor: math.color;
+        colorRate: number;
+        duration: NumberData;
+        emissionCount: NumberData;
+        emissionType: ParticleEmissionType;
+        shapeType: ParticleSystemShape;
+        simulationSpeed: NumberData;
+        width: number;
+        height: number;
+        depth: number;
+        radius: number;
+        angle: number;
+        emitFrom: emitfromenum;
+        rendermodel: RenderModel;
+        mat: material;
+        mesh: gd3d.framework.mesh;
+        enableVelocityOverLifetime: boolean;
+        moveSpeed: Vector3Data;
+        enableSizeOverLifetime: boolean;
+        sizeNodes: NumberKey[];
+        enableRotOverLifeTime: boolean;
+        angleSpeed: NumberData;
+        enableColorOverLifetime: boolean;
+        colorNodes: Vector3Key[];
+        alphaNodes: NumberKey[];
+        enableTexAnimation: boolean;
+        uvType: UVTypeEnum;
+        uSpeed: number;
+        vSpeed: number;
+        row: number;
+        column: number;
+        count: number;
+        private _continueSpaceTime;
+        perVertexCount: number;
+        perIndexxCount: number;
+        vertexSize: number;
+        emissionBatchers: EmissionBatcher_new[];
+        private curbatcher;
+        deadParticles: Particle_new[];
+        private curTime;
+        private beBurst;
+        private numcount;
+        private beover;
+        constructor(sys: TestEffectSystem, data?: EffectElementData);
+        private initDefparticleData;
+        private initByEmissonData;
+        private worldRotation;
+        getWorldRotation(): gd3d.math.quaternion;
+        matToObj: gd3d.math.matrix;
+        private matToWorld;
+        getmatrixToObj(): void;
+        getmatrixToWorld(): gd3d.math.matrix;
+        update(delta: number): void;
+        private updateBatcher;
+        private updateLife;
+        private reInit;
+        private updateEmission;
+        private addParticle;
+        private addBatcher;
+        private _renderCamera;
+        readonly renderCamera: camera;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        dispose(): void;
+        vbo: Float32Array;
+        private ebo;
+        private getMesh;
+        cloneMeshVBO(): Float32Array;
+        cloneMeshEBO(): Uint16Array;
+        writeToJson(obj: any): void;
+    }
+}
+declare namespace gd3d.framework {
+    class EmissionBatcher_new {
+        emission: EffectElementEmission;
+        private webgl;
+        mesh: mesh;
+        mat: material;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        particles: Particle_new[];
+        constructor(emissionElement: EffectElementEmission);
+        private initMesh;
+        curVerCount: number;
+        curIndexCount: number;
+        addParticle(): void;
+        private refreshBuffer;
+        update(delta: number): void;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class effTools {
+        static getRandomDirAndPosByZEmission(emission: EffectElementEmission, outDir: gd3d.math.vector3, outPos: gd3d.math.vector3): void;
+        static getTex_ST(emission: EffectElementEmission, out_St: math.vector4): void;
+    }
+}
+declare namespace gd3d.framework {
+    class Curve3 {
+        private _beizerPoints;
+        private _bezierPointNum;
+        beizerPoints: gd3d.math.vector3[];
+        bezierPointNum: number;
+        static CreateLinearBezier(start: gd3d.math.vector3, end: gd3d.math.vector3, indices: number): Curve3;
+        static GetLerpBezier(nodes: gd3d.framework.ParticleNode[]): Curve3;
+        static CreateQuadraticBezier(v0: gd3d.math.vector3, v1: gd3d.math.vector3, v2: gd3d.math.vector3, bezierPointNum: number): Curve3;
+        static CreateCubicBezier(v0: gd3d.math.vector3, v1: gd3d.math.vector3, v2: gd3d.math.vector3, v3: gd3d.math.vector3, bezierPointNum: number): Curve3;
+        constructor(points: gd3d.math.vector3[], nbPoints: number);
+        getPoints(): math.vector3[];
+    }
+}
+declare namespace gd3d.framework {
+    interface IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): any;
+        update(frameIndex: number): any;
+    }
+    class LinearAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        attriname: string;
+        attrival: any;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class DestroyAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class LoopAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class UVRollAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        speedu: number;
+        speedv: number;
+        startu: number;
+        startv: number;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class UVSpriteAnimationAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        fps: number;
+        row: number;
+        colum: number;
+        totalCount: number;
+        private frameInternal;
+        private spriteIndex;
+        private tex_ST;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class RotationAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        velocity: any;
+        frameInternal: number;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class RoseCurveAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        radius: number;
+        polar: any;
+        level: number;
+        frameInternal: number;
+        speed: number;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class TrailAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        radius: number;
+        position: any;
+        eular: any;
+        width: number;
+        frameInternal: number;
+        speed: number;
+        transform: gd3d.framework.transform;
+        startRotation: gd3d.math.quaternion;
+        color: any;
+        alpha: number;
+        offsetTransalte: gd3d.math.vector3;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        update(frameIndex: number): void;
+    }
+    class BreathAction implements IEffectAction {
+        type: string;
+        params: any;
+        startFrame: number;
+        endFrame: number;
+        elements: EffectElement;
+        attriname: string;
+        startvalue: any;
+        targetvalue: any;
+        loopframe: number;
+        halfloopframe: number;
+        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
+        curTargetFrame: number;
+        update(frameIndex: number): void;
+        swap(): void;
+        getLerpValue(frameIndex: number): any;
+    }
+}
+declare namespace gd3d.framework {
+    class EffectParser {
+        asMgr: assetMgr;
+        Parse(str: string, assetmgr: assetMgr): EffectSystemData;
+        private _parse;
+        private copyAndOverWrite;
+        _parseSingleMeshTypeData(elementData: any, element: EffectElementData): void;
+        _parseEmissionTypeData(elementData: any, element: EffectElementData): void;
+        _parseEmissionShape(_startdata: any, element: EffectElementData): void;
+        _parseToObjData(attrib: string, content: any): any;
+        _parseToParticleNode(content: string): ParticleNode;
+        _parseToValueData(content: string): ValueData;
+        _parseToNumberArray(content: string): number[];
+    }
+}
+declare namespace gd3d.framework {
+    class EffectUtil {
+        static lookatbyXAxis(pos: gd3d.math.vector3, xAxis: gd3d.math.vector3, yAxis: gd3d.math.vector3, zAxis: gd3d.math.vector3, targetpos: gd3d.math.vector3, quat: gd3d.math.quaternion): void;
+        static eulerFromQuaternion(out: math.vector3, q: math.quaternion, order: any): void;
+        static RandomRange(min: number, max: number, isInteger?: boolean): number;
+        static vecMuliNum(vec: gd3d.math.vector3, num: number): gd3d.math.vector3;
+        static parseVector3(value: any): gd3d.math.vector3;
+        static parseEffectVec3(value: any): ParticleNode;
+        static parseEffectVec2(value: any): ParticleNodeVec2;
+        static parseEffectNum(value: any): ParticleNodeNumber;
+        static parseEffectNumNode(value: any): ParticleNodeNumber;
+        static parseEffectValueData(value: any): ValueData;
+        static parseEffectUVSpeed(value: any): UVSpeedNode;
+        static lookat(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, up?: gd3d.math.vector3): void;
+        static RotateVector3(source: gd3d.math.vector3, direction: gd3d.math.vector3, out: gd3d.math.vector3): void;
+        static bindAxisBillboard(localAxis: gd3d.math.vector3, out: gd3d.math.quaternion): void;
+        static lookatVerticalBillboard(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, up?: gd3d.math.vector3): void;
+        static quatLookatZ(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, forward?: gd3d.math.vector3): void;
+        static quatLookatX(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, right?: gd3d.math.vector3): void;
+    }
+}
+declare namespace gd3d.framework {
+    class EmissionBatcher {
+        emissionElement: EmissionElement;
+        private webgl;
+        gameObject: gameObject;
+        data: Emission;
+        mesh: mesh;
+        mat: material;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        particles: Particle[];
+        private vertexSize;
+        vf: number;
+        constructor(emissionElement: EmissionElement);
+        initMesh(): void;
+        curVerCount: number;
+        curIndexCount: number;
+        addParticle(): void;
+        private refreshBuffer;
+        update(delta: number): void;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        dispose(): void;
+    }
+}
+declare namespace gd3d.framework {
+    class Particle {
+        private batcher;
+        gameObject: gameObject;
+        private emisson;
+        private vf;
+        renderModel: RenderModel;
+        private startScale;
+        startRotation: gd3d.math.quaternion;
+        rotationByShape: math.quaternion;
+        euler: math.vector3;
+        rotationByEuler: math.quaternion;
+        localMatrix: math.matrix;
+        localTranslate: math.vector3;
+        localRotation: math.quaternion;
+        localScale: math.vector3;
+        color: math.vector3;
+        colorRate: number;
+        uv: math.vector2;
+        alpha: number;
+        tilling: math.vector2;
+        private totalLife;
+        private curLife;
+        private speedDir;
+        private movespeed;
+        private simulationSpeed;
+        data: Emission;
+        private vertexSize;
+        private vertexCount;
+        sourceVbo: Float32Array;
+        vertexStartIndex: number;
+        dataForVbo: Float32Array;
+        dataForEbo: Uint16Array;
+        private emissionMatToWorld;
+        private emissionWorldRotation;
+        constructor(batcher: EmissionBatcher);
+        uploadData(array: Float32Array): void;
+        initByData(): void;
+        actived: boolean;
+        update(delta: number): void;
+        private transformVertex;
+        private _updateLocalMatrix;
+        private matToworld;
+        private refreshEmissionData;
+        private _updateRotation;
+        private _updateElementRotation;
+        private _updatePos;
+        private _updateEuler;
+        private _startNode;
+        private endNode;
+        private _updateScale;
+        private _updateColor;
+        private tempStartNode;
+        private tempEndNode;
+        private _updateNode;
+        private _startNodeNum;
+        private _curNodeNum;
+        private _updateAlpha;
+        private _startUVSpeedNode;
+        private _curUVSpeedNode;
+        private spriteIndex;
+        private _updateUV;
+        private tex_ST;
+        private _updateVBO;
+        dispose(): void;
+    }
+    enum nodeType {
+        none = 0,
+        alpha = 1,
+        scale = 2
+    }
+}
+declare namespace gd3d.framework {
+    class Particles {
+        emissionElements: EmissionElement[];
+        vf: number;
+        effectSys: effectSystem;
+        constructor(sys: effectSystem);
+        addEmission(_emissionNew: EffectElementData): void;
+        updateForEmission(delta: number): void;
+        update(delta: number): void;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        dispose(): void;
+    }
+    class EmissionElement {
+        webgl: WebGLRenderingContext;
+        gameObject: gameObject;
+        effectSys: effectSystem;
+        ParticleMgr: Particles;
+        vf: number;
+        emissionData: Emission;
+        private maxVertexCount;
+        private localtranslate;
+        private localScale;
+        private localrotate;
+        private eluerAngle;
+        private beloop;
+        simulateInLocalSpace: boolean;
+        active: boolean;
+        private _continueSpaceTime;
+        perVertexCount: number;
+        perIndexxCount: number;
+        emissionBatchers: EmissionBatcher[];
+        private curbatcher;
+        deadParticles: Particle[];
+        private curTime;
+        private numcount;
+        private isover;
+        constructor(_emission: EffectElementData, sys: effectSystem, mgr: Particles);
+        private worldRotation;
+        getWorldRotation(): gd3d.math.quaternion;
+        matToBatcher: gd3d.math.matrix;
+        private matToWorld;
+        getmatrixToWorld(): gd3d.math.matrix;
+        update(delta: number): void;
+        private testtime;
+        updateForEmission(delta: number): void;
+        updateBatcher(delta: number): void;
+        updateEmission(delta: number): void;
+        addParticle(count?: number): void;
+        private addBatcher;
+        renderCamera: camera;
+        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
+        dispose(): void;
+        isOver(): boolean;
     }
 }
 declare namespace gd3d.framework {
@@ -3325,94 +5994,92 @@ declare namespace gd3d.framework {
     }
 }
 declare namespace gd3d.framework {
-    class transform {
-        static readonly ClassName: string;
-        private helpLRotate;
-        private helpLPos;
-        private helpLScale;
-        private checkLRTSChange;
-        private fastEqual;
-        private _scene;
-        scene: scene;
-        name: string;
-        insId: insID;
-        prefab: string;
-        updateWorldTran(): void;
-        updateTran(bool: boolean): void;
-        private _dirtyAABB;
-        private _aabb;
-        readonly aabb: aabb;
-        private _buildAABB;
-        private _children;
-        children: transform[];
-        private _physicsImpostor;
-        physicsImpostor: PhysicsImpostor;
-        private _parent;
-        readonly parent: transform;
-        addChild(node: transform): void;
-        addChildAt(node: transform, index: number): void;
-        removeAllChild(): void;
-        removeChild(node: transform): void;
-        find(name: string): transform;
-        checkImpactTran(tran: transform): boolean;
-        checkImpact(): Array<transform>;
-        private doImpact;
-        private dirtyLocal;
-        private dirtyWorld;
-        private dirtify;
-        private sync;
-        markDirty(): void;
-        markHaveComponent(): void;
-        markHaveRendererComp(): void;
-        hasComponent: boolean;
-        hasComponentChild: boolean;
-        hasRendererComp: boolean;
-        hasRendererCompChild: boolean;
-        private _localRotate;
-        localRotate: math.quaternion;
-        private _localTranslate;
-        localTranslate: math.vector3;
-        localPosition: math.vector3;
-        private _localScale;
-        localScale: math.vector3;
-        private localMatrix;
-        private _localEulerAngles;
-        localEulerAngles: math.vector3;
-        private worldMatrix;
-        private worldRotate;
-        private worldTranslate;
-        private worldScale;
-        getWorldRotate(): math.quaternion;
-        setWorldRotate(rotate: math.quaternion): void;
-        getWorldTranslate(): math.vector3;
-        getWorldPosition(): math.vector3;
-        setWorldPosition(pos: math.vector3): void;
-        getWorldScale(): math.vector3;
-        setWorldScale(scale: math.vector3): void;
-        getLocalMatrix(): math.matrix;
-        getWorldMatrix(): math.matrix;
-        private checkToTop;
-        getForwardInWorld(out: math.vector3): void;
-        getRightInWorld(out: math.vector3): void;
-        getUpInWorld(out: math.vector3): void;
-        setWorldMatrix(mat: math.matrix): void;
-        lookat(trans: transform): void;
-        lookatPoint(point: math.vector3): void;
-        private calcLookAt;
-        private _gameObject;
-        readonly gameObject: gameObject;
-        clone(): transform;
-        readonly beDispose: boolean;
-        private _beDispose;
-        onDispose: () => void;
-        dispose(): void;
+    class tweenUtil {
+        static GetEaseProgress(ease_type: tweenMethod, linear_progress: number): number;
+        static Linear(t: number, b: number, c: number, d: number): number;
+        static ExpoEaseOut(t: number, b: number, c: number, d: number): number;
+        static ExpoEaseIn(t: number, b: number, c: number, d: number): number;
+        static ExpoEaseInOut(t: number, b: number, c: number, d: number): number;
+        static ExpoEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static CircEaseOut(t: number, b: number, c: number, d: number): number;
+        static CircEaseIn(t: number, b: number, c: number, d: number): number;
+        static CircEaseInOut(t: number, b: number, c: number, d: number): number;
+        static CircEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static QuadEaseOut(t: number, b: number, c: number, d: number): number;
+        static QuadEaseIn(t: number, b: number, c: number, d: number): number;
+        static QuadEaseInOut(t: number, b: number, c: number, d: number): number;
+        static QuadEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static SineEaseOut(t: number, b: number, c: number, d: number): number;
+        static SineEaseIn(t: number, b: number, c: number, d: number): number;
+        static SineEaseInOut(t: number, b: number, c: number, d: number): number;
+        static SineEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static CubicEaseOut(t: number, b: number, c: number, d: number): number;
+        static CubicEaseIn(t: number, b: number, c: number, d: number): number;
+        static CubicEaseInOut(t: number, b: number, c: number, d: number): number;
+        static CubicEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static QuartEaseOut(t: number, b: number, c: number, d: number): number;
+        static QuartEaseIn(t: number, b: number, c: number, d: number): number;
+        static QuartEaseInOut(t: number, b: number, c: number, d: number): number;
+        static QuartEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static QuintEaseOut(t: number, b: number, c: number, d: number): number;
+        static QuintEaseIn(t: number, b: number, c: number, d: number): number;
+        static QuintEaseInOut(t: number, b: number, c: number, d: number): number;
+        static QuintEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static ElasticEaseOut(t: number, b: number, c: number, d: number): number;
+        static ElasticEaseIn(t: number, b: number, c: number, d: number): number;
+        static ElasticEaseInOut(t: number, b: number, c: number, d: number): number;
+        static ElasticEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static BounceEaseOut(t: number, b: number, c: number, d: number): number;
+        static BounceEaseIn(t: number, b: number, c: number, d: number): number;
+        static BounceEaseInOut(t: number, b: number, c: number, d: number): number;
+        static BounceEaseOutIn(t: number, b: number, c: number, d: number): number;
+        static BackEaseOut(t: number, b: number, c: number, d: number): number;
+        static BackEaseIn(t: number, b: number, c: number, d: number): number;
+        static BackEaseInOut(t: number, b: number, c: number, d: number): number;
+        static BackEaseOutIn(t: number, b: number, c: number, d: number): number;
     }
-    class insID {
-        constructor();
-        private static idAll;
-        private static next;
-        private id;
-        getInsID(): number;
+    enum tweenMethod {
+        Linear = 0,
+        ExpoEaseOut = 1,
+        ExpoEaseIn = 2,
+        ExpoEaseInOut = 3,
+        ExpoEaseOutIn = 4,
+        CircEaseOut = 5,
+        CircEaseIn = 6,
+        CircEaseInOut = 7,
+        CircEaseOutIn = 8,
+        QuadEaseOut = 9,
+        QuadEaseIn = 10,
+        QuadEaseInOut = 11,
+        QuadEaseOutIn = 12,
+        SineEaseOut = 13,
+        SineEaseIn = 14,
+        SineEaseInOut = 15,
+        SineEaseOutIn = 16,
+        CubicEaseOut = 17,
+        CubicEaseIn = 18,
+        CubicEaseInOut = 19,
+        CubicEaseOutIn = 20,
+        QuartEaseOut = 21,
+        QuartEaseIn = 22,
+        QuartEaseInOut = 23,
+        QuartEaseOutIn = 24,
+        QuintEaseOut = 25,
+        QuintEaseIn = 26,
+        QuintEaseInOut = 27,
+        QuintEaseOutIn = 28,
+        ElasticEaseOut = 29,
+        ElasticEaseIn = 30,
+        ElasticEaseInOut = 31,
+        ElasticEaseOutIn = 32,
+        BounceEaseOut = 33,
+        BounceEaseIn = 34,
+        BounceEaseInOut = 35,
+        BounceEaseOutIn = 36,
+        BackEaseOut = 37,
+        BackEaseIn = 38,
+        BackEaseInOut = 39,
+        BackEaseOutIn = 40
     }
 }
 declare namespace gd3d.framework {
@@ -3556,95 +6223,6 @@ declare namespace gd3d.framework {
         private static create2D_image2D;
         private static create2D_label;
         private static create2D_button;
-    }
-}
-declare namespace gd3d.framework {
-    class tweenUtil {
-        static GetEaseProgress(ease_type: tweenMethod, linear_progress: number): number;
-        static Linear(t: number, b: number, c: number, d: number): number;
-        static ExpoEaseOut(t: number, b: number, c: number, d: number): number;
-        static ExpoEaseIn(t: number, b: number, c: number, d: number): number;
-        static ExpoEaseInOut(t: number, b: number, c: number, d: number): number;
-        static ExpoEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static CircEaseOut(t: number, b: number, c: number, d: number): number;
-        static CircEaseIn(t: number, b: number, c: number, d: number): number;
-        static CircEaseInOut(t: number, b: number, c: number, d: number): number;
-        static CircEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static QuadEaseOut(t: number, b: number, c: number, d: number): number;
-        static QuadEaseIn(t: number, b: number, c: number, d: number): number;
-        static QuadEaseInOut(t: number, b: number, c: number, d: number): number;
-        static QuadEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static SineEaseOut(t: number, b: number, c: number, d: number): number;
-        static SineEaseIn(t: number, b: number, c: number, d: number): number;
-        static SineEaseInOut(t: number, b: number, c: number, d: number): number;
-        static SineEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static CubicEaseOut(t: number, b: number, c: number, d: number): number;
-        static CubicEaseIn(t: number, b: number, c: number, d: number): number;
-        static CubicEaseInOut(t: number, b: number, c: number, d: number): number;
-        static CubicEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static QuartEaseOut(t: number, b: number, c: number, d: number): number;
-        static QuartEaseIn(t: number, b: number, c: number, d: number): number;
-        static QuartEaseInOut(t: number, b: number, c: number, d: number): number;
-        static QuartEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static QuintEaseOut(t: number, b: number, c: number, d: number): number;
-        static QuintEaseIn(t: number, b: number, c: number, d: number): number;
-        static QuintEaseInOut(t: number, b: number, c: number, d: number): number;
-        static QuintEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static ElasticEaseOut(t: number, b: number, c: number, d: number): number;
-        static ElasticEaseIn(t: number, b: number, c: number, d: number): number;
-        static ElasticEaseInOut(t: number, b: number, c: number, d: number): number;
-        static ElasticEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static BounceEaseOut(t: number, b: number, c: number, d: number): number;
-        static BounceEaseIn(t: number, b: number, c: number, d: number): number;
-        static BounceEaseInOut(t: number, b: number, c: number, d: number): number;
-        static BounceEaseOutIn(t: number, b: number, c: number, d: number): number;
-        static BackEaseOut(t: number, b: number, c: number, d: number): number;
-        static BackEaseIn(t: number, b: number, c: number, d: number): number;
-        static BackEaseInOut(t: number, b: number, c: number, d: number): number;
-        static BackEaseOutIn(t: number, b: number, c: number, d: number): number;
-    }
-    enum tweenMethod {
-        Linear = 0,
-        ExpoEaseOut = 1,
-        ExpoEaseIn = 2,
-        ExpoEaseInOut = 3,
-        ExpoEaseOutIn = 4,
-        CircEaseOut = 5,
-        CircEaseIn = 6,
-        CircEaseInOut = 7,
-        CircEaseOutIn = 8,
-        QuadEaseOut = 9,
-        QuadEaseIn = 10,
-        QuadEaseInOut = 11,
-        QuadEaseOutIn = 12,
-        SineEaseOut = 13,
-        SineEaseIn = 14,
-        SineEaseInOut = 15,
-        SineEaseOutIn = 16,
-        CubicEaseOut = 17,
-        CubicEaseIn = 18,
-        CubicEaseInOut = 19,
-        CubicEaseOutIn = 20,
-        QuartEaseOut = 21,
-        QuartEaseIn = 22,
-        QuartEaseInOut = 23,
-        QuartEaseOutIn = 24,
-        QuintEaseOut = 25,
-        QuintEaseIn = 26,
-        QuintEaseInOut = 27,
-        QuintEaseOutIn = 28,
-        ElasticEaseOut = 29,
-        ElasticEaseIn = 30,
-        ElasticEaseInOut = 31,
-        ElasticEaseOutIn = 32,
-        BounceEaseOut = 33,
-        BounceEaseIn = 34,
-        BounceEaseInOut = 35,
-        BounceEaseOutIn = 36,
-        BackEaseOut = 37,
-        BackEaseIn = 38,
-        BackEaseInOut = 39,
-        BackEaseOutIn = 40
     }
 }
 declare namespace gd3d.framework {
@@ -3846,6 +6424,133 @@ declare namespace gd3d.framework {
         setupWebGL(canvas: Element, opt_attribs?: WebGLContextAttributes, opt_onError?: (msg: string) => void): any;
         create3DContext(canvas: any, opt_attribs: any): any;
         constructor();
+    }
+}
+declare namespace gd3d.io {
+    function xhrLoad(url: string, fun: (ContentData: any, _err: Error, isloadFail?: boolean) => void, onprocess: (curLength: number, totalLength: number) => void, responseType: XMLHttpRequestResponseType, loadedFun: (req: XMLHttpRequest) => void): void;
+    function loadText(url: string, fun: (_txt: string, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
+    function loadArrayBuffer(url: string, fun: (_bin: ArrayBuffer, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
+    function loadBlob(url: string, fun: (_blob: Blob, _err: Error, isloadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
+    function loadImg(url: string, fun: (_tex: HTMLImageElement, _err: Error, loadFail?: boolean) => void, onprocess?: (curLength: number, totalLength: number) => void): void;
+}
+declare namespace gd3d.math {
+    class pool {
+        static collect_all(): void;
+        private static _vector4_one;
+        static readonly vector4_one: vector4;
+        private static unused_vector4;
+        static new_vector4(x?: number, y?: number, z?: number, w?: number): vector4;
+        static clone_vector4(src: vector4): vector4;
+        static delete_vector4(v: vector4): void;
+        static collect_vector4(): void;
+        private static _color_one;
+        static readonly color_one: color;
+        private static unused_color;
+        static new_color(r?: number, g?: number, b?: number, a?: number): color;
+        static delete_color(v: color): void;
+        static collect_color(): void;
+        private static _vector3_up;
+        static readonly vector3_up: vector3;
+        private static _vector3_right;
+        static readonly vector3_right: vector3;
+        private static _vector3_forward;
+        static readonly vector3_forward: vector3;
+        private static _vector3_zero;
+        static readonly vector3_zero: vector3;
+        private static _vector3_one;
+        static readonly vector3_one: vector3;
+        private static unused_vector3;
+        static new_vector3(x?: number, y?: number, z?: number): vector3;
+        static clone_vector3(src: vector3): vector3;
+        static delete_vector3(v: vector3): void;
+        static delete_vector3Array(vs: vector3[]): void;
+        static collect_vector3(): void;
+        private static _vector2_zero;
+        static readonly vector2_zero: vector2;
+        private static _vector2_up;
+        static readonly vector2_up: vector2;
+        private static _vector2_right;
+        static readonly vector2_right: vector2;
+        private static unused_vector2;
+        static new_vector2(x?: number, y?: number): vector2;
+        static clone_vector2(src: vector2): vector2;
+        static delete_vector2(v: vector2): void;
+        static delete_vector2Array(vs: vector2[]): void;
+        static collect_vector2(): void;
+        private static unused_matrix3x2;
+        static new_matrix3x2(): matrix3x2;
+        static clone_matrix3x2(src: matrix3x2): matrix3x2;
+        static delete_matrix3x2(v: matrix3x2): void;
+        static collect_matrix3x2(): void;
+        private static unused_matrix;
+        static new_matrix(): matrix;
+        static clone_matrix(src: matrix): matrix;
+        static readonly identityMat: matrix;
+        static delete_matrix(v: matrix): void;
+        static collect_matrix(): void;
+        private static unused_quaternion;
+        static new_quaternion(x?: number, y?: number, z?: number, w?: number): quaternion;
+        static clone_quaternion(src: quaternion): quaternion;
+        static delete_quaternion(v: quaternion): void;
+        static collect_quaternion(): void;
+        private static unused_pickInfo;
+        static new_pickInfo(bu?: number, bv?: number, distance?: number): framework.pickinfo;
+        static delete_pickInfo(v: framework.pickinfo): void;
+        static collect_pickInfo(): void;
+        private static unused_rect;
+        static new_rect(x?: number, y?: number, w?: number, h?: number): rect;
+        static clone_rect(src: rect): rect;
+        static delete_rect(v: rect): void;
+        static collect_rect(): void;
+    }
+}
+declare namespace gd3d.render {
+    class caps {
+        maxTexturesImageUnits: number;
+        maxTextureSize: number;
+        maxCubemapTextureSize: number;
+        maxRenderTextureSize: number;
+        standardDerivatives: boolean;
+        s3tc: WEBGL_compressed_texture_s3tc;
+        textureFloat: boolean;
+        textureAnisotropicFilterExtension: EXT_texture_filter_anisotropic;
+        maxAnisotropy: number;
+        instancedArrays: ANGLE_instanced_arrays;
+        uintIndices: boolean;
+        highPrecisionShaderSupported: boolean;
+        fragmentDepthSupported: boolean;
+        textureFloatLinearFiltering: boolean;
+        textureLOD: boolean;
+        drawBuffersExtension: any;
+        pvrtcExtension: any;
+        atcExtension: any;
+    }
+    class webglkit {
+        private static _maxVertexAttribArray;
+        static SetMaxVertexAttribArray(webgl: WebGLRenderingContext, count: number): void;
+        private static _texNumber;
+        static GetTextureNumber(webgl: WebGLRenderingContext, index: number): number;
+        static FUNC_ADD: number;
+        static FUNC_SUBTRACT: number;
+        static FUNC_REVERSE_SUBTRACT: number;
+        static ONE: number;
+        static ZERO: number;
+        static SRC_ALPHA: number;
+        static SRC_COLOR: number;
+        static ONE_MINUS_SRC_ALPHA: number;
+        static ONE_MINUS_SRC_COLOR: number;
+        static ONE_MINUS_DST_ALPHA: number;
+        static ONE_MINUS_DST_COLOR: number;
+        static LEQUAL: number;
+        static EQUAL: number;
+        static GEQUAL: number;
+        static NOTEQUAL: number;
+        static LESS: number;
+        static GREATER: number;
+        static ALWAYS: number;
+        static NEVER: number;
+        static caps: caps;
+        static initConst(webgl: WebGLRenderingContext): void;
     }
 }
 declare namespace gd3d.render {
@@ -4208,2710 +6913,5 @@ declare namespace gd3d.render {
         height: number;
         dispose(webgl: WebGLRenderingContext): void;
         caclByteLength(): number;
-    }
-}
-declare namespace gd3d.framework {
-    class behaviour2d implements I2DComponent {
-        transform: transform2D;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        remove(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class boxcollider2d implements I2DComponent, ICollider2d {
-        static readonly ClassName: string;
-        transform: transform2D;
-        private _obb;
-        getBound(): obb2d;
-        intersectsTransform(tran: transform2D): boolean;
-        private build;
-        refreshTofullOver(): void;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        remove(): void;
-    }
-}
-declare namespace gd3d.framework {
-    enum TransitionType {
-        None = 0,
-        ColorTint = 1,
-        SpriteSwap = 2
-    }
-    class button implements I2DComponent, event.IUIEventer {
-        static readonly ClassName: string;
-        private _transition;
-        transition: TransitionType;
-        private _originalColor;
-        private _originalSprite;
-        private _origianlSpriteName;
-        private _pressedSpriteName;
-        private _targetImage;
-        targetImage: image2D;
-        private _pressedSprite;
-        pressedGraphic: sprite;
-        private _normalColor;
-        normalColor: math.color;
-        private _pressedColor;
-        pressedColor: math.color;
-        private _fadeDuration;
-        fadeDuration: number;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        transform: transform2D;
-        remove(): void;
-        private downPointV2;
-        private isMovedLimit;
-        private readonly movedLimit;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        private UIEventer;
-        addListener(eventEnum: event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
-        removeListener(eventEnum: event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
-        private _downInThis;
-        private _dragOut;
-        private showNormal;
-        private showPress;
-        private tryGetSprite;
-        private changeColor;
-        private changeSprite;
-    }
-}
-declare namespace gd3d.framework {
-    class image2D implements IRectRenderer {
-        static readonly ClassName: string;
-        constructor();
-        private _unitLen;
-        private datar;
-        private _sprite;
-        private needRefreshImg;
-        color: math.color;
-        private static readonly defUIShader;
-        private static readonly defMaskUIShader;
-        private _CustomShaderName;
-        setShaderByName(shaderName: string): void;
-        getMaterial(): material;
-        private _darwRect;
-        getDrawBounds(): math.rect;
-        private _uimat;
-        private readonly uimat;
-        private _imageType;
-        imageType: ImageType;
-        private _fillMethod;
-        fillMethod: FillMethod;
-        private _fillAmmount;
-        fillAmmount: number;
-        transform: transform2D;
-        sprite: sprite;
-        private _spriteName;
-        private _imageBorder;
-        readonly imageBorder: math.border;
-        render(canvas: canvas): void;
-        private searchTexture;
-        private _cacheMaskV4;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        remove(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        private prepareData;
-        updateTran(): void;
-        private min_x;
-        private max_x;
-        private min_y;
-        private max_y;
-        private calcDrawRect;
-        private updateQuadData;
-        private updateSimpleData;
-        private updateSlicedData;
-        private updateFilledData;
-        private updateTiledData;
-    }
-    enum ImageType {
-        Simple = 0,
-        Sliced = 1,
-        Tiled = 2,
-        Filled = 3
-    }
-    enum FillMethod {
-        Horizontal = 0,
-        Vertical = 1,
-        Radial_90 = 2,
-        Radial_180 = 3,
-        Radial_360 = 4
-    }
-}
-declare namespace gd3d.framework {
-    class inputField implements I2DComponent {
-        static readonly ClassName: string;
-        transform: transform2D;
-        private _frameImage;
-        frameImage: image2D;
-        private customRegexStr;
-        private beFocus;
-        private inputElement;
-        private _text;
-        readonly text: string;
-        private _charlimit;
-        characterLimit: number;
-        private _lineType;
-        LineType: lineType;
-        private _contentType;
-        ContentType: number;
-        private _textLable;
-        TextLabel: label;
-        private _placeholderLabel;
-        PlaceholderLabel: label;
-        private layoutRefresh;
-        start(): void;
-        onPlay(): void;
-        private inputElmLayout;
-        private textRefresh;
-        private filterContentText;
-        update(delta: number): void;
-        remove(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-    enum lineType {
-        SingleLine = 0,
-        MultiLine = 1
-    }
-    enum contentType {
-        None = 0,
-        Number = 1,
-        Word = 2,
-        Underline = 4,
-        ChineseCharacter = 8,
-        NoneChineseCharacter = 16,
-        Email = 32,
-        PassWord = 64,
-        Custom = 128
-    }
-}
-declare namespace gd3d.framework {
-    class label implements IRectRenderer {
-        static readonly ClassName: string;
-        private _text;
-        text: string;
-        private initdater;
-        private _font;
-        font: font;
-        private needRefreshFont;
-        private _fontName;
-        private _fontsize;
-        fontsize: number;
-        linespace: number;
-        horizontalType: HorizontalType;
-        verticalType: VerticalType;
-        horizontalOverflow: boolean;
-        verticalOverflow: boolean;
-        private indexarr;
-        private remainarrx;
-        updateData(_font: gd3d.framework.font): void;
-        private data_begin;
-        private datar;
-        color: math.color;
-        color2: math.color;
-        private static readonly defUIShader;
-        private static readonly defMaskUIShader;
-        private _CustomShaderName;
-        setShaderByName(shaderName: string): void;
-        getMaterial(): material;
-        private _darwRect;
-        getDrawBounds(): math.rect;
-        private _uimat;
-        private readonly uimat;
-        private dirtyData;
-        render(canvas: canvas): void;
-        private searchTexture;
-        private _cacheMaskV4;
-        updateTran(): void;
-        private min_x;
-        private max_x;
-        private min_y;
-        private max_y;
-        private calcDrawRect;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        transform: transform2D;
-        remove(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-    enum HorizontalType {
-        Center = 0,
-        Left = 1,
-        Right = 2
-    }
-    enum VerticalType {
-        Center = 0,
-        Top = 1,
-        Boom = 2
-    }
-}
-declare namespace gd3d.framework {
-    class progressbar implements I2DComponent {
-        static readonly ClassName: string;
-        private _cutPanel;
-        cutPanel: transform2D;
-        private _barBg;
-        barBg: image2D;
-        private _barOverImg;
-        barOverImg: image2D;
-        private _value;
-        value: number;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        private refreshBar;
-        private adjustOverImg;
-        transform: transform2D;
-        remove(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-}
-declare namespace gd3d.framework {
-    class rawImage2D implements IRectRenderer {
-        static readonly ClassName: string;
-        private datar;
-        private _image;
-        private needRefreshImg;
-        image: texture;
-        color: math.color;
-        private static readonly defUIShader;
-        private static readonly defMaskUIShader;
-        private _CustomShaderName;
-        setShaderByName(shaderName: string): void;
-        getMaterial(): material;
-        private _darwRect;
-        getDrawBounds(): math.rect;
-        private _uimat;
-        private readonly uimat;
-        render(canvas: canvas): void;
-        private _cacheMaskV4;
-        updateTran(): void;
-        private min_x;
-        private max_x;
-        private min_y;
-        private max_y;
-        private calcDrawRect;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        transform: transform2D;
-        remove(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-}
-declare namespace gd3d.framework {
-    class scrollRect implements I2DComponent {
-        static readonly ClassName: string;
-        private _content;
-        content: transform2D;
-        horizontal: boolean;
-        vertical: boolean;
-        inertia: boolean;
-        decelerationRate: number;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        transform: transform2D;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        private isPointDown;
-        private lastPoint;
-        private strPoint;
-        private strPos;
-        private SlideTo;
-        private readonly collectNum;
-        private points;
-        private collectPointing;
-        private flyVelocity;
-        private onInertiaSliderUp;
-        private canfly;
-        private readonly threshold;
-        private readonly cgTime;
-        private cgCount;
-        private lastfv;
-        private flyingSlidr;
-        remove(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class uirect implements I2DComponent {
-        static readonly ClassName: string;
-        canbeClick: boolean;
-        start(): void;
-        onPlay(): void;
-        update(delta: number): void;
-        transform: transform2D;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-        remove(): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface I2DBody {
-        initData: IBodyData;
-        transform: transform2D;
-        body: Ibody;
-        addForce(Force: gd3d.math.vector2): any;
-        setVelocity(velocity: math.vector2): any;
-        setDesity(Desity: number): any;
-        setFrictionAir(frictionAir: number): any;
-        setFriction(friction: number): any;
-        setFrictionStatic(frictionStatic: number): any;
-        setRestitution(restitution: number): any;
-        setMass(mass: number): any;
-    }
-    interface IBodyData {
-        mass?: number;
-        density?: number;
-        inertia?: number;
-        restitution?: number;
-        frictionStatic?: number;
-        frictionAir?: number;
-        friction?: number;
-        collisionFilter?: collisionFilter;
-        slop?: number;
-        isStatic?: boolean;
-        type?: string;
-        tag?: string;
-        name?: string;
-    }
-    class bassBody implements I2DBody {
-        transform: transform2D;
-        body: Ibody;
-        m_velocity: math.vector2;
-        addForce(Force: math.vector2): void;
-        setVelocity(velocity: math.vector2): void;
-        setAngularVelocity(velocity: number): void;
-        readonly angularVelocity: number;
-        readonly speed: number;
-        readonly velocity: math.vector2;
-        type: string;
-        readonly collisionFilter: collisionFilter;
-        tag: string;
-        name: string;
-        setDesity(Desity: number): void;
-        setFrictionAir(frictionAir: number): void;
-        setFriction(friction: number): void;
-        setFrictionStatic(frictionStatic: number): void;
-        setRestitution(restitution: number): void;
-        setMass(mass: number): void;
-        initData: IBodyData;
-        setInitData(att: IBodyData): void;
-        setPosition(pos: math.vector2): void;
-        update(delta: number): void;
-        remove(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class circleBody extends bassBody implements I2DComponent, I2DBody {
-        static readonly ClassName: string;
-        transform: transform2D;
-        radius: number;
-        start(): void;
-        onPlay(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface Itiming {
-        timeScale?: number;
-        timestamp?: number;
-    }
-    interface IEngine2DOP {
-        constraintIterations?: number;
-        timing?: Itiming;
-        velocityIterations?: number;
-    }
-    class physicEngine2D {
-        matterEngine: any;
-        private engineWorld;
-        private matterVector;
-        constructor(op?: IEngine2DOP);
-        update(delta: number): void;
-        creatRectBodyByInitData(posx: number, posy: number, width: number, height: number, initData: IBodyData): any;
-        creatCircleBodyByInitData(posx: number, posy: number, radius: number, initData: IBodyData): any;
-        addBody(body: Ibody): void;
-        applyForce(body: Ibody, positon: math.vector2, force: math.vector2): void;
-        applyForceAtCenter(body: Ibody, force: math.vector2): void;
-        setGravity(x: number, y: number): void;
-        setVelocity(body: Ibody, velocity: math.vector2): void;
-        setPosition(body: Ibody, pos: math.vector2): void;
-        setMass(body: Ibody, mass: number): void;
-        setDesity(body: Ibody, Desity: number): void;
-        setFrictionAir(body: Ibody, frictionAir: number): void;
-        setFriction(body: Ibody, friction: number): void;
-        setFrictionStatic(body: Ibody, frictionStatic: number): void;
-        setRestitution(body: Ibody, restitution: number): void;
-        setAngularVelocity(body: Ibody, angularVelocity: number): void;
-        private set;
-        addEvent(eventname: string, callback: Function): void;
-        removeEvent(eventname: string, callback: Function): void;
-        removeBody(body: Ibody): void;
-    }
-    interface Ibody {
-        angle: number;
-        position: matterVector;
-        speed: number;
-        type: string;
-        tag: string;
-        name: string;
-        angularVelocity: number;
-        velocity: matterVector;
-        collisionFilter: collisionFilter;
-        applyForce(body: Ibody, positon: matterVector, force: matterVector): void;
-    }
-    interface matterVector {
-        x: number;
-        y: number;
-        create(x: number, y: number): matterVector;
-    }
-    interface collisionFilter {
-        group?: number;
-        category?: number;
-        mask?: number;
-    }
-}
-declare namespace gd3d.framework {
-    class rectBody extends bassBody implements I2DComponent, I2DBody {
-        static readonly ClassName: string;
-        transform: transform2D;
-        start(): void;
-        onPlay(): void;
-        onPointEvent(canvas: canvas, ev: PointEvent, oncap: boolean): void;
-    }
-}
-declare namespace gd3d.framework {
-    class defmaterial {
-        static initDefaultMaterial(assetmgr: assetMgr): void;
-    }
-}
-declare namespace gd3d.framework {
-    class defMesh {
-        static initDefaultMesh(assetmgr: assetMgr): void;
-        private static createDefaultMesh;
-    }
-}
-declare namespace gd3d.framework {
-    class defShader {
-        static shader0: string;
-        static vscode: string;
-        static fscode: string;
-        static fscode2: string;
-        static uishader: string;
-        static fscodeUI: string;
-        static vscodeUI: string;
-        static vscodeMaskUI: string;
-        static fscodeMaskUI: string;
-        static shaderuifront: string;
-        static vscodefontUI: string;
-        static fscodefontUI: string;
-        static vscodeuifontmask: string;
-        static fscodeuifontmask: string;
-        static diffuseShader: string;
-        static vsdiffuse: string;
-        static fsdiffuse: string;
-        static vsline: string;
-        static fsline: string;
-        static materialShader: string;
-        static vsmaterialcolor: string;
-        static initDefaultShader(assetmgr: assetMgr): void;
-    }
-}
-declare namespace gd3d.framework {
-    class defsprite {
-        static initDefaultSprite(assetmgr: assetMgr): void;
-    }
-}
-declare namespace gd3d.framework {
-    class defTexture {
-        static initDefaultTexture(assetmgr: assetMgr): void;
-        private static initDefaultCubeTexture;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Aniclip implements IAssetFactory {
-        newAsset(): animationClip;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: animationClip, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: animationClip, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Atlas implements IAssetFactory {
-        newAsset(): atlas;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: atlas, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: atlas, call: (handle: () => void) => void): void;
-    }
-}
-declare var WebGLTextureUtil: any;
-declare namespace gd3d.framework {
-    class AssetFactory_DDS implements IAssetFactory {
-        newAsset(): texture;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_f14eff implements IAssetFactory {
-        newAsset(): f14eff;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: f14eff, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: f14eff, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Font implements IAssetFactory {
-        newAsset(filename?: string): font;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: font, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: font, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_GLFragmentShader implements IAssetFactory {
-        newAsset(): IAsset;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_GLVertexShader implements IAssetFactory {
-        newAsset(): IAsset;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface IAssetFactory {
-        newAsset(assetName?: string): IAsset;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: IAsset, call: (handle: () => void) => void): void;
-    }
-    class AssetFactoryTools {
-        static catchError(err: Error, onstate: (state: stateLoad) => void, state: stateLoad): boolean;
-        static useAsset(assetMgr: assetMgr, onstate: (state: stateLoad) => void, state: stateLoad, asset: IAsset, url: string): void;
-        static onProgress(loadedLength: number, totalLength: number, onstate: (state: stateLoad) => void, state: stateLoad, filename: string): void;
-        static onRefProgress(loadedLength: number, totalLength: number, onstate: (state: stateLoad) => void, state: stateLoad, filename: string): void;
-    }
-    function getFileName(url: string): string;
-}
-declare namespace gd3d.framework {
-    class assetfactory_keyFrameAniClip implements IAssetFactory {
-        newAsset(): keyFrameAniClip;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: keyFrameAniClip, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: keyFrameAniClip, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Material implements IAssetFactory {
-        newAsset(filename?: string): material;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: material, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: material, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Mesh implements IAssetFactory {
-        newAsset(): mesh;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: mesh, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: mesh, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_PathAsset implements IAssetFactory {
-        newAsset(): pathasset;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: pathasset, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: pathasset, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Prefab implements IAssetFactory {
-        newAsset(): prefab;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: prefab, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: prefab, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_PVR implements IAssetFactory {
-        newAsset(): texture;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Scene implements IAssetFactory {
-        newAsset(): rawscene;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: rawscene, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: rawscene, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Shader implements IAssetFactory {
-        newAsset(): shader;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: shader, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: shader, call: (handle: () => void) => void): void;
-        private TryParseMap;
-        private parseShader;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_TextAsset implements IAssetFactory {
-        newAsset(): textasset;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: textasset, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: textasset, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_Texture implements IAssetFactory {
-        newAsset(): texture;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class AssetFactory_TextureDesc implements IAssetFactory {
-        newAsset(): texture;
-        load(url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-        loadByPack(respack: any, url: string, onstate: (state: stateLoad) => void, state: stateLoad, assetMgr: assetMgr, asset: texture, call: (handle: () => void) => void): void;
-    }
-}
-declare namespace gd3d.framework {
-    class animationClip implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        Parse(buf: ArrayBuffer): threading.gdPromise<any>;
-        fps: number;
-        loop: boolean;
-        readonly time: number;
-        boneCount: number;
-        bones: string[];
-        indexDic: {
-            [boneName: string]: number;
-        };
-        frameCount: number;
-        frames: {
-            [fid: string]: Float32Array;
-        };
-        subclipCount: number;
-        subclips: subClip[];
-    }
-    class PoseBoneMatrix {
-        static readonly ClassName: string;
-        t: math.vector3;
-        r: math.quaternion;
-        static caclByteLength(): number;
-        Clone(): PoseBoneMatrix;
-        load(read: io.binReader): void;
-        static createDefault(): PoseBoneMatrix;
-        copyFrom(src: PoseBoneMatrix): void;
-        copyFromData(src: Float32Array, seek: number): void;
-        invert(): void;
-        lerpInWorld(_tpose: PoseBoneMatrix, from: PoseBoneMatrix, to: PoseBoneMatrix, v: number): void;
-        lerpInWorldWithData(_tpose: PoseBoneMatrix, from: PoseBoneMatrix, todata: Float32Array, toseek: number, v: number): void;
-        static sMultiply(left: PoseBoneMatrix, right: PoseBoneMatrix, target?: PoseBoneMatrix): PoseBoneMatrix;
-        static sMultiplytpose(left: PoseBoneMatrix, right: tPoseInfo, target?: PoseBoneMatrix): PoseBoneMatrix;
-        static sMultiplyDataAndMatrix(leftdata: Float32Array, leftseek: number, right: PoseBoneMatrix, target?: PoseBoneMatrix): PoseBoneMatrix;
-        static sLerp(left: PoseBoneMatrix, right: PoseBoneMatrix, v: number, target?: PoseBoneMatrix): PoseBoneMatrix;
-        private static poolmats;
-        static recycle(mat: PoseBoneMatrix): void;
-        static create(): PoseBoneMatrix;
-    }
-    class subClip {
-        name: string;
-        loop: boolean;
-        startframe: number;
-        endframe: number;
-        static caclByteLength(): number;
-    }
-}
-declare namespace gd3d.framework {
-    class atlas implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        texturewidth: number;
-        textureheight: number;
-        private _texture;
-        texture: texture;
-        sprites: {
-            [id: string]: sprite;
-        };
-        Parse(jsonStr: string, assetmgr: assetMgr): void;
-    }
-}
-declare namespace gd3d.framework {
-    class f14node {
-        trans: transform;
-        f14Effect: f14EffectSystem;
-    }
-    class f14eff implements IAsset {
-        static readonly ClassName: string;
-        defaultAsset: boolean;
-        private name;
-        private id;
-        constructor(assetName?: string);
-        assetbundle: string;
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        data: F14EffectData;
-        delayTime: number;
-        Parse(jsonStr: string, assetmgr: assetMgr): void;
-        getDependents(): IAsset[];
-        private doSearch;
-    }
-}
-declare namespace gd3d.framework {
-    class font implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        private _texture;
-        texture: texture;
-        cmap: {
-            [id: string]: charinfo;
-        };
-        fontname: string;
-        pointSize: number;
-        padding: number;
-        lineHeight: number;
-        baseline: number;
-        atlasWidth: number;
-        atlasHeight: number;
-        Parse(jsonStr: string, assetmgr: assetMgr): void;
-    }
-    class charinfo {
-        x: number;
-        y: number;
-        w: number;
-        h: number;
-        xSize: number;
-        ySize: number;
-        xOffset: number;
-        yOffset: number;
-        xAddvance: number;
-        static caclByteLength(): number;
-    }
-}
-declare namespace gd3d.framework {
-    enum WrapMode {
-        Default = 0,
-        Once = 1,
-        Clamp = 1,
-        Loop = 2,
-        PingPong = 4,
-        ClampForever = 8
-    }
-    class keyFrameAniClip implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        Parse(jsonStr: string): void;
-        private length;
-        readonly wrapMode: WrapMode;
-        _wrapMode: WrapMode;
-        readonly fps: number;
-        private frameRate;
-        readonly time: number;
-        readonly frameCount: number;
-        curves: AnimationCurve[];
-    }
-    class AnimationCurve {
-        path: string;
-        type: string;
-        propertyName: string;
-        keyFrames: keyFrame[];
-    }
-    class keyFrame {
-        inTangent: number;
-        outTangent: number;
-        tangentMode: number;
-        time: number;
-        value: number;
-    }
-}
-declare namespace gd3d.framework {
-    class UniformData {
-        type: render.UniformTypeEnum;
-        value: any;
-        defaultValue: any;
-        resname: string;
-        constructor(type: render.UniformTypeEnum, value: any, defaultValue?: any);
-    }
-    class material implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        dispose(): void;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        caclByteLength(): number;
-        uploadUnifoms(pass: render.glDrawPass, context: renderContext): void;
-        setShader(shader: shader): void;
-        getLayer(): RenderLayerEnum;
-        private queue;
-        getQueue(): number;
-        setQueue(queue: number): void;
-        getShader(): shader;
-        private shader;
-        defaultMapUniform: {
-            [key: string]: {
-                type: render.UniformTypeEnum;
-                value?: any;
-                becolor?: boolean;
-                min?: number;
-                max?: number;
-            };
-        };
-        statedMapUniforms: {
-            [id: string]: any;
-        };
-        setFloat(_id: string, _number: number): void;
-        setFloatv(_id: string, _numbers: Float32Array): void;
-        setVector4(_id: string, _vector4: math.vector4): void;
-        setVector4v(_id: string, _vector4v: Float32Array): void;
-        setMatrix(_id: string, _matrix: math.matrix): void;
-        setMatrixv(_id: string, _matrixv: Float32Array): void;
-        setTexture(_id: string, _texture: gd3d.framework.texture, resname?: string): void;
-        setCubeTexture(_id: string, _texture: gd3d.framework.texture): void;
-        draw(context: renderContext, mesh: mesh, sm: subMeshInfo, basetype?: string, useGLobalLightMap?: boolean): void;
-        Parse(assetmgr: assetMgr, json: any, bundleName?: string): void;
-        clone(): material;
-        save(): string;
-    }
-}
-declare namespace gd3d.framework {
-    class mesh implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        glMesh: gd3d.render.glMesh;
-        updateByEffect: boolean;
-        data: gd3d.render.meshData;
-        submesh: subMeshInfo[];
-        onReadFinish: () => void;
-        private reading;
-        private readProcess;
-        private readFinish;
-        Parse(buf: ArrayBuffer, webgl: WebGLRenderingContext): threading.gdPromise<{}>;
-        intersects(ray: ray, matrix: gd3d.math.matrix, outInfo: pickinfo): boolean;
-        clone(): mesh;
-        private _cacheMinP;
-        private _cacheMaxP;
-        calcVectexMinMax(outMin: math.vector3, outMax: math.vector3): void;
-    }
-    class subMeshInfo {
-        matIndex: number;
-        useVertexIndex: number;
-        line: boolean;
-        start: number;
-        size: number;
-    }
-}
-declare namespace gd3d.framework {
-    class pathasset implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(): void;
-        dispose(): void;
-        caclByteLength(): number;
-        paths: gd3d.math.vector3[];
-        private type;
-        private instertPointcount;
-        private items;
-        Parse(json: JSON): void;
-        private lines;
-        private getpaths;
-        private getBeisaierPointAlongCurve;
-        private vec3Lerp;
-    }
-    enum pathtype {
-        once = 0,
-        loop = 1,
-        pingpong = 2
-    }
-    enum epointtype {
-        VertexPoint = 0,
-        ControlPoint = 1
-    }
-    class pointitem {
-        point: gd3d.math.vector3;
-        type: epointtype;
-    }
-}
-declare namespace gd3d.framework {
-    class prefab implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        assetbundle: string;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        private trans;
-        getCloneTrans(): transform;
-        getCloneTrans2D(): transform2D;
-        apply(trans: transform): void;
-        jsonstr: string;
-        Parse(jsonStr: string, assetmgr: assetMgr): void;
-    }
-}
-declare namespace gd3d.framework {
-    class rawscene implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        fog: Fog;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        assetbundle: string;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        caclByteLength(): number;
-        resetLightMap(assetmgr: assetMgr): void;
-        private lightmapData;
-        Parse(txt: string, assetmgr: assetMgr): void;
-        getSceneRoot(): transform;
-        useLightMap(scene: scene): void;
-        useFog(scene: scene): void;
-        useNavMesh(scene: scene): boolean;
-        dispose(): void;
-        private navMeshJson;
-        private rootNode;
-        private lightmaps;
-    }
-    class Fog {
-        _Start: number;
-        _End: number;
-        _Color: gd3d.math.vector4;
-        _Density: number;
-    }
-}
-declare namespace gd3d.framework {
-    class shader implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        passes: {
-            [id: string]: gd3d.render.glDrawPass[];
-        };
-        defaultMapUniform: {
-            [key: string]: {
-                type: render.UniformTypeEnum;
-                value?: any;
-                becolor?: boolean;
-                min?: number;
-                max?: number;
-            };
-        };
-        layer: RenderLayerEnum;
-        parse(assetmgr: assetMgr, json: any): void;
-        _parseProperties(assetmgr: assetMgr, properties: any): void;
-        private _parsePass;
-        fillUnDefUniform(pass: render.glDrawPass): void;
-    }
-}
-declare namespace gd3d.framework {
-    class sprite implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        caclByteLength(): number;
-        private _texture;
-        texture: texture;
-        atlas: string;
-        rect: math.rect;
-        border: math.border;
-        private _urange;
-        private _vrange;
-        readonly urange: math.vector2;
-        readonly vrange: math.vector2;
-    }
-}
-declare namespace gd3d.framework {
-    class textasset implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(): void;
-        dispose(): void;
-        content: string;
-        caclByteLength(): number;
-    }
-}
-declare namespace gd3d.framework {
-    class texture implements IAsset {
-        static readonly ClassName: string;
-        private name;
-        private id;
-        defaultAsset: boolean;
-        constructor(assetName?: string);
-        getName(): string;
-        getGUID(): number;
-        use(): void;
-        unuse(disposeNow?: boolean): void;
-        dispose(): void;
-        glTexture: gd3d.render.ITexture;
-        caclByteLength(): number;
-        private _realName;
-        realName: string;
-    }
-}
-declare namespace gd3d.framework {
-    class f14EffectSystem implements IRenderer {
-        static readonly ClassName: string;
-        layer: RenderLayerEnum;
-        renderLayer: number;
-        queue: number;
-        start(): void;
-        onPlay(): void;
-        gameObject: gameObject;
-        private fps;
-        data: F14EffectData;
-        layers: F14Layer[];
-        VF: number;
-        webgl: WebGLRenderingContext;
-        private _f14eff;
-        f14eff: f14eff;
-        private _delayTime;
-        delay: number;
-        setData(data: F14EffectData): void;
-        readonly root: transform;
-        _root: transform;
-        private elements;
-        renderBatch: F14Basebatch[];
-        private loopCount;
-        private allTime;
-        private renderActive;
-        beref: boolean;
-        update(deltaTime: number): void;
-        private OnEndOnceLoop;
-        private _renderCamera;
-        readonly renderCamera: camera;
-        mvpMat: math.matrix;
-        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue?: number): void;
-        private totalTime;
-        restartFrame: number;
-        totalFrame: number;
-        private addF14layer;
-        getElementCount(): number;
-        private playRate;
-        enabletimeFlow: boolean;
-        enableDraw: boolean;
-        private onFinish;
-        play(onFinish?: () => void, PlayRate?: number): void;
-        stop(): void;
-        pause(): void;
-        changeColor(newcolor: math.color): void;
-        changeAlpha(newAlpha: number): void;
-        reset(): void;
-        clone(): void;
-        remove(): void;
-    }
-    enum PlayStateEnum {
-        play = 0,
-        beReady = 1,
-        pause = 2
-    }
-}
-declare namespace gd3d.framework {
-    enum F14TypeEnum {
-        SingleMeshType = 0,
-        particlesType = 1,
-        RefType = 2
-    }
-    interface F14Element {
-        type: F14TypeEnum;
-        update(deltaTime: number, frame: number, fps: number): any;
-        dispose(): any;
-        reset(): any;
-        OnEndOnceLoop(): any;
-        changeColor(value: math.color): any;
-        changeAlpha(value: number): any;
-        layer: F14Layer;
-        drawActive: boolean;
-    }
-}
-declare namespace gd3d.framework {
-    class F14Layer {
-        active: boolean;
-        effect: f14EffectSystem;
-        data: F14LayerData;
-        type: F14TypeEnum;
-        frameList: number[];
-        frames: {
-            [index: number]: F14Frame;
-        };
-        Attlines: {
-            [name: string]: F14AttTimeLine;
-        };
-        element: F14Element;
-        batch: F14Basebatch;
-        constructor(effect: f14EffectSystem, data: F14LayerData);
-        addFrame(index: number, framedata: F14FrameData): F14Frame;
-        removeFrame(frame: number): void;
-        dispose(): void;
-    }
-    class F14Frame {
-        layer: F14Layer;
-        data: F14FrameData;
-        attDic: {
-            [name: string]: any;
-        };
-        constructor(layer: F14Layer, data: F14FrameData);
-        setdata(name: string, obj: any): void;
-        removedata(name: string): void;
-        getdata(name: string): any;
-    }
-    class F14AttTimeLine {
-        name: string;
-        lerpFunc: (from: any, to: any, lerp: any, out: any) => void;
-        cloneFunc: (from: any, to: any) => void;
-        constructor(name: string, lerpfunc: (from: any, to: any, lerp: any, out: any) => void, clonefunc: (from: any, to: any) => void);
-        frameList: number[];
-        line: {
-            [index: number]: any;
-        };
-        addNode(frame: number, value: any): void;
-        remove(frame: number): void;
-        getValue(frame: number, basedate: F14SingleMeshBaseData, out: any): void;
-    }
-}
-declare namespace gd3d.framework {
-    class starCamCtr implements INodeComponent {
-        static readonly ClassName: string;
-        moveDuration: number;
-        minSpeed: number;
-        relativelocation: math.vector3;
-        relativeEuler: math.vector3;
-        private relativeRot;
-        private starteCamRot;
-        private targetCamPos;
-        private targetCamRot;
-        private distance;
-        private movedir;
-        private moveSpeed;
-        private eulerSpeed;
-        private active;
-        start(): void;
-        onPlay(): void;
-        private moveDis;
-        update(delta: number): void;
-        gameObject: gameObject;
-        remove(): void;
-        clone(): void;
-        moveTo(to: transform): void;
-    }
-}
-declare namespace gd3d.framework {
-    class EffectSystemData {
-        life: number;
-        beLoop: boolean;
-        elementDic: {
-            [name: string]: EffectElementData;
-        };
-        clone(): EffectSystemData;
-        dispose(): void;
-    }
-    class EffectElement {
-        transform: transform;
-        data: EffectElementData;
-        name: string;
-        timelineFrame: {
-            [frameIndex: number]: EffectFrameData;
-        };
-        ref: string;
-        actions: IEffectAction[];
-        curAttrData: EffectAttrsData;
-        effectBatcher: EffectBatcher;
-        startVboIndex: number;
-        startEboIndex: number;
-        endEboIndex: number;
-        delayTime: number;
-        actionActive: boolean;
-        loopFrame: number;
-        active: boolean;
-        constructor(_data: EffectElementData);
-        private recordElementLerpAttributes;
-        private recordLerpValues;
-        private recordLerp;
-        initActions(): void;
-        update(): void;
-        private updateElementRotation;
-        isCurFrameNeedRefresh(frameIndex: number): boolean;
-        setActive(_active: boolean): void;
-        dispose(): void;
-    }
-    class EffectElementData {
-        name: string;
-        type: EffectElementTypeEnum;
-        timelineFrame: {
-            [frameIndex: number]: EffectFrameData;
-        };
-        refFrom: string;
-        beloop: boolean;
-        delayTime: number;
-        actionData: EffectActionData[];
-        emissionData: Emission;
-        initFrameData: EffectFrameData;
-        clone(): EffectElementData;
-        dispose(): void;
-    }
-    class EffectAttrsData {
-        pos: math.vector3;
-        euler: math.vector3;
-        color: math.vector3;
-        colorRate: number;
-        scale: math.vector3;
-        uv: math.vector2;
-        alpha: number;
-        mat: EffectMatData;
-        renderModel: RenderModel;
-        matrix: math.matrix;
-        tilling: math.vector2;
-        rotationByEuler: math.quaternion;
-        localRotation: math.quaternion;
-        mesh: mesh;
-        meshdataVbo: Float32Array;
-        setLerpAttribute(attribute: string, val: any): void;
-        getAttribute(attribute: string): any;
-        initAttribute(attribute: string): void;
-        resetMatrix(): void;
-        copyandinit(): EffectAttrsData;
-        clone(): EffectAttrsData;
-    }
-    class EffectFrameData {
-        frameIndex: number;
-        attrsData: EffectAttrsData;
-        lerpDatas: EffectLerpData[];
-        delayTime: number;
-        clone(): EffectFrameData;
-        dispose(): void;
-    }
-    class EffectLerpData {
-        type: EffectLerpTypeEnum;
-        fromFrame: number;
-        toFrame: ValueData;
-        attrsData: EffectAttrsData;
-        attrsList: any[];
-        clone(): EffectLerpData;
-    }
-    class EffectActionData {
-        actionType: string;
-        startFrame: number;
-        endFrame: number;
-        params: any;
-        clone(): EffectActionData;
-    }
-    class EffectMatData {
-        shader: shader;
-        diffuseTexture: texture;
-        alphaTexture: texture;
-        alphaCut: number;
-        static beEqual(data0: EffectMatData, data1: EffectMatData): boolean;
-        clone(): EffectMatData;
-    }
-    enum EffectBatcherState {
-        NotInitedStateType = 0,
-        InitedStateType = 1,
-        ResizeCapacityStateType = 2
-    }
-    class EffectBatcher {
-        mesh: mesh;
-        mat: material;
-        state: EffectBatcherState;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        effectElements: EffectElement[];
-        private _totalVertexCount;
-        curTotalVertexCount: number;
-        private _indexStartIndex;
-        indexStartIndex: number;
-        private _vbosize;
-        resizeVboSize(value: number): void;
-        dispose(): void;
-        vertexSize: number;
-        constructor(formate: number);
-    }
-    enum EffectPlayStateEnum {
-        None = 0,
-        BeReady = 1,
-        Play = 2,
-        Pause = 3,
-        Stop = 4,
-        Dispose = 5
-    }
-    enum EffectElementTypeEnum {
-        SingleMeshType = 0,
-        EmissionType = 1,
-        MultiMeshType = 2
-    }
-    enum EffectLerpTypeEnum {
-        Linear = 0
-    }
-    enum RenderModel {
-        None = 0,
-        BillBoard = 1,
-        StretchedBillBoard = 2,
-        HorizontalBillBoard = 3,
-        VerticalBillBoard = 4,
-        Mesh = 5
-    }
-}
-declare namespace gd3d.framework {
-    enum ParticleEmissionType {
-        burst = 0,
-        continue = 1
-    }
-    class EmissionData {
-        type: ParticleEmissionType;
-        emissionName: string;
-        time: number;
-        count: number;
-        constructor();
-    }
-}
-declare namespace gd3d.framework {
-    class Emission {
-        emissionType: ParticleEmissionType;
-        simulateInLocalSpace: boolean;
-        rootpos: gd3d.math.vector3;
-        rootRotAngle: gd3d.math.vector3;
-        rootScale: gd3d.math.vector3;
-        maxEmissionCount: number;
-        emissionCount: number;
-        time: number;
-        moveSpeed: ParticleNode;
-        gravity: number;
-        euler: ParticleNode;
-        eulerNodes: Array<ParticleNode>;
-        eulerSpeed: ParticleNode;
-        scale: ParticleNode;
-        scaleNodes: Array<ParticleNodeNumber>;
-        scaleSpeed: ParticleNode;
-        color: ParticleNode;
-        colorRate: number;
-        colorNodes: Array<ParticleNode>;
-        colorSpeed: ParticleNode;
-        simulationSpeed: ParticleNodeNumber;
-        alpha: ParticleNodeNumber;
-        alphaNodes: Array<ParticleNodeNumber>;
-        alphaSpeed: ParticleNodeNumber;
-        uv: ParticleNodeVec2;
-        uvType: UVTypeEnum;
-        uvRoll: UVRoll;
-        uvSprite: UVSprite;
-        tilling: math.vector2;
-        mat: EffectMatData;
-        life: ValueData;
-        renderModel: RenderModel;
-        mesh: mesh;
-        particleStartData: gd3d.framework.ParticleStartData;
-        private dataForVbo;
-        getVboData(vf: number): Float32Array;
-        clone(): Emission;
-        getworldRotation(): void;
-        cloneParticleNodeArray(_array: Array<ParticleNode>): ParticleNode[];
-        cloneParticleNodeNumberArray(_array: Array<ParticleNodeNumber>): ParticleNodeNumber[];
-    }
-    class UVSprite {
-        row: number;
-        column: number;
-        totalCount: number;
-        clone(): UVSprite;
-    }
-    class UVRoll {
-        uvSpeed: UVSpeedNode;
-        uvSpeedNodes: Array<UVSpeedNode>;
-        clone(): UVRoll;
-    }
-    enum UVTypeEnum {
-        NONE = 0,
-        UVRoll = 1,
-        UVSprite = 2
-    }
-}
-declare namespace gd3d.framework {
-    class ParticleNode {
-        x: ValueData;
-        y: ValueData;
-        z: ValueData;
-        key: number;
-        constructor();
-        getValue(): gd3d.math.vector3;
-        getValueRandom(): gd3d.math.vector3;
-        clone(): ParticleNode;
-    }
-    class AlphaNode {
-        alpha: ValueData;
-        key: number;
-        getValue(): number;
-    }
-    class UVSpeedNode {
-        u: ValueData;
-        v: ValueData;
-        key: number;
-        getValue(): gd3d.math.vector2;
-        getValueRandom(): gd3d.math.vector2;
-        clone(): UVSpeedNode;
-    }
-    class ParticleNodeVec2 {
-        x: ValueData;
-        y: ValueData;
-        key: number;
-        getValue(): gd3d.math.vector2;
-        getValueRandom(): gd3d.math.vector2;
-        clone(): ParticleNodeVec2;
-    }
-    class ParticleNodeNumber {
-        num: ValueData;
-        key: number;
-        getValue(): number;
-        getValueRandom(): number;
-        clone(): ParticleNodeNumber;
-    }
-}
-declare namespace gd3d.framework {
-    enum ParticleSystemShape {
-        NORMAL = 0,
-        BOX = 1,
-        SPHERE = 2,
-        HEMISPHERE = 3,
-        CONE = 4,
-        EDGE = 5,
-        CIRCLE = 6
-    }
-    class ParticleStartData {
-        shapeType: ParticleSystemShape;
-        private _position;
-        position: gd3d.math.vector3;
-        private _direction;
-        direction: gd3d.math.vector3;
-        private _width;
-        width: number;
-        private _height;
-        height: number;
-        depth: number;
-        private _radius;
-        radius: number;
-        private _angle;
-        angle: number;
-        readonly randomDirection: gd3d.math.vector3;
-        readonly boxDirection: gd3d.math.vector3;
-        readonly sphereDirection: gd3d.math.vector3;
-        readonly hemisphereDirection: gd3d.math.vector3;
-        emitFrom: emitfromenum;
-        readonly coneDirection: gd3d.math.vector3;
-        readonly circleDirection: gd3d.math.vector3;
-        readonly edgeDirection: math.vector3;
-        private getposition;
-        clone(): ParticleStartData;
-    }
-    enum emitfromenum {
-        base = 0,
-        volume = 1
-    }
-}
-declare namespace gd3d.framework {
-    class ValueData {
-        isRandom: boolean;
-        private _value;
-        private _valueLimitMin;
-        private _valueLimitMax;
-        private beInited;
-        value: number;
-        valueLimitMin: number;
-        valueLimitMax: number;
-        clone(): ValueData;
-        getValue(): number;
-        getValueRandom(): number;
-        constructor();
-        static RandomRange(min: number, max: number, isInteger?: boolean): number;
-    }
-}
-declare namespace gd3d.framework {
-    interface IAttributeData {
-        uiState: AttributeUIState;
-        data: {
-            [frameIndex: number]: FrameKeyPointData;
-        };
-        frameIndexs: number[];
-        attributeValType: AttributeValType;
-        attributeType: AttributeType;
-        actions: {
-            [frameIndex: number]: IEffectAction[];
-        };
-        init(): any;
-    }
-    class Vector3AttributeData implements IAttributeData, ILerpAttributeInterface {
-        uiState: AttributeUIState;
-        attributeValType: AttributeValType;
-        attributeType: AttributeType;
-        data: {
-            [frameIndex: number]: FrameKeyPointData;
-        };
-        frameIndexs: number[];
-        actions: {
-            [frameIndex: number]: IEffectAction[];
-        };
-        constructor();
-        init(): void;
-        addFramePoint(data: FrameKeyPointData, func?: Function): void;
-        removeFramePoint(frameId: number, data: any, func?: Function): void;
-        updateFramePoint(data: any, func?: Function): void;
-    }
-    class Vector2AttributeData implements IAttributeData, ILerpAttributeInterface {
-        uiState: AttributeUIState;
-        attributeValType: AttributeValType;
-        attributeType: AttributeType;
-        frameIndexs: number[];
-        data: {
-            [frameIndex: number]: FrameKeyPointData;
-        };
-        actions: {
-            [frameIndex: number]: IEffectAction[];
-        };
-        constructor();
-        init(): void;
-        addFramePoint(data: FrameKeyPointData, func?: Function): void;
-        removeFramePoint(frameId: number, data: gd3d.math.vector2, func?: Function): void;
-        updateFramePoint(data: any, func?: Function): void;
-    }
-    class NumberAttributeData implements IAttributeData, ILerpAttributeInterface {
-        uiState: AttributeUIState;
-        attributeValType: AttributeValType;
-        attributeType: AttributeType;
-        data: {
-            [frameIndex: number]: FrameKeyPointData;
-        };
-        frameIndexs: number[];
-        timeLine: {
-            [frameIndex: number]: number;
-        };
-        actions: {
-            [frameIndex: number]: IEffectAction[];
-        };
-        constructor();
-        init(): void;
-        addFramePoint(data: any, func?: Function): void;
-        removeFramePoint(frameId: number, data: number, func?: Function): void;
-        updateFramePoint(data: any, func?: Function): void;
-    }
-    interface ILerpAttributeInterface {
-        addFramePoint(data: any, func?: Function): any;
-        removeFramePoint(frameId: number, data: any, func?: Function): any;
-        updateFramePoint(data: any, func?: Function): any;
-    }
-    enum AttributeUIState {
-        None = 0,
-        Show = 1,
-        Hide = 2
-    }
-    enum AttributeUIType {
-        Number = 0,
-        Vector2 = 1,
-        Vector3 = 2,
-        Vector4 = 3
-    }
-    enum AttributeValType {
-        FixedValType = 0,
-        LerpType = 1
-    }
-    class FrameKeyPointData {
-        frameIndex: number;
-        val: any;
-        actions: IEffectAction[];
-        constructor(frameIndex: number, val: any);
-    }
-    class AttributeUtil {
-        static addFrameIndex(datas: number[], index: number): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface IEffectElement {
-        name: string;
-        elementType: EffectElementTypeEnum;
-        beloop: boolean;
-        delayTime: number;
-        mat: material;
-        mesh: mesh;
-        writeToJson(obj: any): any;
-        dispose(): any;
-    }
-    enum AttributeType {
-        PositionType = 1,
-        EulerType = 2,
-        ScaleType = 3,
-        ColorType = 4,
-        ColorRateType = 5,
-        AlphaType = 6,
-        TillingType = 7
-    }
-    class EffectElementSingleMesh implements IEffectElement {
-        name: string;
-        elementType: gd3d.framework.EffectElementTypeEnum;
-        beloop: boolean;
-        delayTime: number;
-        life: number;
-        mat: gd3d.framework.material;
-        mesh: gd3d.framework.mesh;
-        colorRate: number;
-        renderModel: gd3d.framework.RenderModel;
-        tex_ST: math.vector4;
-        position: Vector3Key[];
-        euler: Vector3Key[];
-        scale: Vector3Key[];
-        color: Vector3Key[];
-        alpha: NumberKey[];
-        actions: IEffectAction[];
-        curAttrData: EffectAttrsData;
-        loopFrame: number;
-        active: boolean;
-        transform: transform;
-        private mgr;
-        private effectSys;
-        rotationByEuler: math.quaternion;
-        localRotation: math.quaternion;
-        constructor(sys: TestEffectSystem, data?: EffectElementData);
-        private initByElementdata;
-        private initByDefData;
-        writeToJson(obj: any): any;
-        update(): void;
-        private updateElementRotation;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class EffectElementEmission implements IEffectElement {
-        webgl: WebGLRenderingContext;
-        gameObject: gameObject;
-        effectSys: TestEffectSystem;
-        active: boolean;
-        vf: number;
-        private maxVertexCount;
-        rotTranslate: gd3d.math.vector3;
-        rotScale: gd3d.math.vector3;
-        rotRotation: gd3d.math.vector3;
-        private rotQuta;
-        name: string;
-        elementType: EffectElementTypeEnum;
-        delayTime: number;
-        beloop: boolean;
-        lifeTime: NumberData;
-        simulateInLocalSpace: boolean;
-        startScale: Vector3Data;
-        startEuler: Vector3Data;
-        startColor: math.color;
-        colorRate: number;
-        duration: NumberData;
-        emissionCount: NumberData;
-        emissionType: ParticleEmissionType;
-        shapeType: ParticleSystemShape;
-        simulationSpeed: NumberData;
-        width: number;
-        height: number;
-        depth: number;
-        radius: number;
-        angle: number;
-        emitFrom: emitfromenum;
-        rendermodel: RenderModel;
-        mat: material;
-        mesh: gd3d.framework.mesh;
-        enableVelocityOverLifetime: boolean;
-        moveSpeed: Vector3Data;
-        enableSizeOverLifetime: boolean;
-        sizeNodes: NumberKey[];
-        enableRotOverLifeTime: boolean;
-        angleSpeed: NumberData;
-        enableColorOverLifetime: boolean;
-        colorNodes: Vector3Key[];
-        alphaNodes: NumberKey[];
-        enableTexAnimation: boolean;
-        uvType: UVTypeEnum;
-        uSpeed: number;
-        vSpeed: number;
-        row: number;
-        column: number;
-        count: number;
-        private _continueSpaceTime;
-        perVertexCount: number;
-        perIndexxCount: number;
-        vertexSize: number;
-        emissionBatchers: EmissionBatcher_new[];
-        private curbatcher;
-        deadParticles: Particle_new[];
-        private curTime;
-        private beBurst;
-        private numcount;
-        private beover;
-        constructor(sys: TestEffectSystem, data?: EffectElementData);
-        private initDefparticleData;
-        private initByEmissonData;
-        private worldRotation;
-        getWorldRotation(): gd3d.math.quaternion;
-        matToObj: gd3d.math.matrix;
-        private matToWorld;
-        getmatrixToObj(): void;
-        getmatrixToWorld(): gd3d.math.matrix;
-        update(delta: number): void;
-        private updateBatcher;
-        private updateLife;
-        private reInit;
-        private updateEmission;
-        private addParticle;
-        private addBatcher;
-        private _renderCamera;
-        readonly renderCamera: camera;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        dispose(): void;
-        vbo: Float32Array;
-        private ebo;
-        private getMesh;
-        cloneMeshVBO(): Float32Array;
-        cloneMeshEBO(): Uint16Array;
-        writeToJson(obj: any): void;
-    }
-}
-declare namespace gd3d.framework {
-    class EmissionBatcher_new {
-        emission: EffectElementEmission;
-        private webgl;
-        mesh: mesh;
-        mat: material;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        particles: Particle_new[];
-        constructor(emissionElement: EffectElementEmission);
-        private initMesh;
-        curVerCount: number;
-        curIndexCount: number;
-        addParticle(): void;
-        private refreshBuffer;
-        update(delta: number): void;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class effTools {
-        static getRandomDirAndPosByZEmission(emission: EffectElementEmission, outDir: gd3d.math.vector3, outPos: gd3d.math.vector3): void;
-        static getTex_ST(emission: EffectElementEmission, out_St: math.vector4): void;
-    }
-}
-declare namespace gd3d.framework {
-    class Particle_new {
-        gameObject: gameObject;
-        private emisson;
-        private batcher;
-        private startScale;
-        startRotation: gd3d.math.quaternion;
-        rotationByShape: math.quaternion;
-        Starteuler: math.vector3;
-        rotAngle: number;
-        eulerSpeed: number;
-        rotationByEuler: math.quaternion;
-        localMatrix: math.matrix;
-        localTranslate: math.vector3;
-        localRotation: math.quaternion;
-        localScale: math.vector3;
-        startColor: math.color;
-        color: math.vector3;
-        alpha: number;
-        tex_ST: math.vector4;
-        private totalLife;
-        private curLife;
-        private life;
-        private speedDir;
-        private movespeed;
-        private simulationSpeed;
-        sourceVbo: Float32Array;
-        vertexStartIndex: number;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        private emissionMatToWorld;
-        private emissionWorldRotation;
-        private sizeNodes;
-        private colorNodes;
-        private alphaNodes;
-        constructor(batcher: EmissionBatcher_new);
-        uploadData(array: Float32Array): void;
-        initByData(): void;
-        actived: boolean;
-        update(delta: number): void;
-        private transformVertex;
-        private _updateLocalMatrix;
-        private matToworld;
-        private refreshEmissionData;
-        private _updateRotation;
-        private _updatePos;
-        private _updateEuler;
-        private _updateScale;
-        private _updateColor;
-        private spriteIndex;
-        private _updateUV;
-        private _updateVBO;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class Curve3 {
-        private _beizerPoints;
-        private _bezierPointNum;
-        beizerPoints: gd3d.math.vector3[];
-        bezierPointNum: number;
-        static CreateLinearBezier(start: gd3d.math.vector3, end: gd3d.math.vector3, indices: number): Curve3;
-        static GetLerpBezier(nodes: gd3d.framework.ParticleNode[]): Curve3;
-        static CreateQuadraticBezier(v0: gd3d.math.vector3, v1: gd3d.math.vector3, v2: gd3d.math.vector3, bezierPointNum: number): Curve3;
-        static CreateCubicBezier(v0: gd3d.math.vector3, v1: gd3d.math.vector3, v2: gd3d.math.vector3, v3: gd3d.math.vector3, bezierPointNum: number): Curve3;
-        constructor(points: gd3d.math.vector3[], nbPoints: number);
-        getPoints(): math.vector3[];
-    }
-}
-declare namespace gd3d.framework {
-    interface IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): any;
-        update(frameIndex: number): any;
-    }
-    class LinearAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        attriname: string;
-        attrival: any;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class DestroyAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class LoopAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class UVRollAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        speedu: number;
-        speedv: number;
-        startu: number;
-        startv: number;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class UVSpriteAnimationAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        fps: number;
-        row: number;
-        colum: number;
-        totalCount: number;
-        private frameInternal;
-        private spriteIndex;
-        private tex_ST;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class RotationAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        velocity: any;
-        frameInternal: number;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class RoseCurveAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        radius: number;
-        polar: any;
-        level: number;
-        frameInternal: number;
-        speed: number;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class TrailAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        radius: number;
-        position: any;
-        eular: any;
-        width: number;
-        frameInternal: number;
-        speed: number;
-        transform: gd3d.framework.transform;
-        startRotation: gd3d.math.quaternion;
-        color: any;
-        alpha: number;
-        offsetTransalte: gd3d.math.vector3;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        update(frameIndex: number): void;
-    }
-    class BreathAction implements IEffectAction {
-        type: string;
-        params: any;
-        startFrame: number;
-        endFrame: number;
-        elements: EffectElement;
-        attriname: string;
-        startvalue: any;
-        targetvalue: any;
-        loopframe: number;
-        halfloopframe: number;
-        init(_startFrame: number, _endFrame: number, _params: any, _elements: EffectElement): void;
-        curTargetFrame: number;
-        update(frameIndex: number): void;
-        swap(): void;
-        getLerpValue(frameIndex: number): any;
-    }
-}
-declare namespace gd3d.framework {
-    class EffectParser {
-        asMgr: assetMgr;
-        Parse(str: string, assetmgr: assetMgr): EffectSystemData;
-        private _parse;
-        private copyAndOverWrite;
-        _parseSingleMeshTypeData(elementData: any, element: EffectElementData): void;
-        _parseEmissionTypeData(elementData: any, element: EffectElementData): void;
-        _parseEmissionShape(_startdata: any, element: EffectElementData): void;
-        _parseToObjData(attrib: string, content: any): any;
-        _parseToParticleNode(content: string): ParticleNode;
-        _parseToValueData(content: string): ValueData;
-        _parseToNumberArray(content: string): number[];
-    }
-}
-declare namespace gd3d.framework {
-    class EffectUtil {
-        static lookatbyXAxis(pos: gd3d.math.vector3, xAxis: gd3d.math.vector3, yAxis: gd3d.math.vector3, zAxis: gd3d.math.vector3, targetpos: gd3d.math.vector3, quat: gd3d.math.quaternion): void;
-        static eulerFromQuaternion(out: math.vector3, q: math.quaternion, order: any): void;
-        static RandomRange(min: number, max: number, isInteger?: boolean): number;
-        static vecMuliNum(vec: gd3d.math.vector3, num: number): gd3d.math.vector3;
-        static parseVector3(value: any): gd3d.math.vector3;
-        static parseEffectVec3(value: any): ParticleNode;
-        static parseEffectVec2(value: any): ParticleNodeVec2;
-        static parseEffectNum(value: any): ParticleNodeNumber;
-        static parseEffectNumNode(value: any): ParticleNodeNumber;
-        static parseEffectValueData(value: any): ValueData;
-        static parseEffectUVSpeed(value: any): UVSpeedNode;
-        static lookat(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, up?: gd3d.math.vector3): void;
-        static RotateVector3(source: gd3d.math.vector3, direction: gd3d.math.vector3, out: gd3d.math.vector3): void;
-        static bindAxisBillboard(localAxis: gd3d.math.vector3, out: gd3d.math.quaternion): void;
-        static lookatVerticalBillboard(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, up?: gd3d.math.vector3): void;
-        static quatLookatZ(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, forward?: gd3d.math.vector3): void;
-        static quatLookatX(eye: gd3d.math.vector3, targetpos: gd3d.math.vector3, out: gd3d.math.quaternion, right?: gd3d.math.vector3): void;
-    }
-}
-declare namespace gd3d.framework {
-    class EmissionBatcher {
-        emissionElement: EmissionElement;
-        private webgl;
-        gameObject: gameObject;
-        data: Emission;
-        mesh: mesh;
-        mat: material;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        particles: Particle[];
-        private vertexSize;
-        vf: number;
-        constructor(emissionElement: EmissionElement);
-        initMesh(): void;
-        curVerCount: number;
-        curIndexCount: number;
-        addParticle(): void;
-        private refreshBuffer;
-        update(delta: number): void;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class Particle {
-        private batcher;
-        gameObject: gameObject;
-        private emisson;
-        private vf;
-        renderModel: RenderModel;
-        private startScale;
-        startRotation: gd3d.math.quaternion;
-        rotationByShape: math.quaternion;
-        euler: math.vector3;
-        rotationByEuler: math.quaternion;
-        localMatrix: math.matrix;
-        localTranslate: math.vector3;
-        localRotation: math.quaternion;
-        localScale: math.vector3;
-        color: math.vector3;
-        colorRate: number;
-        uv: math.vector2;
-        alpha: number;
-        tilling: math.vector2;
-        private totalLife;
-        private curLife;
-        private speedDir;
-        private movespeed;
-        private simulationSpeed;
-        data: Emission;
-        private vertexSize;
-        private vertexCount;
-        sourceVbo: Float32Array;
-        vertexStartIndex: number;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        private emissionMatToWorld;
-        private emissionWorldRotation;
-        constructor(batcher: EmissionBatcher);
-        uploadData(array: Float32Array): void;
-        initByData(): void;
-        actived: boolean;
-        update(delta: number): void;
-        private transformVertex;
-        private _updateLocalMatrix;
-        private matToworld;
-        private refreshEmissionData;
-        private _updateRotation;
-        private _updateElementRotation;
-        private _updatePos;
-        private _updateEuler;
-        private _startNode;
-        private endNode;
-        private _updateScale;
-        private _updateColor;
-        private tempStartNode;
-        private tempEndNode;
-        private _updateNode;
-        private _startNodeNum;
-        private _curNodeNum;
-        private _updateAlpha;
-        private _startUVSpeedNode;
-        private _curUVSpeedNode;
-        private spriteIndex;
-        private _updateUV;
-        private tex_ST;
-        private _updateVBO;
-        dispose(): void;
-    }
-    enum nodeType {
-        none = 0,
-        alpha = 1,
-        scale = 2
-    }
-}
-declare namespace gd3d.framework {
-    class Particles {
-        emissionElements: EmissionElement[];
-        vf: number;
-        effectSys: effectSystem;
-        constructor(sys: effectSystem);
-        addEmission(_emissionNew: EffectElementData): void;
-        updateForEmission(delta: number): void;
-        update(delta: number): void;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        dispose(): void;
-    }
-    class EmissionElement {
-        webgl: WebGLRenderingContext;
-        gameObject: gameObject;
-        effectSys: effectSystem;
-        ParticleMgr: Particles;
-        vf: number;
-        emissionData: Emission;
-        private maxVertexCount;
-        private localtranslate;
-        private localScale;
-        private localrotate;
-        private eluerAngle;
-        private beloop;
-        simulateInLocalSpace: boolean;
-        active: boolean;
-        private _continueSpaceTime;
-        perVertexCount: number;
-        perIndexxCount: number;
-        emissionBatchers: EmissionBatcher[];
-        private curbatcher;
-        deadParticles: Particle[];
-        private curTime;
-        private numcount;
-        private isover;
-        constructor(_emission: EffectElementData, sys: effectSystem, mgr: Particles);
-        private worldRotation;
-        getWorldRotation(): gd3d.math.quaternion;
-        matToBatcher: gd3d.math.matrix;
-        private matToWorld;
-        getmatrixToWorld(): gd3d.math.matrix;
-        update(delta: number): void;
-        private testtime;
-        updateForEmission(delta: number): void;
-        updateBatcher(delta: number): void;
-        updateEmission(delta: number): void;
-        addParticle(count?: number): void;
-        private addBatcher;
-        renderCamera: camera;
-        render(context: renderContext, assetmgr: assetMgr, camera: gd3d.framework.camera): void;
-        dispose(): void;
-        isOver(): boolean;
-    }
-}
-declare namespace gd3d.framework {
-    class F14EffectData {
-        beloop: boolean;
-        lifeTime: number;
-        layers: F14LayerData[];
-        parsejson(json: any, assetmgr: assetMgr, assetbundle: string): void;
-    }
-    class F14LayerData {
-        Name: string;
-        type: F14TypeEnum;
-        elementdata: F14ElementData;
-        frames: {
-            [frame: number]: F14FrameData;
-        };
-        constructor();
-        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
-    }
-    class F14FrameData {
-        frameindex: number;
-        singlemeshAttDic: {
-            [name: string]: any;
-        };
-        EmissionData: F14EmissionBaseData;
-        constructor(index: number, type: F14TypeEnum);
-    }
-}
-declare namespace gd3d.framework {
-    interface F14ElementData {
-        parse(json: any, assetmgr: assetMgr, assetbundle: string): any;
-    }
-}
-declare namespace gd3d.framework {
-    class NumberData {
-        isRandom: boolean;
-        _value: number;
-        _valueLimitMin: number;
-        _valueLimitMax: number;
-        beInited: boolean;
-        key: number;
-        setValue(value: number): void;
-        setRandomValue(max: number, min: number): void;
-        getValue(reRandom?: boolean): number;
-        constructor(value?: number);
-        static copyto(from: NumberData, to: NumberData): void;
-        static FormJson(json: string, data: NumberData): void;
-    }
-    class Vector3Data {
-        x: NumberData;
-        y: NumberData;
-        z: NumberData;
-        constructor(x?: number, y?: number, z?: number);
-        getValue(reRandom?: boolean): math.vector3;
-        static copyto(from: Vector3Data, to: Vector3Data): void;
-        static FormJson(json: string, data: Vector3Data): void;
-    }
-    class NumberKey {
-        key: number;
-        value: number;
-        constructor(_key: number, _value: number);
-    }
-    class Vector3Key {
-        key: number;
-        value: math.vector3;
-        constructor(_key: number, _value: math.vector3);
-    }
-    class Vector2Key {
-        key: number;
-        value: math.vector2;
-        constructor(_key: number, _value: math.vector2);
-    }
-}
-declare namespace gd3d.framework {
-    class F14Emission implements F14Element {
-        type: F14TypeEnum;
-        layer: F14Layer;
-        drawActive: boolean;
-        effect: f14EffectSystem;
-        baseddata: F14EmissionBaseData;
-        currentData: F14EmissionBaseData;
-        particlelist: F14Particle[];
-        deadParticles: F14Particle[];
-        private frameLife;
-        private TotalTime;
-        private newStartDataTime;
-        curTime: number;
-        private beover;
-        private numcount;
-        localMatrix: math.matrix;
-        private _worldMatrix;
-        private localrot;
-        private worldRot;
-        vertexCount: number;
-        vertexLength: number;
-        dataforvboLen: number;
-        dataforebo: Uint16Array;
-        posArr: math.vector3[];
-        colorArr: math.color[];
-        uvArr: math.vector2[];
-        constructor(effect: f14EffectSystem, layer: F14Layer);
-        private lastFrame;
-        update(deltaTime: number, frame: number, fps: number): void;
-        private refreshByFrameData;
-        changeCurrentBaseData(data: F14EmissionBaseData): void;
-        private initBycurrentdata;
-        getWorldMatrix(): math.matrix;
-        getWorldRotation(): math.quaternion;
-        private updateLife;
-        private reInit;
-        private bursts;
-        private updateEmission;
-        private addParticle;
-        reset(): void;
-        changeColor(value: math.color): void;
-        private settedAlpha;
-        changeAlpha(value: number): void;
-        OnEndOnceLoop(): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    enum RenderModelEnum {
-        None = 0,
-        BillBoard = 1,
-        StretchedBillBoard = 2,
-        HorizontalBillBoard = 3,
-        VerticalBillBoard = 4,
-        Mesh = 5
-    }
-    class F14EmissionBaseData implements F14ElementData {
-        loopenum: LoopEnum;
-        mesh: mesh;
-        material: material;
-        rotPosition: math.vector3;
-        rotScale: math.vector3;
-        rotEuler: math.vector3;
-        rendermodel: RenderModelEnum;
-        beloop: boolean;
-        lifeTime: NumberData;
-        simulateInLocalSpace: boolean;
-        startScaleRate: NumberData;
-        startScale: Vector3Data;
-        startEuler: Vector3Data;
-        startColor: Vector3Data;
-        startAlpha: NumberData;
-        colorRate: number;
-        simulationSpeed: NumberData;
-        start_tex_st: math.vector4;
-        delayTime: number;
-        duration: number;
-        rateOverTime: NumberData;
-        bursts: busrtInfo[];
-        shapeType: ParticleSystemShape;
-        width: number;
-        height: number;
-        depth: number;
-        radius: number;
-        angle: number;
-        emitFrom: emitfromenum;
-        enableVelocityOverLifetime: boolean;
-        moveSpeed: Vector3Data;
-        enableSizeOverLifetime: boolean;
-        sizeNodes: NumberKey[];
-        enableRotOverLifeTime: boolean;
-        angleSpeed: NumberData;
-        enableColorOverLifetime: boolean;
-        colorNodes: Vector3Key[];
-        alphaNodes: NumberKey[];
-        enableTexAnimation: boolean;
-        uvType: UVTypeEnum;
-        uSpeed: number;
-        vSpeed: number;
-        row: number;
-        column: number;
-        count: number;
-        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
-        static getRandomDirAndPosByZEmission(emission: F14EmissionBaseData, outDir: gd3d.math.vector3, outPos: gd3d.math.vector3): void;
-    }
-    class busrtInfo {
-        time: number;
-        count: NumberData;
-        private _beburst;
-        beburst(): boolean;
-        burst(bebusrt?: boolean): void;
-        static CreatformJson(json: any): busrtInfo;
-    }
-}
-declare namespace gd3d.framework {
-    class F14EmissionBatch implements F14Basebatch {
-        type: F14TypeEnum;
-        effect: f14EffectSystem;
-        emission: F14Emission;
-        private mesh;
-        private mat;
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        curRealVboCount: number;
-        curVertexcount: number;
-        curIndexCount: number;
-        vertexLength: number;
-        constructor(effect: f14EffectSystem, element: F14Emission);
-        private getMaxParticleCount;
-        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
-        unRender(): void;
-        getElementCount(): number;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class F14Particle {
-        private data;
-        private element;
-        private totalLife;
-        private startScaleRate;
-        private startScale;
-        Starteuler: math.vector3;
-        StartPos: math.vector3;
-        startColor: math.vector3;
-        startAlpha: number;
-        colorRate: number;
-        private simulationSpeed;
-        private simulateInLocalSpace;
-        private starTex_ST;
-        private speedDir;
-        enableVelocityOverLifetime: boolean;
-        private movespeed;
-        enableSizeOverLifetime: boolean;
-        private sizeNodes;
-        enableRotOverLifeTime: boolean;
-        eulerSpeed: number;
-        enableColorOverLifetime: boolean;
-        private colorNodes;
-        private alphaNodes;
-        enableTexAnimation: boolean;
-        uvType: UVTypeEnum;
-        tex_ST: math.vector4;
-        rotationByEuler: math.quaternion;
-        rotationByShape: math.quaternion;
-        startRotation: math.quaternion;
-        rotAngle: number;
-        localMatrix: math.matrix;
-        localTranslate: math.vector3;
-        localRotation: math.quaternion;
-        localScale: math.vector3;
-        color: math.vector3;
-        alpha: number;
-        private Color;
-        private curLife;
-        private life01;
-        actived: boolean;
-        private emissionMatToWorld;
-        private emissionWorldRotation;
-        private getEmissionMatToWorld;
-        private getemissionWorldRotation;
-        constructor(element: F14Emission, data: F14EmissionBaseData);
-        initByEmissionData(data: F14EmissionBaseData): void;
-        update(deltaTime: number): void;
-        private tempos;
-        private temcolor;
-        private temUv;
-        uploadMeshdata(): void;
-        private transformVertex;
-        private updateLocalMatrix;
-        private updatePos;
-        private updateSize;
-        private updateEuler;
-        private angleRot;
-        private worldpos;
-        private tarWorldpos;
-        private worldspeeddir;
-        private lookDir;
-        private temptx;
-        private worldRotation;
-        private invParWorldRot;
-        private worldStartPos;
-        private updateRot;
-        private updateColor;
-        private updateUV;
-        getCurTex_ST(data: F14EmissionBaseData): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class F14RefElementBatch implements F14Basebatch {
-        type: F14TypeEnum;
-        effect: f14EffectSystem;
-        private element;
-        constructor(effect: f14EffectSystem, element: F14RefElement);
-        unRender(): void;
-        getElementCount(): number;
-        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class F14RefBaseData implements F14ElementData {
-        beLoop: boolean;
-        refdataName: string;
-        refData: F14EffectData;
-        localPos: math.vector3;
-        localEuler: math.vector3;
-        localScale: math.vector3;
-        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
-    }
-}
-declare namespace gd3d.framework {
-    class F14RefElement implements F14Element {
-        type: F14TypeEnum;
-        layer: F14Layer;
-        drawActive: boolean;
-        baseddata: F14RefBaseData;
-        startFrame: number;
-        endFrame: number;
-        effect: f14EffectSystem;
-        constructor(effect: f14EffectSystem, layer: F14Layer);
-        RefEffect: f14EffectSystem;
-        reset(): void;
-        private refreshStartEndFrame;
-        update(deltaTime: number, frame: number, fps: number): void;
-        OnEndOnceLoop(): void;
-        changeColor(value: math.color): void;
-        changeAlpha(value: number): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    class F14SingleMesh implements F14Element {
-        drawActive: boolean;
-        type: F14TypeEnum;
-        layer: F14Layer;
-        private effect;
-        RenderBatch: F14SingleMeshBath;
-        position: math.vector3;
-        scale: math.vector3;
-        euler: math.vector3;
-        color: math.color;
-        tex_ST: math.vector4;
-        baseddata: F14SingleMeshBaseData;
-        private localRotate;
-        startFrame: number;
-        endFrame: number;
-        private vertexCount;
-        private posArr;
-        private colorArr;
-        private uvArr;
-        dataforvbo: Float32Array;
-        dataforebo: Uint16Array;
-        constructor(effect: f14EffectSystem, layer: F14Layer);
-        refreshStartEndFrame(): void;
-        update(deltaTime: number, frame: number, fps: number): void;
-        OnEndOnceLoop(): void;
-        targetMat: math.matrix;
-        refreshTargetMatrix(): void;
-        private tempos;
-        private temColor;
-        private temUv;
-        uploadMeshdata(): void;
-        refreshCurTex_ST(curframe: number, detalTime: number, fps: number): void;
-        private eulerRot;
-        private worldpos;
-        private worldRot;
-        private inverseRot;
-        private lookDir;
-        private worldDirx;
-        private worldDiry;
-        updateRotByBillboard(): void;
-        reset(): void;
-        changeColor(value: math.color): void;
-        settedAlpha: number;
-        changeAlpha(value: number): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    interface F14Basebatch {
-        type: F14TypeEnum;
-        effect: f14EffectSystem;
-        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): any;
-        unRender(): any;
-        dispose(): any;
-        getElementCount(): number;
-    }
-    class F14SingleMeshBath implements F14Basebatch {
-        type: F14TypeEnum;
-        effect: f14EffectSystem;
-        ElementMat: gd3d.framework.material;
-        meshlist: F14SingleMesh[];
-        private activemeshlist;
-        private mesh;
-        indices: number[];
-        vertices: math.vector3[];
-        colors: math.color[];
-        uv: math.vector2[];
-        dataForVbo: Float32Array;
-        dataForEbo: Uint16Array;
-        curRealVboCount: number;
-        curVertexcount: number;
-        curIndexCount: number;
-        vertexLength: number;
-        constructor(mat: material, effect: f14EffectSystem);
-        private noBatch;
-        OnEndCollectElement(): void;
-        reInit(mat: material, effect: f14EffectSystem): void;
-        addElement(mesh: F14SingleMesh, insert?: boolean): void;
-        canBatch(mesh: F14SingleMesh): boolean;
-        getElementCount(): number;
-        private mat;
-        private defST;
-        private temptColorv4;
-        private uploadData;
-        render(context: renderContext, assetmgr: assetMgr, camera: camera, Effqueue: number): void;
-        unRender(): void;
-        dispose(): void;
-    }
-}
-declare namespace gd3d.framework {
-    enum LoopEnum {
-        Restart = 0,
-        TimeContinue = 1
-    }
-    enum BindAxis {
-        X = 0,
-        Y = 1,
-        NONE = 2
-    }
-    class F14SingleMeshBaseData implements F14ElementData {
-        loopenum: LoopEnum;
-        mesh: mesh;
-        material: material;
-        position: gd3d.math.vector3;
-        scale: gd3d.math.vector3;
-        euler: gd3d.math.vector3;
-        color: gd3d.math.color;
-        tex_ST: gd3d.math.vector4;
-        enableTexAnimation: boolean;
-        uvType: UVTypeEnum;
-        uSpeed: number;
-        vSpeed: number;
-        row: number;
-        column: number;
-        count: number;
-        beBillboard: boolean;
-        bindAxis: BindAxis;
-        firtstFrame: number;
-        constructor(firstFrame: number);
-        parse(json: any, assetmgr: assetMgr, assetbundle: string): void;
     }
 }

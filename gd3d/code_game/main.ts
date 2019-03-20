@@ -27,6 +27,12 @@ class main implements gd3d.framework.IUserCode
         this.camera.far = 10;
         //opvalue=0 表示是一个正交相机
         this.camera.opvalue=0; 
+
+        objCam.localTranslate.x =0;
+        objCam.localTranslate.y =0;
+        objCam.localTranslate.z =1;
+        objCam.lookatPoint(new gd3d.math.vector3(0,0,0));
+        objCam.markDirty();
         //2dUI root
         this.overlay = new gd3d.framework.overlay2D();
         this.camera.addOverLay(this.overlay);
@@ -51,6 +57,8 @@ class main implements gd3d.framework.IUserCode
     }
     private loadText(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
     {
+        var assetMgr = this.app.getAssetMgr();
+        //assetMgr.loadSingleRes()
         //創建一個貼圖
         this.tex = new gd3d.framework.texture();
         this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
@@ -77,7 +85,7 @@ class main implements gd3d.framework.IUserCode
             wt.updateRectImg( img, 0, 0);
         };
 
-        img.src = "res/zg256.png";
+        img.src = "res/_game/tmx.png";
 
     }
 
@@ -91,11 +99,12 @@ class main implements gd3d.framework.IUserCode
                 cube.name = "cube";
                 cube.localScale.x = cube.localScale.y = cube.localScale.z = 0.5;
                 cube.localTranslate.x = i;
-                cube.localTranslate.z = j;
+                cube.localTranslate.y = j;
+                cube.markDirty();
                 this.app.getScene().addChild(cube);
                 var mesh = cube.gameObject.addComponent("meshFilter") as gd3d.framework.meshFilter;
 
-                var smesh = this.app.getAssetMgr().getDefaultMesh("cube");
+                var smesh = this.app.getAssetMgr().getDefaultMesh("quad");
                 mesh.mesh = (smesh);
                 var renderer = cube.gameObject.addComponent("meshRenderer") as gd3d.framework.meshRenderer;
                 let cuber = renderer;

@@ -20,6 +20,11 @@ var main = (function () {
         this.camera.near = 0.01;
         this.camera.far = 10;
         this.camera.opvalue = 0;
+        objCam.localTranslate.x = 0;
+        objCam.localTranslate.y = 0;
+        objCam.localTranslate.z = 1;
+        objCam.lookatPoint(new gd3d.math.vector3(0, 0, 0));
+        objCam.markDirty();
         this.overlay = new gd3d.framework.overlay2D();
         this.camera.addOverLay(this.overlay);
         this.taskmgr.addTaskCall(this.loadShader.bind(this));
@@ -34,6 +39,7 @@ var main = (function () {
         });
     };
     main.prototype.loadText = function (laststate, state) {
+        var assetMgr = this.app.getAssetMgr();
         this.tex = new gd3d.framework.texture();
         this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
         var wt = this.tex.glTexture;
@@ -52,7 +58,7 @@ var main = (function () {
             state.finish = true;
             wt.updateRectImg(img, 0, 0);
         };
-        img.src = "res/zg256.png";
+        img.src = "res/_game/tmx.png";
     };
     main.prototype.addcube = function (laststate, state) {
         for (var i = -4; i < 5; i++) {
@@ -61,10 +67,11 @@ var main = (function () {
                 cube.name = "cube";
                 cube.localScale.x = cube.localScale.y = cube.localScale.z = 0.5;
                 cube.localTranslate.x = i;
-                cube.localTranslate.z = j;
+                cube.localTranslate.y = j;
+                cube.markDirty();
                 this.app.getScene().addChild(cube);
                 var mesh = cube.gameObject.addComponent("meshFilter");
-                var smesh = this.app.getAssetMgr().getDefaultMesh("cube");
+                var smesh = this.app.getAssetMgr().getDefaultMesh("quad");
                 mesh.mesh = (smesh);
                 var renderer = cube.gameObject.addComponent("meshRenderer");
                 var cuber = renderer;
