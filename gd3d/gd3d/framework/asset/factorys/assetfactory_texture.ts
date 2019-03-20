@@ -12,6 +12,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadImg(url,
                 (_tex, _err, isloadFail) =>
                 {

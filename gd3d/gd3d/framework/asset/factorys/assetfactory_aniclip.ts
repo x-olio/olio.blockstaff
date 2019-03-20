@@ -12,6 +12,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadArrayBuffer(url,
                 (_buffer, err, isloadFail) =>
                 {
@@ -43,6 +47,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             let _buffer = respack[filename];
             let _clip = asset ? asset : new animationClip(filename);
             // _clip.Parse(_buffer);

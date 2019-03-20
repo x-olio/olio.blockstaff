@@ -13,6 +13,10 @@ namespace gd3d.framework
             let name = filename.substring(0, filename.indexOf("."));
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url, (txt, err, isloadFail) =>
             {
                 call(() =>
@@ -43,6 +47,10 @@ namespace gd3d.framework
                 let name = filename.substring(0, filename.indexOf("."));
 
                 state.resstate[filename] = new ResourceState();
+                if(state.resstateFirst==null)
+                {
+                    state.resstateFirst=state.resstate[filename];
+                }
                 let txt = respack[filename];
                 txt = decodeURI(txt);
                 state.resstate[filename].state = 1;//完成

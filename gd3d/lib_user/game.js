@@ -29,6 +29,7 @@ var main = (function () {
         this.camera.addOverLay(this.overlay);
         this.taskmgr.addTaskCall(this.loadShader.bind(this));
         this.taskmgr.addTaskCall(this.loadText.bind(this));
+        this.taskmgr.addTaskCall(this.loadMap.bind(this));
         this.taskmgr.addTaskCall(this.addcube.bind(this));
     };
     main.prototype.loadShader = function (laststate, state) {
@@ -38,27 +39,28 @@ var main = (function () {
             }
         });
     };
-    main.prototype.loadText = function (laststate, state) {
+    main.prototype.loadMap = function (laststate, state) {
+        var _this = this;
         var assetMgr = this.app.getAssetMgr();
-        this.tex = new gd3d.framework.texture();
-        this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
-        var wt = this.tex.glTexture;
-        var da = new Uint8Array(256 * 256 * 4);
-        for (var x = 0; x < 256; x++)
-            for (var y = 0; y < 256; y++) {
-                var seek = y * 256 * 4 + x * 4;
-                da[seek] = 235;
-                da[seek + 1] = 50;
-                da[seek + 2] = 230;
-                da[seek + 3] = 230;
+        assetMgr.load("res/_game/tmx.json", gd3d.framework.AssetTypeEnum.TextAsset, function (s) {
+            if (s.isfinish) {
+                var textasset = s.resstateFirst.res;
+                _this.map = textasset.content;
+                console.log("map=" + _this.map);
+                state.finish = true;
+                return;
             }
-        wt.updateRect(da, 256, 256, 256, 256);
-        var img = new Image();
-        img.onload = function (e) {
-            state.finish = true;
-            wt.updateRectImg(img, 0, 0);
-        };
-        img.src = "res/_game/tmx.png";
+        });
+    };
+    main.prototype.loadText = function (laststate, state) {
+        var _this = this;
+        var assetMgr = this.app.getAssetMgr();
+        assetMgr.load("res/_game/tmx.png", gd3d.framework.AssetTypeEnum.Texture, function (s) {
+            if (s.isfinish) {
+                _this.tex = s.resstateFirst.res;
+                state.finish = true;
+            }
+        });
     };
     main.prototype.addcube = function (laststate, state) {
         for (var i = -4; i < 5; i++) {

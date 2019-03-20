@@ -13,6 +13,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url, (txt, err, isloadFail) =>
             {
                 call(() =>
@@ -46,6 +50,10 @@ namespace gd3d.framework
                 let filename = getFileName(url);
 
                 state.resstate[filename] = new ResourceState();
+                if(state.resstateFirst==null)
+                {
+                    state.resstateFirst=state.resstate[filename];
+                }
                 let txt = respack[filename];
                 let _f14eff = asset ? asset : new f14eff(filename);
                 _f14eff.assetbundle = bundlename;

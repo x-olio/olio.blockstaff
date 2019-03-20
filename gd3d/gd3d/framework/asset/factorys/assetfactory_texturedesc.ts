@@ -12,6 +12,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new RefResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url,
                 (txt, err, isloadFail) =>
                 {
@@ -179,6 +183,10 @@ namespace gd3d.framework
             var _textureSrc: string = url.replace(filename, _name);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             if (_textureSrc.indexOf(".pvr.bin") >= 0)
             {
                 gd3d.io.loadArrayBuffer(_textureSrc,

@@ -1216,6 +1216,7 @@ declare namespace gd3d.framework {
         resstate: {
             [id: string]: ResourceState;
         };
+        resstateFirst: ResourceState;
         curtask: number;
         bundleLoadState: number;
         totaltask: number;

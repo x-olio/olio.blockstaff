@@ -12,6 +12,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url,
                 (text, err, isloadFail) =>
                 {
@@ -39,6 +43,10 @@ namespace gd3d.framework
                 let filename = getFileName(url);
 
                 state.resstate[filename] = new ResourceState();
+                if(state.resstateFirst==null)
+                {
+                    state.resstateFirst=state.resstate[filename];
+                }
                 let _buffer = respack[filename];
                 let _clip = asset ? asset : new keyFrameAniClip(filename);
                 _clip.Parse(_buffer);

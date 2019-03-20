@@ -257,7 +257,7 @@ namespace gd3d.framework
          * @version egret-gd3d 1.0
          */
         resstate: { [id: string]: ResourceState } = {};
-
+        resstateFirst: ResourceState = null;
         /**
          * @public
          * @language zh_CN

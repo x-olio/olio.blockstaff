@@ -12,6 +12,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url,
                 (txt, err, isloadFail) =>
                 {
@@ -41,6 +45,10 @@ namespace gd3d.framework
             let filename = getFileName(url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             let txt = respack[filename];
             let _path = asset ? asset : new pathasset(filename);
             _path.Parse(JSON.parse(txt));

@@ -13,6 +13,10 @@ namespace gd3d.framework
             let assetbundleName = getFileName(state.url);
 
             state.resstate[filename] = new ResourceState();
+            if(state.resstateFirst==null)
+            {
+                state.resstateFirst=state.resstate[filename];
+            }
             gd3d.io.loadText(url,
                 (txt, err, isloadFail) =>
                 {
@@ -42,6 +46,10 @@ namespace gd3d.framework
                 let assetbundleName = getFileName(state.url);
 
                 state.resstate[filename] = new ResourceState();
+                if(state.resstateFirst==null)
+                {
+                    state.resstateFirst=state.resstate[filename];
+                }
                 let txt = respack[filename];
                 let _material = asset ? asset : new material(filename);
                 _material.Parse(assetMgr, JSON.parse(txt), assetbundleName);

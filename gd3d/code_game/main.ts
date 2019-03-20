@@ -40,10 +40,11 @@ class main implements gd3d.framework.IUserCode
                     //任务排队执行系统
         this.taskmgr.addTaskCall(this.loadShader.bind(this));
         this.taskmgr.addTaskCall(this.loadText.bind(this));
+        this.taskmgr.addTaskCall(this.loadMap.bind(this));
         this.taskmgr.addTaskCall(this.addcube.bind(this));
     }        
     tex: gd3d.framework.texture;
-
+    map: string;
     private loadShader(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
     {
         this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
@@ -55,37 +56,65 @@ class main implements gd3d.framework.IUserCode
         }
         );
     }
+    private loadMap(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
+    {
+        var assetMgr = this.app.getAssetMgr();
+        assetMgr.load("res/_game/tmx.json",gd3d.framework.AssetTypeEnum.TextAsset,(s)=>
+        {
+            if(s.isfinish)
+            {
+                    var textasset = s.resstateFirst.res as  gd3d.framework.textasset;
+                    this.map   =textasset.content;
+                    console.log("map="+this.map);
+                    state.finish=true;
+                    return;
+
+            }
+        });
+    }
     private loadText(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
     {
         var assetMgr = this.app.getAssetMgr();
+        assetMgr.load("res/_game/tmx.png",gd3d.framework.AssetTypeEnum.Texture,(s)=>
+        {
+            if(s.isfinish)
+            {
+
+                    this.tex = s.resstateFirst.res as gd3d.framework.texture;
+                    state.finish=true;
+
+                // state.finish=true;
+                // this.tex = this.app.getAssetMgr().getAssetByName("tmx.png") as gd3d.framework.texture;
+            }
+        });
         //assetMgr.loadSingleRes()
         //創建一個貼圖
-        this.tex = new gd3d.framework.texture();
-        this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
-        var wt = this.tex.glTexture as gd3d.render.WriteableTexture2D;
+        // this.tex = new gd3d.framework.texture();
+        // this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
+        // var wt = this.tex.glTexture as gd3d.render.WriteableTexture2D;
 
 
-        //填充貼圖部分數據
-        var da = new Uint8Array(256 * 256 * 4);
-        for (var x = 0; x < 256; x++)
-            for (var y = 0; y < 256; y++)
-            {
-                var seek = y * 256 * 4 + x * 4;
-                da[seek] = 235;
-                da[seek + 1] = 50;
-                da[seek + 2] = 230;
-                da[seek + 3] = 230;
-            }
-        wt.updateRect(da, 256, 256, 256, 256);
+        // //填充貼圖部分數據
+        // var da = new Uint8Array(256 * 256 * 4);
+        // for (var x = 0; x < 256; x++)
+        //     for (var y = 0; y < 256; y++)
+        //     {
+        //         var seek = y * 256 * 4 + x * 4;
+        //         da[seek] = 235;
+        //         da[seek + 1] = 50;
+        //         da[seek + 2] = 230;
+        //         da[seek + 3] = 230;
+        //     }
+        // wt.updateRect(da, 256, 256, 256, 256);
 
-        //用圖片填充貼圖部分數據
-        var img = new Image();
-        img.onload = (e) => {
-            state.finish = true;
-            wt.updateRectImg( img, 0, 0);
-        };
+        // //用圖片填充貼圖部分數據
+        // var img = new Image();
+        // img.onload = (e) => {
+        //     state.finish = true;
+        //     wt.updateRectImg( img, 0, 0);
+        // };
 
-        img.src = "res/_game/tmx.png";
+        // img.src = "res/_game/tmx.png";
 
     }
 
