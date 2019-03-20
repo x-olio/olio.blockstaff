@@ -7,7 +7,7 @@ window.onload = () =>
 
 
     //user code
-    gd3d.jsLoader.instance().addImportScript("lib_user/app.js");
+    gd3d.jsLoader.instance().addImportScript("lib_user/game.js");
 
     document.body.style.msUserSelect = "none";
     document.body.style.webkitUserSelect = "none";
