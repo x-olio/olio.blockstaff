@@ -69,6 +69,18 @@
           "length":0
           },
       {
+          "name":"resources/experiment/color.fs.glsl",
+          "length":0
+          },
+      {
+          "name":"resources/experiment/color.shader.json",
+          "length":0
+          },
+      {
+          "name":"resources/experiment/color.vs.glsl",
+          "length":0
+          },
+      {
           "name":"resources/experiment/fakepbr.fs.glsl",
           "length":0
           },

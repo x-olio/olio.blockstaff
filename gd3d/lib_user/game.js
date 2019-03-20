@@ -19,6 +19,7 @@ var main = (function () {
         this.camera = objCam.gameObject.addComponent("camera");
         this.camera.near = 0.01;
         this.camera.far = 10;
+        this.camera.opvalue = 0;
         this.overlay = new gd3d.framework.overlay2D();
         this.camera.addOverLay(this.overlay);
         this.taskmgr.addTaskCall(this.loadShader.bind(this));
@@ -67,7 +68,7 @@ var main = (function () {
                 mesh.mesh = (smesh);
                 var renderer = cube.gameObject.addComponent("meshRenderer");
                 var cuber = renderer;
-                var sh = this.app.getAssetMgr().getShader("light1.shader.json");
+                var sh = this.app.getAssetMgr().getShader("color.shader.json");
                 if (sh != null) {
                     cuber.materials = [];
                     cuber.materials.push(new gd3d.framework.material());

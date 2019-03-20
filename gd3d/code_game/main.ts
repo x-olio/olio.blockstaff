@@ -25,6 +25,8 @@ class main implements gd3d.framework.IUserCode
         this.camera = objCam.gameObject.addComponent("camera") as gd3d.framework.camera;
         this.camera.near = 0.01;
         this.camera.far = 10;
+        //opvalue=0 表示是一个正交相机
+        this.camera.opvalue=0; 
         //2dUI root
         this.overlay = new gd3d.framework.overlay2D();
         this.camera.addOverLay(this.overlay);
@@ -98,7 +100,7 @@ class main implements gd3d.framework.IUserCode
                 var renderer = cube.gameObject.addComponent("meshRenderer") as gd3d.framework.meshRenderer;
                 let cuber = renderer;
 
-                var sh = this.app.getAssetMgr().getShader("light1.shader.json");
+                var sh = this.app.getAssetMgr().getShader("color.shader.json");
                 if (sh != null)
                 {
                     cuber.materials = [];
