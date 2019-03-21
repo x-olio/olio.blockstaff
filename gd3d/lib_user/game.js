@@ -539,17 +539,18 @@ var Game;
             };
             Map2DSystem.prototype.loadText = function (url) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var promise;
-                    var _this = this;
+                    var tex, wt, promise;
                     return __generator(this, function (_a) {
+                        tex = new gd3d.framework.texture();
+                        tex.glTexture = new gd3d.render.glTexture2D(this.env.app.webgl, gd3d.render.TextureFormatEnum.RGBA, false, false);
+                        wt = tex.glTexture;
                         promise = new Promise(function (__resolve) {
-                            var assetMgr = _this.env.app.getAssetMgr();
-                            assetMgr.load(url, gd3d.framework.AssetTypeEnum.Texture, function (s) {
-                                if (s.isfinish) {
-                                    var tex = s.resstateFirst.res;
-                                    __resolve(tex);
-                                }
-                            });
+                            var img = new Image();
+                            img.onload = function (e) {
+                                wt.uploadImage(img, false, false, false, false, false, false);
+                                __resolve(tex);
+                            };
+                            img.src = "res/_game/tmx.png";
                         });
                         return [2, promise];
                     });

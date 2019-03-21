@@ -109,27 +109,27 @@ namespace Game.System
         }
         private async loadText(url: string): Promise<gd3d.framework.texture>
         {
-            var promise = new Promise<gd3d.framework.texture>((__resolve) =>
-            {
-                var assetMgr = this.env.app.getAssetMgr();
-                assetMgr.load(url, gd3d.framework.AssetTypeEnum.Texture, (s) =>
-                {
-                    if (s.isfinish)
-                    {
+            // var promise = new Promise<gd3d.framework.texture>((__resolve) =>
+            // {
+            //     var assetMgr = this.env.app.getAssetMgr();
+            //     assetMgr.load(url, gd3d.framework.AssetTypeEnum.Texture, (s) =>
+            //     {
+            //         if (s.isfinish)
+            //         {
 
-                        var tex = s.resstateFirst.res as gd3d.framework.texture;
-                        __resolve(tex);
-                        // state.finish=true;
-                        // this.tex = this.app.getAssetMgr().getAssetByName("tmx.png") as gd3d.framework.texture;
-                    }
-                });
-            });
-            return promise;
+            //             var tex = s.resstateFirst.res as gd3d.framework.texture;
+            //             __resolve(tex);
+            //             // state.finish=true;
+            //             // this.tex = this.app.getAssetMgr().getAssetByName("tmx.png") as gd3d.framework.texture;
+            //         }
+            //     });
+            // });
+            // return promise;
             //assetMgr.loadSingleRes()
             //創建一個貼圖
-            // this.tex = new gd3d.framework.texture();
-            // this.tex.glTexture = new gd3d.render.WriteableTexture2D(this.app.webgl, gd3d.render.TextureFormatEnum.RGBA, 512, 512, true);
-            // var wt = this.tex.glTexture as gd3d.render.WriteableTexture2D;
+            var tex = new gd3d.framework.texture();
+            tex.glTexture = new gd3d.render.glTexture2D(this.env.app.webgl, gd3d.render.TextureFormatEnum.RGBA, false, false);
+            var wt = tex.glTexture as gd3d.render.glTexture2D;
 
 
             // //填充貼圖部分數據
@@ -144,16 +144,21 @@ namespace Game.System
             //         da[seek + 3] = 230;
             //     }
             // wt.updateRect(da, 256, 256, 256, 256);
+            var promise = new Promise<gd3d.framework.texture>((__resolve) =>
+            {
+                // //用圖片填充貼圖部分數據
+                var img = new Image();
+                img.onload = (e) =>
+                {
+                    wt.uploadImage(img, false, false, false, false, false, false);
+                    __resolve(tex);
+                    //     state.finish = true;
+                    //     wt.updateRectImg( img, 0, 0);
+                };
 
-            // //用圖片填充貼圖部分數據
-            // var img = new Image();
-            // img.onload = (e) => {
-            //     state.finish = true;
-            //     wt.updateRectImg( img, 0, 0);
-            // };
-
-            // img.src = "res/_game/tmx.png";
-
+                img.src = "res/_game/tmx.png";
+            });
+            return promise;
         }
 
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number): void
