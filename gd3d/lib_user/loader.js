@@ -29,7 +29,7 @@ window.onload = function () {
         }, 50);
         var gdapp = new gd3d.framework.application();
         var div = document.getElementById("drawarea");
-        gdapp.start(div, gd3d.framework.CanvasFixedType.FixedWidthType, 720);
+        gdapp.start(div, gd3d.framework.CanvasFixedType.Free, 720);
         gdapp.bePlay = true;
         gdapp.addUserCode("main");
     }, function (total, left) {
