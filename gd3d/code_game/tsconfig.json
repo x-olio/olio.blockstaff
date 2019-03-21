@@ -8,7 +8,16 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outFile": "../lib_user/game.js",
-    "composite": true
+    "composite": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es6"
+    ]
   },
-  "references": [ {"path": "../gd3d"} ]
+  "references": [
+    {
+      "path": "../gd3d"
+    }
+  ]
 }

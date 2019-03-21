@@ -7,25 +7,24 @@ namespace Game
         env:Environment;
         stateMgr:StateMgr;
 
-        onStart(app: gd3d.framework.application)
+        hadInit=false;
+        async onStart(app: gd3d.framework.application)
         {
             this.env =new Environment(app);
-            this.env.Init();
+            await this.env.Init();
             this.stateMgr =new StateMgr();
             this.stateMgr.Init(this.env);
             this.stateMgr.ChangeState(new State.State_First());
-
-
-
-
-
-  
+            this.hadInit=true;
         }
- 
+        
         onUpdate(delta: number)
         {
-            this.env.Update(delta);
-            this.stateMgr.Update(delta);
+            if(this.hadInit)
+            {
+                this.env.Update(delta);
+                this.stateMgr.Update(delta);
+            }
 
         }
         isClosed(): boolean

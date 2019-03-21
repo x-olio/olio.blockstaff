@@ -6,8 +6,8 @@ namespace Game.State
         statemgr: StateMgr;
 
 
-        static temp:gd3d.framework.transform2D;
-        OnInit(env: Environment, statemgr: StateMgr)
+        static temp: gd3d.framework.transform2D;
+        async OnInit(env: Environment, statemgr: StateMgr)
         {
             this.env = env;
             this.statemgr = statemgr;
@@ -15,14 +15,14 @@ namespace Game.State
             console.log("i am here. FirstState");
 
             //任务排队执行系统
-            this.env.taskmgr.addTaskCall(this.loadTexture.bind(this));
-            this.env.taskmgr.addTaskCall(this.createUI.bind(this));
+            await this.loadTexture();
+            await this.createUI();
         }
 
         OnExit()
         {
-            var childs=this.env.overlay.getChildren();
-            for(var i in childs)
+            var childs = this.env.overlay.getChildren();
+            for (var i in childs)
             {
                 this.env.overlay.removeChild(childs[i]);
             }
@@ -40,7 +40,7 @@ namespace Game.State
 
         }
 
-        private createUI(astState: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
+        private async createUI(): Promise<void>
         {
             let atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json") as gd3d.framework.atlas;
             let tex_0 = this.env.assetMgr.getAssetByName("zg03_256.png") as gd3d.framework.texture;
@@ -237,41 +237,46 @@ namespace Game.State
 
 
 
-            state.finish = true;
+            return;
         }
 
-        private loadTexture(lastState: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
+        private async loadTexture(): Promise<void>
         {
-            //加载图片资源
-            this.env.assetMgr.load("res/comp/comp.json.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+            //手写promise 方法
+            var promise = new Promise<void>((__resolve) =>
             {
-                if (s.isfinish)
+                //加载图片资源
+                this.env.assetMgr.load("res/comp/comp.json.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
                 {
-                    this.env.assetMgr.load("res/comp/comp.atlas.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+                    if (s.isfinish)
                     {
-                        if (s.isfinish)
+                        this.env.assetMgr.load("res/comp/comp.atlas.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
                         {
-                            //加载字体资源
-                            this.env.assetMgr.load("res/STXINGKA.TTF.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+                            if (s.isfinish)
                             {
-                                if (s.isfinish)
+                                //加载字体资源
+                                this.env.assetMgr.load("res/STXINGKA.TTF.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
                                 {
-                                    this.env.assetMgr.load("res/resources/STXINGKA.font.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+                                    if (s.isfinish)
                                     {
-                                        this.env.assetMgr.load("res/zg03_256.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+                                        this.env.assetMgr.load("res/resources/STXINGKA.font.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
                                         {
-                                            if (s.isfinish)
+                                            this.env.assetMgr.load("res/zg03_256.png", gd3d.framework.AssetTypeEnum.Auto, (s) =>
                                             {
-                                                state.finish = true;
-                                            }
+                                                if (s.isfinish)
+                                                {
+                                                    __resolve();
+                                                }
+                                            });
                                         });
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             });
+            return promise;
         }
 
 
