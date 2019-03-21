@@ -15,7 +15,11 @@
             "tsconfig": "gd3d\\code_game\\tsconfig.json",
             "problemMatcher": [
                 "$tsc"
-            ]
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
