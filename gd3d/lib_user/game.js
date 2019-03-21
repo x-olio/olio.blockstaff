@@ -60,9 +60,11 @@ var Game;
                             this.camera.near = 0.01;
                             this.camera.far = 10;
                             this.camera.opvalue = 0;
+                            this.camera.size = 30;
+                            this.camera.getPosAtXPanelInViewCoordinateByScreenPos;
                             objCam.localTranslate.x = 0;
                             objCam.localTranslate.y = 0;
-                            objCam.localTranslate.z = 1;
+                            objCam.localTranslate.z = -1;
                             objCam.lookatPoint(new gd3d.math.vector3(0, 0, 0));
                             objCam.markDirty();
                             this.overlay = new gd3d.framework.overlay2D();
@@ -454,6 +456,31 @@ var Game;
 (function (Game) {
     var System;
     (function (System) {
+        var TmxLayer = (function () {
+            function TmxLayer() {
+            }
+            return TmxLayer;
+        }());
+        var TmxProperty = (function () {
+            function TmxProperty() {
+            }
+            return TmxProperty;
+        }());
+        var TmxTile = (function () {
+            function TmxTile() {
+            }
+            return TmxTile;
+        }());
+        var TmxTileSet = (function () {
+            function TmxTileSet() {
+            }
+            return TmxTileSet;
+        }());
+        var TmxStruct = (function () {
+            function TmxStruct() {
+            }
+            return TmxStruct;
+        }());
         var Map2DSystem = (function () {
             function Map2DSystem() {
             }
@@ -472,11 +499,11 @@ var Game;
                         switch (_c.label) {
                             case 0:
                                 _a = this;
-                                return [4, this.loadText()];
+                                return [4, this.loadText(urlImgForTmx)];
                             case 1:
                                 _a.tex = _c.sent();
                                 _b = this;
-                                return [4, this.loadMap()];
+                                return [4, this.loadMap(urlJsonTMX)];
                             case 2:
                                 _b.map = _c.sent();
                                 return [4, this.addcube()];
@@ -489,19 +516,19 @@ var Game;
             };
             Map2DSystem.prototype.Close = function () {
             };
-            Map2DSystem.prototype.loadMap = function () {
+            Map2DSystem.prototype.loadMap = function (url) {
                 return __awaiter(this, void 0, void 0, function () {
                     var promise;
                     var _this = this;
                     return __generator(this, function (_a) {
                         promise = new Promise(function (__resolve) {
                             var assetMgr = _this.env.app.getAssetMgr();
-                            assetMgr.load("res/_game/tmx.json", gd3d.framework.AssetTypeEnum.TextAsset, function (s) {
+                            assetMgr.load(url, gd3d.framework.AssetTypeEnum.TextAsset, function (s) {
                                 if (s.isfinish) {
                                     var textasset = s.resstateFirst.res;
-                                    var map = textasset.content;
-                                    console.log("map=" + map);
-                                    __resolve(map);
+                                    var maptxt = textasset.content;
+                                    var mapobj = JSON.parse(maptxt);
+                                    __resolve(mapobj);
                                     return;
                                 }
                             });
@@ -510,14 +537,14 @@ var Game;
                     });
                 });
             };
-            Map2DSystem.prototype.loadText = function () {
+            Map2DSystem.prototype.loadText = function (url) {
                 return __awaiter(this, void 0, void 0, function () {
                     var promise;
                     var _this = this;
                     return __generator(this, function (_a) {
                         promise = new Promise(function (__resolve) {
                             var assetMgr = _this.env.app.getAssetMgr();
-                            assetMgr.load("res/_game/tmx.png", gd3d.framework.AssetTypeEnum.Texture, function (s) {
+                            assetMgr.load(url, gd3d.framework.AssetTypeEnum.Texture, function (s) {
                                 if (s.isfinish) {
                                     var tex = s.resstateFirst.res;
                                     __resolve(tex);
@@ -528,31 +555,46 @@ var Game;
                     });
                 });
             };
+            Map2DSystem.prototype._addQuad = function (x, y, tileX, tileY, tileWidth, tileHeight) {
+                var cube = new gd3d.framework.transform();
+                cube.name = "cube";
+                cube.localScale.x = cube.localScale.y = cube.localScale.z = 1;
+                cube.localTranslate.x = x;
+                cube.localTranslate.y = y;
+                cube.markDirty();
+                this.env.app.getScene().addChild(cube);
+                var mesh = cube.gameObject.addComponent("meshFilter");
+                var smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
+                mesh.mesh = (smesh);
+                var renderer = cube.gameObject.addComponent("meshRenderer");
+                var cuber = renderer;
+                var sh = this.env.app.getAssetMgr().getShader("color.shader.json");
+                if (sh != null) {
+                    cuber.materials = [];
+                    cuber.materials.push(new gd3d.framework.material());
+                    cuber.materials[0].setShader(sh);
+                    cuber.materials[0].setTexture("_MainTex", this.tex);
+                    cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
+                }
+            };
             Map2DSystem.prototype.addcube = function () {
                 return __awaiter(this, void 0, void 0, function () {
-                    var i, j, cube, mesh, smesh, renderer, cuber, sh;
+                    var tileset, i, layer, y, x, id, tileWidth, tileHeight, tileX, tileY;
                     return __generator(this, function (_a) {
-                        for (i = -4; i < 5; i++) {
-                            for (j = -4; j < 5; j++) {
-                                cube = new gd3d.framework.transform();
-                                cube.name = "cube";
-                                cube.localScale.x = cube.localScale.y = cube.localScale.z = 1;
-                                cube.localTranslate.x = i;
-                                cube.localTranslate.y = j;
-                                cube.markDirty();
-                                this.env.app.getScene().addChild(cube);
-                                mesh = cube.gameObject.addComponent("meshFilter");
-                                smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
-                                mesh.mesh = (smesh);
-                                renderer = cube.gameObject.addComponent("meshRenderer");
-                                cuber = renderer;
-                                sh = this.env.app.getAssetMgr().getShader("color.shader.json");
-                                if (sh != null) {
-                                    cuber.materials = [];
-                                    cuber.materials.push(new gd3d.framework.material());
-                                    cuber.materials[0].setShader(sh);
-                                    cuber.materials[0].setTexture("_MainTex", this.tex);
-                                    cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(1 / 4, 1 / 4, 1 / 2, 1 / 2));
+                        tileset = this.map.tilesets[0];
+                        for (i = 0; i < this.map.layers.length; i++) {
+                            layer = this.map.layers[i];
+                            for (y = 0; y < this.map.height; y++) {
+                                for (x = 0; x < this.map.width; x++) {
+                                    id = layer.data[y * layer.width + x];
+                                    if (id == 0)
+                                        continue;
+                                    tileWidth = (tileset.tileheight / tileset.imageheight);
+                                    tileHeight = (tileset.tileheight / tileset.imageheight);
+                                    tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
+                                    tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
+                                    tileY = 1.0 - tileY - tileHeight;
+                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
                                 }
                             }
                         }

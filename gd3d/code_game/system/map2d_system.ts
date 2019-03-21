@@ -1,5 +1,62 @@
 namespace Game.System
 {
+    class TmxLayer
+    {
+        data: number[];
+        height: number;
+        id: number;
+        name: string
+        opacity: number;
+        properties: TmxProperty[];
+        type: string;
+        visible: boolean;
+        width: number;
+        x: number;
+        y: number;
+    }
+    class TmxProperty
+    {
+        name: string;
+        type: string;
+        value: string;
+    }
+    class TmxTile
+    {
+        id: number;
+        properties: TmxProperty[];
+    }
+    class TmxTileSet
+    {
+        columns: number;
+        firstgid: number;
+        image: string;
+        imageheight: number;
+        imagewidth: number;
+        margin: number;
+        name: string;
+        spacing: number;
+        tilecount: number;
+        tileheight: number;
+        tiles: TmxTile[];
+        tilewidth: number;
+    }
+    class TmxStruct
+    {
+        height: number;
+        infinite: boolean;
+        layers: TmxLayer[];
+        nextlayerid: number;
+        nextobjectid: number;
+        orientation: string;
+        renderorder: string;
+        tiledversion: string;
+        tileheight: number;
+        tilesets: TmxTileSet[];
+        tilewidth: number;
+        type: string;
+        version: number;
+        width: number;
+    }
     export class Map2DSystem
     {
         env: Environment;
@@ -18,8 +75,8 @@ namespace Game.System
         async LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>
         {
             //任务排队执行系统
-            this.tex = await this.loadText();
-            this.map = await this.loadMap();
+            this.tex = await this.loadText(urlImgForTmx);
+            this.map = await this.loadMap(urlJsonTMX);
             await this.addcube();
 
         }
@@ -28,22 +85,21 @@ namespace Game.System
 
         }
         tex: gd3d.framework.texture;
-        map: string;
+        map: TmxStruct;
 
-        private async loadMap(): Promise<string> 
+        private async loadMap(url: string): Promise<TmxStruct> 
         {
-            var promise = new Promise<string>((__resolve) =>
+            var promise = new Promise<TmxStruct>((__resolve) =>
             {
                 var assetMgr = this.env.app.getAssetMgr();
-                assetMgr.load("res/_game/tmx.json", gd3d.framework.AssetTypeEnum.TextAsset, (s) =>
+                assetMgr.load(url, gd3d.framework.AssetTypeEnum.TextAsset, (s) =>
                 {
                     if (s.isfinish)
                     {
                         var textasset = s.resstateFirst.res as gd3d.framework.textasset;
-                        var map = textasset.content;
-                        console.log("map=" + map);
-
-                        __resolve(map);
+                        var maptxt = textasset.content;
+                        var mapobj = JSON.parse(maptxt) as TmxStruct;
+                        __resolve(mapobj);
                         return;
 
                     }
@@ -51,12 +107,12 @@ namespace Game.System
             });
             return promise;
         }
-        private async loadText(): Promise<gd3d.framework.texture>
+        private async loadText(url: string): Promise<gd3d.framework.texture>
         {
             var promise = new Promise<gd3d.framework.texture>((__resolve) =>
             {
                 var assetMgr = this.env.app.getAssetMgr();
-                assetMgr.load("res/_game/tmx.png", gd3d.framework.AssetTypeEnum.Texture, (s) =>
+                assetMgr.load(url, gd3d.framework.AssetTypeEnum.Texture, (s) =>
                 {
                     if (s.isfinish)
                     {
@@ -100,41 +156,62 @@ namespace Game.System
 
         }
 
+        _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number): void
+        {
+            var cube = new gd3d.framework.transform();
+            cube.name = "cube";
+            cube.localScale.x = cube.localScale.y = cube.localScale.z = 1
+            cube.localTranslate.x = x;
+            cube.localTranslate.y = y;
+            cube.markDirty();
+            this.env.app.getScene().addChild(cube);
+            var mesh = cube.gameObject.addComponent("meshFilter") as gd3d.framework.meshFilter;
+
+            var smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
+            mesh.mesh = (smesh);
+            var renderer = cube.gameObject.addComponent("meshRenderer") as gd3d.framework.meshRenderer;
+            let cuber = renderer;
+
+            var sh = this.env.app.getAssetMgr().getShader("color.shader.json");
+            if (sh != null)
+            {
+                cuber.materials = [];
+                cuber.materials.push(new gd3d.framework.material());
+                cuber.materials[0].setShader(sh);//----------------使用shader
+                //cuber.materials[0].setVector4("_Color", new gd3d.math.vector4(0.4, 0.4, 0.2, 1.0));
+
+                //let texture = this.app.getAssetMgr().getAssetByName("zg256.png") as gd3d.framework.texture;
+                cuber.materials[0].setTexture("_MainTex", this.tex);
+                cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
+            }
+
+        }
         private async addcube(): Promise<void>
         {
-            for (var i = -4; i < 5; i++)
+            var tileset = this.map.tilesets[0];
+
+            for (var i = 0; i < this.map.layers.length; i++)
             {
-                for (var j = -4; j < 5; j++)
+                var layer = this.map.layers[i];
+                for (var y = 0; y < this.map.height; y++)
                 {
-                    var cube = new gd3d.framework.transform();
-                    cube.name = "cube";
-                    cube.localScale.x = cube.localScale.y = cube.localScale.z = 1
-                    cube.localTranslate.x = i;
-                    cube.localTranslate.y = j;
-                    cube.markDirty();
-                    this.env.app.getScene().addChild(cube);
-                    var mesh = cube.gameObject.addComponent("meshFilter") as gd3d.framework.meshFilter;
-
-                    var smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
-                    mesh.mesh = (smesh);
-                    var renderer = cube.gameObject.addComponent("meshRenderer") as gd3d.framework.meshRenderer;
-                    let cuber = renderer;
-
-                    var sh = this.env.app.getAssetMgr().getShader("color.shader.json");
-                    if (sh != null)
+                    for (var x = 0; x < this.map.width; x++)
                     {
-                        cuber.materials = [];
-                        cuber.materials.push(new gd3d.framework.material());
-                        cuber.materials[0].setShader(sh);//----------------使用shader
-                        //cuber.materials[0].setVector4("_Color", new gd3d.math.vector4(0.4, 0.4, 0.2, 1.0));
+                        var id = layer.data[y * layer.width + x];
+                        if (id == 0) continue;
+                        var tileWidth = (tileset.tileheight / tileset.imageheight);
+                        var tileHeight = (tileset.tileheight / tileset.imageheight);
+                        var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
+                        var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
+                        tileY = 1.0 - tileY - tileHeight;
 
-                        //let texture = this.app.getAssetMgr().getAssetByName("zg256.png") as gd3d.framework.texture;
-                        cuber.materials[0].setTexture("_MainTex", this.tex);
-                        cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(1 / 4, 1 / 4, 1 / 2, 1 / 2));
+
+                        this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
+
                     }
-
                 }
             }
+
             return;
         }
     }

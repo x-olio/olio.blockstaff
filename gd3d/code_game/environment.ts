@@ -28,10 +28,11 @@ namespace Game
             this.camera.far = 10;
             //opvalue=0 表示是一个正交相机
             this.camera.opvalue = 0;
-
+            this.camera.size = 30;
+            this.camera.getPosAtXPanelInViewCoordinateByScreenPos
             objCam.localTranslate.x = 0;
             objCam.localTranslate.y = 0;
-            objCam.localTranslate.z = 1;
+            objCam.localTranslate.z = -1;
             objCam.lookatPoint(new gd3d.math.vector3(0, 0, 0));
             objCam.markDirty();
             //2dUI root
