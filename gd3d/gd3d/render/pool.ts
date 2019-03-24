@@ -1,4 +1,3 @@
-///<reference path="struct.ts"/>
 namespace gd3d.math
 {
     /**

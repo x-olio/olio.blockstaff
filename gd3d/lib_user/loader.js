@@ -1,7 +1,13 @@
 window.onload = function () {
+    let runEngineDemo = false; 
+
     gd3d.jsLoader.instance().addImportScript("lib/Reflect.js");
     gd3d.jsLoader.instance().addImportScript("lib/gd3d.js");
-    gd3d.jsLoader.instance().addImportScript("lib_user/game.js");
+    if(runEngineDemo){
+        gd3d.jsLoader.instance().addImportScript("lib_user/app.js");
+    }else{
+        gd3d.jsLoader.instance().addImportScript("lib_user/game.js");
+    }
     document.body.style.msUserSelect = "none";
     document.body.style.webkitUserSelect = "none";
     var divLoading = document.createElement("div");
@@ -29,7 +35,11 @@ window.onload = function () {
         }, 50);
         var gdapp = new gd3d.framework.application();
         var div = document.getElementById("drawarea");
-        gdapp.start(div, gd3d.framework.CanvasFixedType.FixedWidthType, 720);
+        if(runEngineDemo){
+            gdapp.start(div);
+        }else{
+            gdapp.start(div, gd3d.framework.CanvasFixedType.FixedWidthType, 720);
+        }
         gdapp.bePlay = true;
         gdapp.addUserCode("main");
     }, function (total, left) {

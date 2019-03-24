@@ -24,17 +24,28 @@ namespace demo
 
         private loadLongPrefab(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
         {
-            this.app.getAssetMgr().load("res/prefabs/long/long.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
+            let resName = "long"
+            this.app.getAssetMgr().load(`res/prefabs/${resName}/${resName}.assetbundle.json`, gd3d.framework.AssetTypeEnum.Auto, (s) =>
             {
                 if (s.isfinish)
                 {
-                    var _prefab: gd3d.framework.prefab = this.app.getAssetMgr().getAssetByName("long.prefab.json") as gd3d.framework.prefab;
+                    var _prefab: gd3d.framework.prefab = this.app.getAssetMgr().getAssetByName(`${resName}.prefab.json`) as gd3d.framework.prefab;
                     this.dragon = _prefab.getCloneTrans();
                     this.scene.addChild(this.dragon);
                     this.dragon.markDirty();
-
                     this.camTran = this.dragon.find("Dummy001");
-
+                    let ap =  this.dragon.gameObject.getComponent("aniplayer") as gd3d.framework.aniplayer;
+                    let list = ap.awaitLoadClipNames();
+                    let resPath = `res/prefabs/${resName}/resources/`;
+                    if(list.length >0 ){
+                        let cname = list[0];
+                        ap.addClipByNameLoad(this.app.getAssetMgr(),resPath,cname,(sta,clipName)=>{
+                            if(sta.isfinish){
+                                let clip = ap.getClip(cname);
+                                ap.play(cname);
+                            }
+                        });
+                    }
                     state.finish = true;
                 }
             });

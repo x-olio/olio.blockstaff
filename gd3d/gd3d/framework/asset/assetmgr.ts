@@ -168,29 +168,7 @@ namespace gd3d.framework
          */
         DDS
     }
-
-    /**
-     * @public
-     * @language zh_CN
-     * @classdesc
-     * assetbundle加载的详细状态
-     * @version egret-gd3d 1.0
-     */
-    export enum AssetBundleLoadState
-    {
-        None = 0x00000000,
-        Shader = 0x00000001,
-        Mesh = 0x00000002,
-        Texture = 0x00000004,
-        Material = 0x00000008,
-        Anclip = 0x00000010,
-        Prefab = 0x00000020,
-        Scene = 0x00000040,
-        Textasset = 0x00000080,
-        Pvr = 0x00000100,
-        f14eff = 0x00000200,
-        Dds = 0x00000400,
-    }
+    
     /**
      * @public
      * @language zh_CN
@@ -257,6 +235,13 @@ namespace gd3d.framework
          * @version egret-gd3d 1.0
          */
         resstate: { [id: string]: ResourceState } = {};
+
+        /**
+         * @public
+         * @language zh_CN
+         * 记录加载的第一个的状态和资源引用
+         * @version egret-gd3d 1.0
+         */
         resstateFirst: ResourceState = null;
         /**
          * @public
@@ -265,14 +250,6 @@ namespace gd3d.framework
          * @version egret-gd3d 1.0
          */
         curtask: number = 0;
-
-        /**
-         * @public
-         * @language zh_CN
-         * 加载状态
-         * @version egret-gd3d 1.0
-         */
-        bundleLoadState: number = 0;
         /**
          * @public
          * @language zh_CN

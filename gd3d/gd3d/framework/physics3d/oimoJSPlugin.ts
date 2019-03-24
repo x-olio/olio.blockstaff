@@ -384,7 +384,7 @@ namespace gd3d.framework
             // }
         }
 
-        public setPhysicsBodyTransformation(impostor: PhysicsImpostor, newPosition: math.vector3, newRotation: math.vector3) {
+        public setPhysicsBodyTransformation(impostor: PhysicsImpostor, newPosition: math.vector3, newRotation: math.quaternion) {
             impostor.physicsBody.position.copy(newPosition);
             impostor.physicsBody.quaternion.copy(newRotation);
             impostor.physicsBody.syncShapes();

@@ -161,7 +161,6 @@ namespace gd3d.framework
             }
             this.assetmgr.removeAssetBundle(this.name);
         }
-        private curLoadState: AssetBundleLoadState;
         /**
          * @public
          * @language zh_CN
@@ -177,7 +176,6 @@ namespace gd3d.framework
 
             let total = this.files.length;
             this.assetmgr = assetmgr;
-            this.curLoadState = AssetBundleLoadState.None;
 
             let glvshaders: { url: string, type: AssetTypeEnum, asset: IAsset }[] = [];
             let glfshaders: { url: string, type: AssetTypeEnum, asset: IAsset }[] = [];
@@ -200,17 +198,11 @@ namespace gd3d.framework
 
 
             let asslist: any[] = [];
-            let assstatelist: any[] = [];
 
             //这里定义了加载顺序
             asslist.push(packs, glvshaders, glfshaders, shaders, textassets, meshs,
                 textures, pvrs, ddss, texturedescs, fonts, atlass,
                 materials, anclips, kfaniclips, f14effs, prefabs, scenes);
-
-            assstatelist.push(AssetBundleLoadState.None, AssetBundleLoadState.None, AssetBundleLoadState.None,
-                AssetBundleLoadState.Shader, AssetBundleLoadState.Prefab, AssetBundleLoadState.Mesh,
-                AssetBundleLoadState.Material, AssetBundleLoadState.Scene, AssetBundleLoadState.None,
-                AssetBundleLoadState.Texture, AssetBundleLoadState.Anclip, AssetBundleLoadState.Textasset, AssetBundleLoadState.Pvr, AssetBundleLoadState.f14eff, AssetBundleLoadState.Dds);
 
             let mapPackes: { [id: string]: number } = {};
 
@@ -318,7 +310,7 @@ namespace gd3d.framework
                 }
             }
 
-            let list: { url: string, type: AssetTypeEnum, asset: IAsset, state: AssetBundleLoadState, handle: () => void }[] = [];
+            let list: { url: string, type: AssetTypeEnum, asset: IAsset, handle: () => void }[] = [];
             let handles = {};
 
             for (let i = 0, len = asslist.length; i < len; ++i)
@@ -326,16 +318,12 @@ namespace gd3d.framework
                 for (let j = 0, clen = asslist[i].length; j < clen; ++j)
                 {
                     let item = asslist[i][j];
-                    let state = null;
-                    if (j == item.length - 1)
-                        state = assstatelist[i];
                     handles[item.url] = list.length;
-                    list.push({ url: item.url, type: item.type, asset: item.asset, state: state, handle: undefined });
+                    list.push({ url: item.url, type: item.type, asset: item.asset, handle: undefined });
                 }
             }
 
 
-            state.bundleLoadState = AssetBundleLoadState.None;
             let packlist = [];
             let haveBin = false;
             let tempMap = {};
@@ -345,10 +333,9 @@ namespace gd3d.framework
                 let type = item.type;
                 let asset = item.asset;
                 tempMap[surl] = 1;
-                let loadstate = item.state;
                 if (mapPackes[surl] != undefined)
                 {
-                    packlist.push({ surl, type, asset, loadstate });
+                    packlist.push({ surl, type, asset });
                     delete tempMap[surl];
                     if (this.mapIsNull(tempMap))
                         this.downloadFinsih(state, list, haveBin, onstate, packlist, mapPackes, assetmgr, handles);
@@ -388,8 +375,6 @@ namespace gd3d.framework
                                 this.bundlePackBin[strs[0]] = bufs;
                             }
 
-                            if (state != undefined)
-                                state.bundleLoadState |= loadstate;
 
                             delete tempMap[surl];
                             if (this.mapIsNull(tempMap))
@@ -421,8 +406,6 @@ namespace gd3d.framework
                                 return;
                             }
 
-                            if (state != undefined)
-                                state.bundleLoadState |= loadstate;
 
 
                         }, state, asset, (data) =>
@@ -500,7 +483,7 @@ namespace gd3d.framework
                 if (!hitem.handle)
                     continue;
 
-                if (hitem.type == AssetTypeEnum.Prefab || hitem.type == AssetTypeEnum.F14Effect)
+                if (hitem.type == AssetTypeEnum.Scene || hitem.type == AssetTypeEnum.Prefab || hitem.type == AssetTypeEnum.F14Effect)
                 {
                     lastHandle.push(hitem)
                     continue;

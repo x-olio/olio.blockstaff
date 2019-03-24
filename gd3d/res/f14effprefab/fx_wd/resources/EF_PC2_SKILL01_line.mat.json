@@ -1,0 +1,1 @@
+{"shader":"particles_add.shader.json","srcshader":"Gd3d/particles_add","queue":0,"mapUniform":{"_Main_Tex":{"type":0,"value":"EF_PC2_SKILL01_line.imgdesc.json"},"_Main_Color":{"type":3,"value":"(1,1,1,1)"}}}

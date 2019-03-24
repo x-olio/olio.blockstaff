@@ -6,11 +6,13 @@ class test_anim implements IState
     scene: gd3d.framework.scene;
     player: gd3d.framework.transform;
     cubes: { [id: string]: gd3d.framework.transform } = {};
+    _assetMgr : gd3d.framework.assetMgr;
     start(app: gd3d.framework.application)
     {
         console.log("i am here.");
         this.app = app;
         this.scene = this.app.getScene();
+        this._assetMgr = this.app.getAssetMgr();
         // this.app.targetFrame = 10;
         var prefabObj = new gd3d.framework.transform();
         prefabObj.name = "baihu";
@@ -54,6 +56,17 @@ class test_anim implements IState
 
                         var ap = prefabObj.gameObject.getComponent("aniplayer") as gd3d.framework.aniplayer;
                         // ap.autoplay = false;
+                        let list = ap.awaitLoadClipNames();
+                        let resPath = `res/prefabs/${resName}/resources/`;
+                        if(list.length >0 ){
+                            let cname = list[1];
+                            ap.addClipByNameLoad(this._assetMgr,resPath,cname,(sta,clipName)=>{
+                                if(sta.isfinish){
+                                    let clip = ap.getClip(cname);
+                                    ap.play(cname);
+                                }
+                            });
+                        }
 
                         document.onkeydown = (ev) =>
                         {

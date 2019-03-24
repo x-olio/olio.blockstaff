@@ -11,6 +11,11 @@ namespace gd3d.framework
 
         public gravity: math.vector3;
 
+        /**
+         * Creates a new Physics Engine
+         * @param gravity defines the gravity vector used by the simulation
+         * @param _physicsPlugin defines the plugin to use (CannonJS by default)
+         */
         constructor(gravity:math.vector3=null, private _physicsPlugin: IPhysicsEnginePlugin = new CannonJSPlugin()) {
             if (!this._physicsPlugin.isSupported()) {
                 throw new Error("Physics Engine " + this._physicsPlugin.name + " cannot be found. "
@@ -19,10 +24,12 @@ namespace gd3d.framework
             gravity = gravity || new math.vector3(0, -9.807, 0)
             this.setGravity(gravity);
             this.setTimeStep();
-
-
         }
 
+        /**
+         * Sets the gravity vector used by the simulation
+         * @param gravity defines the gravity vector to use
+         */
         public setGravity(gravity: math.vector3): void {
             this.gravity = gravity;
             this._physicsPlugin.setGravity(this.gravity);
@@ -46,6 +53,9 @@ namespace gd3d.framework
             return this._physicsPlugin.getTimeStep();
         }
 
+        /**
+         * dispose all impostor of the physics engine.
+         */
         public dispose(): void {
             this._impostors.forEach(function (impostor) {
                 impostor.dispose();
@@ -114,6 +124,12 @@ namespace gd3d.framework
             this._physicsPlugin.generateJoint(impostorJoint);
         }
 
+        /**
+         * Removes a joint from the simulation
+         * @param mainImpostor defines the impostor used with the joint
+         * @param connectedImpostor defines the other impostor connected to the main one by the joint
+         * @param joint defines the joint to remove
+         */
         public removeJoint(mainImpostor: PhysicsImpostor, connectedImpostor: PhysicsImpostor, joint: PhysicsJoint) {
             var matchingJoints = this._joints.filter(function (impostorJoint) {
                 return (impostorJoint.connectedImpostor === connectedImpostor
@@ -153,14 +169,26 @@ namespace gd3d.framework
 
         }
 
+        /**
+         * Gets the current plugin used to run the simulation
+         * @returns current plugin
+         */
         public getPhysicsPlugin(): IPhysicsEnginePlugin {
             return this._physicsPlugin;
         }
-        
+        /**
+         * Gets the list of physic impostors
+         * @returns an array of PhysicsImpostor
+         */
         public getImpostors(): Array<PhysicsImpostor> {
             return this._impostors;
         }
 
+        /**
+         * Gets the impostor for a physics enabled object
+         * @param object defines the object impersonated by the impostor
+         * @returns the PhysicsImpostor or null if not found
+         */
         public getImpostorForPhysicsObject(object: transform): PhysicsImpostor {
             for (var i = 0; i < this._impostors.length; ++i) {
                 if (this._impostors[i].object === object) {
@@ -171,6 +199,11 @@ namespace gd3d.framework
             return null;
         }
 
+        /**
+         * Gets the impostor for a physics body object
+         * @param body defines physics body used by the impostor
+         * @returns the PhysicsImpostor or null if not found
+         */
         public getImpostorWithPhysicsBody(body: any): PhysicsImpostor {
             for (var i = 0; i < this._impostors.length; ++i) {
                 if (this._impostors[i].physicsBody === body) {

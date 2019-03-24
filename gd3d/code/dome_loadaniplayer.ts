@@ -155,8 +155,23 @@ class dome_loadaniplayer implements IState {
         let i = 0;
 
         play.onclick = () => {
-            this.ani.stop();
-            // this.ani.play(this.skillName, speed);
+            //this.ani.stop();
+             this.ani.play(this.skillName);
+            let ap = this.ani;
+            if(ap.haveClip(this.skillName)) {
+                ap.play(this.skillName);
+                return;
+            }
+            let list = ap.awaitLoadClipNames();
+            if(!list.indexOf(this.skillName)) return;
+            let resPath = `res/prefabs/roles/${this.roleName}/resources/`;
+            let cname = this.skillName;
+            ap.addClipByNameLoad(this.app.getAssetMgr(),resPath,cname,(sta,clipName)=>{
+                if(sta.isfinish){
+                    let clip = ap.getClip(cname);
+                    ap.play(cname);
+                }
+            });
         }
 
         stop.onclick = () => {

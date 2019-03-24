@@ -1,4 +1,5 @@
 namespace dome {
+    /** 炮王项目炮弹 */
     export class paowuxian2 implements IState {
         app: gd3d.framework.application;
         scene: gd3d.framework.scene;

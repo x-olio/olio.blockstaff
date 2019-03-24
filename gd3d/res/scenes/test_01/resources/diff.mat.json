@@ -1,0 +1,1 @@
+{"shader":"diffuse.shader.json","srcshader":"Gd3d/Diffuse","queue":0,"mapUniform":{"_MainColor":{"type":3,"value":"(0.745283,0.25021,0.2355375,1)"},"_MainTex":{},"_AlphaCut":{"type":1,"value":0.5}}}

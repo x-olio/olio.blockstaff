@@ -5,6 +5,7 @@ namespace t
     {
         app: gd3d.framework.application;
         scene: gd3d.framework.scene;
+        texResName = "trailtest2_00000.imgdesc.json";
         private loadShader(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
         {
             this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
@@ -36,7 +37,8 @@ namespace t
                 }
             }
             );
-            this.app.getAssetMgr().load("res/soul_trail.imgdesc.json", gd3d.framework.AssetTypeEnum.Auto, (s) => 
+            // this.app.getAssetMgr().load("res/soul_trail.imgdesc.json", gd3d.framework.AssetTypeEnum.Auto, (s) => 
+            this.app.getAssetMgr().load(`res/${this.texResName}`, gd3d.framework.AssetTypeEnum.Auto, (s) => 
             {
                 if (s.isfinish) 
                 {
@@ -135,7 +137,7 @@ namespace t
                 var trailrender = trailtrans.gameObject.addComponent("trailRender") as gd3d.framework.trailRender;
                 var mat = new gd3d.framework.material();
                 var shader = this.app.getAssetMgr().getShader("particles_add.shader.json") as gd3d.framework.shader;
-                var tex = this.app.getAssetMgr().getAssetByName("soul_trail.imgdesc.json") as gd3d.framework.texture;
+                var tex = this.app.getAssetMgr().getAssetByName(`${this.texResName}`) as gd3d.framework.texture;
                 mat.setShader(shader);
                 mat.setTexture("_Main_Tex", tex);
 

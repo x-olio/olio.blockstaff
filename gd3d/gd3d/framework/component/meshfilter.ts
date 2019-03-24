@@ -24,7 +24,7 @@ namespace gd3d.framework
         gameObject: gameObject;
         start()
         {
-
+            
         }
 
         onPlay()

@@ -1,0 +1,1 @@
+{"shader":"particles_blend.shader.json","srcshader":"Gd3d/particles_blend","queue":0,"mapUniform":{"_Main_Tex":{"type":0,"value":"glow1111111.imgdesc.json"},"_Main_Color":{"type":3,"value":"(1,1,1,1)"}}}

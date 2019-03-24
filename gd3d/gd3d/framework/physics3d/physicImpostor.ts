@@ -187,7 +187,7 @@ namespace gd3d.framework {
             this._physicsEngine.removeImpostor(this);
             this.physicsBody = null;
             this._parent = this._parent || this._getPhysicsParent();
-            if (!this._isDisposed && !this.parent) {
+            if (!this._isDisposed && (!this.parent || this._options.ignoreParent)) {
                 this._physicsEngine.addImpostor(this);
             }
         }
@@ -746,14 +746,14 @@ namespace gd3d.framework {
             if (this.parent) {
                 this.parent.forceUpdate();
             } else {
-                /*this._object.getChildMeshes().forEach(function(mesh) {
-                    if (mesh.physicsImpostor) {
-                        if (disposeChildren) {
-                            mesh.physicsImpostor.dispose();
-                            mesh.physicsImpostor = null;
-                        }
-                    }
-                })*/
+                // if(this.object.children){
+                //     this.object.children.forEach(sub=>{
+                //         if(sub && sub.physicsImpostor){
+                //             sub.physicsImpostor.dispose();
+                //             sub.physicsImpostor = null;
+                //         }
+                //     });
+                // }
             }
 
             this._isDisposed = true;

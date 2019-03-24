@@ -20,9 +20,17 @@ class test_pbr_scene implements IState {
         this.scene.addChild(objCam);
         this.camera = objCam.gameObject.addComponent("camera") as gd3d.framework.camera;
         this.camera.near = 0.01;
-        this.camera.far = 1000;
+        this.camera.far = 10000;
         this.camera.backgroundColor = new gd3d.math.color(0,0,0,0);
-        CameraController.instance().init(this.app, this.camera);
+        // CameraController.instance().init(this.app, this.camera);
+
+        //相机展示控制器
+        let hoverc = this.camera.gameObject.addComponent("HoverCameraScript") as gd3d.framework.HoverCameraScript;
+        hoverc.panAngle = 180;
+        hoverc.tiltAngle = 45;
+        hoverc.distance = 30 ;
+        hoverc.scaleSpeed = 0.1;
+        hoverc.lookAtPoint = new gd3d.math.vector3(0, 2.5, 0)
 
         //任务排队执行系统
         this.taskmgr.addTaskCall(this.loadTexture.bind(this));
@@ -372,7 +380,7 @@ class test_pbr_scene implements IState {
 
         this.lightPos2.x += x;
         this.lightPos2.z += z;
-        CameraController.instance().update(delta);
+        // CameraController.instance().update(delta);
     }
 
 }

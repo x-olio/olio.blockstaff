@@ -1,5 +1,6 @@
 //导航RVO_防挤Demo
 declare var RVO;
+/** 射线碰撞 碰撞体 */
 class test_pick_boxcollider implements IState
 {
     app: gd3d.framework.application;
@@ -53,10 +54,16 @@ class test_pick_boxcollider implements IState
             if(!trans) return;
             let boxc = trans.gameObject.getComponent("boxcollider") as gd3d.framework.boxcollider;
             if(boxc)    boxc.colliderVisible = true;
+            //test
+            let meshC = trans.gameObject.getComponent("meshcollider") as gd3d.framework.meshcollider;
+            if(meshC){
+                meshC.colliderVisible = true;
+            } 
+
             console.error(` layer : ${trans.gameObject.layer} `);
             if(!trans.children)return;
             trans.children.forEach(sub =>{
-                if(sub)   ShowBoxcollder(sub);              
+                if(sub)   ShowBoxcollder(sub);
             });
         }
 

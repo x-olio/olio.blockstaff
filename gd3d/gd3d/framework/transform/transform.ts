@@ -1072,7 +1072,11 @@ namespace gd3d.framework
                 }
                 //this.removeAllChild();
             }
+            if(this._physicsImpostor){
+                this._physicsImpostor.dispose();
+            }
             this._gameObject.dispose();
+            
             this._beDispose = true;
             if(this.onDispose)
                 this.onDispose();
