@@ -3,7 +3,7 @@ namespace Game.ui
 
     export interface ILabelOption
     {
-        name: string,
+        name?: string,
         text?: string,
         assetMgr: gd3d.framework.assetMgr
         owner?: gd3d.framework.transform2D
@@ -58,7 +58,8 @@ namespace Game.ui
         iptFrame_t.pivot.y = 0;
         iptFrame_t.localTranslate.x = option.x || 0;
         iptFrame_t.localTranslate.y = option.y || 0;
-
+        if (option.owner)
+            option.owner.addChild(iptFrame_t);
         let ipt = iptFrame_t.addComponent("inputField") as gd3d.framework.inputField;
 
         ipt.LineType = option.LineType || gd3d.framework.lineType.SingleLine;

@@ -8,7 +8,8 @@ namespace Game.Common
     }
     export class APITools
     {
-        public static api: string = "http://localhost:9001";
+        public static api: string = "http://wa.h5game.live:3001";
+        // public static api: string = "http://localhost:9001";
 
         public static loginInfo: {
             token: string,
@@ -90,19 +91,29 @@ namespace Game.Common
             return result;
         }
 
-        static Register(data: {
-            loginname: string, password: string,
-            phone: string, email: string
+        static async Register(data: {
+            nickname: string,
+            username: string,
+            password: string,
+            phone: string,
+            email: string,
         })
         {
-            return this.APIPost(`/api/user/public/login/uname`, data);
+            this.loginInfo = null;
+            let result = await this.APIPost("/api/user/public/register", data);
+            if (result.error == 0)
+            {
+                this.loginInfo = result.body;
+                LocalStore.Set("loginInfo", JSON.stringify(result.body));
+            }
+            return result;
         }
 
         static CheckToken()
         {
             return new Promise<boolean>(async (resolve, reason) =>
             {
-             
+
                 let result = await this.APIPost("/api/user/checktoken", { token: this.loginInfo.token });
                 if (result.error != 0)
                     console.error(result.message);

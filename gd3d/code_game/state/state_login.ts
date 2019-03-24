@@ -70,7 +70,7 @@ namespace Game.State
         {
 
             let atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json") as gd3d.framework.atlas;
-            let tex_0 = this.env.assetMgr.getAssetByName("zg03_256.png") as gd3d.framework.texture;
+            // let tex_0 = this.env.assetMgr.getAssetByName("zg03_256.png") as gd3d.framework.texture;
             //9宫格拉伸底图
             let bg_t = new gd3d.framework.transform2D;
             bg_t.name = "框底图"
@@ -190,7 +190,7 @@ namespace Game.State
         OnRegister()
         {
             console.log("注册");
-            this.statemgr.ChangeState(new State_Regision());
+            this.statemgr.ChangeState(new State_Regision(this));
         }
 
 
