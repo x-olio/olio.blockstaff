@@ -123,7 +123,7 @@ var Game;
                             return [4, Game.Common.APITools.CheckToken()];
                         case 2:
                             if (_a.sent())
-                                this.stateMgr.ChangeState(new Game.State.State_Second());
+                                this.stateMgr.ChangeState(new Game.State.State_Menu());
                             else
                                 this.stateMgr.ChangeState(new Game.State.State_Login());
                             return [3, 4];
@@ -295,6 +295,49 @@ var Game;
 (function (Game) {
     var Common;
     (function (Common) {
+        var AssetTools = (function () {
+            function AssetTools() {
+            }
+            AssetTools.promiseQueueExec = function (promises) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var _i, promises_1, fn;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                _i = 0, promises_1 = promises;
+                                _a.label = 1;
+                            case 1:
+                                if (!(_i < promises_1.length)) return [3, 4];
+                                fn = promises_1[_i];
+                                return [4, fn.call(this)];
+                            case 2:
+                                _a.sent();
+                                _a.label = 3;
+                            case 3:
+                                _i++;
+                                return [3, 1];
+                            case 4: return [2];
+                        }
+                    });
+                });
+            };
+            AssetTools.loadAsset = function (assetMgr, url) {
+                return new Promise(function (resolve) {
+                    assetMgr.load(url, gd3d.framework.AssetTypeEnum.Auto, function (s) {
+                        if (s.isfinish)
+                            resolve();
+                    });
+                });
+            };
+            return AssetTools;
+        }());
+        Common.AssetTools = AssetTools;
+    })(Common = Game.Common || (Game.Common = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var Common;
+    (function (Common) {
         var LocalStore = (function () {
             function LocalStore() {
             }
@@ -303,6 +346,9 @@ var Game;
             };
             LocalStore.Set = function (key, value) {
                 this.storeInstance.setItem(key, value);
+            };
+            LocalStore.Clean = function () {
+                this.storeInstance.clear();
             };
             LocalStore.storeInstance = localStorage;
             return LocalStore;
@@ -658,45 +704,14 @@ var Game;
                     this.env.overlay.removeChild(childs[i]);
             };
             State_Login.prototype.loadTexture = function () {
-                return this.promiseQueueExec([
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
-                    this.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
+                return Game.Common.AssetTools.promiseQueueExec([
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
                 ]);
-            };
-            State_Login.prototype.promiseQueueExec = function (promises) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var _i, promises_1, fn;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                _i = 0, promises_1 = promises;
-                                _a.label = 1;
-                            case 1:
-                                if (!(_i < promises_1.length)) return [3, 4];
-                                fn = promises_1[_i];
-                                return [4, fn.call(this)];
-                            case 2:
-                                _a.sent();
-                                _a.label = 3;
-                            case 3:
-                                _i++;
-                                return [3, 1];
-                            case 4: return [2];
-                        }
-                    });
-                });
-            };
-            State_Login.prototype.loadAsset = function (assetMgr, url) {
-                return new Promise(function (resolve) {
-                    assetMgr.load(url, gd3d.framework.AssetTypeEnum.Auto, function (s) {
-                        if (s.isfinish)
-                            resolve();
-                    });
-                });
             };
             State_Login.prototype.createUI = function () {
                 var atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json");
@@ -801,7 +816,7 @@ var Game;
                                     this.lab_message.text = result.message;
                                     return [2];
                                 }
-                                this.statemgr.ChangeState(new State.State_Second());
+                                this.statemgr.ChangeState(new State.State_Menu());
                                 return [3, 4];
                             case 3:
                                 e_1 = _a.sent();
@@ -819,6 +834,95 @@ var Game;
             return State_Login;
         }());
         State.State_Login = State_Login;
+    })(State = Game.State || (Game.State = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var State;
+    (function (State) {
+        var State_Menu = (function () {
+            function State_Menu() {
+            }
+            State_Menu.prototype.OnInit = function (env, statemgr) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                this.env = env;
+                                this.statemgr = statemgr;
+                                return [4, this.loadTexture()];
+                            case 1:
+                                _a.sent();
+                                this.CreateUI();
+                                return [2];
+                        }
+                    });
+                });
+            };
+            State_Menu.prototype.loadTexture = function () {
+                return Game.Common.AssetTools.promiseQueueExec([
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
+                ]);
+            };
+            State_Menu.prototype.OnUpdate = function (delta) {
+            };
+            State_Menu.prototype.OnExit = function () {
+                var childs = this.env.overlay.getChildren();
+                for (var i in childs)
+                    this.env.overlay.removeChild(childs[i]);
+            };
+            State_Menu.prototype.CreateUI = function () {
+                var _this = this;
+                var atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json");
+                var root = new gd3d.framework.transform2D();
+                this.env.overlay.addChild(root);
+                root.markDirty();
+                var x = gd3d.framework.sceneMgr.app.width / 2 - (300 / 2);
+                var btn_enterGame = Game.ui.createButton({
+                    assetMgr: this.env.assetMgr,
+                    hitsSprite: atlasComp.sprites["ui_public_button_hits"],
+                    backSprite: atlasComp.sprites["ui_public_button_1"],
+                    x: x, y: 135,
+                    width: 300,
+                    text: "           开始游戏",
+                    fontcolor: new gd3d.math.color(1, 1, 1, 1),
+                    owner: root
+                });
+                var btn_editor = Game.ui.createButton({
+                    assetMgr: this.env.assetMgr,
+                    hitsSprite: atlasComp.sprites["ui_public_button_hits"],
+                    backSprite: atlasComp.sprites["ui_public_button_1"],
+                    x: x, y: 135 + 60 * 1,
+                    width: 300,
+                    text: "           编辑模式",
+                    fontcolor: new gd3d.math.color(1, 1, 1, 1),
+                    owner: root
+                });
+                Game.ui.createButton({
+                    assetMgr: this.env.assetMgr,
+                    hitsSprite: atlasComp.sprites["ui_public_button_hits"],
+                    backSprite: atlasComp.sprites["ui_public_button_1"],
+                    x: x, y: 135 + 60 * 2,
+                    width: 300,
+                    text: "           退出登录",
+                    fontcolor: new gd3d.math.color(1, 1, 1, 1),
+                    owner: root
+                }).addListener(gd3d.event.UIEventEnum.PointerClick, function () {
+                    Game.Common.LocalStore.Clean();
+                    _this.statemgr.ChangeState(new State.State_Login());
+                }, this);
+                btn_enterGame.addListener(gd3d.event.UIEventEnum.PointerClick, function () {
+                    _this.statemgr.ChangeState(new State.State_Second());
+                }, this);
+            };
+            return State_Menu;
+        }());
+        State.State_Menu = State_Menu;
     })(State = Game.State || (Game.State = {}));
 })(Game || (Game = {}));
 var Game;
@@ -963,7 +1067,7 @@ var Game;
                                 result = _a.sent();
                                 if (result.error != 0)
                                     return [2, this.lab_message.text = result.message];
-                                this.statemgr.ChangeState(new State.State_Second());
+                                this.statemgr.ChangeState(new State.State_Menu());
                                 return [2];
                         }
                     });
@@ -1039,6 +1143,16 @@ var Game;
             }
             return TmxStruct;
         }());
+        var MapBlock = (function () {
+            function MapBlock() {
+            }
+            return MapBlock;
+        }());
+        var MapLayer = (function () {
+            function MapLayer() {
+            }
+            return MapLayer;
+        }());
         var Map2DSystem = (function () {
             function Map2DSystem() {
             }
@@ -1071,8 +1185,6 @@ var Game;
                         }
                     });
                 });
-            };
-            Map2DSystem.prototype.Close = function () {
             };
             Map2DSystem.prototype.loadMap = function (url) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -1138,16 +1250,22 @@ var Game;
             };
             Map2DSystem.prototype.addcube = function () {
                 return __awaiter(this, void 0, void 0, function () {
-                    var tileset, i, layer, y, x, id, tileWidth, tileHeight, tileX, tileY;
+                    var tileset, i, mapString, layer, y, x, id, idStr, tileWidth, tileHeight, tileX, tileY;
                     return __generator(this, function (_a) {
                         tileset = this.map.tilesets[0];
                         for (i = 0; i < this.map.layers.length; i++) {
+                            console.log("layers:" + i);
+                            mapString = "";
                             layer = this.map.layers[i];
                             for (y = 0; y < this.map.height; y++) {
                                 for (x = 0; x < this.map.width; x++) {
                                     id = layer.data[y * layer.width + x];
-                                    if (id == 0)
+                                    if (id == 0) {
+                                        mapString += "  ";
                                         continue;
+                                    }
+                                    idStr = "" + id;
+                                    mapString += idStr.length < 2 ? "0" + id : idStr;
                                     tileWidth = (tileset.tileheight / tileset.imageheight);
                                     tileHeight = (tileset.tileheight / tileset.imageheight);
                                     tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
@@ -1155,11 +1273,30 @@ var Game;
                                     tileY = 1.0 - tileY - tileHeight;
                                     this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
                                 }
+                                mapString += "\n";
                             }
+                            console.log(mapString);
                         }
                         return [2];
                     });
                 });
+            };
+            Map2DSystem.prototype.Parse = function (baseData) {
+                var mapInfo = JSON.parse(baseData);
+                this.baseData = mapInfo;
+                for (var _i = 0, _a = mapInfo.layers; _i < _a.length; _i++) {
+                    var layer = _a[_i];
+                    for (var y = 0; y < mapInfo.height; ++y) {
+                        for (var x = 0; x < mapInfo.width; ++x) {
+                            var id = layer.blocks[y * mapInfo.width + x];
+                            if (!id)
+                                continue;
+                        }
+                    }
+                }
+            };
+            Map2DSystem.prototype.GetData = function () {
+                return this.baseData;
             };
             return Map2DSystem;
         }());
@@ -1256,7 +1393,8 @@ var Game;
                 owner: btn_t, text: option.text, assetMgr: option.assetMgr,
                 name: "lib_" + option.name, fontcolor: option.fontcolor,
                 x: 55,
-                y: -30
+                y: -30,
+                width: option.width
             });
             return btn_b;
         }

@@ -12,5 +12,9 @@ namespace Game.Common
         {
             this.storeInstance.setItem(key, value);
         }
+        static Clean()
+        {
+            this.storeInstance.clear();
+        }
     }
 }

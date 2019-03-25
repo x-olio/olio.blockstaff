@@ -64,10 +64,17 @@ declare namespace Game.Common {
     }
 }
 declare namespace Game.Common {
+    class AssetTools {
+        static promiseQueueExec(promises: Array<Function>): Promise<void>;
+        static loadAsset(assetMgr: gd3d.framework.assetMgr, url: string): Promise<{}>;
+    }
+}
+declare namespace Game.Common {
     class LocalStore {
         private static storeInstance;
         static Get(key: string): string;
         static Set(key: string, value: string): void;
+        static Clean(): void;
     }
 }
 declare namespace Game.Common {
@@ -109,11 +116,20 @@ declare namespace Game.State {
         OnUpdate(delta: number): void;
         OnExit(): void;
         loadTexture(): Promise<void>;
-        promiseQueueExec(promises: Array<Function>): Promise<void>;
-        loadAsset(assetMgr: gd3d.framework.assetMgr, url: string): Promise<{}>;
         createUI(): void;
         OnLogin(): Promise<void>;
         OnRegister(): void;
+    }
+}
+declare namespace Game.State {
+    class State_Menu implements IGameState {
+        private env;
+        private statemgr;
+        OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
+        loadTexture(): Promise<void>;
+        OnUpdate(delta: number): void;
+        OnExit(): void;
+        CreateUI(): void;
     }
 }
 declare namespace Game.State {
@@ -202,17 +218,36 @@ declare namespace Game.System {
         version: number;
         width: number;
     }
+    interface IBlockData {
+        bound: any;
+        dispay: any;
+    }
+    interface ILayerData {
+        type: string;
+        data: Array<number>;
+        blocks: Array<IBlockData>;
+    }
+    interface IMapInfoData {
+        version: string;
+        height: number;
+        width: number;
+        blockwidht: number;
+        blockheight: number;
+        layers: Array<ILayerData>;
+    }
     class Map2DSystem {
         env: Environment;
         InitAsync(env: Environment): Promise<void>;
         LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>;
-        Close(): void;
         tex: gd3d.framework.texture;
         map: TmxStruct;
         private loadMap;
         private loadText;
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number): void;
         private addcube;
+        private baseData;
+        Parse(baseData: string): void;
+        GetData(): IMapInfoData;
     }
 }
 declare namespace Game.ui {
