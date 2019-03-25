@@ -38,33 +38,17 @@ namespace Game.State
 
         loadTexture()
         {
-            return this.promiseQueueExec([
-                this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
-                this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
-                this.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
-                this.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
-                this.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
-                this.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
+            return Common.AssetTools.promiseQueueExec([
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
             ]);
         }
 
-        async promiseQueueExec(promises: Array<Function>)
-        {
-            for (let fn of promises)
-                await fn.call(this);
-        }
 
-        loadAsset(assetMgr: gd3d.framework.assetMgr, url: string)
-        {
-            return new Promise((resolve) =>
-            {
-                assetMgr.load(url, gd3d.framework.AssetTypeEnum.Auto, (s) =>
-                {
-                    if (s.isfinish)
-                        resolve();
-                });
-            });
-        }
 
         createUI()
         {
@@ -179,7 +163,7 @@ namespace Game.State
                     this.lab_message.text = result.message;
                     return;
                 }
-                this.statemgr.ChangeState(new State_Second());
+                this.statemgr.ChangeState(new State_Menu());
             } catch (e)
             {
                 this.lab_message.text = `${e.message}`;

@@ -126,7 +126,8 @@ namespace Game.ui
             owner: btn_t, text: option.text, assetMgr: option.assetMgr,
             name: `lib_${option.name}`, fontcolor: option.fontcolor,
             x: 55,
-            y: -30
+            y: -30,
+            width: option.width
         })
 
 

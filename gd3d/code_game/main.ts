@@ -20,7 +20,7 @@ namespace Game
             {
                 Common.APITools.loginInfo = JSON.parse(loginInfo);
                 if (await Common.APITools.CheckToken())
-                    this.stateMgr.ChangeState(new State.State_Second());
+                    this.stateMgr.ChangeState(new State.State_Menu());
                 else
                     this.stateMgr.ChangeState(new State.State_Login());
             } else

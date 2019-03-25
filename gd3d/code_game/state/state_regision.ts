@@ -178,7 +178,7 @@ namespace Game.State
             if (result.error != 0)
                 return this.lab_message.text = result.message;
 
-            this.statemgr.ChangeState(new State_Second());
+            this.statemgr.ChangeState(new State_Menu());
         }
     }
 }

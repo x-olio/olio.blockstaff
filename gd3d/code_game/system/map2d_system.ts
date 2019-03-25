@@ -57,6 +57,52 @@ namespace Game.System
         version: number;
         width: number;
     }
+
+
+    interface IDisplayData
+    {
+        type: "static" | "animation" | "nine";
+        pics: []
+    }
+    interface IBlockData
+    {
+        bound;
+        dispay;
+    }
+    interface IBlockfileData
+    {
+        pics: Array<string>;
+        blocks: { [id: string]: IBlockData }
+    }
+    interface ILayerData
+    {
+        type: string;
+        data: Array<number>;
+        blocks: Array<IBlockData>;
+    }
+
+    interface IMapInfoData
+    {
+        version: string;
+        height: number;
+        width: number;
+        blockwidht: number;
+        blockheight: number;
+        layers: Array<ILayerData>;
+    }
+
+
+
+    class MapBlock
+    {
+        data: IBlockData
+    }
+    class MapLayer
+    {
+        data: ILayerData;
+        blockfile: IBlockfileData;
+    }
+
     export class Map2DSystem
     {
         env: Environment;
@@ -80,11 +126,10 @@ namespace Game.System
             await this.addcube();
 
         }
-        Close()
-        {
 
-        }
+
         tex: gd3d.framework.texture;
+
         map: TmxStruct;
 
         private async loadMap(url: string): Promise<TmxStruct> 
@@ -197,27 +242,68 @@ namespace Game.System
 
             for (var i = 0; i < this.map.layers.length; i++)
             {
+                console.log(`layers:${i}`);
+                let mapString = "";
                 var layer = this.map.layers[i];
                 for (var y = 0; y < this.map.height; y++)
                 {
                     for (var x = 0; x < this.map.width; x++)
                     {
                         var id = layer.data[y * layer.width + x];
-                        if (id == 0) continue;
+
+
+                        if (id == 0)
+                        {
+                            mapString += "  ";
+                            continue;
+                        }
+                        let idStr = `${id}`;
+                        mapString += idStr.length < 2 ? `0${id}` : idStr;
+
                         var tileWidth = (tileset.tileheight / tileset.imageheight);
                         var tileHeight = (tileset.tileheight / tileset.imageheight);
                         var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
                         var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
                         tileY = 1.0 - tileY - tileHeight;
-
-
                         this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
-
                     }
+                    mapString += "\n";
                 }
+                console.log(mapString);
             }
 
             return;
         }
+
+
+        private baseData: IMapInfoData;
+
+        Parse(baseData: string)
+        {
+
+            let mapInfo: IMapInfoData = JSON.parse(baseData);
+
+            this.baseData = mapInfo;
+
+            for (let layer of mapInfo.layers)
+            {
+                for (let y = 0; y < mapInfo.height; ++y)
+                {
+                    for (let x = 0; x < mapInfo.width; ++x)
+                    {
+                        let id = layer.blocks[y * mapInfo.width + x];
+                        if (!id)
+                            continue;
+                    }
+                }
+            }
+        }
+
+
+        GetData()
+        {
+            return this.baseData;
+        }
+
     }
 }
