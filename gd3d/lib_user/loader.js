@@ -1,5 +1,5 @@
 window.onload = function () {
-    let runEngineDemo = false; 
+    let runEngineDemo = false; //切换引擎demo 或 项目 
 
     gd3d.jsLoader.instance().addImportScript("lib/Reflect.js");
     gd3d.jsLoader.instance().addImportScript("lib/gd3d.js");
@@ -38,7 +38,7 @@ window.onload = function () {
         if(runEngineDemo){
             gdapp.start(div);
         }else{
-            gdapp.start(div, gd3d.framework.CanvasFixedType.FixedWidthType, 720);
+            gdapp.start(div, gd3d.framework.CanvasFixedType.free, 720);
         }
         gdapp.bePlay = true;
         gdapp.addUserCode("main");

@@ -269,6 +269,8 @@ namespace gd3d.framework
             this.inputElement.value = this._text;
             if(this._textLable){
                 this._textLable.text = this._text;
+                if(this.ContentType == contentType.PassWord)
+                    this._textLable.text = this._textLable.text.replace(/(.\**)/g,"*");
                 this.filterContentText();
             }
 

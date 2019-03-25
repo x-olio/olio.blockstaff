@@ -25,9 +25,9 @@ namespace Game
                 this.state.OnInit(this.env,this);
             }
         }
-        Update(delta:number)
+        Update(delta:number):void
         {
-
+            this.state.OnUpdate(delta);
         }
     }
     export interface IGameState

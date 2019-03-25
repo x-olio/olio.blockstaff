@@ -9,11 +9,12 @@ namespace Game
         app: gd3d.framework.application;
         camera: gd3d.framework.camera;
         overlay: gd3d.framework.overlay2D;
-        taskmgr: gd3d.framework.taskMgr;
+        //taskmgr 是个权宜之计，实现不完整，全面使用await async 替代他
+        // taskmgr: gd3d.framework.taskMgr;
         assetMgr: gd3d.framework.assetMgr;
-        Init()
+        async Init()
         {
-            this.taskmgr = new gd3d.framework.taskMgr();
+            //this.taskmgr = new gd3d.framework.taskMgr();
 
             var scene = this.app.getScene();
             this.assetMgr = this.app.getAssetMgr();
@@ -27,10 +28,11 @@ namespace Game
             this.camera.far = 10;
             //opvalue=0 表示是一个正交相机
             this.camera.opvalue = 0;
-
+            this.camera.size = 30;
+            this.camera.getPosAtXPanelInViewCoordinateByScreenPos
             objCam.localTranslate.x = 0;
             objCam.localTranslate.y = 0;
-            objCam.localTranslate.z = 1;
+            objCam.localTranslate.z = -1;
             objCam.lookatPoint(new gd3d.math.vector3(0, 0, 0));
             objCam.markDirty();
             //2dUI root
@@ -38,24 +40,41 @@ namespace Game
             this.camera.addOverLay(this.overlay);
 
             //任务排队执行系统
-            this.taskmgr.addTaskCall(this.loadShader.bind(this));
+            //this.taskmgr.addTaskCall(this.loadShader.bind(this));
+            await this.loadShader();
 
         }
         Update(delta: number)
         {
-            this.taskmgr.move(delta);
+            //this.taskmgr.move(delta);
         }
-        private loadShader(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
+        private async loadShader()
         {
-            this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
+            var promise = new Promise<string>((__resolve) =>
             {
-                if (_state.isfinish)
+                this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
                 {
-                    state.finish = true;
+                    if (_state.isfinish)
+                    {
+                        __resolve();
+                    }
                 }
-            }
-            );
+                );
+            });
+            return promise;
         }
+
+        // private loadShader(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
+        // {
+        //     this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
+        //     {
+        //         if (_state.isfinish)
+        //         {
+        //             state.finish = true;
+        //         }
+        //     }
+        //     );
+        // }
     
     }
 }
