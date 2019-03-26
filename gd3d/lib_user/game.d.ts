@@ -220,34 +220,58 @@ declare namespace Game.System {
     }
     interface IBlockData {
         bound: any;
-        dispay: any;
+        display: {
+            type: string;
+            pics: Array<number>;
+        };
+    }
+    interface IBlockFileData {
+        pics: Array<string>;
+        files: {
+            [id: string]: IBlockData;
+        };
+    }
+    interface ILayerBlockData {
+        file: string;
     }
     interface ILayerData {
         type: string;
         data: Array<number>;
-        blocks: Array<IBlockData>;
+        blocks: Array<ILayerBlockData>;
+        imageheight: number;
+        imagewidth: number;
+        blockwidht: number;
+        blockheight: number;
+    }
+    interface IBlockFileDescData {
+        bound: string;
+        pics: Array<string>;
     }
     interface IMapInfoData {
         version: string;
         height: number;
         width: number;
-        blockwidht: number;
-        blockheight: number;
         layers: Array<ILayerData>;
+        blockfile: IBlockFileData;
+        files: Array<IBlockFileDescData>;
     }
     class Map2DSystem {
         env: Environment;
         InitAsync(env: Environment): Promise<void>;
         LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>;
+        constructor();
         tex: gd3d.framework.texture;
         map: TmxStruct;
         private loadMap;
         private loadText;
-        _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number): void;
+        _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
         private addcube;
         private baseData;
-        Parse(baseData: string): void;
+        Parse(baseData: string): Promise<void>;
         GetData(): IMapInfoData;
+        CreateEmitData(w: number, h: number): any[];
+        CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
+        CalcIndex(x: number, y: number, w: number): number;
     }
 }
 declare namespace Game.ui {

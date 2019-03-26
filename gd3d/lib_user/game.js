@@ -1148,13 +1148,10 @@ var Game;
             }
             return MapBlock;
         }());
-        var MapLayer = (function () {
-            function MapLayer() {
-            }
-            return MapLayer;
-        }());
+        var testJSON = "\n{\n\t\"version\":\"1.0.0\",\n\t\"height\":16,\n\t\"width\":32,\n\t\"blockwidht\":32,\n\t\"blockheight\":16,\n\t\"layers\":[\n\t\t{\n            \"type\":\"bg\",\n            \"data\":[1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\n\t\t\t\"blocks\":[\n                {\n                    \"file\":\"hash1\"\n                },\n                {\n                    \"file\":\"hash2\"\n                },\n                {\n                    \"file\":\"hash3\"\n                }\n\t\t\t]\n\t\t}\n\t],\n\t\"blockfile\":{\n        \"pics\":[\"./res/_game/test/red.png\",\"./res/_game/test/green.png\",\"./res/_game/test/blue.png\"],\n        \"files\":{            \n            \"hash1\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[0,1]\n                }\n            },\n            \"hash2\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[1,0]\n                }\n            },\n            \"hash3\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[2,0]\n                }\n            }\n        }\n\t}\n}\n";
         var Map2DSystem = (function () {
             function Map2DSystem() {
+                window["map2d"] = this;
             }
             Map2DSystem.prototype.InitAsync = function (env) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -1166,23 +1163,9 @@ var Game;
             };
             Map2DSystem.prototype.LoadTmxAsync = function (urlJsonTMX, urlImgForTmx) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var _a, _b;
-                    return __generator(this, function (_c) {
-                        switch (_c.label) {
-                            case 0:
-                                _a = this;
-                                return [4, this.loadText(urlImgForTmx)];
-                            case 1:
-                                _a.tex = _c.sent();
-                                _b = this;
-                                return [4, this.loadMap(urlJsonTMX)];
-                            case 2:
-                                _b.map = _c.sent();
-                                return [4, this.addcube()];
-                            case 3:
-                                _c.sent();
-                                return [2];
-                        }
+                    return __generator(this, function (_a) {
+                        this.Parse(testJSON);
+                        return [2];
                     });
                 });
             };
@@ -1220,13 +1203,13 @@ var Game;
                                 wt.uploadImage(img, false, false, false, false, false, false);
                                 __resolve(tex);
                             };
-                            img.src = "res/_game/tmx.png";
+                            img.src = url;
                         });
                         return [2, promise];
                     });
                 });
             };
-            Map2DSystem.prototype._addQuad = function (x, y, tileX, tileY, tileWidth, tileHeight) {
+            Map2DSystem.prototype._addQuad = function (x, y, tileX, tileY, tileWidth, tileHeight, tex) {
                 var cube = new gd3d.framework.transform();
                 cube.name = "cube";
                 cube.localScale.x = cube.localScale.y = cube.localScale.z = 1;
@@ -1244,7 +1227,7 @@ var Game;
                     cuber.materials = [];
                     cuber.materials.push(new gd3d.framework.material());
                     cuber.materials[0].setShader(sh);
-                    cuber.materials[0].setTexture("_MainTex", this.tex);
+                    cuber.materials[0].setTexture("_MainTex", tex);
                     cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
                 }
             };
@@ -1271,7 +1254,7 @@ var Game;
                                     tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
                                     tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
                                     tileY = 1.0 - tileY - tileHeight;
-                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
+                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, this.tex);
                                 }
                                 mapString += "\n";
                             }
@@ -1282,21 +1265,70 @@ var Game;
                 });
             };
             Map2DSystem.prototype.Parse = function (baseData) {
-                var mapInfo = JSON.parse(baseData);
-                this.baseData = mapInfo;
-                for (var _i = 0, _a = mapInfo.layers; _i < _a.length; _i++) {
-                    var layer = _a[_i];
-                    for (var y = 0; y < mapInfo.height; ++y) {
-                        for (var x = 0; x < mapInfo.width; ++x) {
-                            var id = layer.blocks[y * mapInfo.width + x];
-                            if (!id)
-                                continue;
+                return __awaiter(this, void 0, void 0, function () {
+                    var mapInfo, loadTexs, texMap, _loop_1, this_1, _i, _a, texUrl, _b, _c, layer, y, x, id, tileWidth, tileHeight, tileX, tileY, bdata, block, texKey, texture;
+                    return __generator(this, function (_d) {
+                        switch (_d.label) {
+                            case 0:
+                                mapInfo = JSON.parse(baseData);
+                                this.baseData = mapInfo;
+                                loadTexs = [];
+                                texMap = {};
+                                _loop_1 = function (texUrl) {
+                                    loadTexs.push(this_1.loadText(texUrl).then(function (tex) {
+                                        texMap[texUrl] = tex;
+                                    }));
+                                };
+                                this_1 = this;
+                                for (_i = 0, _a = mapInfo.blockfile.pics; _i < _a.length; _i++) {
+                                    texUrl = _a[_i];
+                                    _loop_1(texUrl);
+                                }
+                                return [4, Promise.all(loadTexs)];
+                            case 1:
+                                _d.sent();
+                                for (_b = 0, _c = mapInfo.layers; _b < _c.length; _b++) {
+                                    layer = _c[_b];
+                                    for (y = 0; y < mapInfo.height; ++y) {
+                                        for (x = 0; x < mapInfo.width; ++x) {
+                                            id = layer.data[y * mapInfo.width + x];
+                                            if (!id)
+                                                continue;
+                                            tileWidth = (layer.blockheight / layer.imageheight);
+                                            tileHeight = (layer.blockheight / layer.imageheight);
+                                            tileX = (((id - 1) % layer.blockheight) | 0) * tileWidth;
+                                            tileY = (((id - 1) / layer.blockheight) | 0) * tileHeight;
+                                            tileY = 1.0 - tileY - tileHeight;
+                                            bdata = layer.blocks[id - 1];
+                                            block = mapInfo.blockfile.files[bdata.file];
+                                            texKey = mapInfo.blockfile.pics[block.display.pics[0]];
+                                            texture = texMap[texKey];
+                                            this._addQuad(x, y, tileX, tileY, tileWidth, tileHeight, texture);
+                                        }
+                                    }
+                                }
+                                return [2];
                         }
-                    }
-                }
+                    });
+                });
             };
             Map2DSystem.prototype.GetData = function () {
                 return this.baseData;
+            };
+            Map2DSystem.prototype.CreateEmitData = function (w, h) {
+                var emitData = [];
+                for (var y = 0; y < h; ++y) {
+                    for (var x = 0; x < h; ++x) {
+                        emitData.push(0);
+                    }
+                }
+                return emitData;
+            };
+            Map2DSystem.prototype.CalcID = function (x, y, mapWitdh, layer) {
+                return layer.data[y * mapWitdh + x];
+            };
+            Map2DSystem.prototype.CalcIndex = function (x, y, w) {
+                return y * w + x;
             };
             return Map2DSystem;
         }());

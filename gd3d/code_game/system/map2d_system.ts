@@ -58,7 +58,12 @@ namespace Game.System
         width: number;
     }
 
+    interface IDisplayItemData
+    {
+        data: string;
+        rect?: { x: number, y: number, w: number, h: number };
 
+    }
     interface IDisplayData
     {
         type: "static" | "animation" | "nine";
@@ -67,18 +72,39 @@ namespace Game.System
     interface IBlockData
     {
         bound;
-        dispay;
+        display: {
+            type: string,
+            pics: Array<number>
+        };
     }
-    interface IBlockfileData
+    interface IBlockFileData
     {
         pics: Array<string>;
-        blocks: { [id: string]: IBlockData }
+        files: { [id: string]: IBlockData }
+    }
+
+    interface ILayerBlockData
+    {
+        file: string;
     }
     interface ILayerData
     {
         type: string;
         data: Array<number>;
-        blocks: Array<IBlockData>;
+        blocks: Array<ILayerBlockData>;
+
+        imageheight: number;
+        imagewidth: number;
+
+        blockwidht: number;
+        blockheight: number;
+    }
+
+
+    interface IBlockFileDescData
+    {
+        bound: string;
+        pics: Array<string>;
     }
 
     interface IMapInfoData
@@ -86,9 +112,9 @@ namespace Game.System
         version: string;
         height: number;
         width: number;
-        blockwidht: number;
-        blockheight: number;
         layers: Array<ILayerData>;
+        blockfile: IBlockFileData;
+        files: Array<IBlockFileDescData>;
     }
 
 
@@ -97,12 +123,63 @@ namespace Game.System
     {
         data: IBlockData
     }
-    class MapLayer
-    {
-        data: ILayerData;
-        blockfile: IBlockfileData;
-    }
-
+    // class MapLayer
+    // {
+    // data: ILayerData;
+    // blockfile: IBlockFileData;
+    // }
+    let testJSON = `
+{
+	"version":"1.0.0",
+	"height":16,
+	"width":32,
+	"blockwidht":32,
+	"blockheight":16,
+	"layers":[
+		{
+            "type":"bg",
+            "data":[1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			"blocks":[
+                {
+                    "file":"hash1"
+                },
+                {
+                    "file":"hash2"
+                },
+                {
+                    "file":"hash3"
+                }
+			]
+		}
+	],
+	"blockfile":{
+        "pics":["./res/_game/test/red.png","./res/_game/test/green.png","./res/_game/test/blue.png"],
+        "files":{            
+            "hash1":{
+                "bound":"stand",
+                "display":{
+                    "type":"static",
+                    "pics":[0,1]
+                }
+            },
+            "hash2":{
+                "bound":"stand",
+                "display":{
+                    "type":"static",
+                    "pics":[1,0]
+                }
+            },
+            "hash3":{
+                "bound":"stand",
+                "display":{
+                    "type":"static",
+                    "pics":[2,0]
+                }
+            }
+        }
+	}
+}
+`
     export class Map2DSystem
     {
         env: Environment;
@@ -121,13 +198,17 @@ namespace Game.System
         async LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>
         {
             //任务排队执行系统
-            this.tex = await this.loadText(urlImgForTmx);
-            this.map = await this.loadMap(urlJsonTMX);
-            await this.addcube();
-
+            // this.tex = await this.loadText(urlImgForTmx);
+            // this.map = await this.loadMap(urlJsonTMX);
+            // await this.addcube();
+            this.Parse(testJSON);
+            return;
         }
 
-
+        constructor()
+        {
+            window["map2d"] = this;
+        }
         tex: gd3d.framework.texture;
 
         map: TmxStruct;
@@ -201,12 +282,12 @@ namespace Game.System
                     //     wt.updateRectImg( img, 0, 0);
                 };
 
-                img.src = "res/_game/tmx.png";
+                img.src = url;//"res/_game/tmx.png";
             });
             return promise;
         }
 
-        _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number): void
+        _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void
         {
             var cube = new gd3d.framework.transform();
             cube.name = "cube";
@@ -231,11 +312,13 @@ namespace Game.System
                 //cuber.materials[0].setVector4("_Color", new gd3d.math.vector4(0.4, 0.4, 0.2, 1.0));
 
                 //let texture = this.app.getAssetMgr().getAssetByName("zg256.png") as gd3d.framework.texture;
-                cuber.materials[0].setTexture("_MainTex", this.tex);
+                cuber.materials[0].setTexture("_MainTex", tex);
                 cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
             }
 
         }
+
+
         private async addcube(): Promise<void>
         {
             var tileset = this.map.tilesets[0];
@@ -251,7 +334,6 @@ namespace Game.System
                     {
                         var id = layer.data[y * layer.width + x];
 
-
                         if (id == 0)
                         {
                             mapString += "  ";
@@ -265,11 +347,12 @@ namespace Game.System
                         var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
                         var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
                         tileY = 1.0 - tileY - tileHeight;
-                        this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight);
+                        this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, this.tex);
                     }
                     mapString += "\n";
                 }
                 console.log(mapString);
+
             }
 
             return;
@@ -278,12 +361,25 @@ namespace Game.System
 
         private baseData: IMapInfoData;
 
-        Parse(baseData: string)
+        async Parse(baseData: string)
         {
 
             let mapInfo: IMapInfoData = JSON.parse(baseData);
 
             this.baseData = mapInfo;
+
+            let loadTexs = [];
+            let texMap = {}
+            for (let texUrl of mapInfo.blockfile.pics)
+            {
+                loadTexs.push(this.loadText(texUrl).then((tex) =>
+                {
+                    texMap[texUrl] = tex;
+                }));
+
+            }
+
+            await Promise.all(loadTexs);
 
             for (let layer of mapInfo.layers)
             {
@@ -291,9 +387,29 @@ namespace Game.System
                 {
                     for (let x = 0; x < mapInfo.width; ++x)
                     {
-                        let id = layer.blocks[y * mapInfo.width + x];
+                        let id = layer.data[y * mapInfo.width + x];
                         if (!id)
                             continue;
+
+                        let tileWidth = (layer.blockheight / layer.imageheight);
+                        let tileHeight = (layer.blockheight / layer.imageheight);
+
+
+                        let tileX = (((id - 1) % layer.blockheight) | 0) * tileWidth;
+                        let tileY = (((id - 1) / layer.blockheight) | 0) * tileHeight;
+
+                        // var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
+                        // var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
+
+                        tileY = 1.0 - tileY - tileHeight;
+
+                        let bdata = layer.blocks[id - 1];//id-1 = 下标
+
+                        let block = mapInfo.blockfile.files[bdata.file];
+                        let texKey = mapInfo.blockfile.pics[block.display.pics[0]];
+                        let texture = texMap[texKey];
+
+                        this._addQuad(x, y, tileX, tileY, tileWidth, tileHeight, texture);
                     }
                 }
             }
@@ -305,5 +421,26 @@ namespace Game.System
             return this.baseData;
         }
 
+        CreateEmitData(w: number, h: number)
+        {
+            let emitData = [];
+            for (let y = 0; y < h; ++y)
+            {
+                for (let x = 0; x < h; ++x)
+                {
+                    emitData.push(0);
+                }
+            }
+            return emitData;
+        }
+
+        CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData)
+        {
+            return layer.data[y * mapWitdh + x];
+        }
+        CalcIndex(x: number, y: number, w: number)
+        {
+            return y * w + x;
+        }
     }
 }
