@@ -102,6 +102,7 @@ namespace dome{
         private loadWeapon(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
         {
             let name="wp_ds_001";
+             name="box";
             this.app.getAssetMgr().load("res/prefabs/"+name+"/"+name+".assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
             {
                 if (s.isfinish)
@@ -146,6 +147,8 @@ namespace dome{
             name="fx_zgg_Skill01_S";
             name="fx_wp_bj";
             name="fx_wd";
+            name = "fx_wd";
+            name = "fx_js";
             this.app.getAssetMgr().load("res/f14effprefab/"+name+"/"+name+".assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
             {
                 if (s.isfinish)
@@ -182,6 +185,7 @@ namespace dome{
             name="GWB02_sw_die1.FBAni.aniclip.bin";
             name="UIbaoxiang_no_idle.FBAni.aniclip.bin";
             name="gmd_xs_run.FBAni.aniclip.bin";
+            name = "Run.FBAni.aniclip.bin";
             this.SkillName=name;
             let url="res/prefabs/"+this.RoleName+"/resources/"+this.SkillName;
             //let url="res/prefabs/"+"pc2/resources/"+this.SkillName;
@@ -309,6 +313,7 @@ namespace dome{
             name="GWB02";
             name="UIbaoxiang";
             name="gmd";
+            name = "elong";
             this.RoleName=name;
             this.app.getAssetMgr().load("res/prefabs/"+name+"/"+name+".assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (s) =>
             {

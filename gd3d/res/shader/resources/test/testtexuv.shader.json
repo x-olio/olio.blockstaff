@@ -1,0 +1,18 @@
+{
+    "layer": "geometry",
+    "properties": [
+        "_MainTex('MainTex',Texture)='white'{}",
+        "_AlphaCut('AlphaCut',Range(0.0,1.0)) = 0.5"
+    ],
+    "passes": {
+        "base": [
+            {
+                "showface": "ccw",
+                "vs": "testtexuv",
+                "fs": "testtexuv",
+                "zwrite":"on",
+                "ztest":"lequal"
+            }
+        ]
+    }
+}

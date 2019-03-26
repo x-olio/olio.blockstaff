@@ -1,0 +1,277 @@
+{
+    "rootNode": {
+        "value": {
+            "name": {
+                "value": "rootnode",
+                "type": "string",
+                "parse": "direct"
+            },
+            "localRotate": {
+                "value": {
+                    "x": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "y": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "z": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "w": {
+                        "value": 1,
+                        "type": "number",
+                        "parse": "direct"
+                    }
+                },
+                "type": "quaternion",
+                "parse": "direct"
+            },
+            "localTranslate": {
+                "value": {
+                    "kEpsilonNormalSqrt": {
+                        "value": 1E-15,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "x": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "y": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "z": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    }
+                },
+                "type": "vector3",
+                "parse": "direct"
+            },
+            "localScale": {
+                "value": {
+                    "kEpsilonNormalSqrt": {
+                        "value": 1E-15,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "x": {
+                        "value": 1,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "y": {
+                        "value": 1,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "z": {
+                        "value": 1,
+                        "type": "number",
+                        "parse": "direct"
+                    }
+                },
+                "type": "vector3",
+                "parse": "direct"
+            },
+            "gameObject": {
+                "value": {
+                    "layer": {
+                        "value": 0,
+                        "type": "number",
+                        "parse": "direct"
+                    },
+                    "tag": {
+                        "value": "Untagged",
+                        "type": "string",
+                        "parse": "direct"
+                    },
+                    "components": {
+                        "value": [],
+                        "type": "nodeComponent[]",
+                        "parse": "direct"
+                    }
+                },
+                "type": "gameObject",
+                "parse": "direct"
+            },
+            "children": {
+                "value": [
+                    {
+                        "value": {
+                            "name": {
+                                "value": "Capsule",
+                                "type": "string",
+                                "parse": "direct"
+                            },
+                            "localRotate": {
+                                "value": {
+                                    "x": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "y": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "z": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "w": {
+                                        "value": 1,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    }
+                                },
+                                "type": "quaternion",
+                                "parse": "direct"
+                            },
+                            "localTranslate": {
+                                "value": {
+                                    "kEpsilonNormalSqrt": {
+                                        "value": 1E-15,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "x": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "y": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "z": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    }
+                                },
+                                "type": "vector3",
+                                "parse": "direct"
+                            },
+                            "localScale": {
+                                "value": {
+                                    "kEpsilonNormalSqrt": {
+                                        "value": 1E-15,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "x": {
+                                        "value": 1,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "y": {
+                                        "value": 1,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "z": {
+                                        "value": 1,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    }
+                                },
+                                "type": "vector3",
+                                "parse": "direct"
+                            },
+                            "gameObject": {
+                                "value": {
+                                    "layer": {
+                                        "value": 0,
+                                        "type": "number",
+                                        "parse": "direct"
+                                    },
+                                    "tag": {
+                                        "value": "Untagged",
+                                        "type": "string",
+                                        "parse": "direct"
+                                    },
+                                    "components": {
+                                        "value": [
+                                            {
+                                                "value": {
+                                                    "comp": {
+                                                        "value": {
+                                                            "mesh": {
+                                                                "value": "Library_unity_default_resources_Capsule.mesh.bin",
+                                                                "type": "mesh",
+                                                                "parse": "nameonly"
+                                                            }
+                                                        },
+                                                        "type": "meshFilter",
+                                                        "parse": "direct"
+                                                    }
+                                                },
+                                                "type": "nodeComponent",
+                                                "parse": "direct"
+                                            },
+                                            {
+                                                "value": {
+                                                    "comp": {
+                                                        "value": {
+                                                            "lightmapIndex": {
+                                                                "value": -1,
+                                                                "type": "number",
+                                                                "parse": "direct"
+                                                            },
+                                                            "materials": {
+                                                                "value": [
+                                                                    {
+                                                                        "value": "diff.mat.json",
+                                                                        "type": "material",
+                                                                        "parse": "nameonly"
+                                                                    }
+                                                                ],
+                                                                "type": "material[]",
+                                                                "parse": "direct"
+                                                            }
+                                                        },
+                                                        "type": "meshRenderer",
+                                                        "parse": "direct"
+                                                    }
+                                                },
+                                                "type": "nodeComponent",
+                                                "parse": "direct"
+                                            }
+                                        ],
+                                        "type": "nodeComponent[]",
+                                        "parse": "direct"
+                                    }
+                                },
+                                "type": "gameObject",
+                                "parse": "direct"
+                            }
+                        },
+                        "type": "transform",
+                        "parse": "direct",
+                        "insid": -72892
+                    }
+                ],
+                "type": "transform[]",
+                "parse": "direct"
+            }
+        },
+        "type": "transform",
+        "parse": "direct",
+        "insid": -82418
+    },
+    "lightmap": []
+}

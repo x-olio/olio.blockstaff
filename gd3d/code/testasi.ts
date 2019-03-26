@@ -31,20 +31,20 @@ class test_loadAsiprefab implements IState
                             objCam.lookat(this.trans);
                             objCam.markDirty();
 
-                            // var tex=this.app.getAssetMgr().getAssetByName("0001_archangel.imgdesc.json")as gd3d.framework.texture;
-                            // var cube=new gd3d.framework.transform();
-                            // var meshf=cube.gameObject.addComponent(gd3d.framework.StringUtil.COMPONENT_MESHFILTER)as gd3d.framework.meshFilter;
-                            // var meshr=cube.gameObject.addComponent(gd3d.framework.StringUtil.COMPONENT_MESHRENDER)as gd3d.framework.meshRenderer;
-                            // var mesh=this.app.getAssetMgr().getDefaultMesh("cube")as gd3d.framework.mesh;
-                            // var mat=new gd3d.framework.material();
-                            // var shader=this.app.getAssetMgr().getShader("diffuse.shader.json");
-                            // mat.setShader(shader);
-                            // mat.setTexture("_MainTex",tex);
-                            // meshf.mesh=mesh;
-                            // meshr.materials=[];
-                            // meshr.materials.push(mat);
+                        //     var tex=this.app.getAssetMgr().getAssetByName("0001_archangel.imgdesc.json")as gd3d.framework.texture;
+                        //     var cube=new gd3d.framework.transform();
+                        //     var meshf=cube.gameObject.addComponent(gd3d.framework.StringUtil.COMPONENT_MESHFILTER)as gd3d.framework.meshFilter;
+                        //     var meshr=cube.gameObject.addComponent(gd3d.framework.StringUtil.COMPONENT_MESHRENDER)as gd3d.framework.meshRenderer;
+                        //     var mesh=this.app.getAssetMgr().getDefaultMesh("cube")as gd3d.framework.mesh;
+                        //     var mat=new gd3d.framework.material();
+                        //     var shader=this.app.getAssetMgr().getShader("diffuse.shader.json");
+                        //     mat.setShader(shader);
+                        //     mat.setTexture("_MainTex",tex);
+                        //     meshf.mesh=mesh;
+                        //     meshr.materials=[];
+                        //     meshr.materials.push(mat);
 
-                           // this.scene.addChild(cube);
+                        //    this.scene.addChild(cube);
 
                         //    var render= this.baihu.gameObject.getComponent(gd3d.framework.StringUtil.COMPONENT_MESHRENDER)as gd3d.framework.meshRenderer;
                         //    render.materials[0].setTexture("_MainTex",tex);
