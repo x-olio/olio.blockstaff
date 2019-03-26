@@ -238,8 +238,6 @@ declare namespace Game.System {
         type: string;
         data: Array<number>;
         blocks: Array<ILayerBlockData>;
-        imageheight: number;
-        imagewidth: number;
         blockwidht: number;
         blockheight: number;
     }

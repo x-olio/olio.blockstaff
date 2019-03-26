@@ -93,8 +93,6 @@ namespace Game.System
         data: Array<number>;
         blocks: Array<ILayerBlockData>;
 
-        imageheight: number;
-        imagewidth: number;
 
         blockwidht: number;
         blockheight: number;
@@ -128,6 +126,57 @@ namespace Game.System
     // data: ILayerData;
     // blockfile: IBlockFileData;
     // }
+
+    //应该是block 分四个文件描述
+    let blockDesc1= 
+    `
+    {
+        "pics":[{tex:"./res/_game/test/red.png",tileWidth:1,tileHeight:1}]
+        //每个文件中有个图片列表，图片有一个基本数据，要把图片横竖切位几份
+        这里的tileWidth=1，tileHeight=1 表示这张图片的被切位1x1份
+
+        "bound":"stand",
+        "display":{
+            "type":"static",
+            "pics":[[0,0]]//pics [0,0] 表示第零张图的第零个元素切片
+        }
+    }
+    `
+    let blockDesc2=     
+    `
+    {
+        "pics":[{tex:"./res/_game/test/green.png",tileWidth:1,tileHeight:1}]
+        "bound":"stand",
+        "display":{
+            "type":"static",
+            "pics":[[0,0]]
+        }
+    }
+    `
+    let blockDesc3=    
+    `
+    {
+        "pics":[{tex:"./res/_game/test/blue.png",tileWidth:1,tileHeight:1}]
+        "bound":"stand",
+        "display":{
+            "type":"static",
+            "pics":[[0,0]]
+        }
+    }
+    `
+    let blockDesc4=     
+    `
+    {
+        "pics":[{tex:"./res/_game/test/stairs.png",tileWidth:1,tileHeight:1}]
+        "bound":"stand",
+        "display":{
+            "type":"static",
+            "pics":[[0,0]]
+        }
+    }
+    `
+
+    
     let testJSON = `
 {
 	"version":"1.0.0",
@@ -406,17 +455,19 @@ namespace Game.System
                         if (!id)
                             continue;
 
-                        let tileWidth = (layer.blockheight / layer.imageheight);
-                        let tileHeight = (layer.blockheight / layer.imageheight);
+
+                        //这里主要的问题，图片提供自己切成了几个图素，也就没办法来计算tileX Y HeighWidth
+                        let tileWidth =1.0;// (layer.blockheight / layer.imageheight);
+                        let tileHeight =1.0// (layer.blockheight / layer.imageheight);
 
 
-                        let tileX = (((id - 1) % layer.blockheight) | 0) * tileWidth;
-                        let tileY = (((id - 1) / layer.blockheight) | 0) * tileHeight;
+                        let tileX = 0;// (((id - 1) % layer.blockheight) | 0) * tileWidth;
+                        let tileY = 0;//(((id - 1) / layer.blockheight) | 0) * tileHeight;
 
                         // var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
                         // var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
 
-                        tileY = 1.0 - tileY - tileHeight;
+                        //tileY = 1.0 - tileY - tileHeight;
 
                         let bdata = layer.blocks[id - 1];//id-1 = 下标
 
