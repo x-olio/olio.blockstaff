@@ -58,193 +58,174 @@ namespace Game.System
         width: number;
     }
 
-    interface IDisplayItemData
-    {
-        data: string;
-        rect?: { x: number, y: number, w: number, h: number };
 
-    }
-    interface IDisplayData
-    {
-        type: "static" | "animation" | "nine";
-        pics: []
-    }
-    interface IBlockData
-    {
-        bound;
-        display: {
-            type: string,
-            pics: Array<number>
-        };
-    }
-    interface IBlockFileData
-    {
-        pics: Array<string>;
-        files: { [id: string]: IBlockData }
-    }
 
-    interface ILayerBlockData
-    {
-        file: string;
-    }
     interface ILayerData
     {
         type: string;
         data: Array<number>;
-        blocks: Array<ILayerBlockData>;
+        refblocks: Array<string>;
 
 
-        blockwidht: number;
-        blockheight: number;
+        width: number;
+        height: number;
     }
 
-
-    interface IBlockFileDescData
-    {
-        bound: string;
-        pics: Array<string>;
-    }
 
     interface IMapInfoData
     {
         version: string;
-        height: number;
-        width: number;
         layers: Array<ILayerData>;
-        blockfile: IBlockFileData;
-        files: Array<IBlockFileDescData>;
     }
 
 
 
-    class MapBlock
-    {
-        data: IBlockData
-    }
+
     // class MapLayer
     // {
     // data: ILayerData;
     // blockfile: IBlockFileData;
     // }
-
+    interface IPieceOFPic //图片的一部分
+    {
+        imgIndex: number;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+    }
+    interface IBlockAnim
+    {
+        speed: number;
+        pieces: number[];
+    }
+    interface IBlockDesc
+    {
+        refImgs: string[];//涉及到的图片
+        pieces: IPieceOFPic[];//图片块
+        bound: string;//这个block和角色的关系，无关/墙/平台
+        layer: string;//这个block是背景，前景，镶嵌物等
+        displayType: string;//这个block的显示类型
+        displayPicList: { [id: string]: IBlockAnim };
+    }
     //应该是block 分四个文件描述
-    let blockDesc1= 
-    `
+    let blockDesc1 =
+        `
     {
-        "pics":[{tex:"./res/_game/test/red.png",tileWidth:1,tileHeight:1}]
-        //每个文件中有个图片列表，图片有一个基本数据，要把图片横竖切位几份
-        这里的tileWidth=1，tileHeight=1 表示这张图片的被切位1x1份
+        "refImgs":["./res/_game/test/red.png"],
+         "pieces":[
+            {
+                "imgIndex":0,
+                "x":0,
+                "y":0,
+                "w":1,
+                "h":1
+            }
+            ],
+        "bound":"wall",
+        "layer":"forground",
+        "displayType":"static",
+        "displayPicList":{
+            "def":{
+                "speed":0,
+                "pieces":[0]
+            }
+        }
+    }
+    `
+    let blockDesc2 =
+        `
+    {
+        "refImgs":["./res/_game/test/green.png"],
+         "pieces":[
+            {
+                "imgIndex":0,
+                "x":0,
+                "y":0,
+                "w":1,
+                "h":1
+            }
+            ],
+        "bound":"wall",
+        "layer":"forground",
+        "displayType":"static",
+        "displayPicList":{
+            "def":{
+                "speed":0,
+                "pieces":[0]
+            }
+        }
+    }
+    `
+    let blockDesc3 =
+        `
+    {
+        "refImgs":["./res/_game/test/blue.png"],
+         "pieces":[
+            {
+                "imgIndex":0,
+                "x":0,
+                "y":0,
+                "w":1,
+                "h":1
+            }
+            ],
+        "bound":"wall",
+        "layer":"forground",
+        "displayType":"static",
+        "displayPicList":{
+            "def":{
+                "speed":0,
+                "pieces":[0]
+            }
+        }
+    }
+    `
+    let blockDesc4 =
+        `
+    {
+        "refImgs":["./res/_game/test/stairs.png"],
+         "pieces":[
+            {
+                "imgIndex":0,
+                "x":0,
+                "y":0,
+                "w":1,
+                "h":1
+            }
+            ],
+        "bound":"wall",
+        "layer":"forground",
+        "displayType":"static",
+        "displayPicList":{
+            "def":{
+                "speed":0,
+                "pieces":[0]
+            }
+        }
+    }
+    `
 
-        "bound":"stand",
-        "display":{
-            "type":"static",
-            "pics":[[0,0]]//pics [0,0] 表示第零张图的第零个元素切片
-        }
-    }
-    `
-    let blockDesc2=     
-    `
-    {
-        "pics":[{tex:"./res/_game/test/green.png",tileWidth:1,tileHeight:1}]
-        "bound":"stand",
-        "display":{
-            "type":"static",
-            "pics":[[0,0]]
-        }
-    }
-    `
-    let blockDesc3=    
-    `
-    {
-        "pics":[{tex:"./res/_game/test/blue.png",tileWidth:1,tileHeight:1}]
-        "bound":"stand",
-        "display":{
-            "type":"static",
-            "pics":[[0,0]]
-        }
-    }
-    `
-    let blockDesc4=     
-    `
-    {
-        "pics":[{tex:"./res/_game/test/stairs.png",tileWidth:1,tileHeight:1}]
-        "bound":"stand",
-        "display":{
-            "type":"static",
-            "pics":[[0,0]]
-        }
-    }
-    `
 
-    
     let testJSON = `
 {
 	"version":"1.0.0",
-	"height":16,
-	"width":32,
-	
 	"layers":[
 		{
-            "blockwidht":32,
-            "blockheight":16,
-            "imageheight":512,
-            "imagewidth": 512,
+            "width":32,
+            "height":16,
             "type":"bg",
             "data":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			"blocks":[
-                {
-                    "file":"hash1"
-                },
-                {
-                    "file":"hash2"
-                },
-                {
-                    "file":"hash3"
-                },
-                {
-                    "file":"hash4"
-                }
-			]
+			"refblocks":["hash1","hash2","hash3","hash4"];
 		}
-	],
-	"blockfile":{
-        "pics":["./res/_game/test/red.png","./res/_game/test/green.png","./res/_game/test/blue.png","./res/_game/test/stairs.png"],
-        "files":{            
-            "hash1":{
-                "bound":"stand",
-                "display":{
-                    "type":"static",
-                    "pics":[0,1]
-                }
-            },
-            "hash2":{
-                "bound":"stand",
-                "display":{
-                    "type":"static",
-                    "pics":[1,0]
-                }
-            },
-            "hash3":{
-                "bound":"stand",
-                "display":{
-                    "type":"static",
-                    "pics":[2,0]
-                }
-            },
-            "hash4":{
-                "bound":"stand",
-                "display":{
-                    "type":"static",
-                    "pics":[3,0]
-                }
-            }
-        }
-	}
+	]
 }
 `
     export class Map2DSystem
     {
         env: Environment;
+        mapBlocks: { [id: string]: IBlockDesc };
+        mapTexs: { [id: string]: gd3d.framework.texture };
         //初始化
         async InitAsync(env: Environment): Promise<void>
         {
@@ -263,13 +244,44 @@ namespace Game.System
             // this.tex = await this.loadText(urlImgForTmx);
             // this.map = await this.loadMap(urlJsonTMX);
             // await this.addcube();
-            this.Parse(testJSON);
+            var block1 = JSON.parse(blockDesc1) as IBlockDesc
+            var block2 = JSON.parse(blockDesc2) as IBlockDesc
+            var block3 = JSON.parse(blockDesc3) as IBlockDesc
+            var block4 = JSON.parse(blockDesc4) as IBlockDesc
+            this.mapBlocks["hash1"] = block1;
+            this.mapBlocks["hash2"] = block2;
+            this.mapBlocks["hash3"] = block3;
+            this.mapBlocks["hash4"] = block4;
+            await this.LoadAllBlockImg();
+
+
+            var mapInfo: IMapInfoData = JSON.parse(testJSON);
+
+            this.baseData = mapInfo;
+            this.Parse(mapInfo);
             return;
         }
-
+        private async LoadAllBlockImg(): Promise<void>
+        {
+            for (var key in this.mapBlocks)
+            {
+                var imgs = this.mapBlocks[key].refImgs;
+                for (var i in imgs)
+                {
+                    var imgname = imgs[i];
+                    if (this.mapTexs[imgname] == undefined)
+                    {
+                        var tex = await this.loadText(imgs[i]);
+                        this.mapTexs[imgs[i]] = tex;
+                    }
+                }
+            }
+            return;
+        }
         constructor()
         {
-            window["map2d"] = this;
+            this.mapBlocks = {};
+            this.mapTexs = {};
         }
         tex: gd3d.framework.texture;
 
@@ -421,59 +433,54 @@ namespace Game.System
         }
 
 
-        private baseData: IMapInfoData;
 
-        async Parse(baseData: string)
+
+        async Parse(mapInfo: IMapInfoData)
         {
-
-            let mapInfo: IMapInfoData = JSON.parse(baseData);
-
-            this.baseData = mapInfo;
-
-            let loadTexs = [];
-            let texMap = {}
-            for (let texUrl of mapInfo.blockfile.pics)
-            {
-                loadTexs.push(this.loadText(texUrl).then((tex) =>
-                {
-                    texMap[texUrl] = tex;
-                }));
-
-            }
-
-            await Promise.all(loadTexs);
-
             for (let layer of mapInfo.layers)
             {
                 let mapString = "";
-                for (let y = 0; y < mapInfo.height; ++y)
+                for (let y = 0; y < layer.height; ++y)
                 {
-                    for (let x = 0; x < mapInfo.width; ++x)
+                    for (let x = 0; x < layer.width; ++x)
                     {
-                        let id = layer.data[y * mapInfo.width + x];
+                        let id = layer.data[y * layer.width + x];
                         mapString += id + " ";
                         if (!id)
                             continue;
 
-
+                        var block = this.mapBlocks[layer.refblocks[id - 1]];
+                        if (block.displayType == "static")
+                        {
+                            //先取动画第0帧
+                            var animframe = 0;
+                            var pieceid = block.displayPicList["def"].pieces[animframe];
+                            var piece = block.pieces[pieceid];
+                            var imgurl = block.refImgs[piece.imgIndex];
+                            var texture = this.mapTexs[imgurl];
+                            var tileX = piece.x;
+                            var tileY = piece.x;
+                            var tileWidth = piece.w;
+                            var tileHeight = piece.h;
+                        }
                         //这里主要的问题，图片提供自己切成了几个图素，也就没办法来计算tileX Y HeighWidth
-                        let tileWidth =1.0;// (layer.blockheight / layer.imageheight);
-                        let tileHeight =1.0// (layer.blockheight / layer.imageheight);
+                        // let tileWidth = 1.0;// (layer.blockheight / layer.imageheight);
+                        // let tileHeight = 1.0// (layer.blockheight / layer.imageheight);
 
 
-                        let tileX = 0;// (((id - 1) % layer.blockheight) | 0) * tileWidth;
-                        let tileY = 0;//(((id - 1) / layer.blockheight) | 0) * tileHeight;
+                        // let tileX = 0;// (((id - 1) % layer.blockheight) | 0) * tileWidth;
+                        // let tileY = 0;//(((id - 1) / layer.blockheight) | 0) * tileHeight;
 
                         // var tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
                         // var tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
 
                         //tileY = 1.0 - tileY - tileHeight;
 
-                        let bdata = layer.blocks[id - 1];//id-1 = 下标
+                        // let bdata = layer.blocks[id - 1];//id-1 = 下标
 
-                        let block = mapInfo.blockfile.files[bdata.file];
-                        let texKey = mapInfo.blockfile.pics[block.display.pics[0]];
-                        let texture = texMap[texKey];
+                        // let block = mapInfo.blockfile.files[bdata.file];
+                        // let texKey = mapInfo.blockfile.pics[block.display.pics[0]];
+                        // let texture = this.mapTexs[texKey];
 
                         this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, texture);
                     }
@@ -483,7 +490,7 @@ namespace Game.System
             }
         }
 
-
+        baseData: IMapInfoData;
         GetData()
         {
             return this.baseData;

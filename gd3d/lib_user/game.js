@@ -1143,19 +1143,15 @@ var Game;
             }
             return TmxStruct;
         }());
-        var MapBlock = (function () {
-            function MapBlock() {
-            }
-            return MapBlock;
-        }());
-        var blockDesc1 = "\n    {\n        \"pics\":[{tex:\"./res/_game/test/red.png\",tileWidth:1,tileHeight:1}]\n        //\u6BCF\u4E2A\u6587\u4EF6\u4E2D\u6709\u4E2A\u56FE\u7247\u5217\u8868\uFF0C\u56FE\u7247\u6709\u4E00\u4E2A\u57FA\u672C\u6570\u636E\uFF0C\u8981\u628A\u56FE\u7247\u6A2A\u7AD6\u5207\u4F4D\u51E0\u4EFD\n        \"bound\":\"stand\",\n        \"display\":{\n            \"type\":\"static\",\n            \"pics\":[[0,0]]\n        }\n    }\n    ";
-        var blockDesc2 = "\n    {\n        \"pics\":[{tex:\"./res/_game/test/green.png\",tileWidth:1,tileHeight:1}]\n        \"bound\":\"stand\",\n        \"display\":{\n            \"type\":\"static\",\n            \"pics\":[[0,0]]\n        }\n    }\n    ";
-        var blockDesc3 = "\n    {\n        \"pics\":[{tex:\"./res/_game/test/blue.png\",tileWidth:1,tileHeight:1}]\n        \"bound\":\"stand\",\n        \"display\":{\n            \"type\":\"static\",\n            \"pics\":[[0,0]]\n        }\n    }\n    ";
-        var blockDesc4 = "\n    {\n        \"pics\":[{tex:\"./res/_game/test/stairs.png\",tileWidth:1,tileHeight:1}]\n        \"bound\":\"stand\",\n        \"display\":{\n            \"type\":\"static\",\n            \"pics\":[[0,0]]\n        }\n    }\n    ";
-        var testJSON = "\n{\n\t\"version\":\"1.0.0\",\n\t\"height\":16,\n\t\"width\":32,\n\t\n\t\"layers\":[\n\t\t{\n            \"blockwidht\":32,\n            \"blockheight\":16,\n            \"imageheight\":512,\n            \"imagewidth\": 512,\n            \"type\":\"bg\",\n            \"data\":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\n\t\t\t\"blocks\":[\n                {\n                    \"file\":\"hash1\"\n                },\n                {\n                    \"file\":\"hash2\"\n                },\n                {\n                    \"file\":\"hash3\"\n                },\n                {\n                    \"file\":\"hash4\"\n                }\n\t\t\t]\n\t\t}\n\t],\n\t\"blockfile\":{\n        \"pics\":[\"./res/_game/test/red.png\",\"./res/_game/test/green.png\",\"./res/_game/test/blue.png\",\"./res/_game/test/stairs.png\"],\n        \"files\":{            \n            \"hash1\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[0,1]\n                }\n            },\n            \"hash2\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[1,0]\n                }\n            },\n            \"hash3\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[2,0]\n                }\n            },\n            \"hash4\":{\n                \"bound\":\"stand\",\n                \"display\":{\n                    \"type\":\"static\",\n                    \"pics\":[3,0]\n                }\n            }\n        }\n\t}\n}\n";
+        var blockDesc1 = "\n    {\n        \"refImgs\":[\"./res/_game/test/red.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
+        var blockDesc2 = "\n    {\n        \"refImgs\":[\"./res/_game/test/green.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
+        var blockDesc3 = "\n    {\n        \"refImgs\":[\"./res/_game/test/blue.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
+        var blockDesc4 = "\n    {\n        \"refImgs\":[\"./res/_game/test/stairs.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
+        var testJSON = "\n{\n\t\"version\":\"1.0.0\",\n\t\"layers\":[\n\t\t{\n            \"width\":32,\n            \"height\":16,\n            \"type\":\"bg\",\n            \"data\":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\n\t\t\t\"refblocks\":[\"hash1\",\"hash2\",\"hash3\",\"hash4\"];\n\t\t}\n\t]\n}\n";
         var Map2DSystem = (function () {
             function Map2DSystem() {
-                window["map2d"] = this;
+                this.mapBlocks = {};
+                this.mapTexs = {};
             }
             Map2DSystem.prototype.InitAsync = function (env) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -1167,9 +1163,67 @@ var Game;
             };
             Map2DSystem.prototype.LoadTmxAsync = function (urlJsonTMX, urlImgForTmx) {
                 return __awaiter(this, void 0, void 0, function () {
+                    var block1, block2, block3, block4, mapInfo;
                     return __generator(this, function (_a) {
-                        this.Parse(testJSON);
-                        return [2];
+                        switch (_a.label) {
+                            case 0:
+                                block1 = JSON.parse(blockDesc1);
+                                block2 = JSON.parse(blockDesc2);
+                                block3 = JSON.parse(blockDesc3);
+                                block4 = JSON.parse(blockDesc4);
+                                this.mapBlocks["hash1"] = block1;
+                                this.mapBlocks["hash2"] = block2;
+                                this.mapBlocks["hash3"] = block3;
+                                this.mapBlocks["hash4"] = block4;
+                                return [4, this.LoadAllBlockImg()];
+                            case 1:
+                                _a.sent();
+                                mapInfo = JSON.parse(testJSON);
+                                this.baseData = mapInfo;
+                                this.Parse(mapInfo);
+                                return [2];
+                        }
+                    });
+                });
+            };
+            Map2DSystem.prototype.LoadAllBlockImg = function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var _a, _b, _i, key, imgs, _c, _d, _e, i, imgname, tex;
+                    return __generator(this, function (_f) {
+                        switch (_f.label) {
+                            case 0:
+                                _a = [];
+                                for (_b in this.mapBlocks)
+                                    _a.push(_b);
+                                _i = 0;
+                                _f.label = 1;
+                            case 1:
+                                if (!(_i < _a.length)) return [3, 6];
+                                key = _a[_i];
+                                imgs = this.mapBlocks[key].refImgs;
+                                _c = [];
+                                for (_d in imgs)
+                                    _c.push(_d);
+                                _e = 0;
+                                _f.label = 2;
+                            case 2:
+                                if (!(_e < _c.length)) return [3, 5];
+                                i = _c[_e];
+                                imgname = imgs[i];
+                                if (!(this.mapTexs[imgname] == undefined)) return [3, 4];
+                                return [4, this.loadText(imgs[i])];
+                            case 3:
+                                tex = _f.sent();
+                                this.mapTexs[imgs[i]] = tex;
+                                _f.label = 4;
+                            case 4:
+                                _e++;
+                                return [3, 2];
+                            case 5:
+                                _i++;
+                                return [3, 1];
+                            case 6: return [2];
+                        }
                     });
                 });
             };
@@ -1268,54 +1322,38 @@ var Game;
                     });
                 });
             };
-            Map2DSystem.prototype.Parse = function (baseData) {
+            Map2DSystem.prototype.Parse = function (mapInfo) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var mapInfo, loadTexs, texMap, _loop_1, this_1, _i, _a, texUrl, _b, _c, layer, mapString, y, x, id, tileWidth, tileHeight, tileX, tileY, bdata, block, texKey, texture;
-                    return __generator(this, function (_d) {
-                        switch (_d.label) {
-                            case 0:
-                                mapInfo = JSON.parse(baseData);
-                                this.baseData = mapInfo;
-                                loadTexs = [];
-                                texMap = {};
-                                _loop_1 = function (texUrl) {
-                                    loadTexs.push(this_1.loadText(texUrl).then(function (tex) {
-                                        texMap[texUrl] = tex;
-                                    }));
-                                };
-                                this_1 = this;
-                                for (_i = 0, _a = mapInfo.blockfile.pics; _i < _a.length; _i++) {
-                                    texUrl = _a[_i];
-                                    _loop_1(texUrl);
-                                }
-                                return [4, Promise.all(loadTexs)];
-                            case 1:
-                                _d.sent();
-                                for (_b = 0, _c = mapInfo.layers; _b < _c.length; _b++) {
-                                    layer = _c[_b];
-                                    mapString = "";
-                                    for (y = 0; y < mapInfo.height; ++y) {
-                                        for (x = 0; x < mapInfo.width; ++x) {
-                                            id = layer.data[y * mapInfo.width + x];
-                                            mapString += id + " ";
-                                            if (!id)
-                                                continue;
-                                            tileWidth = 1.0;
-                                            tileHeight = 1.0;
-                                            tileX = 0;
-                                            tileY = 0;
-                                            bdata = layer.blocks[id - 1];
-                                            block = mapInfo.blockfile.files[bdata.file];
-                                            texKey = mapInfo.blockfile.pics[block.display.pics[0]];
-                                            texture = texMap[texKey];
-                                            this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, texture);
-                                        }
-                                        mapString += "\n";
+                    var _i, _a, layer, mapString, y, x, id, block, animframe, pieceid, piece, imgurl, texture, tileX, tileY, tileWidth, tileHeight;
+                    return __generator(this, function (_b) {
+                        for (_i = 0, _a = mapInfo.layers; _i < _a.length; _i++) {
+                            layer = _a[_i];
+                            mapString = "";
+                            for (y = 0; y < layer.height; ++y) {
+                                for (x = 0; x < layer.width; ++x) {
+                                    id = layer.data[y * layer.width + x];
+                                    mapString += id + " ";
+                                    if (!id)
+                                        continue;
+                                    block = this.mapBlocks[layer.refblocks[id - 1]];
+                                    if (block.displayType == "static") {
+                                        animframe = 0;
+                                        pieceid = block.displayPicList["def"].pieces[animframe];
+                                        piece = block.pieces[pieceid];
+                                        imgurl = block.refImgs[piece.imgIndex];
+                                        texture = this.mapTexs[imgurl];
+                                        tileX = piece.x;
+                                        tileY = piece.x;
+                                        tileWidth = piece.w;
+                                        tileHeight = piece.h;
                                     }
-                                    console.log(mapString);
+                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, texture);
                                 }
-                                return [2];
+                                mapString += "\n";
+                            }
+                            console.log(mapString);
                         }
+                        return [2];
                     });
                 });
             };

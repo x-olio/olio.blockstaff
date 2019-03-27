@@ -218,45 +218,49 @@ declare namespace Game.System {
         version: number;
         width: number;
     }
-    interface IBlockData {
-        bound: any;
-        display: {
-            type: string;
-            pics: Array<number>;
-        };
-    }
-    interface IBlockFileData {
-        pics: Array<string>;
-        files: {
-            [id: string]: IBlockData;
-        };
-    }
-    interface ILayerBlockData {
-        file: string;
-    }
     interface ILayerData {
         type: string;
         data: Array<number>;
-        blocks: Array<ILayerBlockData>;
-        blockwidht: number;
-        blockheight: number;
-    }
-    interface IBlockFileDescData {
-        bound: string;
-        pics: Array<string>;
+        refblocks: Array<string>;
+        width: number;
+        height: number;
     }
     interface IMapInfoData {
         version: string;
-        height: number;
-        width: number;
         layers: Array<ILayerData>;
-        blockfile: IBlockFileData;
-        files: Array<IBlockFileDescData>;
+    }
+    interface IPieceOFPic {
+        imgIndex: number;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+    }
+    interface IBlockAnim {
+        speed: number;
+        pieces: number[];
+    }
+    interface IBlockDesc {
+        refImgs: string[];
+        pieces: IPieceOFPic[];
+        bound: string;
+        layer: string;
+        displayType: string;
+        displayPicList: {
+            [id: string]: IBlockAnim;
+        };
     }
     class Map2DSystem {
         env: Environment;
+        mapBlocks: {
+            [id: string]: IBlockDesc;
+        };
+        mapTexs: {
+            [id: string]: gd3d.framework.texture;
+        };
         InitAsync(env: Environment): Promise<void>;
         LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>;
+        private LoadAllBlockImg;
         constructor();
         tex: gd3d.framework.texture;
         map: TmxStruct;
@@ -264,8 +268,8 @@ declare namespace Game.System {
         private loadText;
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
         private addcube;
-        private baseData;
-        Parse(baseData: string): Promise<void>;
+        Parse(mapInfo: IMapInfoData): Promise<void>;
+        baseData: IMapInfoData;
         GetData(): IMapInfoData;
         CreateEmitData(w: number, h: number): any[];
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
