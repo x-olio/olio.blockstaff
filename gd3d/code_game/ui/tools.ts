@@ -20,7 +20,7 @@ namespace Game.ui
     {
         hitsSprite?: gd3d.framework.sprite;
         backSprite?: gd3d.framework.sprite;
-
+        onClick?: () => void;
     }
     export interface IInputOption extends ILabelOption
     {
@@ -121,16 +121,103 @@ namespace Game.ui
         btn_b.pressedGraphic = option.backSprite;
         btn_b.pressedColor = new gd3d.math.color(1, 1, 1, 1);
         btn_b.transition = gd3d.framework.TransitionType.SpriteSwap;
-
-        createLabel({
-            owner: btn_t, text: option.text, assetMgr: option.assetMgr,
-            name: `lib_${option.name}`, fontcolor: option.fontcolor,
-            x: 55,
-            y: -30,
-            width: option.width
-        })
-
+        if (option.text)
+        {
+            createLabel({
+                owner: btn_t, text: option.text, assetMgr: option.assetMgr,
+                name: `lib_${option.name}`, fontcolor: option.fontcolor,
+                x: 55,
+                y: -30,
+                width: option.width
+            });
+        }
+        if (option.onClick)
+            btn_b.addListener(gd3d.event.UIEventEnum.PointerClick, option.onClick, this);
 
         return btn_b;
+    }
+
+    
+    let helpV2 = new gd3d.math.vector2();
+
+    export function AddEventInComp(trans2d: gd3d.framework.IRectRenderer, eventEnum: gd3d.event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any)
+    {
+        let _this: any = trans2d;
+
+        _this.UIEventer = _this.UIEventer || new gd3d.event.UIEvent();
+        _this.UIEventer.OnEnum(eventEnum, func, thisArg);
+        _this.downPointV2 = _this.downPointV2 || new gd3d.math.vector2();
+
+        trans2d.onPointEvent = function (canvas, ev, oncap)
+        {
+            if (oncap == false)
+            {
+                helpV2.x = ev.x;
+                helpV2.y = ev.y;
+                var b = _this.transform.ContainsCanvasPoint(helpV2);
+
+                if (b)
+                {
+                    if (ev.type == gd3d.event.PointEventEnum.PointDown)
+                    {
+                        _this._downInThis = true;
+
+                        let pd = gd3d.event.UIEventEnum.PointerDown;
+                        if (_this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pd]) > 0)
+                        {
+                            ev.eated = true;
+                            _this.UIEventer.EmitEnum(pd, ev);
+                        }
+                        _this.downPointV2.x = ev.x;
+                        _this.downPointV2.y = ev.y;
+                        _this.isMovedLimit = false;
+                    }
+                    else if (ev.type == gd3d.event.PointEventEnum.PointHold && _this._downInThis)
+                    {
+                        if (_this._dragOut == true)
+                        {
+                            _this._dragOut = false;
+                        }
+                        if (!_this.isMovedLimit)
+                        {
+                            _this.isMovedLimit = gd3d.math.vec2Distance(helpV2, _this.downPointV2) > _this.movedLimit;
+                        }
+                    }
+                    else if (ev.type == gd3d.event.PointEventEnum.PointUp && _this._downInThis)
+                    {
+                        _this._downInThis = false;
+
+                        let pu = gd3d.event.UIEventEnum.PointerUp;
+                        if (_this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pu]) > 0)
+                        {
+                            ev.eated = true;
+                            _this.UIEventer.EmitEnum(pu, ev);
+                        }
+
+
+                        let pc = gd3d.event.UIEventEnum.PointerClick;
+                        if (!_this.isMovedLimit && _this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pc]) > 0)
+                        {
+                            ev.eated = true;
+                            _this.UIEventer.EmitEnum(pc, ev);
+                        }
+                    }
+                }
+                else
+                {
+                    if (ev.type == gd3d.event.PointEventEnum.PointUp)
+                    {//在区域外抬起
+                        _this._downInThis = false;
+                    }
+                    else if (ev.type == gd3d.event.PointEventEnum.PointHold && _this._downInThis)
+                    {
+                        if (_this._dragOut == false)
+                        {
+                            _this._dragOut = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

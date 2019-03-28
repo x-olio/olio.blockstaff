@@ -49,6 +49,8 @@ declare namespace Game.Common {
         };
         static APIPost(url: string, data?: any, binrary?: boolean): Promise<IResult>;
         static APIGet(url: string, data?: any): Promise<IResult>;
+        static UserAPIPost(url: string, data?: any, binrary?: boolean): Promise<IResult>;
+        static UserAPIGet(url: string, data?: any): Promise<IResult>;
         static Login(data: {
             username: string;
             password: string;
@@ -61,6 +63,24 @@ declare namespace Game.Common {
             email: string;
         }): Promise<IResult>;
         static CheckToken(): Promise<boolean>;
+        static SaveMap(data: {
+            name: string;
+            desc: string;
+            data: any;
+        }): Promise<IResult>;
+        static ReadMapList(): Promise<IResult>;
+        static DelMap(data: {
+            name: string;
+        }): Promise<IResult>;
+        static CreateBlock(data: {
+            name: string;
+            desc: string;
+            data: string;
+        }): Promise<IResult>;
+        static ReadBlockList(): Promise<IResult>;
+        static DelBlock(data: {
+            name: string;
+        }): Promise<IResult>;
     }
 }
 declare namespace Game.Common {
@@ -86,6 +106,18 @@ declare namespace Game.Common {
             [key: string]: any;
         } | ArrayBuffer): Promise<{}>;
         static GetXhr(url: string, method: string, loadend?: (xhr: XMLHttpRequest, ev: ProgressEvent) => void, error?: (xhr: XMLHttpRequest, ev: ProgressEvent) => void, statechage?: (xhr: XMLHttpRequest, ev: Event) => void): XMLHttpRequest;
+    }
+}
+declare namespace Game.State {
+    class State_EditorMap implements IGameState {
+        private name?;
+        env: Environment;
+        statemgr: StateMgr;
+        constructor(name?: string);
+        OnInit(env: Environment, statemgr: StateMgr): void;
+        CreateUI(): void;
+        OnUpdate(delta: number): void;
+        OnExit(): void;
     }
 }
 declare namespace Game.State {
@@ -163,6 +195,19 @@ declare namespace Game.State {
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
         OnExit(): void;
         OnUpdate(delta: number): void;
+    }
+}
+declare namespace Game.State {
+    class State_SelectMap implements IGameState {
+        isEditor: boolean;
+        private env;
+        private statemgr;
+        constructor(isEditor?: boolean);
+        OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
+        LoadTexture(): Promise<void>;
+        CreateUI(): Promise<void>;
+        OnUpdate(delta: number): void;
+        OnExit(): void;
     }
 }
 declare namespace Game.System {
@@ -251,29 +296,76 @@ declare namespace Game.System {
         };
     }
     class Map2DSystem {
+        static mapsDataStore: {
+            [key: string]: IMapInfoData;
+        };
+        static mapBlockStore: {
+            [key: string]: IBlockDesc;
+        };
         env: Environment;
+        baseData: IMapInfoData;
         mapBlocks: {
             [id: string]: IBlockDesc;
         };
+        mapInfo: IMapInfoData;
         mapTexs: {
             [id: string]: gd3d.framework.texture;
         };
         InitAsync(env: Environment): Promise<void>;
-        LoadTmxAsync(urlJsonTMX: string, urlImgForTmx: string): Promise<void>;
+        LoadTmxAsync(jsonData: IMapInfoData, blocks: {
+            [key: string]: IBlockDesc;
+        }): Promise<void>;
         private LoadAllBlockImg;
         constructor();
         tex: gd3d.framework.texture;
         map: TmxStruct;
-        private loadMap;
         private loadText;
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
-        private addcube;
         Parse(mapInfo: IMapInfoData): Promise<void>;
-        baseData: IMapInfoData;
-        GetData(): IMapInfoData;
         CreateEmitData(w: number, h: number): any[];
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
         CalcIndex(x: number, y: number, w: number): number;
+        GetImageData(): string;
+    }
+}
+declare namespace Game.ui {
+    class ScrollFrame {
+        private option;
+        root: gd3d.framework.transform2D;
+        private fimages;
+        private curRow;
+        private context;
+        private click_time;
+        private assetMgr;
+        constructor(option: {
+            width: number;
+            height: number;
+            owner?: gd3d.framework.transform2D;
+        });
+        Add(option: {
+            bg: gd3d.framework.texture;
+            border: gd3d.framework.texture;
+            width?: number;
+            height?: number;
+            x?: number;
+            y?: number;
+            owner?: gd3d.framework.transform2D;
+            onClick?: (bindData?: any) => void;
+            onDelete?: () => void;
+            text?: string;
+        }): void;
+        CreateFrameImage(option: {
+            bg: gd3d.framework.texture;
+            border: gd3d.framework.texture;
+            width?: number;
+            height?: number;
+            x?: number;
+            y?: number;
+            owner?: gd3d.framework.transform2D;
+            onClick?: () => void;
+            onDelete?: () => void;
+            text?: string;
+        }): gd3d.framework.transform2D;
     }
 }
 declare namespace Game.ui {
@@ -293,6 +385,7 @@ declare namespace Game.ui {
     interface IButtonOption extends ILabelOption {
         hitsSprite?: gd3d.framework.sprite;
         backSprite?: gd3d.framework.sprite;
+        onClick?: () => void;
     }
     interface IInputOption extends ILabelOption {
         backSprite: gd3d.framework.sprite;
@@ -303,4 +396,10 @@ declare namespace Game.ui {
     function createLabel(option: ILabelOption): gd3d.framework.label;
     function createInput(option: IInputOption): gd3d.framework.inputField;
     function createButton(option: IButtonOption): gd3d.framework.button;
+    function AddEventInComp(trans2d: gd3d.framework.IRectRenderer, eventEnum: gd3d.event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
+}
+declare namespace Game.ui.dialog {
+    class MesageBox {
+        static Show(title: string, content: string): void;
+    }
 }

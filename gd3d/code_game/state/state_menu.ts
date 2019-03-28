@@ -42,7 +42,7 @@ namespace Game.State
             let root = new gd3d.framework.transform2D();
             this.env.overlay.addChild(root);
             root.markDirty();
-            
+
             let x = gd3d.framework.sceneMgr.app.width / 2 - (300 / 2);
             let btn_enterGame = ui.createButton({
                 assetMgr: this.env.assetMgr,
@@ -50,13 +50,17 @@ namespace Game.State
                 backSprite: atlasComp.sprites["ui_public_button_1"],
                 x: x, y: 135,
                 width: 300,
-                text: "           开始游戏",
+                text: "           选择地图",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                owner: root
+                owner: root,
+                onClick: () =>
+                {
+                    this.statemgr.ChangeState(new State_Second());
+                }
             });
 
 
-            let btn_editor = ui.createButton({
+            ui.createButton({
                 assetMgr: this.env.assetMgr,
                 hitsSprite: atlasComp.sprites["ui_public_button_hits"],
                 backSprite: atlasComp.sprites["ui_public_button_1"],
@@ -64,7 +68,11 @@ namespace Game.State
                 width: 300,
                 text: "           编辑模式",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                owner: root
+                owner: root,
+                onClick: () =>
+                {
+                    this.statemgr.ChangeState(new State_SelectMap(true));
+                }
             });
 
             ui.createButton({
@@ -75,17 +83,16 @@ namespace Game.State
                 width: 300,
                 text: "           退出登录",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                owner: root
-            }).addListener(gd3d.event.UIEventEnum.PointerClick, () =>
-            {
-                Common.LocalStore.Clean();
-                this.statemgr.ChangeState(new State_Login());
-            }, this);
+                owner: root,
+                onClick: () =>
+                {
+                    Common.LocalStore.Clean();
+                    this.statemgr.ChangeState(new State_Login());
+                }
 
-            btn_enterGame.addListener(gd3d.event.UIEventEnum.PointerClick, () =>
-            {
-                this.statemgr.ChangeState(new State_Second());
-            }, this);
+            });
+
+
         }
     }
 }

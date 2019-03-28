@@ -59,7 +59,7 @@ namespace gd3d.framework
         stats: Stats.Stats;
         container: HTMLDivElement;
         outcontainer: HTMLDivElement;
-        edModel:boolean;
+        edModel: boolean;
         /**
          * @public
          * @language zh_CN
@@ -243,8 +243,8 @@ namespace gd3d.framework
 
         startForCanvas(canvas: HTMLCanvasElement, type: CanvasFixedType = CanvasFixedType.Free, val: number = 1200, webglDebug = false)
         {
-            this.ccWidth = this.ccWidth == undefined ?  canvas.clientWidth : this.ccWidth;
-            this.ccHeight =this.ccHeight == undefined ?  canvas.clientHeight : this.ccHeight ;
+            this.ccWidth = this.ccWidth == undefined ? canvas.clientWidth : this.ccWidth;
+            this.ccHeight = this.ccHeight == undefined ? canvas.clientHeight : this.ccHeight;
 
             this._timeScale = 1;
             sceneMgr.app = this;
@@ -257,7 +257,8 @@ namespace gd3d.framework
                 throw Error("Failed to get webgl at the application.start()");
             }
 
-            switch (type){
+            switch (type)
+            {
                 case CanvasFixedType.FixedWidthType: this.canvasFixWidth = val; break;
                 case CanvasFixedType.FixedHeightType: this.canvasFixHeight = val; break;
             }
@@ -422,35 +423,41 @@ namespace gd3d.framework
         //delta 单位秒
         private update(delta: number)
         {
-            //if (this.outcontainer.clientWidth != this._canvasClientWidth || this.outcontainer.clientHeight != this._canvasClientHeight)
+            try
             {
-                this.updateOrientationMode();
-            }
-
-            this.updateScreenAsp();
-
-            if (this.bePlay)
-            {
-                if (this.bePause)
+                //if (this.outcontainer.clientWidth != this._canvasClientWidth || this.outcontainer.clientHeight != this._canvasClientHeight)
                 {
-                    if (this.beStepForward && this.beStepNumber > 0)
+                    this.updateOrientationMode();
+                }
+
+                this.updateScreenAsp();
+
+                if (this.bePlay)
+                {
+                    if (this.bePause)
                     {
-                        this.beStepNumber--;
+                        if (this.beStepForward && this.beStepNumber > 0)
+                        {
+                            this.beStepNumber--;
+                            this.updateUserCode(delta);
+                        }
+                    }
+                    else
+                    {
+                        if (this._inputmgr)
+                            this._inputmgr.update(delta);
                         this.updateUserCode(delta);
                     }
                 }
-                else
-                {
-                    if(this._inputmgr)
-                        this._inputmgr.update(delta);
-                    this.updateUserCode(delta);
-                }
-            }
-            this.updateEditorCode(delta);
+                this.updateEditorCode(delta);
 
-            if (this._scene != null)
+                if (this._scene != null)
+                {
+                    this._scene.update(delta);
+                }
+            } catch (e)
             {
-                this._scene.update(delta);
+                console.error(e);
             }
         }
 
@@ -458,9 +465,10 @@ namespace gd3d.framework
         {
             if (!this.outcontainer)
                 return;
-            if(this.webgl && this.webgl.canvas ){
-                this.ccWidth = this.webgl.canvas.clientWidth != null ?  this.webgl.canvas.clientWidth : this.ccWidth; 
-                this.ccHeight = this.webgl.canvas.clientHeight != null ? this.webgl.canvas.clientHeight :this.ccHeight; 
+            if (this.webgl && this.webgl.canvas)
+            {
+                this.ccWidth = this.webgl.canvas.clientWidth != null ? this.webgl.canvas.clientWidth : this.ccWidth;
+                this.ccHeight = this.webgl.canvas.clientHeight != null ? this.webgl.canvas.clientHeight : this.ccHeight;
             }
 
             if (this.ccWidth != this._canvasClientWidth || this.ccHeight != this._canvasClientHeight)
@@ -494,8 +502,9 @@ namespace gd3d.framework
         }
 
         //设置屏幕的 ASP
-        private setScreenAsp(){
-            if(!this.webgl || !this.webgl.canvas) return;
+        private setScreenAsp()
+        {
+            if (!this.webgl || !this.webgl.canvas) return;
             let canvas = this.webgl.canvas;
             let devicePixelRatio = window.devicePixelRatio || 1;
             let type = this.canvasFixedType;
@@ -503,20 +512,20 @@ namespace gd3d.framework
             {
                 case CanvasFixedType.Free:
                     this.screenAdaptiveType = "宽高度自适应(宽高都不固定,真实像素宽高)";
-                    canvas.width = this.ccWidth*devicePixelRatio;
-                    canvas.height = this.ccHeight*devicePixelRatio;
+                    canvas.width = this.ccWidth * devicePixelRatio;
+                    canvas.height = this.ccHeight * devicePixelRatio;
                     this._scaleFromPandding = 1;
                     break;
                 case CanvasFixedType.FixedWidthType:
                     this.screenAdaptiveType = "宽度自适应(宽度固定,一般横屏使用)";
-                    canvas.width = this._fixWidth*devicePixelRatio;
+                    canvas.width = this._fixWidth * devicePixelRatio;
                     canvas.height = canvas.width * this.ccHeight / this.ccWidth;
                     //this._scaleFromPandding = this.ccHeight / this.webgl.canvas.height;
                     this._scaleFromPandding = this.ccHeight * devicePixelRatio / this.webgl.canvas.height;
                     break;
                 case CanvasFixedType.FixedHeightType:
                     this.screenAdaptiveType = "高度自适应(高度固定，一般竖屏使用)";
-                    canvas.height = this._fixHeight*devicePixelRatio;
+                    canvas.height = this._fixHeight * devicePixelRatio;
                     canvas.width = this.ccWidth * canvas.height / this.ccHeight;
                     this._scaleFromPandding = this.ccHeight * devicePixelRatio / this.webgl.canvas.height;
                     break;

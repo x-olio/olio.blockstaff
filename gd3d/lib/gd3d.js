@@ -8,9 +8,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -266,26 +269,31 @@ var gd3d;
                 framework.DrawCallInfo.inc.closeDrawCallInfo();
             };
             application.prototype.update = function (delta) {
-                {
-                    this.updateOrientationMode();
-                }
-                this.updateScreenAsp();
-                if (this.bePlay) {
-                    if (this.bePause) {
-                        if (this.beStepForward && this.beStepNumber > 0) {
-                            this.beStepNumber--;
+                try {
+                    {
+                        this.updateOrientationMode();
+                    }
+                    this.updateScreenAsp();
+                    if (this.bePlay) {
+                        if (this.bePause) {
+                            if (this.beStepForward && this.beStepNumber > 0) {
+                                this.beStepNumber--;
+                                this.updateUserCode(delta);
+                            }
+                        }
+                        else {
+                            if (this._inputmgr)
+                                this._inputmgr.update(delta);
                             this.updateUserCode(delta);
                         }
                     }
-                    else {
-                        if (this._inputmgr)
-                            this._inputmgr.update(delta);
-                        this.updateUserCode(delta);
+                    this.updateEditorCode(delta);
+                    if (this._scene != null) {
+                        this._scene.update(delta);
                     }
                 }
-                this.updateEditorCode(delta);
-                if (this._scene != null) {
-                    this._scene.update(delta);
+                catch (e) {
+                    console.error(e);
                 }
             };
             application.prototype.updateScreenAsp = function () {
@@ -2286,6 +2294,7 @@ var gd3d;
                 outModelPos.x = scalx * 2 - 1;
                 outModelPos.y = 1 - scaly * 2;
             };
+            var canvas_1;
             canvas.ClassName = "canvas";
             canvas.depthTag = "__depthTag__";
             canvas.flowIndexTag = "__flowIndexTag__";
@@ -2306,7 +2315,6 @@ var gd3d;
                 __metadata("design:paramtypes", [])
             ], canvas);
             return canvas;
-            var canvas_1;
         }());
         framework.canvas = canvas;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -3478,7 +3486,7 @@ var gd3d;
             ], transform2D.prototype, "localRotate", void 0);
             __decorate([
                 gd3d.reflect.Field("boolean"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Boolean),
                 __metadata("design:paramtypes", [Boolean])
             ], transform2D.prototype, "isMask", null);
             __decorate([
@@ -3846,7 +3854,7 @@ var gd3d;
             button.ClassName = "button";
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], button.prototype, "transition", null);
             __decorate([
@@ -3859,24 +3867,24 @@ var gd3d;
             ], button.prototype, "_pressedSpriteName", void 0);
             __decorate([
                 gd3d.reflect.Field("reference", null, "image2D"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.image2D),
                 __metadata("design:paramtypes", [framework.image2D])
             ], button.prototype, "targetImage", null);
             __decorate([
                 gd3d.reflect.Field("color"),
                 gd3d.reflect.UIStyle("color"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.color),
                 __metadata("design:paramtypes", [gd3d.math.color])
             ], button.prototype, "normalColor", null);
             __decorate([
                 gd3d.reflect.Field("color"),
                 gd3d.reflect.UIStyle("color"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.color),
                 __metadata("design:paramtypes", [gd3d.math.color])
             ], button.prototype, "pressedColor", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], button.prototype, "fadeDuration", null);
             button = __decorate([
@@ -4896,6 +4904,7 @@ var gd3d;
                     dindex++;
                 }
             };
+            var image2D_1;
             image2D.ClassName = "image2D";
             image2D.defUIShader = "shader/defui";
             image2D.defMaskUIShader = "shader/defmaskui";
@@ -4907,18 +4916,18 @@ var gd3d;
             __decorate([
                 gd3d.reflect.Field("number"),
                 gd3d.reflect.UIStyle("enum"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], image2D.prototype, "imageType", null);
             __decorate([
                 gd3d.reflect.Field("number"),
                 gd3d.reflect.UIStyle("enum"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], image2D.prototype, "fillMethod", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], image2D.prototype, "fillAmmount", null);
             __decorate([
@@ -4935,7 +4944,6 @@ var gd3d;
                 __metadata("design:paramtypes", [])
             ], image2D);
             return image2D;
-            var image2D_1;
         }());
         framework.image2D = image2D;
         var ImageType;
@@ -5227,22 +5235,22 @@ var gd3d;
             inputField.ClassName = "inputField";
             __decorate([
                 gd3d.reflect.Field("reference", null, "image2D"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.image2D),
                 __metadata("design:paramtypes", [framework.image2D])
             ], inputField.prototype, "frameImage", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], inputField.prototype, "characterLimit", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], inputField.prototype, "LineType", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], inputField.prototype, "ContentType", null);
             __decorate([
@@ -5642,6 +5650,7 @@ var gd3d;
             };
             label.prototype.onPointEvent = function (canvas, ev, oncap) {
             };
+            var label_1;
             label.ClassName = "label";
             label.defUIShader = "shader/defuifont";
             label.defMaskUIShader = "shader/defmaskfont";
@@ -5656,7 +5665,7 @@ var gd3d;
             ], label.prototype, "_fontName", void 0);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], label.prototype, "fontsize", null);
             __decorate([
@@ -5694,7 +5703,6 @@ var gd3d;
                 gd3d.reflect.nodeRender
             ], label);
             return label;
-            var label_1;
         }());
         framework.label = label;
         var HorizontalType;
@@ -5799,22 +5807,22 @@ var gd3d;
             progressbar.ClassName = "progressbar";
             __decorate([
                 gd3d.reflect.Field("reference", null, "transform2D"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.transform2D),
                 __metadata("design:paramtypes", [framework.transform2D])
             ], progressbar.prototype, "cutPanel", null);
             __decorate([
                 gd3d.reflect.Field("reference", null, "image2D"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.image2D),
                 __metadata("design:paramtypes", [framework.image2D])
             ], progressbar.prototype, "barBg", null);
             __decorate([
                 gd3d.reflect.Field("reference", null, "image2D"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.image2D),
                 __metadata("design:paramtypes", [framework.image2D])
             ], progressbar.prototype, "barOverImg", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], progressbar.prototype, "value", null);
             progressbar = __decorate([
@@ -6017,12 +6025,13 @@ var gd3d;
             };
             rawImage2D.prototype.onPointEvent = function (canvas, ev, oncap) {
             };
+            var rawImage2D_1;
             rawImage2D.ClassName = "rawImage2D";
             rawImage2D.defUIShader = "shader/defui";
             rawImage2D.defMaskUIShader = "shader/defmaskui";
             __decorate([
                 gd3d.reflect.Field("texture"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.texture),
                 __metadata("design:paramtypes", [framework.texture])
             ], rawImage2D.prototype, "image", null);
             __decorate([
@@ -6035,7 +6044,6 @@ var gd3d;
                 gd3d.reflect.nodeRender
             ], rawImage2D);
             return rawImage2D;
-            var rawImage2D_1;
         }());
         framework.rawImage2D = rawImage2D;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -9735,6 +9743,7 @@ var gd3d;
                     return item;
                 }
             };
+            var PoseBoneMatrix_1;
             PoseBoneMatrix.ClassName = "PoseBoneMatrix";
             PoseBoneMatrix.poolmats = [];
             __decorate([
@@ -9749,7 +9758,6 @@ var gd3d;
                 gd3d.reflect.SerializeType
             ], PoseBoneMatrix);
             return PoseBoneMatrix;
-            var PoseBoneMatrix_1;
         }());
         framework.PoseBoneMatrix = PoseBoneMatrix;
         var subClip = (function () {
@@ -10611,22 +10619,22 @@ var gd3d;
             ], transform.prototype, "prefab", void 0);
             __decorate([
                 gd3d.reflect.Field("transform[]"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Array),
                 __metadata("design:paramtypes", [Array])
             ], transform.prototype, "children", null);
             __decorate([
                 gd3d.reflect.Field("quaternion"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.quaternion),
                 __metadata("design:paramtypes", [gd3d.math.quaternion])
             ], transform.prototype, "localRotate", null);
             __decorate([
                 gd3d.reflect.Field("vector3"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.vector3),
                 __metadata("design:paramtypes", [gd3d.math.vector3])
             ], transform.prototype, "localTranslate", null);
             __decorate([
                 gd3d.reflect.Field("vector3"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.vector3),
                 __metadata("design:paramtypes", [gd3d.math.vector3])
             ], transform.prototype, "localScale", null);
             __decorate([
@@ -10781,6 +10789,7 @@ var gd3d;
             };
             boxcollider.prototype.clone = function () {
             };
+            var boxcollider_1;
             boxcollider.ClassName = "boxcollider";
             boxcollider._tempMatrix = new gd3d.math.matrix();
             __decorate([
@@ -10796,7 +10805,6 @@ var gd3d;
                 gd3d.reflect.nodeBoxCollider
             ], boxcollider);
             return boxcollider;
-            var boxcollider_1;
         }());
         framework.boxcollider = boxcollider;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -10944,7 +10952,7 @@ var gd3d;
             __decorate([
                 gd3d.reflect.Field("mesh"),
                 gd3d.reflect.UIStyle("WidgetDragSelect"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.mesh),
                 __metadata("design:paramtypes", [framework.mesh])
             ], meshFilter.prototype, "mesh", null);
             meshFilter = __decorate([
@@ -11372,7 +11380,7 @@ var gd3d;
             ], skinnedMeshRenderer.prototype, "materials", void 0);
             __decorate([
                 gd3d.reflect.Field("mesh"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.mesh),
                 __metadata("design:paramtypes", [framework.mesh])
             ], skinnedMeshRenderer.prototype, "mesh", null);
             __decorate([
@@ -11988,6 +11996,7 @@ var gd3d;
                 }
                 return JSON.stringify(obj);
             };
+            var material_2;
             material.ClassName = "material";
             __decorate([
                 gd3d.reflect.Field("constText"),
@@ -12002,7 +12011,6 @@ var gd3d;
                 __metadata("design:paramtypes", [String])
             ], material);
             return material;
-            var material_2;
         }());
         framework.material = material;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -12335,13 +12343,13 @@ var gd3d;
                 gd3d.math.vec3Clone(this._cacheMinP, outMin);
                 gd3d.math.vec3Clone(this._cacheMaxP, outMax);
             };
+            var mesh_1;
             mesh.ClassName = "mesh";
             mesh = mesh_1 = __decorate([
                 gd3d.reflect.SerializeType,
                 __metadata("design:paramtypes", [String])
             ], mesh);
             return mesh;
-            var mesh_1;
         }());
         framework.mesh = mesh;
         var subMeshInfo = (function () {
@@ -14201,12 +14209,12 @@ var gd3d;
             bloomctr.ClassName = "bloomctr";
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], bloomctr.prototype, "bloomThreshold", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], bloomctr.prototype, "bloomIntensity", null);
             bloomctr = __decorate([
@@ -14705,6 +14713,7 @@ var gd3d;
             };
             camera.prototype.clone = function () {
             };
+            var camera_1;
             camera.ClassName = "camera";
             __decorate([
                 gd3d.reflect.UIStyle("rangeFloat", 1, 1000, 2),
@@ -14751,7 +14760,6 @@ var gd3d;
                 __metadata("design:paramtypes", [])
             ], camera);
             return camera;
-            var camera_1;
         }());
         framework.camera = camera;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -14845,7 +14853,7 @@ var gd3d;
             ], canvascontainer.prototype, "_overlay2d", void 0);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], canvascontainer.prototype, "renderMode", null);
             canvascontainer = __decorate([
@@ -15387,6 +15395,7 @@ var gd3d;
                 enumerable: true,
                 configurable: true
             });
+            var effectSystem_1;
             effectSystem.ClassName = "effectSystem";
             effectSystem.fps = 30;
             __decorate([
@@ -15407,7 +15416,6 @@ var gd3d;
                 gd3d.reflect.nodeComponent
             ], effectSystem);
             return effectSystem;
-            var effectSystem_1;
         }());
         framework.effectSystem = effectSystem;
     })(framework = gd3d.framework || (gd3d.framework = {}));
@@ -17281,12 +17289,12 @@ var gd3d;
             __decorate([
                 gd3d.reflect.Field("f14eff"),
                 gd3d.reflect.UIStyle("WidgetDragSelect"),
-                __metadata("design:type", Object),
+                __metadata("design:type", framework.f14eff),
                 __metadata("design:paramtypes", [framework.f14eff])
             ], f14EffectSystem.prototype, "f14eff", null);
             __decorate([
                 gd3d.reflect.Field("number"),
-                __metadata("design:type", Object),
+                __metadata("design:type", Number),
                 __metadata("design:paramtypes", [Number])
             ], f14EffectSystem.prototype, "delay", null);
             f14EffectSystem = __decorate([
@@ -32655,7 +32663,7 @@ var gd3d;
             ], obb2d.prototype, "offset", void 0);
             __decorate([
                 gd3d.reflect.Field("vector2"),
-                __metadata("design:type", Object),
+                __metadata("design:type", gd3d.math.vector2),
                 __metadata("design:paramtypes", [gd3d.math.vector2])
             ], obb2d.prototype, "size", null);
             return obb2d;

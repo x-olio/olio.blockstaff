@@ -1,0 +1,86 @@
+namespace Game.State
+{
+    export class State_SelectMap implements IGameState
+    {
+        private env: Environment;
+        private statemgr: StateMgr;
+
+        constructor(public isEditor: boolean = false)
+        {
+
+        }
+        async OnInit(env: Environment, statemgr: StateMgr)
+        {
+            this.env = env;
+            this.statemgr = statemgr;
+            await this.LoadTexture();
+            this.CreateUI();
+
+        }
+
+        LoadTexture()
+        {
+            return Common.AssetTools.promiseQueueExec([
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/add_64.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/del_16.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/border.png"),
+            ]);
+        }
+
+        async CreateUI()
+        {
+            let root = new gd3d.framework.transform2D();
+            this.env.overlay.addChild(root);
+            root.markDirty();
+
+            let tex_add64 = this.env.assetMgr.getAssetByName("add_64.png") as gd3d.framework.texture;
+            // let tex_del16 = this.env.assetMgr.getAssetByName("del_16.png") as gd3d.framework.texture;
+            let tex_border = this.env.assetMgr.getAssetByName("border.png") as gd3d.framework.texture;
+            // let tex_0 = this.env.assetMgr.getAssetByName("zg03_256.png") as gd3d.framework.texture;
+
+
+            let scroll = new ui.ScrollFrame({
+                width: this.env.app.width,
+                height: this.env.app.height,
+                owner: root
+            });
+
+            if (this.isEditor)
+            {
+
+                scroll.Add({
+                    bg: tex_add64, border: tex_border, width: 128, height: 128, onClick: () =>
+                    {
+
+                    }
+                });
+            }
+
+
+            let result = await Common.APITools.ReadMapList();
+            Game.System.Map2DSystem.mapsDataStore = {};
+            for (let item of result.body)
+            {
+                
+            }
+
+        }
+
+
+
+        OnUpdate(delta: number)
+        {
+
+        }
+
+
+        OnExit()
+        {
+            var childs = this.env.overlay.getChildren();
+            for (var i in childs)
+                this.env.overlay.removeChild(childs[i]);
+        }
+
+
+    }
+}

@@ -199,10 +199,12 @@ var Game;
                                 }
                                 catch (e) {
                                     console.error("error:" + xhr.responseText + " ", "" + _this.api + url, data);
+                                    console.error("error:" + xhr.status + " " + xhr.statusText);
                                     reason(new Error(xhr.responseText));
                                 }
                             }
                             else {
+                                console.error("error:" + xhr.responseText + " ", "" + _this.api + url, data);
                                 console.error("error:" + xhr.status + " " + xhr.statusText);
                                 reason(new Error("error:" + xhr.status + " " + xhr.statusText));
                             }
@@ -219,6 +221,7 @@ var Game;
                                 resolve(JSON.parse(xhr.responseText));
                             }
                             catch (e) {
+                                console.error("error:" + xhr.status + " " + xhr.statusText, "" + _this.api + url, data);
                                 console.error(xhr.responseText);
                                 reason(new Error(xhr.responseText));
                             }
@@ -229,6 +232,23 @@ var Game;
                         }
                     });
                 });
+            };
+            APITools.UserAPIPost = function (url, data, binrary) {
+                if (binrary === void 0) { binrary = false; }
+                if (data)
+                    data.token = this.loginInfo.token;
+                return this.APIPost(url, data, binrary);
+            };
+            APITools.UserAPIGet = function (url, data) {
+                if (data)
+                    data.token = this.loginInfo.token;
+                else if (url.lastIndexOf("token=") == -1) {
+                    if (url.lastIndexOf("?") == -1)
+                        url = url + "?token=" + this.loginInfo.token;
+                    else
+                        url = url + "&token=" + this.loginInfo.token;
+                }
+                return this.APIGet(url, data);
             };
             APITools.Login = function (data) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -285,7 +305,25 @@ var Game;
                     });
                 }); });
             };
-            APITools.api = "http://wa.h5game.live:3001";
+            APITools.SaveMap = function (data) {
+                return this.UserAPIPost("/api/map/savemap", data);
+            };
+            APITools.ReadMapList = function () {
+                return this.UserAPIGet("/api/map/readmap");
+            };
+            APITools.DelMap = function (data) {
+                return this.UserAPIGet("/api/map/delmap", data);
+            };
+            APITools.CreateBlock = function (data) {
+                return this.UserAPIPost("/api/map/createblock", data);
+            };
+            APITools.ReadBlockList = function () {
+                return this.UserAPIGet("/api/map/readblock");
+            };
+            APITools.DelBlock = function (data) {
+                return this.UserAPIGet("/api/map/delblock");
+            };
+            APITools.api = "http://localhost:9001";
             return APITools;
         }());
         Common.APITools = APITools;
@@ -416,6 +454,29 @@ var Game;
         }());
         Common.NetTools = NetTools;
     })(Common = Game.Common || (Game.Common = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var State;
+    (function (State) {
+        var State_EditorMap = (function () {
+            function State_EditorMap(name) {
+                this.name = name;
+            }
+            State_EditorMap.prototype.OnInit = function (env, statemgr) {
+                this.env = env;
+                this.statemgr = statemgr;
+            };
+            State_EditorMap.prototype.CreateUI = function () {
+            };
+            State_EditorMap.prototype.OnUpdate = function (delta) {
+            };
+            State_EditorMap.prototype.OnExit = function () {
+            };
+            return State_EditorMap;
+        }());
+        State.State_EditorMap = State_EditorMap;
+    })(State = Game.State || (Game.State = {}));
 })(Game || (Game = {}));
 var Game;
 (function (Game) {
@@ -889,11 +950,14 @@ var Game;
                     backSprite: atlasComp.sprites["ui_public_button_1"],
                     x: x, y: 135,
                     width: 300,
-                    text: "           开始游戏",
+                    text: "           选择地图",
                     fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                    owner: root
+                    owner: root,
+                    onClick: function () {
+                        _this.statemgr.ChangeState(new State.State_Second());
+                    }
                 });
-                var btn_editor = Game.ui.createButton({
+                Game.ui.createButton({
                     assetMgr: this.env.assetMgr,
                     hitsSprite: atlasComp.sprites["ui_public_button_hits"],
                     backSprite: atlasComp.sprites["ui_public_button_1"],
@@ -901,7 +965,10 @@ var Game;
                     width: 300,
                     text: "           编辑模式",
                     fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                    owner: root
+                    owner: root,
+                    onClick: function () {
+                        _this.statemgr.ChangeState(new State.State_SelectMap(true));
+                    }
                 });
                 Game.ui.createButton({
                     assetMgr: this.env.assetMgr,
@@ -911,14 +978,12 @@ var Game;
                     width: 300,
                     text: "           退出登录",
                     fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                    owner: root
-                }).addListener(gd3d.event.UIEventEnum.PointerClick, function () {
-                    Game.Common.LocalStore.Clean();
-                    _this.statemgr.ChangeState(new State.State_Login());
-                }, this);
-                btn_enterGame.addListener(gd3d.event.UIEventEnum.PointerClick, function () {
-                    _this.statemgr.ChangeState(new State.State_Second());
-                }, this);
+                    owner: root,
+                    onClick: function () {
+                        Game.Common.LocalStore.Clean();
+                        _this.statemgr.ChangeState(new State.State_Login());
+                    }
+                });
             };
             return State_Menu;
         }());
@@ -1023,7 +1088,8 @@ var Game;
                     width: 200,
                     text: "     返回",
                     fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                    owner: root
+                    owner: root,
+                    onClick: this.OnBack.bind(this)
                 });
                 this.btn_ok = Game.ui.createButton({
                     name: "btn_ok",
@@ -1034,10 +1100,9 @@ var Game;
                     width: 200,
                     text: "     确定",
                     fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                    owner: root
+                    owner: root,
+                    onClick: this.OnRegister.bind(this)
                 });
-                this.btn_back.addListener(gd3d.event.UIEventEnum.PointerClick, this.OnBack.bind(this), this);
-                this.btn_ok.addListener(gd3d.event.UIEventEnum.PointerClick, this.OnRegister.bind(this), this);
             };
             State_Regision.prototype.OnBack = function () {
                 this.statemgr.ChangeState(this.upstate);
@@ -1097,7 +1162,7 @@ var Game;
                                 return [4, this.map2d.InitAsync(this.env)];
                             case 1:
                                 _a.sent();
-                                return [4, this.map2d.LoadTmxAsync("res/_game/tmx.json", "res/_game/tmx.png")];
+                                return [4, this.map2d.LoadTmxAsync(null, null)];
                             case 2:
                                 _a.sent();
                                 return [2];
@@ -1112,6 +1177,84 @@ var Game;
             return State_Second;
         }());
         State.State_Second = State_Second;
+    })(State = Game.State || (Game.State = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var State;
+    (function (State) {
+        var State_SelectMap = (function () {
+            function State_SelectMap(isEditor) {
+                if (isEditor === void 0) { isEditor = false; }
+                this.isEditor = isEditor;
+            }
+            State_SelectMap.prototype.OnInit = function (env, statemgr) {
+                return __awaiter(this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                this.env = env;
+                                this.statemgr = statemgr;
+                                return [4, this.LoadTexture()];
+                            case 1:
+                                _a.sent();
+                                this.CreateUI();
+                                return [2];
+                        }
+                    });
+                });
+            };
+            State_SelectMap.prototype.LoadTexture = function () {
+                return Game.Common.AssetTools.promiseQueueExec([
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/add_64.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/del_16.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/border.png"),
+                ]);
+            };
+            State_SelectMap.prototype.CreateUI = function () {
+                return __awaiter(this, void 0, void 0, function () {
+                    var root, tex_add64, tex_border, scroll, result, _i, _a, item;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                root = new gd3d.framework.transform2D();
+                                this.env.overlay.addChild(root);
+                                root.markDirty();
+                                tex_add64 = this.env.assetMgr.getAssetByName("add_64.png");
+                                tex_border = this.env.assetMgr.getAssetByName("border.png");
+                                scroll = new Game.ui.ScrollFrame({
+                                    width: this.env.app.width,
+                                    height: this.env.app.height,
+                                    owner: root
+                                });
+                                if (this.isEditor) {
+                                    scroll.Add({
+                                        bg: tex_add64, border: tex_border, width: 128, height: 128, onClick: function () {
+                                        }
+                                    });
+                                }
+                                return [4, Game.Common.APITools.ReadMapList()];
+                            case 1:
+                                result = _b.sent();
+                                Game.System.Map2DSystem.mapsDataStore = {};
+                                for (_i = 0, _a = result.body; _i < _a.length; _i++) {
+                                    item = _a[_i];
+                                }
+                                return [2];
+                        }
+                    });
+                });
+            };
+            State_SelectMap.prototype.OnUpdate = function (delta) {
+            };
+            State_SelectMap.prototype.OnExit = function () {
+                var childs = this.env.overlay.getChildren();
+                for (var i in childs)
+                    this.env.overlay.removeChild(childs[i]);
+            };
+            return State_SelectMap;
+        }());
+        State.State_SelectMap = State_SelectMap;
     })(State = Game.State || (Game.State = {}));
 })(Game || (Game = {}));
 var Game;
@@ -1146,8 +1289,8 @@ var Game;
         var blockDesc1 = "\n    {\n        \"refImgs\":[\"./res/_game/test/red.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
         var blockDesc2 = "\n    {\n        \"refImgs\":[\"./res/_game/test/green.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
         var blockDesc3 = "\n    {\n        \"refImgs\":[\"./res/_game/test/blue.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
-        var blockDesc4 = "\n    {\n        \"refImgs\":[\"./res/_game/test/stairs.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
-        var testJSON = "\n{\n\t\"version\":\"1.0.0\",\n\t\"layers\":[\n\t\t{\n            \"width\":32,\n            \"height\":16,\n            \"type\":\"bg\",\n            \"data\":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\n\t\t\t\"refblocks\":[\"hash1\",\"hash2\",\"hash3\",\"hash4\"];\n\t\t}\n\t]\n}\n";
+        var blockDesc4 = "\n    {\n         \"refImgs\":[\"./res/_game/test/stairs.png\"],\n         \"pieces\":[\n            {\n                \"imgIndex\":0,\n                \"x\":0,\n                \"y\":0,\n                \"w\":1,\n                \"h\":1\n            }\n            ],\n        \"bound\":\"wall\",\n        \"layer\":\"forground\",\n        \"displayType\":\"static\",\n        \"displayPicList\":{\n            \"def\":{\n                \"speed\":0,\n                \"pieces\":[0]\n            }\n        }\n    }\n    ";
+        var testJSON = "\n{\n\t\"version\":\"1.0.0\",\n\t\"layers\":[\n\t\t{\n            \"width\":32,\n            \"height\":16,\n            \"type\":\"bg\",\n            \"data\":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\n\t\t\t\"refblocks\":[\"hash1\",\"hash2\",\"hash3\",\"hash4\"]\n\t\t}\n    ]\n}\n";
         var Map2DSystem = (function () {
             function Map2DSystem() {
                 this.mapBlocks = {};
@@ -1161,25 +1304,27 @@ var Game;
                     });
                 });
             };
-            Map2DSystem.prototype.LoadTmxAsync = function (urlJsonTMX, urlImgForTmx) {
+            Map2DSystem.prototype.LoadTmxAsync = function (jsonData, blocks) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var block1, block2, block3, block4, mapInfo;
+                    var mapInfo, block1, block2, block3, block4;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                block1 = JSON.parse(blockDesc1);
-                                block2 = JSON.parse(blockDesc2);
-                                block3 = JSON.parse(blockDesc3);
-                                block4 = JSON.parse(blockDesc4);
-                                this.mapBlocks["hash1"] = block1;
-                                this.mapBlocks["hash2"] = block2;
-                                this.mapBlocks["hash3"] = block3;
-                                this.mapBlocks["hash4"] = block4;
+                                mapInfo = jsonData || JSON.parse(testJSON);
+                                this.baseData = mapInfo;
+                                if (!blocks) {
+                                    block1 = JSON.parse(blockDesc1);
+                                    block2 = JSON.parse(blockDesc2);
+                                    block3 = JSON.parse(blockDesc3);
+                                    block4 = JSON.parse(blockDesc4);
+                                    this.mapBlocks["hash1"] = block1;
+                                    this.mapBlocks["hash2"] = block2;
+                                    this.mapBlocks["hash3"] = block3;
+                                    this.mapBlocks["hash4"] = block4;
+                                }
                                 return [4, this.LoadAllBlockImg()];
                             case 1:
                                 _a.sent();
-                                mapInfo = JSON.parse(testJSON);
-                                this.baseData = mapInfo;
                                 this.Parse(mapInfo);
                                 return [2];
                         }
@@ -1188,63 +1333,37 @@ var Game;
             };
             Map2DSystem.prototype.LoadAllBlockImg = function () {
                 return __awaiter(this, void 0, void 0, function () {
-                    var _a, _b, _i, key, imgs, _c, _d, _e, i, imgname, tex;
-                    return __generator(this, function (_f) {
-                        switch (_f.label) {
+                    var _a, _b, _i, key, _c, _d, imgname, tex;
+                    return __generator(this, function (_e) {
+                        switch (_e.label) {
                             case 0:
                                 _a = [];
                                 for (_b in this.mapBlocks)
                                     _a.push(_b);
                                 _i = 0;
-                                _f.label = 1;
+                                _e.label = 1;
                             case 1:
                                 if (!(_i < _a.length)) return [3, 6];
                                 key = _a[_i];
-                                imgs = this.mapBlocks[key].refImgs;
-                                _c = [];
-                                for (_d in imgs)
-                                    _c.push(_d);
-                                _e = 0;
-                                _f.label = 2;
+                                _c = 0, _d = this.mapBlocks[key].refImgs;
+                                _e.label = 2;
                             case 2:
-                                if (!(_e < _c.length)) return [3, 5];
-                                i = _c[_e];
-                                imgname = imgs[i];
+                                if (!(_c < _d.length)) return [3, 5];
+                                imgname = _d[_c];
                                 if (!(this.mapTexs[imgname] == undefined)) return [3, 4];
-                                return [4, this.loadText(imgs[i])];
+                                return [4, this.loadText(imgname)];
                             case 3:
-                                tex = _f.sent();
-                                this.mapTexs[imgs[i]] = tex;
-                                _f.label = 4;
+                                tex = _e.sent();
+                                this.mapTexs[imgname] = tex;
+                                _e.label = 4;
                             case 4:
-                                _e++;
+                                _c++;
                                 return [3, 2];
                             case 5:
                                 _i++;
                                 return [3, 1];
                             case 6: return [2];
                         }
-                    });
-                });
-            };
-            Map2DSystem.prototype.loadMap = function (url) {
-                return __awaiter(this, void 0, void 0, function () {
-                    var promise;
-                    var _this = this;
-                    return __generator(this, function (_a) {
-                        promise = new Promise(function (__resolve) {
-                            var assetMgr = _this.env.app.getAssetMgr();
-                            assetMgr.load(url, gd3d.framework.AssetTypeEnum.TextAsset, function (s) {
-                                if (s.isfinish) {
-                                    var textasset = s.resstateFirst.res;
-                                    var maptxt = textasset.content;
-                                    var mapobj = JSON.parse(maptxt);
-                                    __resolve(mapobj);
-                                    return;
-                                }
-                            });
-                        });
-                        return [2, promise];
                     });
                 });
             };
@@ -1289,39 +1408,6 @@ var Game;
                     cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
                 }
             };
-            Map2DSystem.prototype.addcube = function () {
-                return __awaiter(this, void 0, void 0, function () {
-                    var tileset, i, mapString, layer, y, x, id, idStr, tileWidth, tileHeight, tileX, tileY;
-                    return __generator(this, function (_a) {
-                        tileset = this.map.tilesets[0];
-                        for (i = 0; i < this.map.layers.length; i++) {
-                            console.log("layers:" + i);
-                            mapString = "";
-                            layer = this.map.layers[i];
-                            for (y = 0; y < this.map.height; y++) {
-                                for (x = 0; x < this.map.width; x++) {
-                                    id = layer.data[y * layer.width + x];
-                                    if (id == 0) {
-                                        mapString += "  ";
-                                        continue;
-                                    }
-                                    idStr = "" + id;
-                                    mapString += idStr.length < 2 ? "0" + id : idStr;
-                                    tileWidth = (tileset.tileheight / tileset.imageheight);
-                                    tileHeight = (tileset.tileheight / tileset.imageheight);
-                                    tileX = (((id - 1) % tileset.columns) | 0) * tileWidth;
-                                    tileY = (((id - 1) / tileset.columns) | 0) * tileHeight;
-                                    tileY = 1.0 - tileY - tileHeight;
-                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, this.tex);
-                                }
-                                mapString += "\n";
-                            }
-                            console.log(mapString);
-                        }
-                        return [2];
-                    });
-                });
-            };
             Map2DSystem.prototype.Parse = function (mapInfo) {
                 return __awaiter(this, void 0, void 0, function () {
                     var _i, _a, layer, mapString, y, x, id, block, animframe, pieceid, piece, imgurl, texture, tileX, tileY, tileWidth, tileHeight;
@@ -1329,7 +1415,7 @@ var Game;
                         for (_i = 0, _a = mapInfo.layers; _i < _a.length; _i++) {
                             layer = _a[_i];
                             mapString = "";
-                            for (y = 0; y < layer.height; ++y) {
+                            for (y = layer.height; y >= 0; --y) {
                                 for (x = 0; x < layer.width; ++x) {
                                     id = layer.data[y * layer.width + x];
                                     mapString += id + " ";
@@ -1347,7 +1433,7 @@ var Game;
                                         tileWidth = piece.w;
                                         tileHeight = piece.h;
                                     }
-                                    this._addQuad(x, -y, tileX, tileY, tileWidth, tileHeight, texture);
+                                    this._addQuad(x, y, tileX, tileY, tileWidth, tileHeight, texture);
                                 }
                                 mapString += "\n";
                             }
@@ -1357,13 +1443,10 @@ var Game;
                     });
                 });
             };
-            Map2DSystem.prototype.GetData = function () {
-                return this.baseData;
-            };
             Map2DSystem.prototype.CreateEmitData = function (w, h) {
                 var emitData = [];
                 for (var y = 0; y < h; ++y) {
-                    for (var x = 0; x < h; ++x) {
+                    for (var x = 0; x < w; ++x) {
                         emitData.push(0);
                     }
                 }
@@ -1375,10 +1458,113 @@ var Game;
             Map2DSystem.prototype.CalcIndex = function (x, y, w) {
                 return y * w + x;
             };
+            Map2DSystem.prototype.GetImageData = function () {
+                return this.env.app.webgl.canvas.toDataURL("image/png");
+            };
             return Map2DSystem;
         }());
         System.Map2DSystem = Map2DSystem;
     })(System = Game.System || (Game.System = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var ui;
+    (function (ui) {
+        var ScrollFrame = (function () {
+            function ScrollFrame(option) {
+                this.option = option;
+                this.fimages = [];
+                this.curRow = 0;
+                this.click_time = 0;
+                this.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
+                var scroll_t = new gd3d.framework.transform2D;
+                scroll_t.width = option.width - 60;
+                scroll_t.height = option.height - 60;
+                scroll_t.localTranslate.x = 30;
+                scroll_t.localTranslate.y = 30;
+                var scroll_ = scroll_t.addComponent("scrollRect");
+                var ct = new gd3d.framework.transform2D;
+                ct.width = option.width;
+                scroll_t.addChild(ct);
+                scroll_.inertia = true;
+                scroll_.decelerationRate = 0.135;
+                scroll_.content = ct;
+                scroll_t.isMask = true;
+                scroll_.horizontal = true;
+                scroll_.vertical = true;
+                this.root = scroll_t;
+                this.context = ct;
+                if (option.owner)
+                    option.owner.addChild(scroll_t);
+                Game.Common.AssetTools.loadAsset(this.assetMgr, "./res/_game/test/del_16.png");
+            }
+            ScrollFrame.prototype.Add = function (option) {
+                var maxWCount = parseInt("" + this.option.width / option.width);
+                var col = this.fimages.length % maxWCount;
+                option.owner = this.context;
+                option.x = col * option.width + col * 10;
+                option.y = this.curRow * option.height + this.curRow * 10;
+                var fimg = this.CreateFrameImage(option);
+                this.context.height = this.curRow * option.height + this.curRow * 10;
+                this.fimages.push(fimg);
+                if (col == maxWCount - 1)
+                    ++this.curRow;
+            };
+            ScrollFrame.prototype.CreateFrameImage = function (option) {
+                var raw_t2 = new gd3d.framework.transform2D;
+                raw_t2.width = option.width || 0;
+                raw_t2.height = option.height || 0;
+                raw_t2.transform.localTranslate.x = option.x || 0;
+                raw_t2.transform.localTranslate.y = option.y || 0;
+                var raw_i2 = raw_t2.addComponent("rawImage2D");
+                raw_i2.image = option.bg;
+                ui.AddEventInComp(raw_i2, gd3d.event.UIEventEnum.PointerClick, function () {
+                    if (option.onClick)
+                        option.onClick();
+                }, this);
+                if (option.border) {
+                    var bg_t = new gd3d.framework.transform2D;
+                    var bg_i = bg_t.addComponent("rawImage2D");
+                    bg_t.width = option.width || 0;
+                    bg_t.height = option.height || 0;
+                    bg_i.image = option.border;
+                    bg_i.color = new gd3d.math.color(.3, .3, .3, .2);
+                    raw_t2.addChild(bg_t);
+                }
+                if (option.onDelete) {
+                    var delTex_16 = this.assetMgr.getAssetByName("del_16.png");
+                    var del_t = new gd3d.framework.transform2D;
+                    del_t.width = 16;
+                    del_t.height = 16;
+                    del_t.transform.localTranslate.x = option.width - 16;
+                    del_t.transform.localTranslate.y = 0;
+                    var del_i = del_t.addComponent("rawImage2D");
+                    del_i.image = delTex_16;
+                    ui.AddEventInComp(del_i, gd3d.event.UIEventEnum.PointerClick, function () {
+                        if (option.onDelete)
+                            option.onDelete();
+                    }, this);
+                    raw_t2.addChild(del_t);
+                }
+                if (option.text) {
+                    var lab = ui.createLabel({
+                        text: option.text,
+                        assetMgr: this.assetMgr,
+                        width: option.width - 10,
+                        height: 30,
+                        owner: raw_t2
+                    });
+                    lab.verticalType = gd3d.framework.VerticalType.Center;
+                    lab.horizontalType = gd3d.framework.HorizontalType.Center;
+                }
+                if (option.owner)
+                    option.owner.addChild(raw_t2);
+                return raw_t2;
+            };
+            return ScrollFrame;
+        }());
+        ui.ScrollFrame = ScrollFrame;
+    })(ui = Game.ui || (Game.ui = {}));
 })(Game || (Game = {}));
 var Game;
 (function (Game) {
@@ -1466,16 +1652,96 @@ var Game;
             btn_b.pressedGraphic = option.backSprite;
             btn_b.pressedColor = new gd3d.math.color(1, 1, 1, 1);
             btn_b.transition = gd3d.framework.TransitionType.SpriteSwap;
-            createLabel({
-                owner: btn_t, text: option.text, assetMgr: option.assetMgr,
-                name: "lib_" + option.name, fontcolor: option.fontcolor,
-                x: 55,
-                y: -30,
-                width: option.width
-            });
+            if (option.text) {
+                createLabel({
+                    owner: btn_t, text: option.text, assetMgr: option.assetMgr,
+                    name: "lib_" + option.name, fontcolor: option.fontcolor,
+                    x: 55,
+                    y: -30,
+                    width: option.width
+                });
+            }
+            if (option.onClick)
+                btn_b.addListener(gd3d.event.UIEventEnum.PointerClick, option.onClick, this);
             return btn_b;
         }
         ui.createButton = createButton;
+        var helpV2 = new gd3d.math.vector2();
+        function AddEventInComp(trans2d, eventEnum, func, thisArg) {
+            var _this = trans2d;
+            _this.UIEventer = _this.UIEventer || new gd3d.event.UIEvent();
+            _this.UIEventer.OnEnum(eventEnum, func, thisArg);
+            _this.downPointV2 = _this.downPointV2 || new gd3d.math.vector2();
+            trans2d.onPointEvent = function (canvas, ev, oncap) {
+                if (oncap == false) {
+                    helpV2.x = ev.x;
+                    helpV2.y = ev.y;
+                    var b = _this.transform.ContainsCanvasPoint(helpV2);
+                    if (b) {
+                        if (ev.type == gd3d.event.PointEventEnum.PointDown) {
+                            _this._downInThis = true;
+                            var pd = gd3d.event.UIEventEnum.PointerDown;
+                            if (_this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pd]) > 0) {
+                                ev.eated = true;
+                                _this.UIEventer.EmitEnum(pd, ev);
+                            }
+                            _this.downPointV2.x = ev.x;
+                            _this.downPointV2.y = ev.y;
+                            _this.isMovedLimit = false;
+                        }
+                        else if (ev.type == gd3d.event.PointEventEnum.PointHold && _this._downInThis) {
+                            if (_this._dragOut == true) {
+                                _this._dragOut = false;
+                            }
+                            if (!_this.isMovedLimit) {
+                                _this.isMovedLimit = gd3d.math.vec2Distance(helpV2, _this.downPointV2) > _this.movedLimit;
+                            }
+                        }
+                        else if (ev.type == gd3d.event.PointEventEnum.PointUp && _this._downInThis) {
+                            _this._downInThis = false;
+                            var pu = gd3d.event.UIEventEnum.PointerUp;
+                            if (_this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pu]) > 0) {
+                                ev.eated = true;
+                                _this.UIEventer.EmitEnum(pu, ev);
+                            }
+                            var pc = gd3d.event.UIEventEnum.PointerClick;
+                            if (!_this.isMovedLimit && _this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pc]) > 0) {
+                                ev.eated = true;
+                                _this.UIEventer.EmitEnum(pc, ev);
+                            }
+                        }
+                    }
+                    else {
+                        if (ev.type == gd3d.event.PointEventEnum.PointUp) {
+                            _this._downInThis = false;
+                        }
+                        else if (ev.type == gd3d.event.PointEventEnum.PointHold && _this._downInThis) {
+                            if (_this._dragOut == false) {
+                                _this._dragOut = true;
+                            }
+                        }
+                    }
+                }
+            };
+        }
+        ui.AddEventInComp = AddEventInComp;
+    })(ui = Game.ui || (Game.ui = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var ui;
+    (function (ui) {
+        var dialog;
+        (function (dialog) {
+            var MesageBox = (function () {
+                function MesageBox() {
+                }
+                MesageBox.Show = function (title, content) {
+                };
+                return MesageBox;
+            }());
+            dialog.MesageBox = MesageBox;
+        })(dialog = ui.dialog || (ui.dialog = {}));
     })(ui = Game.ui || (Game.ui = {}));
 })(Game || (Game = {}));
 //# sourceMappingURL=game.js.map

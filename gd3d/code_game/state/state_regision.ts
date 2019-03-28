@@ -46,7 +46,6 @@ namespace Game.State
         {
             let atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json") as gd3d.framework.atlas;
             let root = new gd3d.framework.transform2D();
-
             this.env.overlay.addChild(root);
             root.markDirty();
 
@@ -131,7 +130,8 @@ namespace Game.State
                 width: 200,
                 text: "     返回",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                owner: root
+                owner: root,
+                onClick: this.OnBack.bind(this)
             });
 
             this.btn_ok = ui.createButton({
@@ -143,12 +143,9 @@ namespace Game.State
                 width: 200,
                 text: "     确定",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                owner: root
+                owner: root,
+                onClick: this.OnRegister.bind(this)
             });
-
-            this.btn_back.addListener(gd3d.event.UIEventEnum.PointerClick, this.OnBack.bind(this), this);
-            this.btn_ok.addListener(gd3d.event.UIEventEnum.PointerClick, this.OnRegister.bind(this), this);
-
         }
 
         private OnBack()
