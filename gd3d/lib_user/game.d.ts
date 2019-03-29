@@ -81,6 +81,7 @@ declare namespace Game.Common {
         static DelBlock(data: {
             name: string;
         }): Promise<IResult>;
+        static GetBlockTexUrl(name: string): string;
     }
 }
 declare namespace Game.Common {
@@ -101,7 +102,7 @@ declare namespace Game.Common {
     class NetTools {
         static Get(url: string, params?: {
             [key: string]: string | number | boolean;
-        }, encoding?: boolean): Promise<{}>;
+        }, encoding?: boolean): Promise<XMLHttpRequest>;
         static Post(url: string, data?: {
             [key: string]: any;
         } | ArrayBuffer): Promise<{}>;
@@ -187,12 +188,27 @@ declare namespace Game.State {
         private OnRegister;
     }
 }
+declare var md5: any;
 declare namespace Game.State {
     class State_Second implements IGameState {
+        private mapName;
+        private isEditor;
         env: Environment;
         statemgr: StateMgr;
         map2d: Game.System.Map2DSystem;
+        private root;
+        private allblock_scroll;
+        private layerblock_scroll;
+        private tex_border;
+        private curBlock;
+        private curlayer;
+        constructor(mapName: string, isEditor?: boolean);
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
+        CreateEditorUI(): Promise<void>;
+        CreateLayerBlockUI(): void;
+        CreateBlockUI(): void;
+        RefreshBlockList(): void;
+        CreateBlockItem(blockName: string, block: System.IBlockDesc): void;
         OnExit(): void;
         OnUpdate(delta: number): void;
     }
@@ -311,6 +327,7 @@ declare namespace Game.System {
         mapTexs: {
             [id: string]: gd3d.framework.texture;
         };
+        root: gd3d.framework.transform;
         InitAsync(env: Environment): Promise<void>;
         LoadTmxAsync(jsonData: IMapInfoData, blocks: {
             [key: string]: IBlockDesc;
@@ -322,10 +339,16 @@ declare namespace Game.System {
         private loadText;
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
         Parse(mapInfo: IMapInfoData): Promise<void>;
-        CreateEmitData(w: number, h: number): any[];
+        CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData;
+        CreateEmitBlock(): IBlockDesc;
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
         CalcIndex(x: number, y: number, w: number): number;
         GetImageData(): string;
+    }
+}
+declare namespace Game.ui {
+    class File {
+        static Show(select: (file: File) => void, mimeType?: string): void;
     }
 }
 declare namespace Game.ui {
@@ -341,31 +364,36 @@ declare namespace Game.ui {
             width: number;
             height: number;
             owner?: gd3d.framework.transform2D;
+            x?: number;
+            y?: number;
         });
         Add(option: {
             bg: gd3d.framework.texture;
-            border: gd3d.framework.texture;
-            width?: number;
-            height?: number;
-            x?: number;
-            y?: number;
-            owner?: gd3d.framework.transform2D;
-            onClick?: (bindData?: any) => void;
-            onDelete?: () => void;
-            text?: string;
-        }): void;
-        CreateFrameImage(option: {
-            bg: gd3d.framework.texture;
-            border: gd3d.framework.texture;
+            border?: gd3d.framework.texture;
             width?: number;
             height?: number;
             x?: number;
             y?: number;
             owner?: gd3d.framework.transform2D;
             onClick?: () => void;
+            onDbClick?: () => void;
+            onDelete?: () => void;
+            text?: string;
+        }): Promise<void>;
+        CreateFrameImage(option: {
+            bg: gd3d.framework.texture;
+            border?: gd3d.framework.texture;
+            width?: number;
+            height?: number;
+            x?: number;
+            y?: number;
+            owner?: gd3d.framework.transform2D;
+            onClick?: () => void;
+            onDbClick?: () => void;
             onDelete?: () => void;
             text?: string;
         }): gd3d.framework.transform2D;
+        Clear(): void;
     }
 }
 declare namespace Game.ui {
@@ -396,6 +424,15 @@ declare namespace Game.ui {
     function createLabel(option: ILabelOption): gd3d.framework.label;
     function createInput(option: IInputOption): gd3d.framework.inputField;
     function createButton(option: IButtonOption): gd3d.framework.button;
+    function CreateFrameImage(option: {
+        bg: gd3d.framework.texture;
+        border?: gd3d.framework.texture;
+        width?: number;
+        height?: number;
+        x?: number;
+        y?: number;
+        owner?: gd3d.framework.transform2D;
+    }): gd3d.framework.rawImage2D;
     function AddEventInComp(trans2d: gd3d.framework.IRectRenderer, eventEnum: gd3d.event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any): void;
 }
 declare namespace Game.ui.dialog {

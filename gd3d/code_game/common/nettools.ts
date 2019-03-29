@@ -2,16 +2,21 @@ namespace Game.Common
 {
     export class NetTools
     {
-        static Get(url: string, params?: { [key: string]: string | number | boolean }, encoding: boolean = false)
+        static Get(url: string, params?: { [key: string]: string | number | boolean }, encoding: boolean = true)
         {
-            return new Promise((resolve, reason) =>
+            return new Promise<XMLHttpRequest>((resolve, reason) =>
             {
-                if (encoding)
+                if (params)
+                {
+                    url += (url.lastIndexOf("?") == -1) ? "?" : "&";
                     for (let key in params)
                     {
-                        if (typeof (params[key]) == "string")
-                            params[key] = escape(params[key] as string);
+                        let value = params[key];
+                        if (encoding && typeof (value) == "string")
+                            value = escape(params[key] as string);
+                        url += `${key}=${value}&`;
                     }
+                }
                 this.GetXhr(url, "GET", (xhr) =>
                 {
                     resolve(xhr);

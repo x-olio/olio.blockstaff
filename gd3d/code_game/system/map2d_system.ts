@@ -60,7 +60,7 @@ namespace Game.System
 
 
 
-    interface ILayerData
+    export interface ILayerData
     {
         type: string;
         data: Array<number>;
@@ -72,14 +72,13 @@ namespace Game.System
     }
 
 
-    interface IMapInfoData
+    export interface IMapInfoData
     {
         version: string;
         layers: Array<ILayerData>;
-
     }
 
-    interface IPieceOFPic //图片的一部分
+    export interface IPieceOFPic //图片的一部分
     {
         imgIndex: number;
         x: number;
@@ -87,12 +86,12 @@ namespace Game.System
         w: number;
         h: number;
     }
-    interface IBlockAnim
+    export interface IBlockAnim
     {
         speed: number;
         pieces: number[];
     }
-    interface IBlockDesc
+    export interface IBlockDesc
     {
         refImgs: string[];//涉及到的图片
         pieces: IPieceOFPic[];//图片块
@@ -202,6 +201,7 @@ namespace Game.System
 
     let testJSON = `
 {
+    
 	"version":"1.0.0",
 	"layers":[
 		{
@@ -224,11 +224,14 @@ namespace Game.System
         mapBlocks: { [id: string]: IBlockDesc };
         mapInfo: IMapInfoData;
         mapTexs: { [id: string]: gd3d.framework.texture };
-
+        root: gd3d.framework.transform;
         //初始化
         async InitAsync(env: Environment): Promise<void>
         {
             this.env = env;
+            this.root = new gd3d.framework.transform();
+            this.root.markDirty();
+            env.app.getScene().addChild(this.root);
             return;
         }
         async LoadTmxAsync(jsonData: IMapInfoData, blocks: { [key: string]: IBlockDesc }): Promise<void>
@@ -260,7 +263,7 @@ namespace Game.System
                 {
                     if (this.mapTexs[imgname] == undefined)
                     {
-                        var tex = await this.loadText(imgname);
+                        var tex = await this.loadText(Common.APITools.GetBlockTexUrl(imgname));
                         this.mapTexs[imgname] = tex;
                     }
                 }
@@ -270,6 +273,7 @@ namespace Game.System
         {
             this.mapBlocks = {};
             this.mapTexs = {};
+
         }
         tex: gd3d.framework.texture;
 
@@ -286,6 +290,7 @@ namespace Game.System
             {
                 // //用圖片填充貼圖部分數據
                 var img = new Image();
+                img.crossOrigin = "";
                 img.onload = (e) =>
                 {
                     wt.uploadImage(img, false, false, false, false, false, false);
@@ -305,7 +310,8 @@ namespace Game.System
             cube.localTranslate.x = x;
             cube.localTranslate.y = y;
             cube.markDirty();
-            this.env.app.getScene().addChild(cube);
+            // this.env.app.getScene().addChild(cube);
+            this.root.addChild(cube);
             var mesh = cube.gameObject.addComponent("meshFilter") as gd3d.framework.meshFilter;
 
             var smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
@@ -325,6 +331,8 @@ namespace Game.System
             }
 
         }
+
+
 
         async Parse(mapInfo: IMapInfoData)
         {
@@ -364,17 +372,60 @@ namespace Game.System
         }
 
 
-        CreateEmitData(w: number, h: number)
+        CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData
         {
             let emitData = [];
+
             for (let y = 0; y < h; ++y)
             {
                 for (let x = 0; x < w; ++x)
                 {
-                    emitData.push(0);
+                    if (y == 0)
+                        emitData.push(1);
+                    else
+                        emitData.push(0);
                 }
             }
-            return emitData;
+            return {
+                layers: [
+                    {
+                        width: w,
+                        height: h,
+                        type: "bg",
+                        data: emitData,
+                        refblocks: [
+                            defBlockName
+                        ]
+                    }
+                ],
+                version: "1.0.1"
+            };
+        }
+
+        CreateEmitBlock(): IBlockDesc
+        {
+            return {
+                // refImgs: ["./res/_game/test/stairs.png"],
+                refImgs: [],
+                pieces: [
+                    {
+                        "imgIndex": 0,
+                        "x": 0,
+                        "y": 0,
+                        "w": 1,
+                        "h": 1
+                    }
+                ],
+                bound: "wall",
+                layer: "forground",
+                displayType: "static",
+                displayPicList: {
+                    "def": {
+                        "speed": 0,
+                        "pieces": [0]
+                    }
+                }
+            }
         }
 
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData)

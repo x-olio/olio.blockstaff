@@ -12,6 +12,8 @@ namespace Game
         //taskmgr 是个权宜之计，实现不完整，全面使用await async 替代他
         // taskmgr: gd3d.framework.taskMgr;
         assetMgr: gd3d.framework.assetMgr;
+
+        
         async Init()
         {
             //this.taskmgr = new gd3d.framework.taskMgr();

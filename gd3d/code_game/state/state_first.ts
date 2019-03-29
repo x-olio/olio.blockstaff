@@ -36,7 +36,7 @@ namespace Game.State
         //切换状态
         OnBtn_ChangeState()
         {
-            this.statemgr.ChangeState(new State_Second());
+            this.statemgr.ChangeState(new State_Second(""));
 
         }
 

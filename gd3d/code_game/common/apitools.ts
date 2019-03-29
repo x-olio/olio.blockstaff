@@ -55,7 +55,7 @@ namespace Game.Common
         {
             return new Promise<IResult>((resolve, reason) =>
             {
-                NetTools.Post(`${this.api}${url}`, data).then((xhr: XMLHttpRequest) =>
+                NetTools.Get(`${this.api}${url}`, data).then((xhr: XMLHttpRequest) =>
                 {
                     if (xhr.status == 200)
                     {
@@ -185,7 +185,13 @@ namespace Game.Common
         //删除地图块
         static DelBlock(data: { name: string })
         {
-            return this.UserAPIGet("/api/map/delblock");
+            return this.UserAPIGet("/api/map/delblock", data);
+        }
+
+        static GetBlockTexUrl(name: string)
+        {
+            // return `${this.api}/api/map/getblocktex.png?token=${this.loginInfo.token}&name=${name}`;
+            return `${this.api}${name}`;
         }
     }
 }

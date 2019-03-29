@@ -3529,8 +3529,9 @@ declare namespace gd3d.event {
         PointerDown = 0,
         PointerUp = 1,
         PointerClick = 2,
-        PointerEnter = 3,
-        PointerExit = 4
+        PointerDoubleClick = 3,
+        PointerEnter = 4,
+        PointerExit = 5
     }
     enum PointEventEnum {
         PointDown = 0,

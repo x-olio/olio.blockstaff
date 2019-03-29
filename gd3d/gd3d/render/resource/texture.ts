@@ -239,6 +239,9 @@
         }
         uploadImage(img: HTMLImageElement, mipmap: boolean, linear: boolean, premultiply: boolean = true, repeat: boolean = false, mirroredU: boolean = false, mirroredV: boolean = false): void
         {
+            
+            
+
             this.width = img.width;
             this.height = img.height;
             this.mipmap = mipmap;

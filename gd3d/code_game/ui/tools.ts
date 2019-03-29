@@ -137,7 +137,41 @@ namespace Game.ui
         return btn_b;
     }
 
-    
+
+    export function CreateFrameImage(option: {
+        bg: gd3d.framework.texture,
+        border?: gd3d.framework.texture,
+        width?: number,
+        height?: number,
+        x?: number,
+        y?: number,
+        owner?: gd3d.framework.transform2D
+    })
+    {
+        let raw_t2 = new gd3d.framework.transform2D;
+        raw_t2.width = option.width || 0;
+        raw_t2.height = option.height || 0;
+        raw_t2.transform.localTranslate.x = option.x || 0;
+        raw_t2.transform.localTranslate.y = option.y || 0;
+        let raw_i2 = raw_t2.addComponent("rawImage2D") as gd3d.framework.rawImage2D;
+        raw_i2.image = option.bg;
+
+        if (option.border)
+        {//边框
+            let bg_t = new gd3d.framework.transform2D;
+            let bg_i = bg_t.addComponent("rawImage2D") as gd3d.framework.rawImage2D;
+            bg_t.width = option.width || 0;
+            bg_t.height = option.height || 0;
+            bg_i.image = option.border;
+            bg_i.color = new gd3d.math.color(.3, .3, .3, .2);
+            raw_t2.addChild(bg_t);
+        }
+
+        if (option.owner)
+            option.owner.addChild(raw_t2);
+        return raw_i2;
+    }
+
     let helpV2 = new gd3d.math.vector2();
 
     export function AddEventInComp(trans2d: gd3d.framework.IRectRenderer, eventEnum: gd3d.event.UIEventEnum, func: (...args: Array<any>) => void, thisArg: any)
@@ -147,7 +181,7 @@ namespace Game.ui
         _this.UIEventer = _this.UIEventer || new gd3d.event.UIEvent();
         _this.UIEventer.OnEnum(eventEnum, func, thisArg);
         _this.downPointV2 = _this.downPointV2 || new gd3d.math.vector2();
-
+        let time = 0;
         trans2d.onPointEvent = function (canvas, ev, oncap)
         {
             if (oncap == false)
@@ -194,13 +228,23 @@ namespace Game.ui
                             _this.UIEventer.EmitEnum(pu, ev);
                         }
 
+                        let pc: gd3d.event.UIEventEnum;
+                        if (Date.now() - time < 300)
+                        {
+                            pc = gd3d.event.UIEventEnum.PointerDoubleClick;
+                        } else
+                        {
+                            pc = gd3d.event.UIEventEnum.PointerClick;
+                        }
 
-                        let pc = gd3d.event.UIEventEnum.PointerClick;
+                        
                         if (!_this.isMovedLimit && _this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pc]) > 0)
                         {
                             ev.eated = true;
                             _this.UIEventer.EmitEnum(pc, ev);
                         }
+                        time = Date.now();
+
                     }
                 }
                 else
@@ -220,4 +264,7 @@ namespace Game.ui
             }
         }
     }
+
+
+
 }

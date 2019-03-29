@@ -55,7 +55,7 @@ namespace Game.State
                 owner: root,
                 onClick: () =>
                 {
-                    this.statemgr.ChangeState(new State_Second());
+                    this.statemgr.ChangeState(new State_SelectMap());
                 }
             });
 

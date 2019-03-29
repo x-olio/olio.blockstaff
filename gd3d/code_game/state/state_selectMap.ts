@@ -51,19 +51,33 @@ namespace Game.State
                 scroll.Add({
                     bg: tex_add64, border: tex_border, width: 128, height: 128, onClick: () =>
                     {
-
+                        this.statemgr.ChangeState(new State_Second(null, true));
                     }
                 });
             }
 
 
-            let result = await Common.APITools.ReadMapList();
-            Game.System.Map2DSystem.mapsDataStore = {};
-            for (let item of result.body)
+
+            let blocks = Game.System.Map2DSystem.mapBlockStore = {};
+            let bresult = await Common.APITools.ReadBlockList();
+            for (let blockInfo of bresult.body)
             {
-                
+                blocks[blockInfo.name] = JSON.parse(blockInfo.data);
             }
 
+            let result = await Common.APITools.ReadMapList();
+            let maps = Game.System.Map2DSystem.mapsDataStore = {};
+
+            for (let item of result.body)
+            {
+                maps[item.name] = JSON.parse(item.data);
+                scroll.Add({
+                    text: item.name, bg: tex_add64, border: tex_border, width: 128, height: 128, onClick: () =>
+                    {
+                        this.statemgr.ChangeState(new State_Second(item.name, this.isEditor));
+                    }
+                });
+            }
         }
 
 

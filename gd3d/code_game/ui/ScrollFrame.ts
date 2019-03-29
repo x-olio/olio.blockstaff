@@ -11,19 +11,20 @@ namespace Game.ui
         private click_time = 0;
         private assetMgr: gd3d.framework.assetMgr;
         constructor(private option: {
-            width: number, height: number, owner?: gd3d.framework.transform2D
+            width: number, height: number, owner?: gd3d.framework.transform2D,
+            x?: number, y?: number
         })
         {
 
             this.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
             let scroll_t = new gd3d.framework.transform2D;
-            scroll_t.width = option.width - 60;
-            scroll_t.height = option.height - 60;
+            scroll_t.width = option.width; //- 60;
+            scroll_t.height = option.height;// - 60;
 
 
 
-            scroll_t.localTranslate.x = 30;
-            scroll_t.localTranslate.y = 30;
+            scroll_t.localTranslate.x = option.x || 30;
+            scroll_t.localTranslate.y = option.y || 30;
             let scroll_ = scroll_t.addComponent("scrollRect") as gd3d.framework.scrollRect;
             let ct = new gd3d.framework.transform2D;
             ct.width = option.width;
@@ -43,15 +44,16 @@ namespace Game.ui
             Common.AssetTools.loadAsset(this.assetMgr, "./res/_game/test/del_16.png");
         }
 
-        public Add(option: {
+        public async Add(option: {
             bg: gd3d.framework.texture,
-            border: gd3d.framework.texture,
+            border?: gd3d.framework.texture,
             width?: number,
             height?: number,
             x?: number,
             y?: number,
             owner?: gd3d.framework.transform2D,
-            onClick?: (bindData?: any) => void,
+            onClick?: () => void,
+            onDbClick?: () => void,
             onDelete?: () => void,
             text?: string
         })
@@ -62,7 +64,7 @@ namespace Game.ui
             option.x = col * option.width + col * 10;
             option.y = this.curRow * option.height + this.curRow * 10;
             let fimg = this.CreateFrameImage(option);
-            this.context.height = this.curRow * option.height + this.curRow * 10;
+            this.context.height = (this.curRow * option.height + this.curRow * 10) + option.height;
 
             this.fimages.push(fimg);
             if (col == maxWCount - 1)
@@ -71,7 +73,7 @@ namespace Game.ui
 
         CreateFrameImage(option: {
             bg: gd3d.framework.texture,
-            border: gd3d.framework.texture,
+            border?: gd3d.framework.texture,
 
             width?: number,
             height?: number,
@@ -79,23 +81,24 @@ namespace Game.ui
             y?: number,
             owner?: gd3d.framework.transform2D,
             onClick?: () => void,
+            onDbClick?: () => void,
             onDelete?: () => void
             text?: string
         })
         {
-            let raw_t2 = new gd3d.framework.transform2D;
-            raw_t2.width = option.width || 0;
-            raw_t2.height = option.height || 0;
-            raw_t2.transform.localTranslate.x = option.x || 0;
-            raw_t2.transform.localTranslate.y = option.y || 0;
-            let raw_i2 = raw_t2.addComponent("rawImage2D") as gd3d.framework.rawImage2D;
-            raw_i2.image = option.bg;
-
+            let raw_i2 = ui.CreateFrameImage(option);
+            let raw_t2 = raw_i2.transform;
 
             AddEventInComp(raw_i2, gd3d.event.UIEventEnum.PointerClick, () =>
             {
                 if (option.onClick)
                     option.onClick();
+            }, this);
+            
+            AddEventInComp(raw_i2, gd3d.event.UIEventEnum.PointerDoubleClick, () =>
+            {
+                if (option.onDbClick)
+                    option.onDbClick();
             }, this);
 
             if (option.border)
@@ -143,6 +146,22 @@ namespace Game.ui
             if (option.owner)
                 option.owner.addChild(raw_t2);
             return raw_t2;
+        }
+
+
+        Clear()
+        {
+
+            this.fimages = [];
+            this.fimages.length = 0;
+            this.context.height = 0;
+            this.curRow = 0;
+            var childs = this.context.children;
+            if (childs)
+            {
+                while (childs.length > 0)
+                    this.context.removeChild(childs[0]);
+            }
         }
     }
 

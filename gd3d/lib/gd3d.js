@@ -19317,8 +19317,9 @@ var gd3d;
             UIEventEnum[UIEventEnum["PointerDown"] = 0] = "PointerDown";
             UIEventEnum[UIEventEnum["PointerUp"] = 1] = "PointerUp";
             UIEventEnum[UIEventEnum["PointerClick"] = 2] = "PointerClick";
-            UIEventEnum[UIEventEnum["PointerEnter"] = 3] = "PointerEnter";
-            UIEventEnum[UIEventEnum["PointerExit"] = 4] = "PointerExit";
+            UIEventEnum[UIEventEnum["PointerDoubleClick"] = 3] = "PointerDoubleClick";
+            UIEventEnum[UIEventEnum["PointerEnter"] = 4] = "PointerEnter";
+            UIEventEnum[UIEventEnum["PointerExit"] = 5] = "PointerExit";
         })(UIEventEnum = event.UIEventEnum || (event.UIEventEnum = {}));
         var PointEventEnum;
         (function (PointEventEnum) {
@@ -34463,6 +34464,7 @@ var gd3d;
             gd3d.io.xhrLoad(url, fun, onprocess, "blob", function (req) {
                 var blob = req.response;
                 var img = document.createElement("img");
+                img.crossOrigin = "";
                 img.onload = function (e) {
                     window.URL.revokeObjectURL(img.src);
                     fun(img, null);

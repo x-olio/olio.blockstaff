@@ -143,7 +143,7 @@
         gd3d.io.xhrLoad(url,fun,onprocess,"blob",(req)=>{
             var blob = req.response;
             var img = document.createElement("img");
-            //img.crossOrigin = "anonymous";
+            img.crossOrigin = "";
             img.onload = function (e)
             {
                 window.URL.revokeObjectURL(img.src);
