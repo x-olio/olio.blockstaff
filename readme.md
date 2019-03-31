@@ -19,6 +19,10 @@ blockstaff 是我们的第一个项目，他的画面表现形式基调是像马
 
 [地图系统数据格式](doc/map/format.md)
 
+## 开发进度
+
+[开发文档](doc/process/start.md)
+
 ## 游戏试玩
 
 略

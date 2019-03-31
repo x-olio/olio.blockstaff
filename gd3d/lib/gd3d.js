@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -19612,8 +19612,8 @@ var gd3d;
                 if (ev.detail) {
                     this.lastWheel = -1 * ev.detail;
                 }
-                else if (ev.wheelDelta) {
-                    this.lastWheel = ev.wheelDelta / 120;
+                else if (ev["wheelDelta"]) {
+                    this.lastWheel = ev["wheelDelta"] / 120;
                 }
                 else if (ev.DOM_DELTA_PIXEL) {
                     this.lastWheel = ev.DOM_DELTA_PIXEL / 120;
@@ -30306,8 +30306,8 @@ var gd3d;
         var help_quat = new gd3d.math.quaternion();
         var PhysicsImpostor = (function () {
             function PhysicsImpostor(object, type, _options) {
-                if (_options === void 0) { _options = { mass: 0 }; }
                 var _this = this;
+                if (_options === void 0) { _options = { mass: 0 }; }
                 this.object = object;
                 this.type = type;
                 this._options = _options;

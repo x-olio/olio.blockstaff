@@ -103,8 +103,8 @@ namespace gd3d.framework
             this.hasWheel = true;
             if (ev.detail) {
                 this.lastWheel = -1 * ev.detail;
-            }  else if (ev.wheelDelta) {
-                this.lastWheel = ev.wheelDelta / 120;
+            }  else if (ev["wheelDelta"]) {
+                this.lastWheel = ev["wheelDelta"] / 120;
             } else if (ev.DOM_DELTA_PIXEL) {
                 this.lastWheel = ev.DOM_DELTA_PIXEL / 120;
             } else {

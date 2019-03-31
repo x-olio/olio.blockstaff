@@ -8,6 +8,11 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outFile": "../lib/gd3d.js",
-    "composite": true
+    "composite": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.promise"
+    ]
   }
 }
