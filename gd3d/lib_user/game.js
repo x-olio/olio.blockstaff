@@ -107,6 +107,7 @@ var Game;
         }
         main.prototype.onStart = function (app) {
             return __awaiter(this, void 0, void 0, function () {
+                var loginInfo;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -117,6 +118,9 @@ var Game;
                             this.stateMgr = new Game.StateMgr();
                             this.stateMgr.Init(this.env);
                             this.stateMgr.ChangeState(new Game.State.State_List());
+                            loginInfo = Game.Common.LocalStore.Get("loginInfo");
+                            if (loginInfo)
+                                Game.Common.APITools.loginInfo = JSON.parse(loginInfo);
                             this.hadInit = true;
                             return [2];
                     }
@@ -1223,6 +1227,13 @@ var Game;
                 this.mapName = mapName;
                 this.isEditor = isEditor;
             }
+            State_Second.prototype.LoadTexture = function () {
+                return Game.Common.AssetTools.promiseQueueExec([
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/add_64.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/del_16.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/border.png"),
+                ]);
+            };
             State_Second.prototype.OnInit = function (env, statemgr) {
                 return __awaiter(this, void 0, void 0, function () {
                     var editorGame;
@@ -1233,16 +1244,19 @@ var Game;
                                 this.env = env;
                                 this.statemgr = statemgr;
                                 console.log("i am here. SecondState");
-                                this.map2d = new Game.System.Map2DSystem();
-                                return [4, this.map2d.InitAsync(this.env)];
+                                return [4, this.LoadTexture()];
                             case 1:
                                 _a.sent();
-                                if (!this.mapName) return [3, 3];
-                                return [4, this.map2d.LoadTmxAsync(Game.System.Map2DSystem.mapsDataStore[this.mapName], Game.System.Map2DSystem.mapBlockStore)];
+                                this.map2d = new Game.System.Map2DSystem();
+                                return [4, this.map2d.InitAsync(this.env)];
                             case 2:
                                 _a.sent();
-                                _a.label = 3;
+                                if (!this.mapName) return [3, 4];
+                                return [4, this.map2d.LoadTmxAsync(Game.System.Map2DSystem.mapsDataStore[this.mapName], Game.System.Map2DSystem.mapBlockStore)];
                             case 3:
+                                _a.sent();
+                                _a.label = 4;
+                            case 4:
                                 if (this.isEditor) {
                                     editorGame = new Game.ui.EditorGame(this.mapName);
                                     this.env.overlay.addChild(editorGame.Init());
@@ -1620,6 +1634,8 @@ var Game;
             Map2DSystem.prototype.GetImageData = function () {
                 return this.env.app.webgl.canvas.toDataURL("image/png");
             };
+            Map2DSystem.mapsDataStore = {};
+            Map2DSystem.mapBlockStore = {};
             return Map2DSystem;
         }());
         System.Map2DSystem = Map2DSystem;

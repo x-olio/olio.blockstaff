@@ -216,8 +216,8 @@ namespace Game.System
 `
     export class Map2DSystem
     {
-        static mapsDataStore: { [key: string]: IMapInfoData };
-        static mapBlockStore: { [key: string]: IBlockDesc };
+        static mapsDataStore: { [key: string]: IMapInfoData } = {};
+        static mapBlockStore: { [key: string]: IBlockDesc } = {};
 
         env: Environment;
         baseData: IMapInfoData;

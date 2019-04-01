@@ -16,6 +16,9 @@ namespace Game
             this.stateMgr.Init(this.env);
 
             this.stateMgr.ChangeState(new State.State_List());
+            let loginInfo = Common.LocalStore.Get("loginInfo");
+            if(loginInfo)
+                Common.APITools.loginInfo = JSON.parse(loginInfo);
             // let loginInfo = Common.LocalStore.Get("loginInfo");
             // if (loginInfo)
             // {

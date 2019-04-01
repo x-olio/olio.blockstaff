@@ -14,13 +14,23 @@ namespace Game.State
 
         }
 
+        LoadTexture()
+        {
+            return Common.AssetTools.promiseQueueExec([
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/add_64.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/del_16.png"),
+                Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/_game/test/border.png"),
+            ]);
+        }
+
+        
         async OnInit(env: Environment, statemgr: StateMgr)
         {
             this.env = env;
             this.statemgr = statemgr;
 
             console.log("i am here. SecondState");
-
+            await this.LoadTexture();
             this.map2d = new Game.System.Map2DSystem();
 
             await this.map2d.InitAsync(this.env);

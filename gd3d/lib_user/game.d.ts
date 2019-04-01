@@ -211,6 +211,7 @@ declare namespace Game.State {
         map2d: Game.System.Map2DSystem;
         private curlayer;
         constructor(mapName: string, isEditor?: boolean);
+        LoadTexture(): Promise<void>;
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
         OnExit(): void;
         OnUpdate(delta: number): void;
