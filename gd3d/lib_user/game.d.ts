@@ -196,19 +196,9 @@ declare namespace Game.State {
         env: Environment;
         statemgr: StateMgr;
         map2d: Game.System.Map2DSystem;
-        private root;
-        private allblock_scroll;
-        private layerblock_scroll;
-        private tex_border;
-        private curBlock;
         private curlayer;
         constructor(mapName: string, isEditor?: boolean);
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
-        CreateEditorUI(): Promise<void>;
-        CreateLayerBlockUI(): void;
-        CreateBlockUI(): void;
-        RefreshBlockList(): void;
-        CreateBlockItem(blockName: string, block: System.IBlockDesc): void;
         OnExit(): void;
         OnUpdate(delta: number): void;
     }
@@ -340,14 +330,14 @@ declare namespace Game.System {
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
         Parse(mapInfo: IMapInfoData): Promise<void>;
         CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData;
-        CreateEmitBlock(): IBlockDesc;
+        static CreateEmitBlock(): IBlockDesc;
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
         CalcIndex(x: number, y: number, w: number): number;
         GetImageData(): string;
     }
 }
 declare namespace Game.ui {
-    class File {
+    class CFile {
         static Show(select: (file: File) => void, mimeType?: string): void;
     }
 }
@@ -438,5 +428,25 @@ declare namespace Game.ui {
 declare namespace Game.ui.dialog {
     class MesageBox {
         static Show(title: string, content: string): void;
+    }
+}
+declare namespace Game.ui {
+    class EditorGame {
+        private mapName;
+        uiroot: gd3d.framework.transform2D;
+        private allblock_scroll;
+        private refblock_scroll;
+        private tex_border;
+        private curBlock;
+        private assetMgr;
+        OnAddBlockTex: (file: File) => void;
+        OnSaveMap: (name: string, width: number, height: number) => void;
+        constructor(mapName: string);
+        Init(): gd3d.framework.transform2D;
+        CreateUI(): void;
+        CreateBlockUI(): void;
+        CreateRefBlockUI(): void;
+        RefreshBlockList(): void;
+        CreateBlockItem(blockName: string, block: System.IBlockDesc): void;
     }
 }

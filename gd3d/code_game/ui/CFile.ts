@@ -1,6 +1,6 @@
 namespace Game.ui
 {
-    export class File
+    export class CFile
     {
         public static Show(select: (file: File) => void, mimeType?: string)
         {

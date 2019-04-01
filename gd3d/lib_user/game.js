@@ -1162,6 +1162,8 @@ var Game;
             }
             State_Second.prototype.OnInit = function (env, statemgr) {
                 return __awaiter(this, void 0, void 0, function () {
+                    var editorGame;
+                    var _this = this;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
@@ -1179,185 +1181,25 @@ var Game;
                                 _a.label = 3;
                             case 3:
                                 if (this.isEditor) {
-                                    this.CreateEditorUI();
+                                    editorGame = new Game.ui.EditorGame(this.mapName);
+                                    this.env.overlay.addChild(editorGame.Init());
+                                    editorGame.OnSaveMap = function (name, width, height) {
+                                        _this.map2d.root.removeAllChild();
+                                        {
+                                            var defBlockKey = void 0;
+                                            for (var key in Game.System.Map2DSystem.mapBlockStore) {
+                                                defBlockKey = key;
+                                                _this.map2d.mapBlocks[key] = Game.System.Map2DSystem.mapBlockStore[key];
+                                                break;
+                                            }
+                                            var emitData = _this.map2d.CreateEmitData(width, height, defBlockKey);
+                                            _this.map2d.LoadTmxAsync(emitData, Game.System.Map2DSystem.mapBlockStore);
+                                        }
+                                        _this.curlayer = _this.map2d.baseData.layers[0];
+                                    };
                                 }
                                 return [2];
                         }
-                    });
-                });
-            };
-            State_Second.prototype.CreateEditorUI = function () {
-                return __awaiter(this, void 0, void 0, function () {
-                    var atlasComp, inp_name, inp_w, inp_h;
-                    var _this = this;
-                    return __generator(this, function (_a) {
-                        this.root = new gd3d.framework.transform2D();
-                        this.env.overlay.addChild(this.root);
-                        this.root.markDirty();
-                        atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json");
-                        inp_name = Game.ui.createInput({
-                            placeholder: "地图名",
-                            text: this.mapName,
-                            assetMgr: this.env.assetMgr,
-                            backSprite: atlasComp.sprites["ui_public_input"],
-                            x: 5, y: 5,
-                            width: 70,
-                            owner: this.root
-                        });
-                        inp_w = Game.ui.createInput({
-                            placeholder: "宽度",
-                            assetMgr: this.env.assetMgr,
-                            backSprite: atlasComp.sprites["ui_public_input"],
-                            x: 95, y: 5,
-                            width: 50,
-                            owner: this.root
-                        });
-                        inp_h = Game.ui.createInput({
-                            placeholder: "高度",
-                            assetMgr: this.env.assetMgr,
-                            backSprite: atlasComp.sprites["ui_public_input"],
-                            x: 165, y: 5,
-                            width: 50,
-                            owner: this.root
-                        });
-                        Game.ui.createButton({
-                            assetMgr: this.env.assetMgr,
-                            hitsSprite: atlasComp.sprites["ui_public_button_hits"],
-                            backSprite: atlasComp.sprites["ui_public_button_1"],
-                            x: 225, y: 5,
-                            width: 150,
-                            text: "确定",
-                            fontcolor: new gd3d.math.color(1, 1, 1, 1),
-                            owner: this.root,
-                            onClick: function () {
-                                var name = inp_name.text;
-                                var widht = Number(inp_w.text) || 0;
-                                var height = Number(inp_h.text) || 0;
-                                if (!name || !widht || !height)
-                                    return console.error("地图数据正确,无法保存");
-                                _this.map2d.root.removeAllChild();
-                                {
-                                    var defBlockKey = void 0;
-                                    for (var key in Game.System.Map2DSystem.mapBlockStore) {
-                                        defBlockKey = key;
-                                        _this.map2d.mapBlocks[key] = Game.System.Map2DSystem.mapBlockStore[key];
-                                        break;
-                                    }
-                                    var emitData = _this.map2d.CreateEmitData(widht, height, defBlockKey);
-                                    _this.map2d.LoadTmxAsync(emitData, Game.System.Map2DSystem.mapBlockStore);
-                                }
-                                _this.curlayer = _this.map2d.baseData.layers[0];
-                            }
-                        });
-                        this.curBlock = Game.ui.CreateFrameImage({
-                            bg: null,
-                            width: 64, height: 64,
-                            x: 395, y: 5,
-                            owner: this.root
-                        });
-                        this.CreateBlockUI();
-                        return [2];
-                    });
-                });
-            };
-            State_Second.prototype.CreateLayerBlockUI = function () {
-                this.layerblock_scroll = new Game.ui.ScrollFrame({
-                    width: 300,
-                    height: 64,
-                    x: 520, y: 5,
-                    owner: this.root
-                });
-            };
-            State_Second.prototype.CreateBlockUI = function () {
-                this.tex_border = this.env.assetMgr.getAssetByName("border.png");
-                this.allblock_scroll = new Game.ui.ScrollFrame({
-                    width: 70,
-                    height: 300,
-                    owner: this.root,
-                    x: 5, y: 50
-                });
-                this.RefreshBlockList();
-            };
-            State_Second.prototype.RefreshBlockList = function () {
-                var _this = this;
-                this.allblock_scroll.Clear();
-                setTimeout(function () {
-                    var tex_add64 = _this.env.assetMgr.getAssetByName("add_64.png");
-                    _this.allblock_scroll.Add({
-                        width: 64,
-                        height: 64,
-                        bg: tex_add64,
-                        border: _this.tex_border,
-                        onClick: function () {
-                            Game.ui.File.Show(function (file) { return __awaiter(_this, void 0, void 0, function () {
-                                var blockName, blockData, result;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0:
-                                            blockName = md5(file.name + "_" + Date.now());
-                                            blockData = this.map2d.CreateEmitBlock();
-                                            return [4, Game.Common.APITools.CreateBlock({
-                                                    name: blockName,
-                                                    desc: "",
-                                                    data: JSON.stringify(blockData),
-                                                    file: file
-                                                })];
-                                        case 1:
-                                            result = _a.sent();
-                                            if (result.error == 0) {
-                                                Game.System.Map2DSystem.mapBlockStore[blockName] = result.body;
-                                                this.CreateBlockItem(blockName, result.body);
-                                            }
-                                            else
-                                                console.error(result.message);
-                                            return [2];
-                                    }
-                                });
-                            }); }, "*.png,*.jpg");
-                        },
-                        onDbClick: function () {
-                            if (_this.curlayer) {
-                            }
-                        }
-                    });
-                    var blocks = Game.System.Map2DSystem.mapBlockStore;
-                    for (var key in blocks)
-                        _this.CreateBlockItem(key, blocks[key]);
-                }, 50);
-            };
-            State_Second.prototype.CreateBlockItem = function (blockName, block) {
-                var _this = this;
-                if (!block || !block.refImgs || block.refImgs.length < 1)
-                    return;
-                var texUrl = Game.Common.APITools.GetBlockTexUrl(block.refImgs[0]);
-                Game.Common.AssetTools.loadAsset(this.env.assetMgr, texUrl).then(function () {
-                    var texName = texUrl.substring(texUrl.lastIndexOf("/") + 1);
-                    var bgTex = _this.env.assetMgr.getAssetByName(texName);
-                    _this.allblock_scroll.Add({
-                        width: 64,
-                        height: 64,
-                        bg: bgTex,
-                        border: _this.tex_border,
-                        onClick: function () {
-                            _this.curBlock.image = bgTex;
-                        },
-                        onDelete: function () { return __awaiter(_this, void 0, void 0, function () {
-                            var result;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4, Game.Common.APITools.DelBlock({ name: blockName })];
-                                    case 1:
-                                        result = _a.sent();
-                                        if (result.error == 0) {
-                                            delete Game.System.Map2DSystem.mapBlockStore[blockName];
-                                            this.RefreshBlockList();
-                                        }
-                                        else
-                                            console.error(result.message);
-                                        return [2];
-                                }
-                            });
-                        }); }
                     });
                 });
             };
@@ -1632,7 +1474,8 @@ var Game;
                             for (y = layer.height; y >= 0; --y) {
                                 for (x = 0; x < layer.width; ++x) {
                                     id = layer.data[y * layer.width + x];
-                                    mapString += id + " ";
+                                    if (id != undefined)
+                                        mapString += id + " ";
                                     if (!id)
                                         continue;
                                     block = this.mapBlocks[layer.refblocks[id - 1]];
@@ -1682,7 +1525,7 @@ var Game;
                     version: "1.0.1"
                 };
             };
-            Map2DSystem.prototype.CreateEmitBlock = function () {
+            Map2DSystem.CreateEmitBlock = function () {
                 return {
                     refImgs: [],
                     pieces: [
@@ -1723,10 +1566,10 @@ var Game;
 (function (Game) {
     var ui;
     (function (ui) {
-        var File = (function () {
-            function File() {
+        var CFile = (function () {
+            function CFile() {
             }
-            File.Show = function (select, mimeType) {
+            CFile.Show = function (select, mimeType) {
                 var inp_file = document.createElement("input");
                 inp_file.type = "file";
                 inp_file.style.display = "none";
@@ -1744,9 +1587,9 @@ var Game;
                     inp_file.remove();
                 }, 1);
             };
-            return File;
+            return CFile;
         }());
-        ui.File = File;
+        ui.CFile = CFile;
     })(ui = Game.ui || (Game.ui = {}));
 })(Game || (Game = {}));
 var Game;
@@ -2071,6 +1914,183 @@ var Game;
             }());
             dialog.MesageBox = MesageBox;
         })(dialog = ui.dialog || (ui.dialog = {}));
+    })(ui = Game.ui || (Game.ui = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var ui;
+    (function (ui) {
+        var EditorGame = (function () {
+            function EditorGame(mapName) {
+                this.mapName = mapName;
+                this.uiroot = new gd3d.framework.transform2D();
+                this.uiroot.markDirty();
+                this.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
+            }
+            EditorGame.prototype.Init = function () {
+                this.CreateUI();
+                return this.uiroot;
+            };
+            EditorGame.prototype.CreateUI = function () {
+                var _this = this;
+                var atlasComp = this.assetMgr.getAssetByName("comp.atlas.json");
+                this.tex_border = this.assetMgr.getAssetByName("border.png");
+                var inp_name = ui.createInput({
+                    placeholder: "地图名",
+                    text: this.mapName,
+                    assetMgr: this.assetMgr,
+                    backSprite: atlasComp.sprites["ui_public_input"],
+                    x: 5, y: 5,
+                    width: 70,
+                    owner: this.uiroot
+                });
+                var inp_w = ui.createInput({
+                    placeholder: "宽度",
+                    assetMgr: this.assetMgr,
+                    backSprite: atlasComp.sprites["ui_public_input"],
+                    x: 95, y: 5,
+                    width: 50,
+                    owner: this.uiroot
+                });
+                var inp_h = ui.createInput({
+                    placeholder: "高度",
+                    assetMgr: this.assetMgr,
+                    backSprite: atlasComp.sprites["ui_public_input"],
+                    x: 165, y: 5,
+                    width: 50,
+                    owner: this.uiroot
+                });
+                ui.createButton({
+                    assetMgr: this.assetMgr,
+                    hitsSprite: atlasComp.sprites["ui_public_button_hits"],
+                    backSprite: atlasComp.sprites["ui_public_button_1"],
+                    x: 225, y: 5,
+                    width: 150,
+                    text: "确定",
+                    fontcolor: new gd3d.math.color(1, 1, 1, 1),
+                    owner: this.uiroot,
+                    onClick: function () {
+                        var name = inp_name.text;
+                        var widht = Number(inp_w.text) || 0;
+                        var height = Number(inp_h.text) || 0;
+                        if (!name || !widht || !height)
+                            return console.error("地图数据正确,无法保存");
+                        if (_this.OnSaveMap)
+                            _this.OnSaveMap(name, widht, height);
+                    }
+                });
+                this.curBlock = ui.CreateFrameImage({
+                    bg: null,
+                    width: 64, height: 64,
+                    x: 395, y: 5,
+                    owner: this.uiroot
+                });
+                this.CreateBlockUI();
+                this.CreateRefBlockUI();
+            };
+            EditorGame.prototype.CreateBlockUI = function () {
+                this.allblock_scroll = new ui.ScrollFrame({
+                    width: 70,
+                    height: 300,
+                    owner: this.uiroot,
+                    x: 5, y: 50
+                });
+                this.RefreshBlockList();
+            };
+            EditorGame.prototype.CreateRefBlockUI = function () {
+                this.refblock_scroll = new ui.ScrollFrame({
+                    width: 70,
+                    height: 300,
+                    owner: this.uiroot,
+                    x: 75, y: 50
+                });
+            };
+            EditorGame.prototype.RefreshBlockList = function () {
+                var _this = this;
+                this.allblock_scroll.Clear();
+                setTimeout(function () {
+                    var tex_add64 = _this.assetMgr.getAssetByName("add_64.png");
+                    _this.allblock_scroll.Add({
+                        width: 64,
+                        height: 64,
+                        bg: tex_add64,
+                        border: _this.tex_border,
+                        onClick: function () {
+                            ui.CFile.Show(function (file) { return __awaiter(_this, void 0, void 0, function () {
+                                var blockName, blockData, result;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            if (this.OnAddBlockTex)
+                                                this.OnAddBlockTex(file);
+                                            blockName = md5(file.name + "_" + Date.now());
+                                            blockData = Game.System.Map2DSystem.CreateEmitBlock();
+                                            return [4, Game.Common.APITools.CreateBlock({
+                                                    name: blockName,
+                                                    desc: "",
+                                                    data: JSON.stringify(blockData),
+                                                    file: file
+                                                })];
+                                        case 1:
+                                            result = _a.sent();
+                                            if (result.error == 0) {
+                                                Game.System.Map2DSystem.mapBlockStore[blockName] = result.body;
+                                                this.CreateBlockItem(blockName, result.body);
+                                            }
+                                            else
+                                                console.error(result.message);
+                                            return [2];
+                                    }
+                                });
+                            }); }, "*.png,*.jpg");
+                        },
+                        onDbClick: function () {
+                        }
+                    });
+                    var blocks = Game.System.Map2DSystem.mapBlockStore;
+                    for (var key in blocks)
+                        _this.CreateBlockItem(key, blocks[key]);
+                }, 50);
+            };
+            EditorGame.prototype.CreateBlockItem = function (blockName, block) {
+                var _this = this;
+                if (!block || !block.refImgs || block.refImgs.length < 1)
+                    return;
+                var texUrl = Game.Common.APITools.GetBlockTexUrl(block.refImgs[0]);
+                Game.Common.AssetTools.loadAsset(this.assetMgr, texUrl).then(function () {
+                    var texName = texUrl.substring(texUrl.lastIndexOf("/") + 1);
+                    var bgTex = _this.assetMgr.getAssetByName(texName);
+                    _this.allblock_scroll.Add({
+                        width: 64,
+                        height: 64,
+                        bg: bgTex,
+                        border: _this.tex_border,
+                        onClick: function () {
+                            _this.curBlock.image = bgTex;
+                        },
+                        onDelete: function () { return __awaiter(_this, void 0, void 0, function () {
+                            var result;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4, Game.Common.APITools.DelBlock({ name: blockName })];
+                                    case 1:
+                                        result = _a.sent();
+                                        if (result.error == 0) {
+                                            delete Game.System.Map2DSystem.mapBlockStore[blockName];
+                                            this.RefreshBlockList();
+                                        }
+                                        else
+                                            console.error(result.message);
+                                        return [2];
+                                }
+                            });
+                        }); }
+                    });
+                });
+            };
+            return EditorGame;
+        }());
+        ui.EditorGame = EditorGame;
     })(ui = Game.ui || (Game.ui = {}));
 })(Game || (Game = {}));
 //# sourceMappingURL=game.js.map

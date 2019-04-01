@@ -344,10 +344,10 @@ namespace Game.System
                     for (let x = 0; x < layer.width; ++x)
                     {
                         let id = layer.data[y * layer.width + x];
-                        mapString += id + " ";
+                        if (id != undefined)
+                            mapString += id + " ";
                         if (!id)
                             continue;
-
                         var block = this.mapBlocks[layer.refblocks[id - 1]];
                         if (block.displayType == "static")
                         {
@@ -402,7 +402,7 @@ namespace Game.System
             };
         }
 
-        CreateEmitBlock(): IBlockDesc
+        static CreateEmitBlock(): IBlockDesc
         {
             return {
                 // refImgs: ["./res/_game/test/stairs.png"],
