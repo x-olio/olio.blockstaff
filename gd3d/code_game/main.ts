@@ -15,16 +15,17 @@ namespace Game
             this.stateMgr = new StateMgr();
             this.stateMgr.Init(this.env);
 
-            let loginInfo = Common.LocalStore.Get("loginInfo");
-            if (loginInfo)
-            {
-                Common.APITools.loginInfo = JSON.parse(loginInfo);
-                if (await Common.APITools.CheckToken())
-                    this.stateMgr.ChangeState(new State.State_Menu());
-                else
-                    this.stateMgr.ChangeState(new State.State_Login());
-            } else
-                this.stateMgr.ChangeState(new State.State_Login());
+            this.stateMgr.ChangeState(new State.State_List());
+            // let loginInfo = Common.LocalStore.Get("loginInfo");
+            // if (loginInfo)
+            // {
+            //     Common.APITools.loginInfo = JSON.parse(loginInfo);
+            //     if (await Common.APITools.CheckToken())
+            //         this.stateMgr.ChangeState(new State.State_Menu());
+            //     else
+            //         this.stateMgr.ChangeState(new State.State_Login());
+            // } else
+            //     this.stateMgr.ChangeState(new State.State_Login());
 
             this.hadInit = true;
         }

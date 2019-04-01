@@ -5,7 +5,7 @@ namespace Game.ui
     {
         name?: string,
         text?: string,
-        assetMgr: gd3d.framework.assetMgr
+        assetMgr?: gd3d.framework.assetMgr
         owner?: gd3d.framework.transform2D
         fontsize?: number,
         fontasset?: string,
@@ -32,6 +32,8 @@ namespace Game.ui
 
     export function createLabel(option: ILabelOption)
     {
+        if (!option.assetMgr)
+            option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
         let lab_t = new gd3d.framework.transform2D;
         lab_t.name = option.name;
         lab_t.width = option.width || 120;
@@ -40,7 +42,6 @@ namespace Game.ui
         lab_t.localTranslate.y = option.y || 0;
         if (option.owner)
             option.owner.addChild(lab_t);
-
         let lab_l = lab_t.addComponent("label") as gd3d.framework.label;
         lab_l.font = option.assetMgr.getAssetByName(option.fontasset || "STXINGKA.font.json") as gd3d.framework.font;
         lab_l.fontsize = option.fontsize || 24;
@@ -50,6 +51,8 @@ namespace Game.ui
     }
     export function createInput(option: IInputOption)
     {
+        if (!option.assetMgr)
+            option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
         //一个输入框
         let iptFrame_t = new gd3d.framework.transform2D;
         iptFrame_t.width = option.width || 120;
@@ -103,6 +106,8 @@ namespace Game.ui
     }
     export function createButton(option: IButtonOption)
     {
+        if (!option.assetMgr)
+            option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
         //按鈕
         let btn_t = new gd3d.framework.transform2D;
         btn_t.name = option.name;

@@ -44,6 +44,25 @@ namespace Game.ui
             Common.AssetTools.loadAsset(this.assetMgr, "./res/_game/test/del_16.png");
         }
 
+        public AddComp(comp: gd3d.framework.I2DComponent)
+        {
+            let width = comp.transform.width;
+            let height = comp.transform.height;
+
+            let maxWCount = parseInt(`${this.option.width / width}`);
+            let col = this.fimages.length % maxWCount;
+            // option.owner = this.context;
+            // option.x = col * option.width + col * 10;
+            // option.y = this.curRow * option.height + this.curRow * 10;
+            comp.transform.localTranslate.x = col * width + col * 10;
+            comp.transform.localTranslate.y = this.curRow * height + this.curRow * 10;
+            this.context.height = (this.curRow * height + this.curRow * 10) + height;
+            this.context.addChild(comp.transform);
+            this.fimages.push(comp);
+            if (col == maxWCount - 1)
+                ++this.curRow;
+        }
+
         public async Add(option: {
             bg: gd3d.framework.texture,
             border?: gd3d.framework.texture,
@@ -94,7 +113,7 @@ namespace Game.ui
                 if (option.onClick)
                     option.onClick();
             }, this);
-            
+
             AddEventInComp(raw_i2, gd3d.event.UIEventEnum.PointerDoubleClick, () =>
             {
                 if (option.onDbClick)

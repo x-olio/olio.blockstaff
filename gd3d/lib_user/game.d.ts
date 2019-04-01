@@ -136,6 +136,19 @@ declare namespace Game.State {
     }
 }
 declare namespace Game.State {
+    class State_List implements IGameState {
+        private env;
+        private statemgr;
+        private scroll;
+        loadTexture(): Promise<void>;
+        OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
+        CreateFunc(text: string, state: IGameState): void;
+        CreateUI(): void;
+        OnUpdate(delta: number): void;
+        OnExit(): void;
+    }
+}
+declare namespace Game.State {
     class State_Login implements IGameState {
         private env;
         private statemgr;
@@ -357,6 +370,7 @@ declare namespace Game.ui {
             x?: number;
             y?: number;
         });
+        AddComp(comp: gd3d.framework.I2DComponent): void;
         Add(option: {
             bg: gd3d.framework.texture;
             border?: gd3d.framework.texture;
@@ -390,7 +404,7 @@ declare namespace Game.ui {
     interface ILabelOption {
         name?: string;
         text?: string;
-        assetMgr: gd3d.framework.assetMgr;
+        assetMgr?: gd3d.framework.assetMgr;
         owner?: gd3d.framework.transform2D;
         fontsize?: number;
         fontasset?: string;

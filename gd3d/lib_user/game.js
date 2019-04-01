@@ -107,7 +107,6 @@ var Game;
         }
         main.prototype.onStart = function (app) {
             return __awaiter(this, void 0, void 0, function () {
-                var loginInfo;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -117,20 +116,7 @@ var Game;
                             _a.sent();
                             this.stateMgr = new Game.StateMgr();
                             this.stateMgr.Init(this.env);
-                            loginInfo = Game.Common.LocalStore.Get("loginInfo");
-                            if (!loginInfo) return [3, 3];
-                            Game.Common.APITools.loginInfo = JSON.parse(loginInfo);
-                            return [4, Game.Common.APITools.CheckToken()];
-                        case 2:
-                            if (_a.sent())
-                                this.stateMgr.ChangeState(new Game.State.State_Menu());
-                            else
-                                this.stateMgr.ChangeState(new Game.State.State_Login());
-                            return [3, 4];
-                        case 3:
-                            this.stateMgr.ChangeState(new Game.State.State_Login());
-                            _a.label = 4;
-                        case 4:
+                            this.stateMgr.ChangeState(new Game.State.State_List());
                             this.hadInit = true;
                             return [2];
                     }
@@ -735,6 +721,83 @@ var Game;
             return State_First;
         }());
         State.State_First = State_First;
+    })(State = Game.State || (Game.State = {}));
+})(Game || (Game = {}));
+var Game;
+(function (Game) {
+    var State;
+    (function (State) {
+        var State_List = (function () {
+            function State_List() {
+            }
+            State_List.prototype.loadTexture = function () {
+                return Game.Common.AssetTools.promiseQueueExec([
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.json.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/comp/comp.atlas.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/STXINGKA.TTF.png"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/resources/STXINGKA.font.json"),
+                    Game.Common.AssetTools.loadAsset.bind(this, this.env.assetMgr, "res/zg03_256.png"),
+                ]);
+            };
+            State_List.prototype.OnInit = function (env, statemgr) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var uiroot;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                this.env = env;
+                                this.statemgr = statemgr;
+                                return [4, this.loadTexture()];
+                            case 1:
+                                _a.sent();
+                                uiroot = new gd3d.framework.transform2D();
+                                uiroot.markDirty();
+                                this.scroll = new Game.ui.ScrollFrame({
+                                    width: 300,
+                                    height: this.env.app.height,
+                                    owner: uiroot
+                                });
+                                this.env.overlay.addChild(uiroot);
+                                this.CreateUI();
+                                return [2];
+                        }
+                    });
+                });
+            };
+            State_List.prototype.CreateFunc = function (text, state) {
+                var _this = this;
+                var atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json");
+                this.scroll.AddComp(Game.ui.createButton({
+                    width: 300,
+                    height: 40,
+                    text: text,
+                    hitsSprite: atlasComp.sprites["ui_public_button_hits"],
+                    backSprite: atlasComp.sprites["ui_public_button_1"],
+                    fontcolor: new gd3d.math.color(1, 1, 1, 1),
+                    onClick: function () {
+                        _this.statemgr.ChangeState(state);
+                    }
+                }));
+                this.scroll.root.setLayoutValue(gd3d.framework.layoutOption.V_CENTER, 1);
+                console.log("create func :" + text);
+            };
+            State_List.prototype.CreateUI = function () {
+                this.CreateFunc("登陆测试", new State.State_Login());
+                this.CreateFunc("场景测试", new State.State_Second("", true));
+                this.CreateFunc("注册测试", new State.State_Regision(this));
+            };
+            State_List.prototype.OnUpdate = function (delta) {
+            };
+            State_List.prototype.OnExit = function () {
+                var childs = this.env.overlay.getChildren();
+                for (var i in childs) {
+                    this.env.overlay.removeChild(childs[i]);
+                }
+            };
+            return State_List;
+        }());
+        State.State_List = State_List;
     })(State = Game.State || (Game.State = {}));
 })(Game || (Game = {}));
 var Game;
@@ -1624,6 +1687,19 @@ var Game;
                     option.owner.addChild(scroll_t);
                 Game.Common.AssetTools.loadAsset(this.assetMgr, "./res/_game/test/del_16.png");
             }
+            ScrollFrame.prototype.AddComp = function (comp) {
+                var width = comp.transform.width;
+                var height = comp.transform.height;
+                var maxWCount = parseInt("" + this.option.width / width);
+                var col = this.fimages.length % maxWCount;
+                comp.transform.localTranslate.x = col * width + col * 10;
+                comp.transform.localTranslate.y = this.curRow * height + this.curRow * 10;
+                this.context.height = (this.curRow * height + this.curRow * 10) + height;
+                this.context.addChild(comp.transform);
+                this.fimages.push(comp);
+                if (col == maxWCount - 1)
+                    ++this.curRow;
+            };
             ScrollFrame.prototype.Add = function (option) {
                 return __awaiter(this, void 0, void 0, function () {
                     var maxWCount, col, fimg;
@@ -1713,6 +1789,8 @@ var Game;
     var ui;
     (function (ui) {
         function createLabel(option) {
+            if (!option.assetMgr)
+                option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
             var lab_t = new gd3d.framework.transform2D;
             lab_t.name = option.name;
             lab_t.width = option.width || 120;
@@ -1730,6 +1808,8 @@ var Game;
         }
         ui.createLabel = createLabel;
         function createInput(option) {
+            if (!option.assetMgr)
+                option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
             var iptFrame_t = new gd3d.framework.transform2D;
             iptFrame_t.width = option.width || 120;
             iptFrame_t.height = option.height || 30;
@@ -1778,6 +1858,8 @@ var Game;
         }
         ui.createInput = createInput;
         function createButton(option) {
+            if (!option.assetMgr)
+                option.assetMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
             var btn_t = new gd3d.framework.transform2D;
             btn_t.name = option.name;
             btn_t.width = option.width || 100;
