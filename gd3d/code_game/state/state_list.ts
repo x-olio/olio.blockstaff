@@ -9,9 +9,9 @@ namespace Game.State
         CreateUI()
         {
             this.CreateFunc("登陆测试", new State_Login());
-            this.CreateFunc("场景测试", new State_Second("", true));
+            this.CreateFunc("地块上传", new State_Second("", true));
             this.CreateFunc("注册测试", new State_Regision(this));
-            this.CreateFunc("角色测试", new State_GamePlayer());
+            this.CreateFunc("场景与角色", new State_GamePlayer());
         }
 
         loadTexture()

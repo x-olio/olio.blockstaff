@@ -783,9 +783,9 @@ var Game;
             }
             State_List.prototype.CreateUI = function () {
                 this.CreateFunc("登陆测试", new State.State_Login());
-                this.CreateFunc("场景测试", new State.State_Second("", true));
+                this.CreateFunc("地块上传", new State.State_Second("", true));
                 this.CreateFunc("注册测试", new State.State_Regision(this));
-                this.CreateFunc("角色测试", new State.State_GamePlayer());
+                this.CreateFunc("场景与角色", new State.State_GamePlayer());
             };
             State_List.prototype.loadTexture = function () {
                 return Game.Common.AssetTools.promiseQueueExec([
