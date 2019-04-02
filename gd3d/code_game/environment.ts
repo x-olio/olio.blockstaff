@@ -13,7 +13,7 @@ namespace Game
         // taskmgr: gd3d.framework.taskMgr;
         assetMgr: gd3d.framework.assetMgr;
 
-        
+
         async Init()
         {
             //this.taskmgr = new gd3d.framework.taskMgr();
@@ -39,6 +39,10 @@ namespace Game
             objCam.markDirty();
             //2dUI root
             this.overlay = new gd3d.framework.overlay2D();
+            
+            this.overlay.matchReference_width = this.app.width;
+            this.overlay.matchReference_height = this.app.height;
+            this.overlay.scaleMode = gd3d.framework.UIScaleMode.SCALE_WITH_SCREEN_SIZE;
             this.camera.addOverLay(this.overlay);
 
             //任务排队执行系统
@@ -66,17 +70,5 @@ namespace Game
             return promise;
         }
 
-        // private loadShader(laststate: gd3d.framework.taskstate, state: gd3d.framework.taskstate)
-        // {
-        //     this.app.getAssetMgr().load("res/shader/Mainshader.assetbundle.json", gd3d.framework.AssetTypeEnum.Auto, (_state) =>
-        //     {
-        //         if (_state.isfinish)
-        //         {
-        //             state.finish = true;
-        //         }
-        //     }
-        //     );
-        // }
-    
     }
 }

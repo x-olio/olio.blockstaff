@@ -109,17 +109,8 @@ declare namespace Game.Common {
         static GetXhr(url: string, method: string, loadend?: (xhr: XMLHttpRequest, ev: ProgressEvent) => void, error?: (xhr: XMLHttpRequest, ev: ProgressEvent) => void, statechage?: (xhr: XMLHttpRequest, ev: Event) => void): XMLHttpRequest;
     }
 }
-declare namespace Game.State {
-    class State_EditorMap implements IGameState {
-        private name?;
-        env: Environment;
-        statemgr: StateMgr;
-        constructor(name?: string);
-        OnInit(env: Environment, statemgr: StateMgr): void;
-        CreateUI(): void;
-        OnUpdate(delta: number): void;
-        OnExit(): void;
-    }
+declare namespace Game.Common {
+    function Random(min: number, max: number): number;
 }
 declare namespace Game.State {
     class State_First implements IGameState {
@@ -136,14 +127,25 @@ declare namespace Game.State {
     }
 }
 declare namespace Game.State {
+    class State_GamePlayer implements IGameState {
+        private env;
+        private stateMgr;
+        m2dSys: System.Map2DSystem;
+        private gamePlayer;
+        OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
+        OnUpdate(delta: number): void;
+        OnExit(): void;
+    }
+}
+declare namespace Game.State {
     class State_List implements IGameState {
         private env;
         private statemgr;
         private scroll;
+        CreateUI(): void;
         loadTexture(): Promise<void>;
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
         CreateFunc(text: string, state: IGameState): void;
-        CreateUI(): void;
         OnUpdate(delta: number): void;
         OnExit(): void;
     }
@@ -228,6 +230,21 @@ declare namespace Game.State {
         CreateUI(): Promise<void>;
         OnUpdate(delta: number): void;
         OnExit(): void;
+    }
+}
+declare namespace Game {
+    class GamePlayer {
+        trans: gd3d.framework.transform;
+        private assertMgr;
+        private inputmgr;
+        constructor();
+        Init(): Promise<void>;
+        LoadTexture(): Promise<{}>;
+        Inittrans(): void;
+        Move(): void;
+        Jump(): void;
+        SetPos(x: number, y: number): void;
+        Update(delta: number): void;
     }
 }
 declare namespace Game.System {
@@ -332,22 +349,25 @@ declare namespace Game.System {
             [id: string]: gd3d.framework.texture;
         };
         root: gd3d.framework.transform;
+        tex: gd3d.framework.texture;
+        map: TmxStruct;
+        constructor();
         InitAsync(env: Environment): Promise<void>;
         LoadTmxAsync(jsonData: IMapInfoData, blocks: {
             [key: string]: IBlockDesc;
         }): Promise<void>;
         private LoadAllBlockImg;
-        constructor();
-        tex: gd3d.framework.texture;
-        map: TmxStruct;
         private loadText;
         _addQuad(x: number, y: number, tileX: number, tileY: number, tileWidth: number, tileHeight: number, tex: gd3d.framework.texture): void;
         Parse(mapInfo: IMapInfoData): Promise<void>;
-        CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData;
+        static CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData;
+        GetRandomPos(): any;
         static CreateEmitBlock(): IBlockDesc;
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
         CalcIndex(x: number, y: number, w: number): number;
         GetImageData(): string;
+        PrintMapInfo(): void;
+        Entry(pos: gd3d.math.vector2, trans: gd3d.framework.transform): void;
     }
 }
 declare namespace Game.ui {
