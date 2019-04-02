@@ -34,9 +34,9 @@ namespace Game.State
             root.markDirty();
 
             let tex_add64 = this.env.assetMgr.getAssetByName("add_64.png") as gd3d.framework.texture;
-            // let tex_del16 = this.env.assetMgr.getAssetByName("del_16.png") as gd3d.framework.texture;
+            
             let tex_border = this.env.assetMgr.getAssetByName("border.png") as gd3d.framework.texture;
-            // let tex_0 = this.env.assetMgr.getAssetByName("zg03_256.png") as gd3d.framework.texture;
+            
 
 
             let scroll = new ui.ScrollFrame({

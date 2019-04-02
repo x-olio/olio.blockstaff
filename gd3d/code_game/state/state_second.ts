@@ -23,7 +23,7 @@ namespace Game.State
             ]);
         }
 
-        
+
         async OnInit(env: Environment, statemgr: StateMgr)
         {
             this.env = env;
@@ -51,7 +51,7 @@ namespace Game.State
                     // if (!this.map2d.baseData)
                     {
                         let defBlockKey: string;
-                        
+
                         for (let key in System.Map2DSystem.mapBlockStore)
                         {
                             defBlockKey = key;
@@ -73,7 +73,9 @@ namespace Game.State
 
         OnExit()
         {
-
+            var childs = this.env.overlay.getChildren();
+            for (var i in childs)
+                this.env.overlay.removeChild(childs[i]);
         }
 
         OnUpdate(delta: number)

@@ -63,7 +63,7 @@ namespace Game.State
 
         OnUpdate(delta: number)
         {
-
+            
         }
 
         OnExit()
