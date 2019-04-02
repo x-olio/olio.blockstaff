@@ -208,12 +208,15 @@ namespace Game.System
             "width":32,
             "height":16,
             "type":"bg",
-            "data":[4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            "data":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			"refblocks":["hash1","hash2","hash3","hash4"]
 		}
     ]
 }
-`
+`;
+
+
+
     export class Map2DSystem
     {
         static mapsDataStore: { [key: string]: IMapInfoData } = {};
@@ -224,7 +227,17 @@ namespace Game.System
         mapBlocks: { [id: string]: IBlockDesc };
         mapInfo: IMapInfoData;
         mapTexs: { [id: string]: gd3d.framework.texture };
+
         root: gd3d.framework.transform;
+        tex: gd3d.framework.texture;
+        map: TmxStruct;
+
+        constructor()
+        {
+            this.mapBlocks = {};
+            this.mapTexs = {};
+
+        }
         //初始化
         async InitAsync(env: Environment): Promise<void>
         {
@@ -251,11 +264,12 @@ namespace Game.System
                 this.mapBlocks["hash3"] = block3;
                 this.mapBlocks["hash4"] = block4;
             }
-            await this.LoadAllBlockImg();
+
+            await this.LoadAllBlockImg(blocks == null);
             this.Parse(mapInfo);
             return;
         }
-        private async LoadAllBlockImg(): Promise<void>
+        private async LoadAllBlockImg(isLocal: boolean = false): Promise<void>
         {
             for (let key in this.mapBlocks)
             {
@@ -263,24 +277,17 @@ namespace Game.System
                 {
                     if (this.mapTexs[imgname] == undefined)
                     {
-                        var tex = await this.loadText(Common.APITools.GetBlockTexUrl(imgname));
+                        var tex = await this.loadText(isLocal ? imgname : Common.APITools.GetBlockTexUrl(imgname));
                         this.mapTexs[imgname] = tex;
                     }
                 }
             }
-        }
-        constructor()
-        {
-            this.mapBlocks = {};
-            this.mapTexs = {};
 
         }
-        tex: gd3d.framework.texture;
-
-        map: TmxStruct;
 
         private async loadText(url: string): Promise<gd3d.framework.texture>
         {
+            console.log(`loadtex:${url}`);
             //創建一個貼圖
             var tex = new gd3d.framework.texture();
             tex.glTexture = new gd3d.render.glTexture2D(this.env.app.webgl, gd3d.render.TextureFormatEnum.RGBA, false, false);
@@ -311,7 +318,7 @@ namespace Game.System
             cube.localTranslate.y = y;
             cube.markDirty();
             // this.env.app.getScene().addChild(cube);
-            this.root.addChild(cube);
+
             var mesh = cube.gameObject.addComponent("meshFilter") as gd3d.framework.meshFilter;
 
             var smesh = this.env.app.getAssetMgr().getDefaultMesh("quad");
@@ -329,7 +336,7 @@ namespace Game.System
                 cuber.materials[0].setTexture("_MainTex", tex);
                 cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(tileWidth, tileHeight, tileX, tileY));
             }
-
+            this.root.addChild(cube);
         }
 
 
@@ -338,14 +345,14 @@ namespace Game.System
         {
             for (let layer of mapInfo.layers)
             {
-                let mapString = "";
+
                 for (let y = layer.height; y >= 0; --y)
                 {
                     for (let x = 0; x < layer.width; ++x)
                     {
                         let id = layer.data[y * layer.width + x];
-                        if (id != undefined)
-                            mapString += id + " ";
+
+
                         if (!id)
                             continue;
                         var block = this.mapBlocks[layer.refblocks[id - 1]];
@@ -365,14 +372,14 @@ namespace Game.System
 
                         this._addQuad(x, y, tileX, tileY, tileWidth, tileHeight, texture);
                     }
-                    mapString += "\n";
+
                 }
-                console.log(mapString);
+
             }
         }
 
 
-        CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData
+        static CreateEmitData(w: number, h: number, defBlockName: string): IMapInfoData
         {
             let emitData = [];
 
@@ -400,6 +407,31 @@ namespace Game.System
                 ],
                 version: "1.0.1"
             };
+        }
+
+        GetRandomPos()
+        {
+            let layerIndex = 0
+            let w = this.baseData.layers[layerIndex].width;
+            let h = this.baseData.layers[layerIndex].height;
+            let refblocks = this.baseData.layers[layerIndex].refblocks;
+            let pos
+
+            for (let i = 0; i < 50; ++i)
+            {
+                let y = Common.Random(0, h);
+                let x = Common.Random(0, w);
+                let id = this.CalcIndex(x, y, w);
+                if (id == undefined)
+                    continue;
+                let block = this.mapBlocks[refblocks[id - 1]];
+                if (!block || block.bound == "none")
+                {
+                    pos = new gd3d.math.vector2(x, y);
+                    break;
+                }
+            }
+            return pos;
         }
 
         static CreateEmitBlock(): IBlockDesc
@@ -442,6 +474,34 @@ namespace Game.System
         GetImageData()
         {
             return this.env.app.webgl.canvas.toDataURL("image/png");
+        }
+
+        PrintMapInfo()
+        {
+            for (let layer of this.baseData.layers)
+            {
+                let mapString = `layer:${layer.type}`;
+                for (let y = layer.height; y >= 0; --y)
+                {
+                    for (let x = 0; x < layer.width; ++x)
+                    {
+                        let id = layer.data[y * layer.width + x];
+
+                        if (id != undefined)
+                            mapString += id + " ";
+                    }
+                    mapString += "\n";
+                }
+                console.log(mapString);
+            }
+        }
+
+        public Entry(pos: gd3d.math.vector2, trans: gd3d.framework.transform)
+        {
+            trans.localTranslate.x = pos.x;
+            trans.localTranslate.y = pos.y;
+            this.root.addChild(trans);
+            trans.markDirty();
         }
     }
 }

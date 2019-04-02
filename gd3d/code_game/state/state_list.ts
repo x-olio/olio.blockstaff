@@ -6,6 +6,13 @@ namespace Game.State
         private statemgr: StateMgr;
         private scroll: ui.ScrollFrame;
 
+        CreateUI()
+        {
+            this.CreateFunc("登陆测试", new State_Login());
+            this.CreateFunc("场景测试", new State_Second("", true));
+            this.CreateFunc("注册测试", new State_Regision(this));
+            this.CreateFunc("角色测试", new State_GamePlayer());
+        }
 
         loadTexture()
         {
@@ -21,16 +28,20 @@ namespace Game.State
         async OnInit(env: Environment, statemgr: StateMgr)
         {
             this.env = env;
+
             this.statemgr = statemgr;
             await this.loadTexture();
-            let uiroot = new gd3d.framework.transform2D();
-            uiroot.markDirty();
+
             this.scroll = new ui.ScrollFrame({
                 width: 300,
-                height: this.env.app.height,
-                owner: uiroot
+                height: this.env.app.height - 100
             });
-            this.env.overlay.addChild(uiroot);
+
+            //设置居中
+            this.scroll.root.layoutState = gd3d.framework.layoutOption.V_CENTER | gd3d.framework.layoutOption.H_CENTER;
+
+            this.scroll.root.markDirty();
+            this.env.overlay.addChild(this.scroll.root);
 
             this.CreateUI();
         }
@@ -38,7 +49,7 @@ namespace Game.State
         CreateFunc(text: string, state: IGameState)
         {
             let atlasComp = this.env.assetMgr.getAssetByName("comp.atlas.json") as gd3d.framework.atlas;
-            this.scroll.AddComp(ui.createButton({
+            let button = ui.createButton({
                 width: 300,
                 height: 40,
                 text: text,
@@ -49,21 +60,17 @@ namespace Game.State
                 {
                     this.statemgr.ChangeState(state);
                 }
-            }));
+            });
+
+            this.scroll.AddComp(button);
             this.scroll.root.setLayoutValue(gd3d.framework.layoutOption.V_CENTER, 1);
-            console.log(`create func :${text}`);
+            
         }
 
-        CreateUI()
-        {
-            this.CreateFunc("登陆测试", new State_Login());
-            this.CreateFunc("场景测试", new State_Second("", true));
-            this.CreateFunc("注册测试", new State_Regision(this));
-        }
 
         OnUpdate(delta: number)
         {
-            
+
         }
 
         OnExit()

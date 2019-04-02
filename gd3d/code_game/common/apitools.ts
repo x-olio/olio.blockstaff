@@ -190,6 +190,8 @@ namespace Game.Common
 
         static GetBlockTexUrl(name: string)
         {
+            if (name.indexOf(".") == 0)
+                name = name.substring(1);
             // return `${this.api}/api/map/getblocktex.png?token=${this.loginInfo.token}&name=${name}`;
             return `${this.api}${name}`;
         }

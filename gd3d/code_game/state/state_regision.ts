@@ -128,7 +128,7 @@ namespace Game.State
                 backSprite: atlasComp.sprites["ui_public_button_1"],
                 x: 40, y: 375 + 45,
                 width: 200,
-                text: "     返回",
+                text: "返回",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
                 owner: root,
                 onClick: this.OnBack.bind(this)
@@ -141,7 +141,7 @@ namespace Game.State
                 backSprite: atlasComp.sprites["ui_public_button_1"],
                 x: 260, y: 375 + 45,
                 width: 200,
-                text: "     确定",
+                text: "确定",
                 fontcolor: new gd3d.math.color(1, 1, 1, 1),
                 owner: root,
                 onClick: this.OnRegister.bind(this)

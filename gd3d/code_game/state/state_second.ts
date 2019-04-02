@@ -59,7 +59,7 @@ namespace Game.State
                             break;
                         }
 
-                        let emitData = this.map2d.CreateEmitData(width, height, defBlockKey);
+                        let emitData = System.Map2DSystem.CreateEmitData(width, height, defBlockKey);
 
                         this.map2d.LoadTmxAsync(emitData, System.Map2DSystem.mapBlockStore);
                     }

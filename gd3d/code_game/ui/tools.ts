@@ -126,15 +126,18 @@ namespace Game.ui
         btn_b.pressedGraphic = option.backSprite;
         btn_b.pressedColor = new gd3d.math.color(1, 1, 1, 1);
         btn_b.transition = gd3d.framework.TransitionType.SpriteSwap;
+
         if (option.text)
         {
-            createLabel({
+            let lab = createLabel({
                 owner: btn_t, text: option.text, assetMgr: option.assetMgr,
                 name: `lib_${option.name}`, fontcolor: option.fontcolor,
-                x: 55,
-                y: -30,
-                width: option.width
+                width: btn_t.width,
+                height: btn_t.height
             });
+
+            lab.horizontalType = gd3d.framework.HorizontalType.Center;
+            lab.verticalType = gd3d.framework.VerticalType.Center;
         }
         if (option.onClick)
             btn_b.addListener(gd3d.event.UIEventEnum.PointerClick, option.onClick, this);
@@ -242,7 +245,7 @@ namespace Game.ui
                             pc = gd3d.event.UIEventEnum.PointerClick;
                         }
 
-                        
+
                         if (!_this.isMovedLimit && _this.UIEventer.listenerCount(gd3d.event.UIEventEnum[pc]) > 0)
                         {
                             ev.eated = true;
