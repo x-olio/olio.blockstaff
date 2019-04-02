@@ -95,7 +95,7 @@ namespace Game.System
     {
         refImgs: string[];//涉及到的图片
         pieces: IPieceOFPic[];//图片块
-        bound: string;//这个block和角色的关系，无关/墙/平台
+        bound: "none" | "wall" | "stand";//这个block和角色的关系，无关/墙/平台
         layer: string;//这个block是背景，前景，镶嵌物等
         displayType: string;//这个block的显示类型
         displayPicList: { [id: string]: IBlockAnim };
@@ -266,8 +266,6 @@ namespace Game.System
             }
 
             await this.LoadAllBlockImg(blocks == null);
-            this.Parse(mapInfo);
-            return;
         }
         private async LoadAllBlockImg(isLocal: boolean = false): Promise<void>
         {
@@ -346,12 +344,11 @@ namespace Game.System
             for (let layer of mapInfo.layers)
             {
 
-                for (let y = layer.height; y >= 0; --y)
+                for (let y = layer.height - 1; y >= 0; --y)
                 {
                     for (let x = 0; x < layer.width; ++x)
                     {
                         let id = layer.data[y * layer.width + x];
-
 
                         if (!id)
                             continue;
@@ -466,9 +463,17 @@ namespace Game.System
         }
 
 
-        CalcIndex(x: number, y: number, w: number)
+        CalcIndex(x: number, y: number, w: number = 32)
         {
-            return y * w + x;
+            if (x < 0 || y < 0)
+                return;
+            // console.log(`x:${x},y:${y}`);
+            // x = Math.ceil(x);
+            // y = Math.ceil(y);
+
+            let index = y * w + x;
+            // console.log(`x:${x},y:${y},index:${index},ref:${this.baseData.layers[0].data[index]}`);
+            return index;
         }
 
         GetImageData()
@@ -480,8 +485,9 @@ namespace Game.System
         {
             for (let layer of this.baseData.layers)
             {
-                let mapString = `layer:${layer.type}`;
-                for (let y = layer.height; y >= 0; --y)
+                let mapString = `layer:${layer.type}
+`;
+                for (let y = layer.height - 1; y >= 0; --y)
                 {
                     for (let x = 0; x < layer.width; ++x)
                     {
@@ -496,12 +502,5 @@ namespace Game.System
             }
         }
 
-        public Entry(pos: gd3d.math.vector2, trans: gd3d.framework.transform)
-        {
-            trans.localTranslate.x = pos.x;
-            trans.localTranslate.y = pos.y;
-            this.root.addChild(trans);
-            trans.markDirty();
-        }
     }
 }

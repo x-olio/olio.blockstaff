@@ -729,27 +729,40 @@ var Game;
             }
             State_GamePlayer.prototype.OnInit = function (env, statemgr) {
                 return __awaiter(this, void 0, void 0, function () {
+                    var index;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
                                 this.env = env;
                                 this.stateMgr = statemgr;
-                                this.m2dSys = new Game.System.Map2DSystem();
-                                this.m2dSys.InitAsync(this.env);
-                                this.m2dSys.LoadTmxAsync(null, null);
-                                this.gamePlayer = new Game.GamePlayer();
-                                return [4, this.gamePlayer.Init()];
+                                this.map2d = new Game.System.Map2DSystem();
+                                this.map2d.InitAsync(this.env);
+                                return [4, this.map2d.LoadTmxAsync(null, null)];
                             case 1:
                                 _a.sent();
-                                this.m2dSys.Entry(new gd3d.math.vector2(0, 1), this.gamePlayer.trans);
-                                this.m2dSys.PrintMapInfo();
+                                index = this.map2d.CalcIndex(3, 1);
+                                this.map2d.baseData.layers[0].data[index] = 1;
+                                index = this.map2d.CalcIndex(4, 1);
+                                this.map2d.baseData.layers[0].data[index] = 3;
+                                index = this.map2d.CalcIndex(6, 1);
+                                this.map2d.baseData.layers[0].data[index] = 2;
+                                index = this.map2d.CalcIndex(1, 4);
+                                this.map2d.baseData.layers[0].data[index] = 3;
+                                this.map2d.Parse(this.map2d.baseData);
+                                this.gamePlayer = new Game.GamePlayer();
+                                return [4, this.gamePlayer.Init(this.map2d)];
+                            case 2:
+                                _a.sent();
+                                this.gamePlayer.EntryScene(this.map2d, 1, 10);
+                                this.map2d.PrintMapInfo();
                                 return [2];
                         }
                     });
                 });
             };
             State_GamePlayer.prototype.OnUpdate = function (delta) {
-                this.gamePlayer.Update(delta);
+                if (this.gamePlayer)
+                    this.gamePlayer.Update(delta);
             };
             State_GamePlayer.prototype.OnExit = function () {
                 var childs = this.env.overlay.getChildren();
@@ -1424,16 +1437,32 @@ var Game;
 })(Game || (Game = {}));
 var Game;
 (function (Game) {
+    var PlayerState;
+    (function (PlayerState) {
+        PlayerState[PlayerState["None"] = 0] = "None";
+        PlayerState[PlayerState["Jump"] = 1] = "Jump";
+        PlayerState[PlayerState["Down"] = 2] = "Down";
+    })(PlayerState || (PlayerState = {}));
     var GamePlayer = (function () {
         function GamePlayer() {
+            this.state = PlayerState.None;
+            this.jumpHeight = 3;
+            this.jumpSpeed = 8;
+            this.downSpeed = 8;
+            this.moveSpeed = 3;
+            this.jumpStartPos = 0;
+            this.dirLR = 0;
+            this.dirUD = -1;
             this.assertMgr = gd3d.framework.sceneMgr.app.getAssetMgr();
             this.inputmgr = new gd3d.framework.inputMgr(this.assertMgr.app);
         }
-        GamePlayer.prototype.Init = function () {
+        GamePlayer.prototype.Init = function (map) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4, this.LoadTexture()];
+                        case 0:
+                            this.map = map;
+                            return [4, this.LoadTexture()];
                         case 1:
                             _a.sent();
                             this.Inittrans();
@@ -1443,13 +1472,13 @@ var Game;
             });
         };
         GamePlayer.prototype.LoadTexture = function () {
-            return Game.Common.AssetTools.loadAsset(this.assertMgr, "./res/_game/test/red.png");
+            return Game.Common.AssetTools.loadAsset(this.assertMgr, "./res/_game/test/gameplayer.png");
         };
         GamePlayer.prototype.Inittrans = function () {
             this.trans = new gd3d.framework.transform();
             this.trans.localScale.x = this.trans.localScale.y = this.trans.localScale.z = 1;
             this.trans.markDirty();
-            var tex = this.assertMgr.getAssetByName("red.png");
+            var tex = this.assertMgr.getAssetByName("gameplayer.png");
             var mesh = this.trans.gameObject.addComponent("meshFilter");
             var smesh = this.assertMgr.getDefaultMesh("quad");
             mesh.mesh = (smesh);
@@ -1461,21 +1490,77 @@ var Game;
                 cuber.materials.push(new gd3d.framework.material());
                 cuber.materials[0].setShader(sh);
                 cuber.materials[0].setTexture("_MainTex", tex);
-                cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(0, 0, 1, 1));
+                cuber.materials[0].setVector4("_MainTex_ST", new gd3d.math.vector4(1, 1, 0, 0));
             }
-        };
-        GamePlayer.prototype.Move = function () {
         };
         GamePlayer.prototype.Jump = function () {
+            if (this.state == PlayerState.Jump)
+                return;
+            this.state = PlayerState.Jump;
+            this.jumpStartPos = this.trans.localTranslate.y;
+            this.dirUD = 1;
+            console.log("jump");
+        };
+        GamePlayer.prototype.GetBlock = function (index) {
+            var layer = this.map.baseData.layers[0];
+            var block = this.map.mapBlocks[layer.refblocks[layer.data[index] - 1]];
+            return block;
+        };
+        GamePlayer.prototype.CheckBlock = function (index) {
+            var block = this.GetBlock(index);
+            if (block && block.bound != "none")
+                return false;
+            return true;
+        };
+        GamePlayer.prototype.CheckMoveX = function (x, y) {
+            if (this.dirLR > 0)
+                return this.CheckBlock(this.map.CalcIndex(Math.ceil(x), Math.round(y)));
+            if (this.dirLR < 0)
+                return this.CheckBlock(this.map.CalcIndex(Math.floor(x), Math.round(y)));
+            return true;
+        };
+        GamePlayer.prototype.CheckMoveY = function (x, y) {
+            if (this.dirUD > 0)
+                return this.CheckBlock(this.map.CalcIndex(Math.round(x), Math.ceil(y)));
+            if (this.dirUD < 0)
+                return this.CheckBlock(this.map.CalcIndex(Math.round(x), Math.floor(y)));
+            return true;
         };
         GamePlayer.prototype.SetPos = function (x, y) {
-            this.trans.localTranslate.x = x;
-            this.trans.localTranslate.y = y;
+            if (this.CheckMoveX(x, y))
+                this.trans.localTranslate.x = x;
+            if (this.CheckMoveY(x, y))
+                this.trans.localTranslate.y = y;
         };
         GamePlayer.prototype.Update = function (delta) {
+            if (!this.trans)
+                return;
             if (this.inputmgr.GetKeyDown(gd3d.event.KeyCode.Space)) {
-                console.log("###");
+                this.Jump();
             }
+            if (this.inputmgr.GetKeyDown(gd3d.event.KeyCode.KeyJ)) {
+                this.dirLR = -1;
+            }
+            else if (this.inputmgr.GetKeyDown(gd3d.event.KeyCode.KeyL)) {
+                this.dirLR = 1;
+            }
+            else if (this.inputmgr.GetKeyUP(gd3d.event.KeyCode.KeyJ) || this.inputmgr.GetKeyUP(gd3d.event.KeyCode.KeyL))
+                this.dirLR = 0;
+            var y = this.trans.localTranslate.y + delta * (this.jumpSpeed * this.dirUD);
+            var x = this.trans.localTranslate.x + delta * (this.moveSpeed * this.dirLR);
+            if ((this.dirUD == 1 && this.trans.localTranslate.y >= this.jumpStartPos + this.jumpHeight) || this.dirUD == 1 && !this.CheckMoveY(this.trans.localTranslate.x, y)) {
+                this.dirUD = -1;
+            }
+            if (this.state == PlayerState.Jump && this.dirUD == -1) {
+                if (this.state == PlayerState.Jump && !this.CheckMoveY(this.trans.localTranslate.x, y)) {
+                    this.state = PlayerState.None;
+                }
+            }
+            this.SetPos(x, y);
+        };
+        GamePlayer.prototype.EntryScene = function (map2d, x, y) {
+            this.SetPos(x, y);
+            map2d.root.addChild(this.trans);
         };
         return GamePlayer;
     }());
@@ -1552,7 +1637,6 @@ var Game;
                                 return [4, this.LoadAllBlockImg(blocks == null)];
                             case 1:
                                 _a.sent();
-                                this.Parse(mapInfo);
                                 return [2];
                         }
                     });
@@ -1644,7 +1728,7 @@ var Game;
                     return __generator(this, function (_b) {
                         for (_i = 0, _a = mapInfo.layers; _i < _a.length; _i++) {
                             layer = _a[_i];
-                            for (y = layer.height; y >= 0; --y) {
+                            for (y = layer.height - 1; y >= 0; --y) {
                                 for (x = 0; x < layer.width; ++x) {
                                     id = layer.data[y * layer.width + x];
                                     if (!id)
@@ -1741,7 +1825,11 @@ var Game;
                 return layer.data[y * mapWitdh + x];
             };
             Map2DSystem.prototype.CalcIndex = function (x, y, w) {
-                return y * w + x;
+                if (w === void 0) { w = 32; }
+                if (x < 0 || y < 0)
+                    return;
+                var index = y * w + x;
+                return index;
             };
             Map2DSystem.prototype.GetImageData = function () {
                 return this.env.app.webgl.canvas.toDataURL("image/png");
@@ -1749,8 +1837,8 @@ var Game;
             Map2DSystem.prototype.PrintMapInfo = function () {
                 for (var _i = 0, _a = this.baseData.layers; _i < _a.length; _i++) {
                     var layer = _a[_i];
-                    var mapString = "layer:" + layer.type;
-                    for (var y = layer.height; y >= 0; --y) {
+                    var mapString = "layer:" + layer.type + "\n";
+                    for (var y = layer.height - 1; y >= 0; --y) {
                         for (var x = 0; x < layer.width; ++x) {
                             var id = layer.data[y * layer.width + x];
                             if (id != undefined)
@@ -1760,12 +1848,6 @@ var Game;
                     }
                     console.log(mapString);
                 }
-            };
-            Map2DSystem.prototype.Entry = function (pos, trans) {
-                trans.localTranslate.x = pos.x;
-                trans.localTranslate.y = pos.y;
-                this.root.addChild(trans);
-                trans.markDirty();
             };
             Map2DSystem.mapsDataStore = {};
             Map2DSystem.mapBlockStore = {};

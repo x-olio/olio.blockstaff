@@ -4,7 +4,7 @@ namespace Game.State
     {
         private env: Environment;
         private stateMgr: StateMgr;
-        m2dSys: System.Map2DSystem;
+        map2d: System.Map2DSystem;
         private gamePlayer: GamePlayer;
 
         async OnInit(env: Environment, statemgr: StateMgr)
@@ -12,19 +12,33 @@ namespace Game.State
             this.env = env;
             this.stateMgr = statemgr;
 
-            this.m2dSys = new System.Map2DSystem();
+            this.map2d = new System.Map2DSystem();
 
-            this.m2dSys.InitAsync(this.env);
+            this.map2d.InitAsync(this.env);
 
-            this.m2dSys.LoadTmxAsync(null, null);
+            await this.map2d.LoadTmxAsync(null, null);
+
+            let index = this.map2d.CalcIndex(3, 1);
+            this.map2d.baseData.layers[0].data[index] = 1;
+
+            index = this.map2d.CalcIndex(4, 1);
+            this.map2d.baseData.layers[0].data[index] = 3;
+
+            index = this.map2d.CalcIndex(6, 1);
+            this.map2d.baseData.layers[0].data[index] = 2;
+
+            index = this.map2d.CalcIndex(1, 4);
+            this.map2d.baseData.layers[0].data[index] = 3;
+
+            this.map2d.Parse(this.map2d.baseData);
 
             this.gamePlayer = new GamePlayer();
 
-            await this.gamePlayer.Init();
+            await this.gamePlayer.Init(this.map2d);
 
-            this.m2dSys.Entry(new gd3d.math.vector2(0, 1), this.gamePlayer.trans);
+            this.gamePlayer.EntryScene(this.map2d, 1, 10);
 
-            this.m2dSys.PrintMapInfo();
+            this.map2d.PrintMapInfo();
         }
 
 
@@ -32,7 +46,8 @@ namespace Game.State
 
         OnUpdate(delta: number)
         {
-            this.gamePlayer.Update(delta);
+            if (this.gamePlayer)
+                this.gamePlayer.Update(delta);
         }
 
 

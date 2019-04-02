@@ -130,7 +130,7 @@ declare namespace Game.State {
     class State_GamePlayer implements IGameState {
         private env;
         private stateMgr;
-        m2dSys: System.Map2DSystem;
+        map2d: System.Map2DSystem;
         private gamePlayer;
         OnInit(env: Environment, statemgr: StateMgr): Promise<void>;
         OnUpdate(delta: number): void;
@@ -237,14 +237,27 @@ declare namespace Game {
         trans: gd3d.framework.transform;
         private assertMgr;
         private inputmgr;
+        private state;
+        jumpHeight: number;
+        jumpSpeed: number;
+        downSpeed: number;
+        private moveSpeed;
+        private jumpStartPos;
+        private map;
+        private dirLR;
+        private dirUD;
         constructor();
-        Init(): Promise<void>;
+        Init(map: System.Map2DSystem): Promise<void>;
         LoadTexture(): Promise<{}>;
         Inittrans(): void;
-        Move(): void;
         Jump(): void;
+        GetBlock(index: number): System.IBlockDesc;
+        CheckBlock(index: any): boolean;
+        CheckMoveX(x: any, y: any): boolean;
+        CheckMoveY(x: any, y: any): boolean;
         SetPos(x: number, y: number): void;
         Update(delta: number): void;
+        EntryScene(map2d: System.Map2DSystem, x: number, y: number): void;
     }
 }
 declare namespace Game.System {
@@ -325,7 +338,7 @@ declare namespace Game.System {
     interface IBlockDesc {
         refImgs: string[];
         pieces: IPieceOFPic[];
-        bound: string;
+        bound: "none" | "wall" | "stand";
         layer: string;
         displayType: string;
         displayPicList: {
@@ -364,10 +377,9 @@ declare namespace Game.System {
         GetRandomPos(): any;
         static CreateEmitBlock(): IBlockDesc;
         CalcID(x: number, y: number, mapWitdh: number, layer: ILayerData): number;
-        CalcIndex(x: number, y: number, w: number): number;
+        CalcIndex(x: number, y: number, w?: number): number;
         GetImageData(): string;
         PrintMapInfo(): void;
-        Entry(pos: gd3d.math.vector2, trans: gd3d.framework.transform): void;
     }
 }
 declare namespace Game.ui {
